@@ -86,6 +86,14 @@ Full list of blog posts I wrote along the way : [Link](http://blog.fossasia.org/
 + [Creating better structured apps from user submitted scripts](http://blog.fossasia.org/enhancing-the-functionality-of-user-submitted-scripts-in-the-pslab-remote-framework/)
 + [Adding a graph component to the frontend](http://blog.fossasia.org/including-a-graph-component-in-the-remote-access-framework-for-pslab/)
 
+Additional links
+===
+
+---
+
++ [Daily Scrum Reports](https://groups.google.com/forum/#!searchin/pslab-fossasia/subject$3Ajithin%7Csort:date)
+---
+
 ----
 
 + The PSLab project is inspired from ExpEYES  <http://expeyes.in>
