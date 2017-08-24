@@ -4,7 +4,9 @@ title: Google Summer of Code 2017
 description: "FOSSASIA"
 ---
 
-## Project Abstract : Develop firmware and experiments for Pocket Science Lab (PSLab)
+Project Abstract : Develop firmware and experiments for Pocket Science Lab (PSLab)
+===
+
 ---
 
 Characteristic of a shift into the digital era, students have started to learn to code at an early age. However, most of the academic applications are currently centered around purely software based learning techniques such as simulations.
@@ -15,28 +17,54 @@ The Pocket Science lab is such a platform precisely, and its architecture makes 
 
 ### Mentors : Lorenz Gerber, Kiwi, Praveen Patil (Gnovi), Greg Austic, Ansgar Schmidt, Darwin Gosal, Wan Leung Wong, Ajithkumar bp, Mitch Altman, Shams Jaber, Victoria Bondarchuk, Mario Behling, Haggen So, Soong Chee Gi
 
-## Work Completed
-* * *
+Work Completed
+===
+
+---
 
 For GSoC-17, I worked on several aspects of the [Pocket Science Lab](https://pslab.fossasia.org) Project:
+---
 
 * [Desktop Applications](https://github.com/fossasia/pslab-desktop-apps):
+---
   * Documenting the various apps and using Jekyll to render markdown files via templates.
   * Cross checked a range of experiments and collected data.
   * Created screenshots, and made several schematics for documentation.
-  * Added applications to calibrate the pslab using ADS1115 16-bit ADC module.
-* [Python Communication Library](https://github.com/fossasia/pslab-python)
-  * Made bug fixes in capture calls.
-  * Assisted the android team to understand the various function calls during the porting process
-  * Added support for several new add-on modules such as ADS1115, SX1278 LoRa module, MPU925x 10-DOF IMU sensor among others.
-* [Firmware development of the PSLab](https://github.com/fossasia/pslab-firmware)
-  * Code for PIC24E processor written with MPLab IDE and compiled with XC16 compiler.
-  * Wrote the state machine for PSLab and uploaded the same during the proposal stage of GSoC-17.
-* [Hardware design](https://github.com/fossasia/pslab-hardware) : Designed with [KiCAD](http://kicad-pcb.org/). Assisted developers in adding more robust features.
+  * Added applications to calibrate the pslab using ADS1115 16-bit ADC module.  
+  * My Contribution: [Pull Requests](https://github.com/fossasia/pslab-desktop-apps/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Ajithinbp), [commits](https://github.com/fossasia/pslab-desktop-apps/commits/?author=jithinbp), [issues](https://github.com/fossasia/pslab-desktop-apps/issues/?author=jithinbp)
+  ---
+
 * [remote laboratory](https://github.com/fossasia/pslab-remote):
+---
   * Made a framework for accessing the PSLab remotely. Please refer to the README on how to setup your own server.
   * Created an API server with python flask, and Postgresql. A live copy is hosted on [Heroku](pslab-stage.herokuapp.com) . A real PSLab hardware device is not connected to the server, and a dummy class is being used instead.
   * Created a webapp made with ember-cli. A demo of the webapp hosted on [Surge.sh](pslab-remote.surge.sh)
+  
+  * My Contribution: [Pull Requests](https://github.com/fossasia/pslab-remote/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Ajithinbp), [issues](https://github.com/fossasia/pslab-hardware/issues?utf8=%E2%9C%93&q=is%3Aissue%20author%3Ajithinbp), [commits](https://github.com/fossasia/pslab-remote/commits/?author=jithinbp)
+  ---
+
+* [Python Communication Library](https://github.com/fossasia/pslab-python)
+---
+  * Made bug fixes in capture calls.
+  * Assisted the android team to understand the various function calls during the porting process
+  * Added support for several new add-on modules such as ADS1115, SX1278 LoRa module, MPU925x 10-DOF IMU sensor among others.  
+  * My Contribution: [Pull Requests](https://github.com/fossasia/pslab-python/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Ajithinbp), [commits](https://github.com/fossasia/pslab-python/commits/?author=jithinbp), [issues](https://github.com/fossasia/pslab-python/issues?utf8=%E2%9C%93&q=is%3Aissue%20author%3Ajithinbp)
+  ---
+
+* [Firmware development of the PSLab](https://github.com/fossasia/pslab-firmware)
+---
+  * Code for PIC24E processor written with MPLab IDE and compiled with XC16 compiler.
+  * Wrote the state machine for PSLab and uploaded the same during the proposal stage of GSoC-17.
+  * My Contribution: [Pull Requests](https://github.com/fossasia/pslab-firmware/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Ajithinbp), [commits](https://github.com/fossasia/pslab-firmware/commits/master?author=jithinbp), [issues](https://github.com/fossasia/pslab-firmware/issues/?author=jithinbp)
+  ---
+
+* [Hardware design](https://github.com/fossasia/pslab-hardware) :
+---
+  * Designed with [KiCAD](http://kicad-pcb.org/). Assisted developers in adding more robust features.
+
+  * My Contribution: [Pull Requests](https://github.com/fossasia/pslab-hardware/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Ajithinbp), [commits](https://github.com/fossasia/pslab-hardware/commits/?author=jithinbp), [issues](https://github.com/fossasia/pslab-hardware/issues/?author=jithinbp)
+  ---
+
 
 
 {% include gallery.html %}
