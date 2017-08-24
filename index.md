@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Google Summer of Code 2017
-description: "Student : Jithin B.P &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mentor : FOSSASIA"
+description: "FOSSASIA"
 ---
 
 ## Project Abstract : Develop firmware and experiments for Pocket Science Lab (PSLab)
@@ -61,8 +61,7 @@ Full list of blog posts I wrote along the way : [Link](http://blog.fossasia.org/
 ----
 
 + The PSLab project is inspired from ExpEYES  <http://expeyes.in>
-+ FOSSASIA is supporting development and promotion of ExpEYES project since 2014 mainly through Google Summer of Code
 
-Chat: [Pocket Science Slack Channel](http://fossasia.slack.com/messages/pocketscience/) | [Get an Invite](http://fossasia-slack.herokuapp.com/)
+Chat: [Pocket Science Gitter Channel](https://gitter.im/fossasia/pslab) ,  [Mailing List](https://groups.google.com/forum/#!forum/pslab-fossasia)
 
 
