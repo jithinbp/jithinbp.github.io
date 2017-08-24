@@ -1,17 +1,16 @@
 ---
 layout: default
+title: Google Summer of Code 2017
 ---
 
-# jithinbp.github.io
-Repository is for my GSoC-2017 github page http://jithinbp.github.io
 
-For GSoC-17, I worked on several aspects of the Pocket Science Lab Project:
+For GSoC-17, I worked on several aspects of the [Pocket Science Lab](pslab.fossasia.org) Project:
 
-+ [Firmware development of the PSLab](https://github.com/fossasia/pslab-firmware) : Code for PIC24E processor written with MPLab IDE and compiled with XC16 compiler.
-+ [Hardware design](https://github.com/fossasia/pslab-hardware) : Made with [KiCAD](http://kicad-pcb.org/)
-+ [Desktop Applications](https://github.com/fossasia/pslab-desktop-apps) : My contributions were towards documenting the various apps and using Jekyll to render markdown files via templates . I cross checked a range of experiments in order to create screenshots, made several schematics, and fixed bugs in a few. I also added applications to calibrate the pslab using ADS1115 16-bit ADC module
-+ [Python Communication Library](https://github.com/fossasia/pslab-python) : Made bug fixes in capture calls. Helped the android team to understand the various function calls during the porting process. Added support for several new add-on modules such as ADS1115, SX1278 LoRa module, MPU925x 10-DOF IMU sensor among others.
-+ [remote laboratory](https://github.com/fossasia/pslab-remote) : Made a framework for accessing the PSLab remotely. This involves a backend designed with python flask, and a webapp made with ember-cli. A demo of the webapp hosted on [Surge.sh](pslab-remote.surge.sh), and the backend is hosted on [Heroku](pslab-stage.herokuapp.com)
+* [Firmware development of the PSLab](https://github.com/fossasia/pslab-firmware) : Code for PIC24E processor written with MPLab IDE and compiled with XC16 compiler.
+* [Hardware design](https://github.com/fossasia/pslab-hardware) : Made with [KiCAD](http://kicad-pcb.org/)
+* [Desktop Applications](https://github.com/fossasia/pslab-desktop-apps) : My contributions were towards documenting the various apps and using Jekyll to render markdown files via templates . I cross checked a range of experiments in order to create screenshots, made several schematics, and fixed bugs in a few. I also added applications to calibrate the pslab using ADS1115 16-bit ADC module
+* [Python Communication Library](https://github.com/fossasia/pslab-python) : Made bug fixes in capture calls. Helped the android team to understand the various function calls during the porting process. Added support for several new add-on modules such as ADS1115, SX1278 LoRa module, MPU925x 10-DOF IMU sensor among others.
+* [remote laboratory](https://github.com/fossasia/pslab-remote) : Made a framework for accessing the PSLab remotely. This involves a backend designed with python flask, and a webapp made with ember-cli. A demo of the webapp hosted on [Surge.sh](pslab-remote.surge.sh), and the backend is hosted on [Heroku](pslab-stage.herokuapp.com)
 
 A list of blog posts I wrote elaborating my journey :
 
@@ -33,20 +32,4 @@ A list of blog posts I wrote elaborating my journey :
 
 Chat: [Pocket Science Slack Channel](http://fossasia.slack.com/messages/pocketscience/) | [Get an Invite](http://fossasia-slack.herokuapp.com/)
 
-More Posts
----
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
-
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
-
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
-</div>

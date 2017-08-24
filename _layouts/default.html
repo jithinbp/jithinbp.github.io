@@ -1,51 +1,65 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+	<html>
+		<head>
+		    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+		    {% include meta.html %}
 
-    {% include meta.html %}
+			<title>Jithin : GSoC 2017</title>
+			<meta charset="utf-8">
+			
+			<!-- core CSS -->
+			<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+			<link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+		</head>
 
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<body class="homepage">
 
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+    <header id="header">
 
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
-  </head>
-
-  <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-
+	<nav class="navbar navbar-inverse"  role="banner">
+	  <div class="container-fluid">
+	    <div class="navbar-header pull-left">
+	            <a class="navbar-brand" href="{{ site.baseurl }}/index.html"><div class="site-avatar"><img src="{{ site.avatar }}" alt="avatar"></div></a>
+	    </div>
+	    <ul class="nav navbar-nav pull-left">
           <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+            <h1 class="site-name">{{ site.name }}</h1>
             <p class="site-description">{{ site.description }}</p>
           </div>
+	    </ul>
 
-          <nav>
-            <a href="{{ site.baseurl }}/">Blog</a>
-            <a href="{{ site.baseurl }}/about">About</a>
-          </nav>
-        </header>
-      </div>
+	    <ul class="nav navbar-nav pull-right">
+            <li><a href="{{ site.baseurl }}/">Home</a></li>
+            <li><a href="{{ site.baseurl }}/about">About</a></li>
+	    </ul>
+	  </div>
+	</nav>
+
+
+		
+    </header><!--/header-->
+    <div class="container">
+
+		{% if page.title %}
+		<div class="center wow fadeInDown">
+			<br><h2>{{ page.title }}</h2>
+			<p class="lead"> {{ page.description }}</p>
+		</div>    
+		{% endif %}
+		{{ content }}
     </div>
 
-    <div id="main" role="main" class="container">
-      {{ content }}
-    </div>
 
-    <div class="wrapper-footer">
+    <div class="footer navbar-fixed-bottom">
       <div class="container">
-        <footer class="footer">
           {% include svg-icons.html %}
-        </footer>
       </div>
     </div>
 
     {% include analytics.html %}
-  </body>
+
+	</body>
 </html>
+
+
+
