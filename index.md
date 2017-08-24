@@ -26,7 +26,10 @@ For GSoC-17, I worked on several aspects of the [Pocket Science Lab](pslab.fossa
 * [Python Communication Library](https://github.com/fossasia/pslab-python) : Made bug fixes in capture calls. Helped the android team to understand the various function calls during the porting process. Added support for several new add-on modules such as ADS1115, SX1278 LoRa module, MPU925x 10-DOF IMU sensor among others.
 * [remote laboratory](https://github.com/fossasia/pslab-remote) : Made a framework for accessing the PSLab remotely. This involves a backend designed with python flask, and a webapp made with ember-cli. A demo of the webapp hosted on [Surge.sh](pslab-remote.surge.sh), and the backend is hosted on [Heroku](pslab-stage.herokuapp.com)
 
-A list of blog posts I wrote elaborating my journey :
+
+{% include gallery.html %}
+
+Full list of blog posts I wrote along the way :
 
 + [The Pocket Science Lab Hardware](http://blog.fossasia.org/the-pocket-science-lab-hardware/)
 + [The Pocket Science Lab: Who Needs it, and Why](http://blog.fossasia.org/the-pocket-science-lab-who-needs-it-and-why-2/)

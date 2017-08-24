@@ -344,5 +344,85 @@ input.search-form:hover {
   padding:10px;
 }
 
+
+
+.gallery-title
+{
+    font-size: 36px;
+    color: #04818a;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+.gallery-title:after {
+    content: "";
+    position: absolute;
+    width: 7.5%;
+    left: 46.5%;
+    height: 45px;
+    border-bottom: 1px solid #5e5e5e;
+}
+.filter-button
+{
+    font-size: 18px;
+    border: 1px solid #42B32F;
+    border-radius: 5px;
+    text-align: center;
+    color: #rgba(17, 110, 148, 0.88);
+    margin-bottom: 30px;
+
+}
+.filter-button:hover
+{
+    font-size: 18px;
+    border: 1px solid #42B32F;
+    border-radius: 5px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #04818a;
+
+}
+.btn-default:active .filter-button:active
+{
+    background-color: #42B32F;
+    color: white;
+}
+
+.port-image
+{
+    width: 100%;
+}
+
+.gallery_product
+{
+    margin-bottom: 30px;
+}
+
+.my-panel{
+min-height: 350px;
+}
+
+.panel-body{
+padding: 6px;
+}
+
+.panel-heading > a {
+  color: #fff;
+  -webkit-transition: color 300ms, background-color 300ms;
+  -moz-transition: color 300ms, background-color 300ms;
+  -o-transition:  color 300ms, background-color 300ms;
+  transition:  color 300ms, background-color 300ms;
+}
+
+
+.panel-heading > a:hover {
+  color: #ffe400;
+}
+
+.panel-heading > a:focus {
+  color: #ffe400;
+}
+
+
 @import "svg-icons";
-@import "sidebar";
+
