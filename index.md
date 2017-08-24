@@ -37,8 +37,8 @@ For GSoC-17, I worked on several aspects of the [Pocket Science Lab](https://psl
 * [remote laboratory](https://github.com/fossasia/pslab-remote):
 ---
   * Made a framework for accessing the PSLab remotely. Please refer to the README on how to setup your own server.
-  * Created an API server with python flask, and Postgresql. A live copy is hosted on [Heroku](pslab-stage.herokuapp.com) . A real PSLab hardware device is not connected to the server, and a dummy class is being used instead.
-  * Created a webapp made with ember-cli. A demo of the webapp hosted on [Surge.sh](pslab-remote.surge.sh)
+  * Created an API server with python flask, and Postgresql. A live copy is hosted on [Heroku](https://pslab-stage.herokuapp.com) . A real PSLab hardware device is not connected to the server, and a dummy class is being used instead.
+  * Created a webapp made with ember-cli. A demo of the webapp hosted on [Surge.sh](https://pslab-remote.surge.sh)
   
   * My Contribution: [Pull Requests](https://github.com/fossasia/pslab-remote/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Ajithinbp), [issues](https://github.com/fossasia/pslab-hardware/issues?utf8=%E2%9C%93&q=is%3Aissue%20author%3Ajithinbp), [commits](https://github.com/fossasia/pslab-remote/commits/?author=jithinbp)
   ---
