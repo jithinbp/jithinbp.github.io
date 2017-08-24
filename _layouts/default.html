@@ -15,29 +15,26 @@
 <body class="homepage">
 
     <header id="header">
+		<nav class="navbar navbar-inverse"  role="banner">
+		  <div class="container-fluid">
+			<div class="navbar-header pull-left">
+			        <a class="navbar-brand" href="{{ site.baseurl }}/index.html"><div class="site-avatar"><img src="{{ site.avatar }}" alt="avatar"></div></a>
+			</div>
+			<ul class="nav navbar-nav pull-left">
+		      <div class="site-info">
+		        <h1 class="site-name">{{ site.name }}</h1>
+		        <p class="site-description">{{ site.description }}</p>
+		      </div>
+			</ul>
 
-	<nav class="navbar navbar-inverse"  role="banner">
-	  <div class="container-fluid">
-	    <div class="navbar-header pull-left">
-	            <a class="navbar-brand" href="{{ site.baseurl }}/index.html"><div class="site-avatar"><img src="{{ site.avatar }}" alt="avatar"></div></a>
-	    </div>
-	    <ul class="nav navbar-nav pull-left">
-          <div class="site-info">
-            <h1 class="site-name">{{ site.name }}</h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
-	    </ul>
+			<ul class="nav navbar-nav pull-right">
+		        <li><a href="{{ site.baseurl }}/">Home</a></li>
+		        <li><a href="{{ site.baseurl }}/about">About</a></li>
+			</ul>
+		  </div>
+		</nav>
+	</header><!--/header-->
 
-	    <ul class="nav navbar-nav pull-right">
-            <li><a href="{{ site.baseurl }}/">Home</a></li>
-            <li><a href="{{ site.baseurl }}/about">About</a></li>
-	    </ul>
-	  </div>
-	</nav>
-
-
-		
-    </header><!--/header-->
     <div class="container">
 
 		{% if page.title %}

@@ -1,20 +1,40 @@
 ---
 ---
 
-@import 'bootstrap';
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// Grid system and page structure
+@import "bootstrap/scaffolding";
+
+// Base CSS
+@import "bootstrap/type";
+@import "bootstrap/forms";
+
+// Components: common
+@import "bootstrap/dropdowns";
+
+// Components: Nav
+@import "bootstrap/navs";
+@import "bootstrap/navbar";
+
+// Utility classes
+@import "bootstrap/utilities";
 
 /*************************
 *******Typography******
 **************************/
 
 body {
-  background: #fff;
-  font-family: 'Open Sans', sans-serif;
-  color:#4e4e4e;
-  line-height: 22px;
+  padding: 0;
+  margin: 0;
   padding-bottom:80px;
 }
 
+.container {
+ padding-left: 5%;
+ padding-right: 5%;
+}
 
 h1,
 h2,
@@ -244,6 +264,7 @@ input.search-form:hover {
 .site-avatar {
   float: left;
   margin-right: 15px;
+  margin-left: 15px;
   padding:5px;
 
   img {
@@ -344,3 +365,4 @@ input.search-form:hover {
 }
 
 @import "svg-icons";
+@import "sidebar";
