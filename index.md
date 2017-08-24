@@ -18,18 +18,30 @@ The Pocket Science lab is such a platform precisely, and its architecture makes 
 ## Work Completed
 * * *
 
-For GSoC-17, I worked on several aspects of the [Pocket Science Lab](pslab.fossasia.org) Project:
+For GSoC-17, I worked on several aspects of the [Pocket Science Lab](https://pslab.fossasia.org) Project:
 
-* [Firmware development of the PSLab](https://github.com/fossasia/pslab-firmware) : Code for PIC24E processor written with MPLab IDE and compiled with XC16 compiler.
-* [Hardware design](https://github.com/fossasia/pslab-hardware) : Made with [KiCAD](http://kicad-pcb.org/)
-* [Desktop Applications](https://github.com/fossasia/pslab-desktop-apps) : My contributions were towards documenting the various apps and using Jekyll to render markdown files via templates . I cross checked a range of experiments in order to create screenshots, made several schematics, and fixed bugs in a few. I also added applications to calibrate the pslab using ADS1115 16-bit ADC module
-* [Python Communication Library](https://github.com/fossasia/pslab-python) : Made bug fixes in capture calls. Helped the android team to understand the various function calls during the porting process. Added support for several new add-on modules such as ADS1115, SX1278 LoRa module, MPU925x 10-DOF IMU sensor among others.
-* [remote laboratory](https://github.com/fossasia/pslab-remote) : Made a framework for accessing the PSLab remotely. This involves a backend designed with python flask, and a webapp made with ember-cli. A demo of the webapp hosted on [Surge.sh](pslab-remote.surge.sh), and the backend is hosted on [Heroku](pslab-stage.herokuapp.com)
+* [Desktop Applications](https://github.com/fossasia/pslab-desktop-apps):
+  * Documenting the various apps and using Jekyll to render markdown files via templates.
+  * Cross checked a range of experiments and collected data.
+  * Created screenshots, and made several schematics for documentation.
+  * Added applications to calibrate the pslab using ADS1115 16-bit ADC module.
+* [Python Communication Library](https://github.com/fossasia/pslab-python)
+  * Made bug fixes in capture calls.
+  * Assisted the android team to understand the various function calls during the porting process
+  * Added support for several new add-on modules such as ADS1115, SX1278 LoRa module, MPU925x 10-DOF IMU sensor among others.
+* [Firmware development of the PSLab](https://github.com/fossasia/pslab-firmware)
+  * Code for PIC24E processor written with MPLab IDE and compiled with XC16 compiler.
+  * Wrote the state machine for PSLab and uploaded the same during the proposal stage of GSoC-17.
+* [Hardware design](https://github.com/fossasia/pslab-hardware) : Designed with [KiCAD](http://kicad-pcb.org/). Assisted developers in adding more robust features.
+* [remote laboratory](https://github.com/fossasia/pslab-remote):
+  * Made a framework for accessing the PSLab remotely. Please refer to the README on how to setup your own server.
+  * Created an API server with python flask, and Postgresql. A live copy is hosted on [Heroku](pslab-stage.herokuapp.com) . A real PSLab hardware device is not connected to the server, and a dummy class is being used instead.
+  * Created a webapp made with ember-cli. A demo of the webapp hosted on [Surge.sh](pslab-remote.surge.sh)
 
 
 {% include gallery.html %}
 
-Full list of blog posts I wrote along the way :
+Full list of blog posts I wrote along the way : [Link](http://blog.fossasia.org/author/jithinbp/) to my blog on blog.fossasia.org
 
 + [The Pocket Science Lab Hardware](http://blog.fossasia.org/the-pocket-science-lab-hardware/)
 + [The Pocket Science Lab: Who Needs it, and Why](http://blog.fossasia.org/the-pocket-science-lab-who-needs-it-and-why-2/)
