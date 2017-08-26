@@ -34,7 +34,9 @@
 			<ul class="nav navbar-nav pull-right">
 		        <li><a href="{{ site.baseurl }}/">Home</a></li>
 		        <li><a href="{{ site.baseurl }}/about">About</a></li>
-		        <li><a  target="_blank" href="https://summerofcode.withgoogle.com/serve/4853982055890944/">GSoC-17 Proposal</a></li>
+		        {% for L in page.urls %}
+			  <li><a href = "{{ L.url }}" target="_blank">{{ L.title }}</a></li>
+			{% endfor %}
 			</ul>
 		  </div>
 		</nav>
