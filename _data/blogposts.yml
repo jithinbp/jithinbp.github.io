@@ -49,13 +49,13 @@
 - title: Designing a remote access framework
   description: We're going to build a framework to remotely access the Pocket Science Lab via the internet. This is an introductory post that outlined a framework. MySql was eventually abandoned in favour of Postgresql
   url: http://blog.fossasia.org/designing-a-virtual-laboratory-with-pslab/
-  img: https://i1.wp.com/blog.fossasia.org/wp-content/uploads/2017/08/psl_signup_postman.png?resize=825%2C510
+  img: https://i0.wp.com/blog.fossasia.org/wp-content/uploads/2017/07/vlab_cover2.png?resize=825%2C510
   section: RA
 
 - title: Creating an API server using Python-Flask
   description: A walkthrough on how to create an API server and deploy it on Heroku. Also includes testing with Postman chrome extension.
   url: http://blog.fossasia.org/designing-a-remote-laboratory-with-pslab-using-python-flask-framework/
-  img: https://i0.wp.com/blog.fossasia.org/wp-content/uploads/2017/07/vlab_cover2.png?resize=825%2C510
+  img: https://i1.wp.com/blog.fossasia.org/wp-content/uploads/2017/08/psl_signup_postman.png?resize=825%2C510
   section: RA
 
 - title: Execute python function calls remotely
