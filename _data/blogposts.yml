@@ -83,10 +83,10 @@
   section: RA
 
 
-- title:
-  description:
-  url:
-  img:
-  section:
+- title: A simple oscilloscope for PSLab remote
+  description: A how-to guide on writing a simple python script that will create an oscilloscope utility with capture1, capture2, and capture4 function calls
+  url: http://blog.fossasia.org/creating-an-elementary-oscilloscope-in-pslabs-remote-framework/
+  img: https://i2.wp.com/blog.fossasia.org/wp-content/uploads/2017/08/psl-virt-scope-header.gif?resize=628%2C350
+  section: RA
 
 
