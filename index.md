@@ -1,6 +1,7 @@
 ---
 layout: default
-title: Hello !
+pagetitle: Home page
+description: Nothing here yet
 ---
 
 <ul>

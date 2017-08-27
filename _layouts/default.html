@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 	<html>
 		<head>
-		    <title>{% if page.pagetitle %}{{ page.pagetitle }}{% elsif page.title %} – {{ page.title }}{% endif %}</title>
-		    {% include meta.html %}
+			    <title>{% if page.title %}{{ page.title }}{% elsif page.pagetitle %} – {{ page.pagetitle }}{% endif %}</title>
+			    {% include meta.html %}
 
-			<title>Jithin : GSoC 2017</title>
 			<meta charset="utf-8">
 			
 			<!-- core CSS -->
@@ -44,9 +43,9 @@
 
     <div class="container">
 
-		{% if page.title %}
+		{% if page.pagetitle %}
 		<div class="center wow fadeInDown">
-			<br><h2>{{ page.title }}</h2>
+			<br><h2>{{ page.pagetitle }}</h2>
 			<p class="lead"> {{ page.description }}</p>
 		</div>    
 		{% endif %}
