@@ -29,7 +29,7 @@
   section: DA
 
 - title: Understanding PN Junctions with PSLab
-  description: Introduction to experiments with diodes. Explains the results from some of PSLab's experiments such as band gap calculations , and rectifiers.
+  description: Introduction to experiments with diodes. Explains the results from some of PSLab's experiments such as band gap calculations.
   url: http://blog.fossasia.org/understanding-pn-junctions-with-the-pocket-science-lab/
   img: https://i1.wp.com/blog.fossasia.org/wp-content/uploads/2017/07/psl_iv_cover.png?resize=771%2C510
   section: DA
@@ -41,13 +41,13 @@
   section: DA
 
 - title: Calibration using ADS1115 16-bit ADC
-  description: Calibrating the PSLab’s Analog Features for Maximum Accuracy. Any instrument is only as good as its voltage reference and calibration procedure, and this post deals with calibration of the PSLab
+  description: Calibrating the PSLab’s Analog Features. Any instrument is only as good as its voltage reference and calibration procedure, and this post details the calibration routine.
   url: http://blog.fossasia.org/calibrating-the-pslabs-analog-features-for-maximum-accuracy/
   img: https://i0.wp.com/blog.fossasia.org/wp-content/uploads/2017/08/psl_cal.png?w=528
   section: DA
 
 - title: Designing a remote access framework
-  description: We're going to build a framework to remotely access the Pocket Science Lab via the internet. This is an introductory post that outlined a framework. MySql was eventually abandoned in favour of Postgresql
+  description: An introductory post about my plans to build a framework to remotely access the Pocket Science Lab via the internet.
   url: http://blog.fossasia.org/designing-a-virtual-laboratory-with-pslab/
   img: https://i0.wp.com/blog.fossasia.org/wp-content/uploads/2017/07/vlab_cover2.png?resize=825%2C510
   section: RA
