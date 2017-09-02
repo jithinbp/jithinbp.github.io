@@ -89,4 +89,8 @@
   img: https://i2.wp.com/blog.fossasia.org/wp-content/uploads/2017/08/psl-virt-scope-header.gif?resize=628%2C350
   section: RA
 
-
+- title: User Guide for PSLab-Remote
+  description: This post is a guide for users who wish to test the remote access framework for PSLab.
+  url: http://blog.fossasia.org/user-guide-for-the-pslab-remote-access-framework/
+  img: https://i1.wp.com/blog.fossasia.org/wp-content/uploads/2017/09/psl_virt_runscript.gif?resize=750%2C502
+  section: RA
