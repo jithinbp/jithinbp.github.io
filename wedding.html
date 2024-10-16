@@ -302,22 +302,18 @@
 	<script src="js/main.js"></script>
 
 	<script>
-    var d = new Date('October 20, 2024 17:00:00');;
+    var d = new Date('October 20, 2024 16:00:00');
 
     // default example
     simplyCountdown('.simply-countdown-one', {
         year: d.getFullYear(),
         month: d.getMonth() + 1,
-        day: d.getDate()
-    });
-
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
         day: d.getDate(),
+        hours: d.getHours(),
+        minutes: d.getMinutes(),
         enableUtc: false
     });
+
 </script>
 
 	</body>
