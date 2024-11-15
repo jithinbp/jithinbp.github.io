@@ -433,6 +433,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#success" class="md-nav__link">
+    Success
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphical-interface-with-pyqt" class="md-nav__link">
+    Graphical interface with PyQt
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2480,6 +2494,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#success" class="md-nav__link">
+    Success
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphical-interface-with-pyqt" class="md-nav__link">
+    Graphical interface with PyQt
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2857,12 +2885,363 @@ I only have like 2GB of space left :(</p>
 </code></pre></div>
 </details>
 <p>Tweak the config file, and run it. Good luck!</p>
-<p>This is a terminal utility, but shows spectra with Gnuplot. There are shortcut keys which you can check by pressing <code>?</code> .
-Some useful ones</p>
+<p>This is a terminal utility, but shows spectra with Gnuplot. There are shortcut keys which you can check by pressing <code>?</code> .</p>
+<p>Some useful ones:</p>
 <ul>
 <li><code>h</code>: Enable histogram (Counts, Time) . Press again to make Counts, Channels.</li>
 <li><code>qy</code>: Quit, yes.</li>
+<li><code>ey</code>: Clear data, yes.</li>
 </ul>
+<h3 id="success">Success<a class="headerlink" href="#success" title="Permanent link">&para;</a></h3>
+<p>I input the waveform from a shaping amplifier. 60Co -&gt; 2x2PMT -&gt; preamp -&gt; shaper -&gt; CAEN5743 , and got this plot.</p>
+<p><img alt="" src="images/CAEN/wavedemo.png" /></p>
+<h3 id="graphical-interface-with-pyqt">Graphical interface with PyQt<a class="headerlink" href="#graphical-interface-with-pyqt" title="Permanent link">&para;</a></h3>
+<hr />
+<p>So i&rsquo;ve spun up a graphical interface for lazy folks. it does not use the library, but instead polls the files created by wavedemo. it also includes an editor to tweak the config file (saves automagically when you go back to the other tab)</p>
+<p><img alt="" src="images/CAEN/pyqt_wavedemo.png" /></p>
+<details class="tip">
+<summary>Source Code : graph.py</summary>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="p">(</span><span class="n">QApplication</span><span class="p">,</span> <span class="n">QMainWindow</span><span class="p">,</span> <span class="n">QWidget</span><span class="p">,</span> <span class="n">QVBoxLayout</span><span class="p">,</span> 
+                           <span class="n">QHBoxLayout</span><span class="p">,</span> <span class="n">QLineEdit</span><span class="p">,</span> <span class="n">QPushButton</span><span class="p">,</span> <span class="n">QLabel</span><span class="p">,</span> <span class="n">QFileDialog</span><span class="p">,</span> <span class="n">QMenuBar</span><span class="p">,</span> <span class="n">QMenu</span><span class="p">,</span> <span class="n">QMessageBox</span><span class="p">,</span> <span class="n">QToolBar</span><span class="p">,</span> <span class="n">QTabWidget</span><span class="p">,</span> <span class="n">QTextEdit</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtCore</span> <span class="kn">import</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">QProcess</span><span class="p">,</span> <span class="n">QTimer</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtGui</span> <span class="kn">import</span> <span class="n">QTextCursor</span><span class="p">,</span> <span class="n">QIcon</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.backends.backend_qt5agg</span> <span class="kn">import</span> <span class="n">FigureCanvasQTAgg</span> <span class="k">as</span> <span class="n">FigureCanvas</span>
+<span class="kn">from</span> <span class="nn">matplotlib.figure</span> <span class="kn">import</span> <span class="n">Figure</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">Popen</span>
+
+<span class="k">class</span> <span class="nc">GraphingCalculator</span><span class="p">(</span><span class="n">QMainWindow</span><span class="p">):</span>
+    <span class="n">monitoring_histogram</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">monitoring_waveform</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;CAEN Data Plotter&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+
+        <span class="c1"># Initialize timers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">histo_timer</span> <span class="o">=</span> <span class="n">QTimer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_timer</span> <span class="o">=</span> <span class="n">QTimer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">histo_timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_histogram</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_waveform</span><span class="p">)</span>
+        
+        <span class="c1"># Initialize last modification times</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_histo_mtime</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_wave_mtime</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Create menu bar and toolbar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_menu_bar</span><span class="p">()</span>
+
+        <span class="c1"># Create tab widget</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tab_widget</span> <span class="o">=</span> <span class="n">QTabWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCentralWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tab_widget</span><span class="p">)</span>
+
+        <span class="c1"># Create and add plotting tab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_widget</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_plot_tab</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tab_widget</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_widget</span><span class="p">,</span> <span class="s2">&quot;Plotting&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Create and add config editor tab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config_widget</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_config_tab</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tab_widget</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_widget</span><span class="p">,</span> <span class="s2">&quot;Config Editor&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Connect tab change signal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tab_widget</span><span class="o">.</span><span class="n">currentChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_tab_changed</span><span class="p">)</span>
+        
+        <span class="c1"># Store the last active tab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_tab_index</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">setup_plot_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setup the plotting interface tab&quot;&quot;&quot;</span>
+        <span class="n">main_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_widget</span><span class="p">)</span>
+
+        <span class="c1"># Create input area</span>
+        <span class="n">input_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">csv_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Plot CSV&quot;</span><span class="p">)</span>
+        <span class="n">wave_demo_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Run WaveDemo&quot;</span><span class="p">)</span>
+        <span class="n">wave_demo_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">QIcon</span><span class="o">.</span><span class="n">fromTheme</span><span class="p">(</span><span class="s2">&quot;media-playback-start&quot;</span><span class="p">))</span>
+        <span class="n">csv_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_csv</span><span class="p">)</span>
+        <span class="n">wave_demo_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run_wave_demo</span><span class="p">)</span>
+        <span class="n">input_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">csv_button</span><span class="p">)</span>
+        <span class="n">input_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">wave_demo_button</span><span class="p">)</span>
+        <span class="n">main_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">input_layout</span><span class="p">)</span>
+
+        <span class="c1"># Create matplotlib figure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">figure</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">FigureCanvas</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="p">)</span>
+        <span class="n">main_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">)</span>
+
+        <span class="c1"># Add control panel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_panel</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">control_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">control_panel</span><span class="p">)</span>
+        
+        <span class="c1"># Add control buttons</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor_hist_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Monitor Histogram&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor_wave_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Monitor Waveform&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_monitor_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Stop Monitoring&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor_hist_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor_histogram</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor_wave_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor_waveform</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_monitor_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stop_monitoring</span><span class="p">)</span>
+        
+        <span class="n">control_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor_hist_button</span><span class="p">)</span>
+        <span class="n">control_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor_wave_button</span><span class="p">)</span>
+        <span class="n">control_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stop_monitor_button</span><span class="p">)</span>
+        
+        <span class="n">main_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">control_panel</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_panel</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">setup_config_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setup the config editor tab&quot;&quot;&quot;</span>
+        <span class="n">config_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_widget</span><span class="p">)</span>
+        
+        <span class="c1"># Add text editor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config_editor</span> <span class="o">=</span> <span class="n">QTextEdit</span><span class="p">()</span>
+        <span class="n">config_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_editor</span><span class="p">)</span>
+        
+        <span class="c1"># Load config file if it exists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_config_file</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">load_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the WaveDemoConfig.ini file into the editor&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">config_file</span> <span class="o">=</span> <span class="s2">&quot;WaveDemoConfig.ini&quot;</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">config_editor</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">config_editor</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;# WaveDemoConfig.ini not found&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error loading config file: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">save_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the config file&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">config_file</span> <span class="o">=</span> <span class="s2">&quot;WaveDemoConfig.ini&quot;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_editor</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Config file saved successfully&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving config file: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_tab_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle tab changes&quot;&quot;&quot;</span>
+        <span class="c1"># If we&#39;re leaving the config editor tab, save the file</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_tab_index</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Config editor tab index</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_config_file</span><span class="p">()</span>
+        
+        <span class="c1"># If we&#39;re entering the config editor tab, reload the file</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_config_file</span><span class="p">()</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_tab_index</span> <span class="o">=</span> <span class="n">index</span>
+
+    <span class="k">def</span> <span class="nf">create_menu_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the menu bar with File and Help menus&quot;&quot;&quot;</span>
+        <span class="n">menubar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">menuBar</span><span class="p">()</span>
+        
+        <span class="c1"># File menu</span>
+        <span class="n">file_menu</span> <span class="o">=</span> <span class="n">menubar</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="s1">&#39;File&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># Add Exit action to File menu</span>
+        <span class="n">exit_action</span> <span class="o">=</span> <span class="n">file_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s1">&#39;Exit&#39;</span><span class="p">)</span>
+        <span class="n">exit_action</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+        
+        <span class="c1"># Help menu</span>
+        <span class="n">help_menu</span> <span class="o">=</span> <span class="n">menubar</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="s1">&#39;Help&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># Add About action to Help menu</span>
+        <span class="n">about_action</span> <span class="o">=</span> <span class="n">help_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s1">&#39;About&#39;</span><span class="p">)</span>
+        <span class="n">about_action</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">show_about_dialog</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">show_about_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show the About dialog with software information&quot;&quot;&quot;</span>
+        <span class="n">about_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        &lt;h3&gt;CAEN Digitizer Data Plotter&lt;/h3&gt;</span>
+<span class="s2">        &lt;p&gt;This software is designed to visualize data from CAEN Multi Channel Analyzers </span>
+<span class="s2">        and Digitizers. It provides real-time monitoring of both waveforms and histograms </span>
+<span class="s2">        generated by the CAEN hardware.&lt;/p&gt;</span>
+<span class="s2">        </span>
+<span class="s2">        &lt;p&gt;&lt;b&gt;Features:&lt;/b&gt;&lt;/p&gt;</span>
+<span class="s2">        &lt;ul&gt;</span>
+<span class="s2">        &lt;li&gt;Real-time waveform monitoring&lt;/li&gt;</span>
+<span class="s2">        &lt;li&gt;Real-time histogram monitoring&lt;/li&gt;</span>
+<span class="s2">        &lt;li&gt;CSV data plotting capabilities&lt;/li&gt;</span>
+<span class="s2">        &lt;li&gt;Integration with CAEN WaveDemo software&lt;/li&gt;</span>
+<span class="s2">        &lt;/ul&gt;</span>
+<span class="s2">        </span>
+<span class="s2">        &lt;p&gt;&lt;b&gt;Developer:&lt;/b&gt;&lt;br&gt;</span>
+<span class="s2">        Jithin B.P.&lt;br&gt;</span>
+<span class="s2">        &lt;a href=&quot;mailto:jithinbp@gmail.com&quot;&gt;jithinbp@gmail.com&lt;/a&gt;&lt;/p&gt;</span>
+<span class="s2">        </span>
+<span class="s2">        &lt;p&gt;&lt;b&gt;Version:&lt;/b&gt; 1.0&lt;/p&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        
+        <span class="n">QMessageBox</span><span class="o">.</span><span class="n">about</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;About CAEN Data Plotter&quot;</span><span class="p">,</span> <span class="n">about_text</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">plot_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Open and plot a CSV file&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Open CSV File&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;CSV Files (*.csv);;Text Files (*.txt)&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_data_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">plot_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;CSV Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error plotting CSV: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">read_data_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read data from a file and return x, y data and labels&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="c1"># Multi-column case: use first two columns</span>
+                <span class="n">x_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+                <span class="n">y_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Single-column case: generate x values automatically</span>
+                <span class="n">y_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+                <span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_data</span><span class="p">))</span>
+            
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_data</span><span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error reading file </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">plot_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generic plotting function for both line plots and histograms&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;line&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;histogram&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error plotting data: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run_wave_demo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the WaveDemo command in a new gnome-terminal&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Launch terminal with a unique title</span>
+            <span class="n">terminal_title</span> <span class="o">=</span> <span class="s2">&quot;wavedemo_terminal&quot;</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;gnome-terminal --title=&quot;</span><span class="si">{</span><span class="n">terminal_title</span><span class="si">}</span><span class="s1">&quot; -- bash -c &quot;WaveDemo_x743 WaveDemoConfig.ini; read -p </span><span class="se">\&#39;</span><span class="s1">Press Enter to close...</span><span class="se">\&#39;</span><span class="s1">&quot;&#39;</span>
+            <span class="n">QProcess</span><span class="o">.</span><span class="n">startDetached</span><span class="p">(</span><span class="s1">&#39;gnome-terminal&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;--title&#39;</span><span class="p">,</span> <span class="n">terminal_title</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;WaveDemo_x743 WaveDemoConfig.ini; read -p &quot;Press Enter to close...&quot;&#39;</span><span class="p">])</span>
+            
+            <span class="c1"># Give terminal time to open</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            
+            <span class="c1"># Show the control panel after launching WaveDemo</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">control_panel</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error launching terminal: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">monitor_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start histogram monitoring&quot;&quot;&quot;</span>
+        <span class="c1"># Stop waveform monitoring if active</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitoring_waveform</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wave_timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">monitoring_waveform</span> <span class="o">=</span> <span class="kc">False</span>
+            
+        <span class="c1"># Start histogram monitoring</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitoring_histogram</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">histo_timer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># Poll every 100ms</span>
+        
+        <span class="c1"># Initialize the plot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Histogram Monitor&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">monitor_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start waveform monitoring&quot;&quot;&quot;</span>
+        <span class="c1"># Stop histogram monitoring if active</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitoring_histogram</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">histo_timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">monitoring_histogram</span> <span class="o">=</span> <span class="kc">False</span>
+            
+        <span class="c1"># Start waveform monitoring</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitoring_waveform</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_timer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># Poll every 100ms</span>
+        
+        <span class="c1"># Initialize the plot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Waveform Monitor&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">stop_monitoring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop all monitoring&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitoring_histogram</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitoring_waveform</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">histo_timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">update_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update histogram plot from file&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;PlotHistoData.txt&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+                <span class="k">return</span>
+
+            <span class="c1"># Check if file has been modified</span>
+            <span class="n">mtime</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mtime</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_histo_mtime</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_histo_mtime</span> <span class="o">=</span> <span class="n">mtime</span>
+
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_data_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">plot_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;Histogram Monitor&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="s2">&quot;Counts&quot;</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;histogram&#39;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error updating histogram: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update waveform plot from file&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;PlotWavesData.txt&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+                <span class="k">return</span>
+
+            <span class="c1"># Check if file has been modified</span>
+            <span class="n">mtime</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mtime</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_wave_mtime</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_wave_mtime</span> <span class="o">=</span> <span class="n">mtime</span>
+
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_data_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">plot_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;Waveform Monitor&quot;</span><span class="p">,</span> <span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="s2">&quot;Amplitude&quot;</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error updating waveform: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">calculator</span> <span class="o">=</span> <span class="n">GraphingCalculator</span><span class="p">()</span>
+    <span class="n">calculator</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</code></pre></div>
+</details>
+<p>Dependencies : PyQt5 , matplotlib, numpy    </p>
 
 
 
