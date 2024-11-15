@@ -1,0 +1,13 @@
+<details>
+  <summary style="cursor:pointer;">Full list of blog posts I wrote along the way : <a href="http://blog.fossasia.org/author/jithinbp/">link</a> to my blog on blog.fossasia.org</summary>
+
+  <div class="row">
+  <ul>
+  {% for blog in site.data.blogposts %}
+    <li><a href = "{{ blog.url }}" target="_blank">{{ blog.title }}</a></li>
+  {% endfor %}
+  </ul>
+  </div>
+</details>
+
+

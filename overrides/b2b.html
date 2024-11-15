@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+  <!-- Add scripts that need to run before here -->
+  {{ super() }}
+  <!-- Add scripts that need to run afterwards here -->
+
+
+{% endblock %}
+
+
+{% block announce %}
+
+<marquee>
+    <a href="/syllabus" style="text-decoration: none; color: inherit;">
+        New batch starting soon...
+    </a>
+</marquee>
+
+{% endblock %}
+
+{% block htmltitle %}
+  <title>CIE: Blocks to Bots</title>
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+
+
+<!-- Custom Banner -->
+<div class="banner">
+  <div class="full-width-banner">
+    <img src="../images/cover.png" alt="Banner Image" class="banner-image">
+  </div>
+
+</div>
+{% endblock %}
+
+{% block content %}
+
+
+{{super() }}
+
+{% endblock %}

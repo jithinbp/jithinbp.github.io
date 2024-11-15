@@ -1,0 +1,2991 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jithinbp.in/CAEN.html">
+      
+      
+        <link rel="prev" href="workshopnano.html">
+      
+      
+        <link rel="next" href="boards.html">
+      
+      
+      <link rel="icon" href="images/kuttypy.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
+    
+    
+      
+        <title>CAEN on Ubuntu - Jithin BP</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.35e1ed30.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+  
+  
+  
+  
+  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5 1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5 14 11H6v2Z"/></svg>');}</style>
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/main.css">
+    
+      <link rel="stylesheet" href="assets/lightbox/css/lightbox.min.css">
+    
+      <link rel="stylesheet" href="assets/carousel.css">
+    
+      <link rel="stylesheet" href="assets/xtra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#caen-digitizer-data-collection-and-viewing-on-ubuntu" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Jithin BP" class="md-header__button md-logo" aria-label="Jithin BP" data-md-component="logo">
+      
+  <img src="images/kuttypy.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jithin BP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CAEN on Ubuntu
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jithinbp/jithinbp.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jithinbp/jithinbp.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Jithin BP" class="md-nav__button md-logo" aria-label="Jithin BP" data-md-component="logo">
+      
+  <img src="images/kuttypy.png" alt="logo">
+
+    </a>
+    Jithin BP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jithinbp/jithinbp.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jithinbp/jithinbp.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pages/environment.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environment Sensors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mqtt.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quiz_server.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QUIZ Server
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workshopnano.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Kuttypy Nano
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    CAEN on Ubuntu
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="CAEN.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    CAEN on Ubuntu
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-toolchain" class="md-nav__link">
+    Setup toolchain
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup toolchain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing" class="md-nav__link">
+    Installing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wavedemo" class="md-nav__link">
+    Wavedemo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execute-wavedemo-user-manual" class="md-nav__link">
+    Execute Wavedemo. User Manual
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="boards.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Boards
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pages/wedding.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wedding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="curriculum-vitae.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Curriculum Vitae
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Masters Research
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Masters Research
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ms-thesis-full-text.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Masters Thesis Full Text
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="thin-film-deposition-at-iiser-mohali.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Thin Film Deposition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pcar-spectroscopy.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PCAR Spectroscopy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scanning-tunneling-microscopy.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scanning Tunneling Microscopy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="liquid-helium-cryostat.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Liquid Helium Cryostat
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mfp-3d-atomic-force-microscope.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MFP-3D Atomic Force Microscope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="probes-for-cryostats.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probes for Cryostats
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="na2iro3-depositionimaging.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other PLD Attempts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="the-refrigerator-next-door.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Next Door Neighbours
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Academic Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Academic Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="applications-of-mobile-technology-in-archaeology.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Archaeology and Android
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="multi-channel-analyzer-for-radiation-analysis.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Radiation Detection and Analysis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="software-pid-controller.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software PID Controller
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_4" id="__nav_11_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Optics Lab
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_4">
+            <span class="md-nav__icon md-icon"></span>
+            Optics Lab
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pendulum-tracking-with-opencv.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pendulum Tracking with OpenCV
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="beam-profile-extraction-with-opencv.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Beam Profile Extraction with OpenCV
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spatial-light-modulation-with-a-dismantled-projector.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spatial Light Modulation with a Dismantled Projector
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="virtual-lab-project.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtual Lab Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3d-phase-portaits.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3D Phase Portrait Simulations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ideal-gas-mixing-simulation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ideal Gas Mixing Simulation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    A Versatile Labtool
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            A Versatile Labtool
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="a-versatile-labtool.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home Page
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="a-versatile-labtool/getting-started.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_3" id="__nav_12_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Calibration
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3">
+            <span class="md-nav__icon md-icon"></span>
+            Calibration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/calibrating-the-analog-bits-for-maximum-accuracy.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Calibration and Accuracy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/calibrating-dac-channels.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Calibrating DAC Channels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_4" id="__nav_12_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Design and Construction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_4">
+            <span class="md-nav__icon md-icon"></span>
+            Design and Construction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/system-diagram.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System Diagram
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/artists-impression.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artists Impression
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/3d-printing-enclosure.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3D printing Enclosure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/i2c-3-jack.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    I2C Bus 3.5mm Jack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/bom.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bill of Materials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_4_6" id="__nav_12_4_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Waveform Generators
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            Waveform Generators
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/28bitdds.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    28 bit DDS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/sinewavegen.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15kHz Sine Wave
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/help.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docs and interactive help
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/wireless-subunits.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wireless Subunits
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_4_9" id="__nav_12_4_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Alternate Interfaces
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            Alternate Interfaces
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/oled.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Standalone OLED
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/esp8266.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP8266 WiFi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/rpi.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Raspberry Pi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/android.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Android App
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/addon24bit.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    24 Bit ADC Add On Board
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/ws2812.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Addressable RGB LEDs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/hb100.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Doppler Radar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtool/purchase.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Purchase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vlabtool-V2
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            Vlabtool-V2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/home.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home Page
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/proto.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    First Prototype
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Sensors and Add-ons
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            Sensors and Add-ons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/linear_encoder.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inductance based linear encoder
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/tcd3648.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Position sensing TCD2648AP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/sensors.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    External Sensors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/sensors2.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing various sensors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/highresaddons.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    High Resolution Add-ons
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_4" id="__nav_13_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Construction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_4">
+            <span class="md-nav__icon md-icon"></span>
+            Construction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/proto2and3.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prototypes 2 and 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/larger.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Larger form factor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/lasercut.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Laser Cut Enclosures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/wireless.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wireless Subunits
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_6" id="__nav_13_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    More Features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_6">
+            <span class="md-nav__icon md-icon"></span>
+            More Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/ampmod.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Amplitude Modulations AD633
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/bodeplots.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bandpass filter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/keithley.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Calibrating calibrator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vlabtoolv2/streaming.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    125ksps streaming
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hobby Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Hobby Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pov.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    POV Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="graphicalcoding.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web based graphical coding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="expeyeswebapp.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ExpEYES android and webapp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="misc.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miscellaneous Hobby Projects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Github
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Github
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pcar.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PCAR Spectroscopy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-toolchain" class="md-nav__link">
+    Setup toolchain
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup toolchain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing" class="md-nav__link">
+    Installing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wavedemo" class="md-nav__link">
+    Wavedemo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execute-wavedemo-user-manual" class="md-nav__link">
+    Execute Wavedemo. User Manual
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="caen-digitizer-data-collection-and-viewing-on-ubuntu">CAEN Digitizer data collection and viewing on Ubuntu<a class="headerlink" href="#caen-digitizer-data-collection-and-viewing-on-ubuntu" title="Permanent link">&para;</a></h1>
+<p>DT5743 is what i have, but the instructions will work for a wide range</p>
+<h2 id="setup-toolchain">Setup toolchain<a class="headerlink" href="#setup-toolchain" title="Permanent link">&para;</a></h2>
+<hr />
+<div class="admonition info">
+<p class="admonition-title">Install Packages from CAEN</p>
+<ul>
+<li><a href="https://www.caen.it/?downloadfile=8633" target="_blank">CAENVMELib-v4.0.2</a></li>
+<li><a href="https://www.caen.it/?downloadfile=8292" target="_blank">CAENComm-v1.7.0</a></li>
+<li><a href="https://www.caen.it/?downloadfile=7354" target="_blank">CAENDigitizer-v2.17.3</a></li>
+<li><a href="https://www.caen.it/?downloadfile=10084" target="_blank">CAENUSBdrvB-v1.6.0</a> : Get specific drivers for your device from <a href="https://www.caen.it/download/?filter=CAENComm%20Library" target="_blank">CAEN</a></li>
+<li><a href="https://www.caen.it/?downloadfile=9675" target="_blank">caenwavedemo_x743-1.2.1</a></li>
+</ul>
+</div>
+<h3 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h3>
+<hr />
+<p>Dependencies : glibc and libusb are required. along with the build tools like make.</p>
+<div class="admonition tip">
+<p class="admonition-title">you can check glibc version</p>
+<p><pre><font color="#26A269"><b>jithin@jithin-Victus</b></font>:<font color="#12488B"><b>~</b></font>$ ldd &ndash;version | head -n1
+ldd (Ubuntu GLIBC 2.35-0ubuntu3.8) 2.35
+</pre></p>
+<p>minimum version 2.11 is asked by CAEN.</p>
+</div>
+<p>The first 4 packages are simply <code>sudo ./install_x64</code> , except the USBdrv where you make need to do <code>make</code> followed by <code>sudo make install</code> if you do not want to use DKMS.</p>
+<p>There are some sample programs inside CAENDigitizer which you can try to compile using <code>make</code></p>
+<h3 id="wavedemo">Wavedemo<a class="headerlink" href="#wavedemo" title="Permanent link">&para;</a></h3>
+<hr />
+<p>gnuplot is needed. you can get it from synaptic.</p>
+<p>There seems to be a redefinition bug in <code>include/Wavedemo.h</code> for which <a href="https://downloader.cursor.sh/linux/appImage/x64" target="blank_">Cursor</a> easily suggested a fix. Change the enum definitions in that file to what&rsquo;s shown below to avoid redefinition errors.</p>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="n">WPLOT_MODE_1BD</span><span class="p">,</span><span class="w">		</span><span class="c1">//plots only output waveforms of one board at a time without any processing</span>
+<span class="w">	</span><span class="n">WPLOT_MODE_1CH</span><span class="p">,</span><span class="w">		</span><span class="c1">//plots analogue and digital waveforms of one channel at a time</span>
+<span class="w">	</span><span class="n">WPLOT_MODE_STD</span><span class="p">,</span><span class="w">		</span><span class="c1">//plots analogue and digital waveforms of events</span>
+
+<span class="w">	</span><span class="n">WPLOT_MODE_DUMMY_LAST</span>
+<span class="p">}</span><span class="w"> </span><span class="n">WPLOT_MODE_t</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="n">HPLOT_DISABLED</span><span class="p">,</span>
+<span class="w">	</span><span class="n">HPLOT_TIME</span><span class="p">,</span>
+<span class="w">	</span><span class="n">HPLOT_ENERGY</span><span class="p">,</span>
+
+<span class="w">	</span><span class="n">HPLOT_TYPE_DUMMY_LAST</span>
+<span class="p">}</span><span class="w"> </span><span class="n">HPLOT_TYPE_t</span><span class="p">;</span>
+</code></pre></div>
+<p>MAKE and INSTALLATION</p>
+<div class="highlight"><pre><span></span><code>./configure<span class="w"> </span><span class="nv">CFLAGS</span><span class="o">=</span>-O2
+make
+sudo<span class="w"> </span>make<span class="w"> </span>install
+</code></pre></div>
+<h3 id="execute-wavedemo-user-manual">Execute Wavedemo. <a href="file:///home/jithin/Downloads/UM8789_WaveDemo_x743_UserManual_rev1.pdf" target="blank_">User Manual</a><a class="headerlink" href="#execute-wavedemo-user-manual" title="Permanent link">&para;</a></h3>
+<hr />
+<p><img alt="" src="images/CAEN/wavedemo_histogram.png" /></p>
+<div class="highlight"><pre><span></span><code>WaveDemo_x743 WaveDemoConfig.ini
+</code></pre></div>
+<p>The config file contains all info. I have attached my config file below.
+Notice that I have set all SAVE_DATA options to NO because it fills up a few gigs within minutes, and
+I only have like 2GB of space left :(</p>
+<details class="tip">
+<summary>WaveDemoConfig.ini : I am only using CH0 on board 1</summary>
+<div class="highlight"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="o">****************************************************************</span>
+<span class="err">#</span><span class="w"> </span><span class="n">WaveDemo_x743</span><span class="w"> </span><span class="n">Configuration</span><span class="w"> </span><span class="n">File</span>
+<span class="err">#</span><span class="w"> </span><span class="o">****************************************************************</span>
+
+<span class="err">#</span><span class="w"> </span><span class="o">----------------------------------------------------------------</span>
+<span class="err">#</span><span class="w"> </span><span class="n">Board</span><span class="w"> </span><span class="n">Connection</span><span class="w"> </span><span class="n">Parameters</span>
+<span class="err">#</span><span class="w"> </span><span class="o">----------------------------------------------------------------</span>
+<span class="o">[</span><span class="n">CONNECTIONS</span><span class="o">]</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">OPEN</span><span class="w"> </span><span class="o">&lt;</span><span class="n">N</span><span class="o">&gt;</span><span class="p">:</span><span class="w"> </span><span class="n">open</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">digitizer</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">USB</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">                  </span><span class="n">Desktop</span><span class="o">/</span><span class="n">NIM</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="nf">USB</span><span class="w"> </span><span class="p">(</span><span class="n">direct</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">USB</span><span class="p">)</span>
+<span class="err">#</span><span class="w">          </span><span class="n">USB</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">BA</span><span class="w">                 </span><span class="n">VME</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">USB</span><span class="o">-</span><span class="n">V1718</span><span class="o">/</span><span class="n">V3718</span><span class="w"> </span><span class="p">(</span><span class="n">BA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BaseAddress</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">VME</span><span class="w"> </span><span class="n">board</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">hex</span><span class="p">)</span>
+<span class="err">#</span><span class="w">          </span><span class="n">PCI</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">                </span><span class="n">Desktop</span><span class="o">/</span><span class="n">NIM</span><span class="o">/</span><span class="n">VME</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="nf">CONET</span><span class="w"> </span><span class="p">(</span><span class="n">optical</span><span class="w"> </span><span class="n">link</span><span class="p">)</span><span class="w"> </span>
+<span class="err">#</span><span class="w">          </span><span class="n">PCI</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">BA</span><span class="w">               </span><span class="n">VME</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">V2718</span><span class="o">/</span><span class="n">V3718</span><span class="w"> </span><span class="p">(</span><span class="n">BA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BaseAddress</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">VME</span><span class="w"> </span><span class="n">board</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">hex</span><span class="p">)</span><span class="w"> </span>
+<span class="err">#</span><span class="w">          </span><span class="n">USB_A4818</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">          </span><span class="n">Desktop</span><span class="o">/</span><span class="n">NIM</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">USB</span><span class="o">-&gt;</span><span class="n">A4818</span><span class="o">-&gt;</span><span class="n">CONET</span><span class="w"> </span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">PID</span><span class="w"> </span><span class="p">(</span><span class="n">product</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">A4818</span><span class="p">)</span>
+<span class="err">#</span><span class="w">          </span><span class="n">USB_A4818_V2718</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">BA</span><span class="w">   </span><span class="n">VME</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">USB</span><span class="o">-</span><span class="n">A4818</span><span class="o">-</span><span class="n">V2718</span><span class="w"> </span><span class="p">(</span><span class="n">BA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BaseAddress</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">VME</span><span class="w"> </span><span class="n">board</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">hex</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">PID</span><span class="w"> </span><span class="p">(</span><span class="n">product</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">A4818</span><span class="p">)</span>
+<span class="err">#</span><span class="w">          </span><span class="n">USB_A4818_V3718</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">BA</span><span class="w">   </span><span class="n">VME</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">USB</span><span class="o">-</span><span class="n">A4818</span><span class="o">-</span><span class="n">V3718</span><span class="w"> </span><span class="p">(</span><span class="n">BA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BaseAddress</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">VME</span><span class="w"> </span><span class="n">board</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">hex</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">PID</span><span class="w"> </span><span class="p">(</span><span class="n">product</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">A4818</span><span class="p">)</span>
+<span class="err">#</span><span class="w">          </span><span class="n">USB_A4818_V4718</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">BA</span><span class="w">   </span><span class="n">VME</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">USB</span><span class="o">-</span><span class="n">A4818</span><span class="o">-</span><span class="n">V4718</span><span class="w"> </span><span class="p">(</span><span class="n">BA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BaseAddress</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">VME</span><span class="w"> </span><span class="n">board</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">hex</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">PID</span><span class="w"> </span><span class="p">(</span><span class="n">product</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">A4818</span><span class="p">)</span>
+<span class="err">#</span><span class="w">          </span><span class="n">ETH_V4718</span><span class="w"> </span><span class="n">IP</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">BA</span><span class="w">        </span><span class="n">VME</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">ETH</span><span class="o">-</span><span class="n">V4718</span><span class="w"> </span><span class="p">(</span><span class="n">BA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BaseAddress</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">VME</span><span class="w"> </span><span class="n">board</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">hex</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">IP</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">IP</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">V4718</span><span class="p">)</span>
+<span class="err">#</span><span class="w">          </span><span class="n">USB_V4718</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">BA</span><span class="w">         </span><span class="n">VME</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">USB</span><span class="o">-</span><span class="n">V4718</span><span class="w"> </span><span class="p">(</span><span class="n">BA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BaseAddress</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">VME</span><span class="w"> </span><span class="n">board</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">hex</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">PID</span><span class="w"> </span><span class="p">(</span><span class="n">product</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">V4718</span><span class="p">)</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">boards</span><span class="p">,</span><span class="w"> </span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">indicates</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">master</span><span class="w"> </span><span class="n">board</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">VME</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">USB</span><span class="o">-</span><span class="n">V1718</span><span class="w"> </span><span class="p">(</span><span class="n">uncomment</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="n">below</span><span class="p">)</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">USB</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32110000</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">USB</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32100000</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">VME</span><span class="w"> </span><span class="n">digitizer</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">ETH</span><span class="o">-</span><span class="n">V4718</span><span class="w"> </span><span class="p">(</span><span class="n">uncomment</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="n">below</span><span class="p">)</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ETH_V4718</span><span class="w"> </span><span class="mf">192.168.1.254</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32110000</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ETH_V4718</span><span class="w"> </span><span class="mf">192.168.1.254</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32100000</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">examples</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="nf">digitizer</span><span class="w"> </span><span class="p">(</span><span class="n">uncomment</span><span class="w"> </span><span class="n">just</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="n">below</span><span class="p">)</span>
+<span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">USB</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">USB</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32100000</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PCI</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PCI</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32100000</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ETH_V4718</span><span class="w"> </span><span class="mf">192.168.1.254</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32100000</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">USB_V4718</span><span class="w"> </span><span class="mi">12345</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32100000</span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">USB_A4818</span><span class="w"> </span><span class="mi">12345</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span>
+<span class="err">#</span><span class="n">OPEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">USB_A4818_V2718</span><span class="w"> </span><span class="mi">12345</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32100000</span>
+
+
+<span class="err">#</span><span class="w"> </span><span class="o">----------------------------------------------------------------</span>
+<span class="err">#</span><span class="w"> </span><span class="n">Program</span><span class="w"> </span><span class="n">options</span>
+<span class="err">#</span><span class="w"> </span><span class="o">----------------------------------------------------------------</span>
+<span class="o">[</span><span class="n">OPTIONS</span><span class="o">]</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">GNUPLOT_PATH</span><span class="p">:</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">gnuplot</span><span class="w"> </span><span class="n">executable</span><span class="w"> </span><span class="nf">file</span><span class="w"> </span><span class="p">(</span><span class="n">optional</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">environment</span><span class="w"> </span><span class="n">variables</span><span class="p">)</span>
+<span class="n">GNUPLOT_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">DATAFILE_PATH</span><span class="p">:</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">save</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="nf">file</span><span class="w"> </span><span class="p">(</span><span class="n">the</span><span class="w"> </span><span class="n">folder</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">created</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">exist</span><span class="p">)</span>
+<span class="n">DATAFILE_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">data_output</span><span class="o">/</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">SAVE_RAW_DATA</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">raw</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">saving</span>
+<span class="n">SAVE_RAW_DATA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+<span class="err">#</span><span class="w"> </span><span class="n">SAVE_TDC_LIST</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">saving</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Trigger</span><span class="w"> </span><span class="n">Time</span><span class="w"> </span><span class="n">Tag</span><span class="w"> </span><span class="n">list</span>
+<span class="n">SAVE_TDC_LIST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YES</span>
+<span class="err">#</span><span class="w"> </span><span class="n">SAVE_WAVEFORM</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">waveform</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="nf">saving</span><span class="w"> </span><span class="p">(</span><span class="n">of</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">events</span><span class="p">)</span>
+<span class="n">SAVE_WAVEFORM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+<span class="err">#</span><span class="w"> </span><span class="n">SAVE_ENERGY_HISTOGRAM</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">saving</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">energy</span><span class="w"> </span><span class="n">histogram</span>
+<span class="n">SAVE_ENERGY_HISTOGRAM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YES</span>
+<span class="err">#</span><span class="w"> </span><span class="n">SAVE_TIME_HISTOGRAM</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">saving</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">histogram</span>
+<span class="n">SAVE_TIME_HISTOGRAM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+<span class="err">#</span><span class="w"> </span><span class="n">SAVE_LISTS</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="nf">saving</span><span class="w"> </span><span class="p">(</span><span class="n">of</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">events</span><span class="p">)</span>
+<span class="n">SAVE_LISTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+<span class="err">#</span><span class="w"> </span><span class="n">SAVE_RUN_INFO</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">saving</span>
+<span class="n">SAVE_RUN_INFO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">OUTPUT_FILE_FORMAT</span><span class="p">:</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">either</span><span class="w"> </span><span class="n">ASCII</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="nf">binary</span><span class="w"> </span><span class="p">(</span><span class="n">raw</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">always</span><span class="w"> </span><span class="n">binary</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">BINARY</span><span class="p">,</span><span class="w"> </span><span class="n">ASCII</span>
+<span class="n">OUTPUT_FILE_FORMAT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ASCII</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">OUTPUT_FILE_HEADER</span><span class="p">:</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">enabled</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">included</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">data</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span>
+<span class="n">OUTPUT_FILE_HEADER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YES</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">OUTPUT_FILE_TIMESTAMP_UNIT</span><span class="p">:</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">stamps</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">files</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">=</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">=</span><span class="n">ns</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">=</span><span class="n">us</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">=</span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">=</span><span class="n">s</span>
+<span class="n">OUTPUT_FILE_TIMESTAMP_UNIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">STATS_ENABLE</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">updating</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">printing</span><span class="w"> </span><span class="n">statistics</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="n">acquisition</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span>
+<span class="n">STATS_RUN_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YES</span>
+<span class="err">#</span><span class="w"> </span><span class="n">PLOT_ENABLE</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">waveform</span><span class="w"> </span><span class="n">plotting</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">starts</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span>
+<span class="n">PLOT_RUN_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YES</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">DGTZ_RESET</span><span class="p">:</span><span class="w"> </span><span class="n">specify</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">boards</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">their</span><span class="w"> </span><span class="n">programming</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span>
+<span class="n">DGTZ_RESET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YES</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">SYNC_ENABLE</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">working</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">boards</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="p">.</span><span class="na">B</span><span class="p">.:</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">must</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">TRIGGER_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXTERN</span><span class="p">)</span>
+<span class="n">SYNC_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TRIGGER_FIXED</span><span class="p">:</span><span class="w"> </span><span class="n">fix</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">percent</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">whole</span><span class="w"> </span><span class="n">acquisition</span><span class="w"> </span><span class="n">window</span>
+<span class="err">#</span><span class="w"> </span><span class="n">values</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">90</span><span class="w"> </span><span class="p">(</span><span class="o">%</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="k">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<span class="n">TRIGGER_FIXED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">BOARD_REF</span><span class="p">:</span><span class="w"> </span><span class="n">Board</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">CHANNEL_REF</span><span class="w"> </span><span class="n">belongs</span>
+<span class="n">BOARD_REF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="err">#</span><span class="w"> </span><span class="n">CHANNEL_REF</span><span class="p">:</span><span class="w"> </span><span class="n">Channel</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">TOF</span><span class="w"> </span><span class="n">measurements</span>
+<span class="n">CHANNEL_REF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="err">##</span><span class="w">                    </span><span class="err">##</span>
+<span class="err">###</span><span class="w"> </span><span class="n">Histogram</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="err">##</span>
+<span class="err">##</span><span class="w">                    </span><span class="err">##</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">ENERGY_H_NBIN</span><span class="p">:</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bins</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">energy</span><span class="w"> </span><span class="n">histogram</span>
+<span class="err">#</span><span class="w"> </span><span class="n">values</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="n">K</span>
+<span class="n">ENERGY_H_NBIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="n">K</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TIME_H_NBIN</span><span class="p">:</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bins</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">histogram</span>
+<span class="err">#</span><span class="w"> </span><span class="n">values</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="n">K</span>
+<span class="n">TIME_H_NBIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">K</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TIME_H_MODE</span><span class="p">:</span><span class="w"> </span><span class="n">Time</span><span class="w"> </span><span class="n">histogram</span><span class="w"> </span><span class="n">mode</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">START_STOP</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">common</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="n">channel</span><span class="p">),</span><span class="w"> </span><span class="n">INTERVALS</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="n">consecutive</span><span class="w"> </span><span class="n">events</span><span class="p">)</span>
+<span class="n">TIME_H_MODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">START_STOP</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TIME_H_MIN</span><span class="p">:</span><span class="w"> </span><span class="n">Lower</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="nf">histogram</span><span class="w"> </span><span class="p">(</span><span class="n">in</span><span class="w"> </span><span class="n">ns</span><span class="p">)</span>
+<span class="n">TIME_H_MIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">16</span>
+<span class="err">#</span><span class="w"> </span><span class="n">TIME_H_MAX</span><span class="p">:</span><span class="w"> </span><span class="n">Upper</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="nf">histogram</span><span class="w"> </span><span class="p">(</span><span class="n">in</span><span class="w"> </span><span class="n">ns</span><span class="p">)</span>
+<span class="n">TIME_H_MAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span>
+
+
+<span class="err">#</span><span class="w"> </span><span class="o">----------------------------------------------------------------</span>
+<span class="err">#</span><span class="w"> </span><span class="n">Common</span><span class="w"> </span><span class="nf">Setting</span><span class="w"> </span><span class="p">(</span><span class="n">applied</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">channels</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="o">----------------------------------------------------------------</span>
+<span class="o">[</span><span class="n">COMMON</span><span class="o">]</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">INPUT_ENABLE</span><span class="p">:</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">channels</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="nf">default</span><span class="w"> </span><span class="p">(</span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">individually</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CHANNEL</span><span class="w"> </span><span class="n">n</span><span class="o">]</span><span class="w"> </span><span class="n">sections</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span>
+<span class="n">INPUT_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">SAMPLING_FREQUENCY</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.2</span><span class="w"> </span><span class="n">GHz</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.6</span><span class="w"> </span><span class="n">GHz</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w"> </span><span class="n">MHz</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span><span class="w"> </span><span class="n">MHz</span>
+<span class="n">SAMPLING_FREQUENCY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">INL_CORRECTION_ENABLE</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Integral</span><span class="w"> </span><span class="n">Non</span><span class="w"> </span><span class="n">Linearity</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">acquired</span><span class="w"> </span><span class="n">data</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span>
+<span class="n">INL_CORRECTION_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YES</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TRIGGER_TYPE</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">SOFTWARE</span><span class="w"> </span><span class="p">(</span><span class="n">trigger</span><span class="w">  </span><span class="n">command</span><span class="w">  </span><span class="n">is</span><span class="w"> </span><span class="n">generated</span><span class="w">  </span><span class="n">by</span><span class="w">  </span><span class="n">the</span><span class="w">  </span><span class="n">software</span><span class="p">),</span>
+<span class="err">#</span><span class="w">          </span><span class="n">NORMAL</span><span class="w"> </span><span class="p">(</span><span class="n">the</span><span class="w"> </span><span class="n">signals</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">recorded</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="n">channels</span><span class="w"> </span><span class="n">upon</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">self</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">capability</span><span class="p">),</span><span class="w"> </span>
+<span class="err">#</span><span class="w">          </span><span class="n">EXTERNAL</span><span class="w"> </span><span class="p">(</span><span class="n">trigger</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">signals</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">TRG</span><span class="o">-</span><span class="n">IN</span><span class="w"> </span><span class="n">input</span><span class="p">),</span>
+<span class="err">#</span><span class="w">          </span><span class="n">ADVANCED</span><span class="w"> </span><span class="p">(</span><span class="n">allows</span><span class="w"> </span><span class="n">separate</span><span class="w"> </span><span class="n">settings</span><span class="p">,</span><span class="w"> </span><span class="n">see</span><span class="w"> </span><span class="n">EXTERNAL_TRIGGER</span><span class="p">,</span><span class="w"> </span><span class="n">SOFTWARE_TRIGGER</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">CHANNEL_SELF_TRIGGER</span><span class="p">)</span>
+<span class="err">#</span><span class="n">TRIGGER_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXTERNAL</span>
+<span class="n">TRIGGER_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NORMAL</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">EXTERNAL_TRIGGER</span><span class="p">:</span><span class="w"> </span><span class="n">external</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">settings</span><span class="p">.</span>
+<span class="err">#</span><span class="w"> </span><span class="n">SOFTWARE_TRIGGER</span><span class="p">:</span><span class="w"> </span><span class="n">software</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">settings</span><span class="p">.</span>
+<span class="err">#</span><span class="w"> </span><span class="n">CHANNEL_SELF_TRIGGER</span><span class="p">:</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">auto</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">settings</span><span class="p">.</span>
+<span class="err">#</span><span class="w"> </span><span class="n">When</span><span class="w"> </span><span class="n">enabled</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">specific</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">either</span><span class="w"> </span><span class="nf">propagated</span><span class="w"> </span><span class="p">(</span><span class="n">ACQUISITION_AND_TRGOUT</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">TRGOUT_ONLY</span><span class="p">)</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="nf">not</span><span class="w"> </span><span class="p">(</span><span class="n">ACQUISITION_ONLY</span><span class="p">)</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">TRGOUT</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">DISABLED</span><span class="p">,</span><span class="w"> </span><span class="n">ACQUISITION_ONLY</span><span class="p">,</span><span class="w"> </span><span class="n">ACQUISITION_AND_TRGOUT</span><span class="p">,</span><span class="w"> </span><span class="n">TRGOUT_ONLY</span>
+<span class="err">#</span><span class="w"> </span><span class="n">These</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="n">work</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">TRIGGER_TYPE</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">ADVANCED</span><span class="p">.</span>
+<span class="err">#</span><span class="n">EXTERNAL_TRIGGER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACQUISITION_ONLY</span>
+<span class="err">#</span><span class="n">SOFTWARE_TRIGGER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACQUISITION_ONLY</span>
+<span class="err">#</span><span class="n">CHANNEL_SELF_TRIGGER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACQUISITION_ONLY</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">CHANNEL_TRIGGER_ENABLE</span><span class="p">:</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">auto</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">settings</span><span class="p">.</span><span class="w"> </span><span class="p">(</span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">individually</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CHANNEL</span><span class="w"> </span><span class="n">n</span><span class="o">]</span><span class="w"> </span><span class="n">sections</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span>
+<span class="n">CHANNEL_TRIGGER_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YES</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">RECORD_LENGTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">acquisition</span><span class="w"> </span><span class="n">window</span>
+<span class="err">#</span><span class="w"> </span><span class="n">values</span><span class="p">:</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="p">(</span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span>
+<span class="n">RECORD_LENGTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">POST_TRIGGER</span><span class="p">:</span><span class="w"> </span><span class="n">delay</span><span class="w"> </span><span class="n">added</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">front</span><span class="o">-</span><span class="n">end</span><span class="w"> </span><span class="n">FPGA</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">acquisition</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">stopped</span><span class="p">.</span><span class="w"> </span><span class="n">Units</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">periods</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">SAMLONG</span><span class="w"> </span><span class="n">chips</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="nf">clock</span><span class="w"> </span><span class="p">(</span><span class="n">see</span><span class="w"> </span><span class="n">V1743</span><span class="w"> </span><span class="n">userl</span><span class="w"> </span><span class="n">Manual</span><span class="p">).</span>
+<span class="err">#</span><span class="w"> </span><span class="n">values</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">255</span><span class="w"> </span>
+<span class="n">POST_TRIGGER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TRIGGER_EDGE</span><span class="p">:</span><span class="w"> </span><span class="n">decides</span><span class="w"> </span><span class="n">whether</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">occurs</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">rising</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">falling</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">signal</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">RISING</span><span class="p">,</span><span class="w"> </span><span class="n">FALLING</span>
+<span class="n">TRIGGER_EDGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RISING</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TRIGGER_THRESHOLD</span><span class="p">:</span><span class="w"> </span><span class="n">threshold</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">auto</span><span class="w"> </span><span class="n">trigger</span>
+<span class="err">#</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="o">-</span><span class="mf">1.25</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="mf">1.25</span><span class="w"> </span><span class="n">V</span>
+<span class="n">TRIGGER_THRESHOLD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">PULSE_POLARITY</span><span class="p">:</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">polarity</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">POSITIVE</span><span class="p">,</span><span class="w"> </span><span class="n">NEGATIVE</span>
+<span class="n">PULSE_POLARITY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POSITIVE</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">FPIO_LEVEL</span><span class="p">:</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">front</span><span class="w"> </span><span class="n">panel</span><span class="w"> </span><span class="n">I</span><span class="o">/</span><span class="n">O</span><span class="w"> </span><span class="n">LEMO</span><span class="w"> </span><span class="n">connectors</span><span class="w"> </span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">NIM</span><span class="p">,</span><span class="w"> </span><span class="n">TTL</span>
+<span class="n">FPIO_LEVEL</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">NIM</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">DC_OFFSET</span><span class="p">:</span><span class="w"> </span><span class="n">DC</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="nf">adjust</span><span class="w"> </span><span class="p">(</span><span class="n">DAC</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">setting</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="o">-</span><span class="mf">1.25</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="mf">1.25</span><span class="w"> </span><span class="n">V</span>
+<span class="n">DC_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="err">##</span><span class="w">                               </span><span class="err">##</span>
+<span class="err">###</span><span class="w"> </span><span class="n">Waveforms</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="err">##</span>
+<span class="err">##</span><span class="w">                               </span><span class="err">##</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">GATE_WIDTH</span><span class="p">:</span><span class="w"> </span><span class="n">gate</span><span class="w"> </span><span class="nf">width</span><span class="w"> </span><span class="p">(</span><span class="n">in</span><span class="w"> </span><span class="n">ns</span><span class="p">)</span>
+<span class="n">GATE_WIDTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">150</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">PRE_GATE</span><span class="p">:</span><span class="w"> </span><span class="n">portion</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">gate</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">trigger</span><span class="w"> </span><span class="p">(</span><span class="n">in</span><span class="w"> </span><span class="n">ns</span><span class="p">)</span>
+<span class="n">PRE_GATE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">NS_BASELINE</span><span class="p">:</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Samples</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">baseline</span><span class="w"> </span><span class="n">calculation</span>
+<span class="n">NS_BASELINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">DISCR_MODE</span><span class="p">:</span><span class="w"> </span><span class="n">Discriminator</span><span class="w"> </span><span class="n">mode</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">CFD</span>
+<span class="n">DISCR_MODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CFD</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">CFD_DELAY</span><span class="p">:</span><span class="w"> </span><span class="n">CFD</span><span class="w"> </span><span class="nf">delay</span><span class="w"> </span><span class="p">(</span><span class="n">in</span><span class="w"> </span><span class="n">ns</span><span class="p">)</span>
+<span class="n">CFD_DELAY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">CFD_ATTEN</span><span class="p">:</span><span class="w"> </span><span class="n">CFD</span><span class="w"> </span><span class="n">attenuation</span>
+<span class="err">#</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">CFD_ATTEN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TTF_SMOOTHING</span><span class="p">:</span><span class="w"> </span><span class="n">smoothing</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">disabled</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="n">samples</span>
+<span class="n">TTF_SMOOTHING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="err">##</span><span class="w">                 </span><span class="err">##</span>
+<span class="err">###</span><span class="w"> </span><span class="n">Register</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="err">##</span>
+<span class="err">##</span><span class="w">                 </span><span class="err">##</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">WRITE_REGISTER</span><span class="p">:</span><span class="w"> </span><span class="n">generic</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">register</span><span class="w"> </span><span class="n">access</span><span class="p">.</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="n">allows</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">direct</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span>
+<span class="err">#</span><span class="w"> </span><span class="n">registers</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">board</span><span class="p">.</span><span class="w"> </span><span class="n">NOTE</span><span class="p">:</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">direct</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">accesses</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">executed</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">setting</span><span class="p">,</span><span class="w"> </span><span class="n">thus</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">might</span>
+<span class="err">#</span><span class="w"> </span><span class="n">happen</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">specific</span><span class="w"> </span><span class="n">setting</span><span class="w"> </span><span class="n">overwrites</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">register</span><span class="w"> </span><span class="n">content</span><span class="p">.</span>
+<span class="err">#</span><span class="w"> </span><span class="n">Syntax</span><span class="p">:</span><span class="w"> </span><span class="n">WRITE_REGISTER</span><span class="w"> </span><span class="n">ADDRESS</span><span class="w"> </span><span class="n">DATA</span><span class="p">,</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">ADDRESS</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">register</span><span class="w"> </span><span class="p">(</span><span class="mi">16</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">hex</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">DATA</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">being</span><span class="w"> </span><span class="nf">written</span><span class="w"> </span><span class="p">(</span><span class="mi">31</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">hex</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="n">Example</span><span class="p">:</span><span class="w"> </span><span class="n">WRITE_REGISTER</span><span class="w">  </span><span class="mi">1080</span><span class="w">  </span><span class="mo">00000010</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">threshold</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="nf">counts</span><span class="w"> </span><span class="p">(</span><span class="n">hex</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="err">#</span><span class="w">  </span><span class="n">WRITE_REGISTER</span><span class="w">  </span><span class="mi">8168</span><span class="w">  </span><span class="mi">8</span><span class="w">  </span>
+<span class="err">#</span><span class="n">WRITE_REGISTER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8100</span><span class="w"> </span><span class="n">FFFFFFFB</span><span class="w"> </span><span class="mi">4</span>
+
+
+<span class="err">#</span><span class="w"> </span><span class="o">----------------------------------------------------------------</span>
+<span class="err">#</span><span class="w"> </span><span class="n">Individual</span><span class="w"> </span><span class="n">Settings</span><span class="w"> </span>
+<span class="err">#</span><span class="w"> </span><span class="o">----------------------------------------------------------------</span>
+<span class="err">#</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">setting</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">usually</span><span class="w"> </span><span class="n">applied</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">channel</span>
+<span class="err">#</span><span class="w"> </span><span class="n">basis</span><span class="p">;</span><span class="w"> </span><span class="n">however</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">put</span><span class="w"> </span><span class="n">them</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="o">[</span><span class="n">COMMON</span><span class="o">]</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">in</span>
+<span class="err">#</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="n">them</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">channels</span><span class="p">.</span>
+<span class="err">#</span><span class="w"> </span><span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="p">:</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">applies</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">board</span><span class="w"> </span><span class="nf">N</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">[</span><span class="n">COMMON</span><span class="o">]</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="n">N</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">CHANNEL</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="p">:</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">applies</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">board</span><span class="w"> </span><span class="nf">N</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">override</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="o">----------------------------------------------------------------</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">INPUT_ENABLE</span><span class="p">:</span><span class="w"> </span><span class="n">enable</span><span class="o">/</span><span class="n">disable</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">channel</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">CHANNEL_TRIGGER_ENABLE</span><span class="p">:</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">auto</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">settings</span><span class="p">.</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">YES</span><span class="p">,</span><span class="w"> </span><span class="n">NO</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">DC_OFFSET</span><span class="p">:</span><span class="w"> </span><span class="n">DC</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="n">adjust</span>
+<span class="err">#</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="o">-</span><span class="mf">1.25</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="mf">1.25</span><span class="w"> </span><span class="n">V</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TRIGGER_THRESHOLD</span><span class="p">:</span><span class="w"> </span><span class="n">threshold</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">auto</span><span class="w"> </span><span class="n">trigger</span>
+<span class="err">#</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="o">-</span><span class="mf">1.25</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="mf">1.25</span><span class="w"> </span><span class="n">V</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">TRIGGER_EDGE</span><span class="p">:</span><span class="w"> </span><span class="n">decides</span><span class="w"> </span><span class="n">whether</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">occurs</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">rising</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">falling</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">signal</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">RISING</span><span class="p">,</span><span class="w"> </span><span class="n">FALLING</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">PULSE_POLARITY</span><span class="p">:</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">polarity</span>
+<span class="err">#</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="n">POSITIVE</span><span class="p">,</span><span class="w"> </span><span class="n">NEGATIVE</span>
+
+
+<span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="mi">0</span><span class="o">]</span>
+<span class="n">INPUT_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+
+<span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CHANNEL</span><span class="w"> </span><span class="mi">0</span><span class="o">]</span>
+<span class="n">INPUT_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YES</span>
+<span class="n">DC_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">TRIGGER_EDGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RISING</span>
+<span class="n">PULSE_POLARITY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POSITIVE</span>
+<span class="n">TRIGGER_THRESHOLD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span>
+
+<span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CHANNEL</span><span class="w"> </span><span class="mi">1</span><span class="o">]</span>
+<span class="n">INPUT_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+<span class="n">DC_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">TRIGGER_EDGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RISING</span>
+<span class="n">PULSE_POLARITY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POSITIVE</span>
+<span class="n">TRIGGER_THRESHOLD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">+</span><span class="mf">0.2</span>
+<span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CHANNEL</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span>
+<span class="n">INPUT_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+<span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CHANNEL</span><span class="w"> </span><span class="mi">3</span><span class="o">]</span>
+<span class="n">INPUT_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+
+
+<span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="mi">1</span><span class="o">]</span>
+<span class="n">INPUT_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+<span class="o">[</span><span class="n">BOARD</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CHANNEL</span><span class="w"> </span><span class="mi">0</span><span class="o">]</span>
+<span class="n">INPUT_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO</span>
+</code></pre></div>
+</details>
+<p>Tweak the config file, and run it. Good luck!</p>
+<p>This is a terminal utility, but shows spectra with Gnuplot. There are shortcut keys which you can check by pressing <code>?</code> .
+Some useful ones</p>
+<ul>
+<li><code>h</code>: Enable histogram (Counts, Time) . Press again to make Counts, Channels.</li>
+<li><code>qy</code>: Quit, yes.</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="workshopnano.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Kuttypy Nano">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Kuttypy Nano
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="boards.html" class="md-footer__link md-footer__link--next" aria-label="Next: Boards">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Boards
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2019 <a href="https://jithinbp.in">JITHIN BP</a>
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/jithinbp_" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/jithin_bp" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/jithinbp" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "content.code.copy"], "search": "assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="assets/lightbox/js/lightbox-plus-jquery.min.js"></script>
+      
+        <script src="assets/carousel.js"></script>
+      
+    
+  </body>
+</html>
