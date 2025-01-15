@@ -8,13 +8,9 @@
       
       
       
-        <link rel="canonical" href="https://jithinbp.in/quiz_server.html">
+        <link rel="canonical" href="https://jithinbp.in/catprinter.html">
       
       
-        <link rel="prev" href="mqtt.html">
-      
-      
-        <link rel="next" href="workshopnano.html">
       
       
       <link rel="icon" href="images/kuttypy.png">
@@ -22,7 +18,7 @@
     
     
       
-        <title>QUIZ Server - Jithin BP</title>
+        <title>Catprinter - Jithin BP</title>
       
     
     
@@ -91,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#creating-a-quiz-server-for-seelab3" class="md-skip">
+        <a href="#reverse-engineering-thermal-printer" class="md-skip">
           Skip to content
         </a>
       
@@ -126,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              QUIZ Server
+              Catprinter
             
           </span>
         </div>
@@ -319,29 +315,9 @@
       
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    QUIZ Server
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="quiz_server.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="quiz_server.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -350,67 +326,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-server" class="md-nav__link">
-    The server
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#clients" class="md-nav__link">
-    Clients
-  </a>
-  
-    <nav class="md-nav" aria-label="Clients">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#teacher" class="md-nav__link">
-    Teacher
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#student" class="md-nav__link">
-    Student
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#screenshots" class="md-nav__link">
-    Screenshots
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2469,8 +2384,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2479,42 +2392,50 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-server" class="md-nav__link">
-    The server
+  <a href="#reverse-engineering-thermal-printer" class="md-nav__link">
+    Reverse engineering thermal printer
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#clients" class="md-nav__link">
-    Clients
+  <a href="#downloaded-the-apk" class="md-nav__link">
+    Downloaded the apk
   </a>
-  
-    <nav class="md-nav" aria-label="Clients">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#teacher" class="md-nav__link">
-    Teacher
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#student" class="md-nav__link">
-    Student
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#screenshots" class="md-nav__link">
-    Screenshots
+  <a href="#decompilation" class="md-nav__link">
+    Decompilation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bluetoothctl" class="md-nav__link">
+    bluetoothctl
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trying-bluetooth-hci-snoop-log" class="md-nav__link">
+    Trying Bluetooth HCI snoop log
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receive" class="md-nav__link">
+    Receive
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    
   </a>
   
 </li>
@@ -2537,30 +2458,161 @@
   
 
 
-<h1 id="creating-a-quiz-server-for-seelab3">Creating a quiz server for SEELab3<a class="headerlink" href="#creating-a-quiz-server-for-seelab3" title="Permanent link">&para;</a></h1>
-<p>Objective: I need a way for teachers to conduct real time quizzes
-in the classroom where they use the desktop app to send MCQ questions which are
-relayed via the server to the android apps of the students.</p>
-<p>Tools: fastapi, redis, gunicorn, socketio</p>
-<h2 id="the-server">The server<a class="headerlink" href="#the-server" title="Permanent link">&para;</a></h2>
-<p>Built with fastapi and redis for scalability, it hosts socketio, and allows folks to create quiz rooms
-with passwords. students can then join these rooms.</p>
-<p>testing : python3 socket_server.py
-deploy: gunicorn -w 4 -k uvicorn.workers.UvicornWorker socket_server:app</p>
-<h2 id="clients">Clients<a class="headerlink" href="#clients" title="Permanent link">&para;</a></h2>
-<h3 id="teacher">Teacher<a class="headerlink" href="#teacher" title="Permanent link">&para;</a></h3>
-<p>a testing script connects and creates a room. when the server says room has been created, it starts sending questions to that room&rsquo;s members</p>
-<h3 id="student">Student<a class="headerlink" href="#student" title="Permanent link">&para;</a></h3>
-<p>A testing script connects and listens for questions
-a shell script is used to spin up multiple students</p>
-<p><code>for i in {1..20}; do python3 test_student.py &amp; done</code></p>
-<p>for killing all</p>
-<p><code>kill $(jobs -p)</code></p>
-<h2 id="screenshots">Screenshots<a class="headerlink" href="#screenshots" title="Permanent link">&para;</a></h2>
-<p>Deploying
-<img alt="" src="/images/quiz/deploy.png" /></p>
-<p>Running
-<img alt="" src="/images/quiz/run.png" /></p>
+  <h1>Catprinter</h1>
+
+<h2 id="reverse-engineering-thermal-printer">Reverse engineering thermal printer<a class="headerlink" href="#reverse-engineering-thermal-printer" title="Permanent link">&para;</a></h2>
+<p>So i bought this cute cat thermal printer for 1000 Rs, hoping to reverse engineer it and and run
+it from a python script over bluetooth.</p>
+<p>while waiting for it to deliver, I found several other reverse engineering efforts, and it seemed
+like I had my job cut out for me..  however, none of the 4 blogs i followed worked for the model I
+got. The tutorial on apk decompilation by <a href="https://werwolv.net/blog/cat_printer">Werwolv</a> was quite detailed
+so I set out to decompile the app that works with my printer. perhaps i can get it working with some minorcommand
+tweaks.</p>
+<h2 id="downloaded-the-apk">Downloaded the apk<a class="headerlink" href="#downloaded-the-apk" title="Permanent link">&para;</a></h2>
+<p>Press the power button twice, and it gives you a scan code to download a 180 MB apk. but the same app 
+can be found on the play store as <code>fun print</code> , and the same developer <code>yintibao</code> has another app called iBleem
+which also works with this printer.</p>
+<h2 id="decompilation">Decompilation<a class="headerlink" href="#decompilation" title="Permanent link">&para;</a></h2>
+<p><a href="http://www.javadecompilers.com/apk">http://www.javadecompilers.com/apk</a></p>
+<p>uploaded the massive 180MB apk, and received a 207MB zip file within a minute. takes up 450 MB when unzipped. 
+This app could be a few MB if you didn&rsquo;t need so many bells and whistles.</p>
+<h2 id="bluetoothctl">bluetoothctl<a class="headerlink" href="#bluetoothctl" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>[MXW01:/service0008/char0016]# gatt.
+gatt.acquire-notify             gatt.register-service
+gatt.acquire-write              gatt.release-notify
+gatt.attribute-info             gatt.release-write
+gatt.clone                      gatt.select-attribute
+gatt.list-attributes            gatt.unregister-application
+gatt.notify                     gatt.unregister-characteristic
+gatt.read                       gatt.unregister-descriptor
+gatt.register-application       gatt.unregister-includes
+gatt.register-characteristic    gatt.unregister-service
+gatt.register-descriptor        gatt.write
+gatt.register-includes          
+[MXW01:/service0008/char0016]# gatt.list-attributes 
+Primary Service (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0040
+	0000ae3a-0000-1000-8000-00805f9b34fb
+	Unknown
+Characteristic (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0040/char0043
+	0000ae3c-0000-1000-8000-00805f9b34fb
+	Unknown
+Descriptor (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0040/char0043/desc0045
+	00002902-0000-1000-8000-00805f9b34fb
+	Client Characteristic Configuration
+Characteristic (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0040/char0041
+	0000ae3b-0000-1000-8000-00805f9b34fb
+	Unknown
+Primary Service (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008
+	0000ae30-0000-1000-8000-00805f9b34fb
+	Unknown
+Characteristic (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008/char0016
+	0000ae10-0000-1000-8000-00805f9b34fb
+	Unknown
+Characteristic (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008/char0013
+	0000ae05-0000-1000-8000-00805f9b34fb
+	Unknown
+Descriptor (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008/char0013/desc0015
+	00002902-0000-1000-8000-00805f9b34fb
+	Client Characteristic Configuration
+Characteristic (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008/char0010
+	0000ae04-0000-1000-8000-00805f9b34fb
+	Unknown
+Descriptor (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008/char0010/desc0012
+	00002902-0000-1000-8000-00805f9b34fb
+	Client Characteristic Configuration
+Characteristic (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008/char000e
+	0000ae03-0000-1000-8000-00805f9b34fb
+	Unknown
+Characteristic (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008/char000b
+	0000ae02-0000-1000-8000-00805f9b34fb
+	Unknown
+Descriptor (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008/char000b/desc000d
+	00002902-0000-1000-8000-00805f9b34fb
+	Client Characteristic Configuration
+Characteristic (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0008/char0009
+	0000ae01-0000-1000-8000-00805f9b34fb
+	Unknown
+Primary Service (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0004
+	00001801-0000-1000-8000-00805f9b34fb
+	Generic Attribute Profile
+Characteristic (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0004/char0005
+	00002a05-0000-1000-8000-00805f9b34fb
+	Service Changed
+Descriptor (Handle 0x0000)
+	/org/bluez/hci0/dev_48_0F_57_11_2D_EE/service0004/char0005/desc0007
+	00002902-0000-1000-8000-00805f9b34fb
+	Client Characteristic Configuration
+[MXW01:/service0008/char0016]# 
+</code></pre></div>
+<h2 id="trying-bluetooth-hci-snoop-log">Trying Bluetooth HCI snoop log<a class="headerlink" href="#trying-bluetooth-hci-snoop-log" title="Permanent link">&para;</a></h2>
+<p>enabled it from developer options</p>
+<p>adb bugreport anewbugreportfolder</p>
+<h2 id="receive">Receive<a class="headerlink" href="#receive" title="Permanent link">&para;</a></h2>
+<p>on characteristic 0xAE02 , received following on eDebugger android app when lid opened/closed</p>
+<p>------------------------------------o/c-----------
+22 21 A1 03 0A 00 00 00 00 49 1B 00 01 01 2F 07 00
+22 21 A1 03 0A 00 00 00 00 49 1B 00 00 00 42 07 00</p>
+<p>got this with simplepyble library when the lid wasopened.
+22 21 a1 03 0a 00 00 00 00 49 1c 00 01 01 2d 0b 00</p>
+<p>no dice so far&hellip;</p>
+<h2 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>public void openNotification() {
+    BleManager.getInstance().notify(
+        this.connectingDevice,
+        this.charactristicNotiy.getService().getUuid().toString(), 
+        this.charactristicNotiy.getUuid().toString(),
+        new BleNotifyCallback() {
+            public void onCharacteristicChanged(byte[] data) {
+                // This is where AE02 notifications are received
+                if (data.length != 0) {
+                    // Process incoming data
+                    String firstByte = byteToHex(data[0]);
+                    if (&quot;01&quot;.equals(firstByte)) {
+                        // Handle flow control response
+                        new Thread() {
+                            public void run() {
+                                synchronized (flowLock) {
+                                    FlowWriteForV10G.setGredit(
+                                        Integer.parseInt(byteToHex(data[1]), 16)
+                                    );
+                                    FlowWriteForV10G.setCanWriteFlag(true);
+                                    flowLock.notify();
+                                }
+                            }
+                        }.start();
+                    }
+                }
+            }
+            // ... other callback methods
+        }
+    );
+}
+</code></pre></div>
+<p>The notification handler is set up when the device is connected and services are discovered. The code listens for incoming data on the notification characteristic (AE02) and processes it, particularly for flow control responses where:</p>
+<ul>
+<li>It checks the first byte of the response</li>
+<li>If the first byte is &ldquo;01&rdquo;, it handles flow control by:</li>
+<li>Setting the credit value from the second byte</li>
+<li>Enabling the write flag</li>
+<li>Notifying the flow control lock</li>
+</ul>
+<p>This is part of the flow control mechanism where the printer uses AE02 to tell the app when it&rsquo;s ready to receive more data via AE01.</p>
 
 
 
@@ -2577,44 +2629,6 @@ a shell script is used to spin up multiple students</p>
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="mqtt.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: MQTT">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                MQTT
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="workshopnano.html" class="md-footer__link md-footer__link--next" aria-label="Next: Kuttypy Nano">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Kuttypy Nano
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
