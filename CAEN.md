@@ -91,10 +91,40 @@ I only have like 2GB of space left :(
 Tweak the config file, and run it. Good luck!
 
 This is a terminal utility, but shows spectra with Gnuplot. There are shortcut keys which you can check by pressing `?` .
-Some useful ones
+
+Some useful ones:
 
 + `h`: Enable histogram (Counts, Time) . Press again to make Counts, Channels.
 + `qy`: Quit, yes.
++ `ey`: Clear data, yes.
+
+
+### Success
+
+I input the waveform from a shaping amplifier. 60Co -> 2x2PMT -> preamp -> shaper -> CAEN5743 , and got this plot.
+
+![](images/CAEN/wavedemo.png)
+ 
+
+### Graphical interface with PyQt
+---
+
+So i've spun up a graphical interface for lazy folks. it does not use the library, but instead polls the files created by wavedemo. it also includes an editor to tweak the config file (saves automagically when you go back to the other tab)
+
+
+
+![](images/CAEN/pyqt_wavedemo.png)
+
+
+??? tip "Source Code : graph.py"
+	```python
+
+	--8<-- "assets/CAEN/graph.py"
+
+	```
+	
+Dependencies : PyQt5 , matplotlib, numpy 	
+	
 
 
 

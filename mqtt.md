@@ -182,3 +182,35 @@ Tried a library to embed maps, but it doesn't offer widgets, and instead makes a
 	1730872602: New connection from 192.168.23.249:49505 on port 1883.
 	```
  
+ 
+## Enabling clients via Javascript
+ 
+ I wanted to use this with embedded webviews running on android, but those do not support mqtt, but need
+ to use the websockets protocol. mosquitto 1.6 needed to be upgraded to 2.0 
+ 
+```
+sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa  
+sudo apt update
+sudo apt install mosquitto
+```
+
+The new mosquitto.conf file which adds port 9001 for websocket connections
+
+```
+persistence true
+persistence_location /var/lib/mosquitto/
+
+log_dest file /var/log/mosquitto/mosquitto.log
+
+include_dir /etc/mosquitto/conf.d
+
+allow_anonymous true
+listener 1883 0.0.0.0
+
+listener 9001 0.0.0.0
+protocol websockets
+socket_domain ipv4
+
+```
+
+

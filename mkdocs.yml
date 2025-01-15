@@ -27,7 +27,7 @@ theme:
     annotation: material/arrow-right-circle 
  
 docs_dir: .
-site_dir: ../site
+site_dir: site
 use_directory_urls: false
 
 #theme: 'readthedocs'
@@ -106,6 +106,7 @@ nav:
 
     - Projects:
         - 'Wedding': pages/wedding.html
+        - 'sasthrayan Open House': pages/sasthrayan.html
 
     - Home:
         - Curriculum Vitae: curriculum-vitae.md
