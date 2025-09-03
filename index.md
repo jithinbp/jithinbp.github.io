@@ -1,7 +1,7 @@
 ---
 layout: welcome
 cover: true
-image: /assets/img/sidebar-bg.jpg
+image: /assets/img/cover.jpg
 hide_description: true
 accent_image:
   background: 'url(/assets/img/bg_elec.jpg)'
