@@ -1,6 +1,6 @@
 ---
 layout: project
-title: 'SEELab3 3.0'
+title: 'SEELab 3.0'
 date: 1 Jan 2019
 image:  
   path: /assets/img/phd/seelab-cover.jpg
