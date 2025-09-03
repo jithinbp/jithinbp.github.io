@@ -1,0 +1,207 @@
+basics:
+  name: "Jithin B.P."
+  label: "Director, CSpark Research"
+  picture: "/assets/img/jb0.jpg"
+  email: "jithinbp@gmail.com"
+  phone: "(+91) 851100290"
+  website: "https://jithinbp.in"
+  summary: >
+    A passionate researcher and developer with a strong background in physics and a keen interest in robotics and embedded systems. My work focuses on creating practical, hands-on solutions, from academic research projects to founding a research-oriented company. I specialize in developing affordable data acquisition instruments and educational tools for nuclear physics and embedded systems.
+    [Download my Resume here](/assets/jithin_resume.pdf)
+
+  location:
+    address: ""
+    postalCode: "110067"
+    city: "New Delhi"
+    countryCode: "IN"
+    region: "Delhi"
+  profiles:
+    - network: "Github"
+      username: "jithinbp"
+      url: "https://github.com/jithinbp"
+    - network: "LinkedIn"
+      username: "Jithin BP"
+      url: "https://www.linkedin.com/in/jithinbp"
+    - network: "Twitter"
+      username: "jithinbp_"
+      url: "https://www.x.com/jithinbp_"
+
+
+work:
+  - company: "Cspark Research"
+    position: "Founder"
+    website: ""
+    startDate: "2016-01-01"
+    endDate: ""
+    summary: >
+      Founded a research and development company focused on creating open-source tools and educational resources. Developed affordable data acquisition instruments that have been commercialized and supplied to various universities in India and abroad.
+    highlights:
+      - "Designed and developed an Alpha Particle Spectrometer, a Gamma Spectrometer, and a Dual Parameter Multi Channel MCA for nuclear physics education and research."
+      - "Managed all aspects of product development, including circuit design, firmware, software, detector development, and enclosure design."
+      - "Commercialized devices are used in 20+ universities and research labs, including Panjab University, Aligarh Muslim University, and IUAC."
+      - "Documented and published experiments on isotope extraction and coincidence measurements as lab manuals for instruments."
+  - company: "Indian Institute of Science Education and Research (IISER), Mohali"
+    position: "Research Scholar"
+    website: "http://www.iisermohali.ac.in/"
+    startDate: "2014-07-01"
+    endDate: "2016-01-01"
+    summary: >
+      Continued research from my Master's thesis, focusing on developing a Multi Channel Analyzer (MCA) and interfacing scientific equipment.
+    highlights:
+      - "Developed an open-source Multi Channel Analyzer (MCA) for Gamma-ray spectroscopy, which led to a publication."
+      - "Utilized embedded systems and firmware to interface with scientific equipment."
+
+
+
+education:
+  - institution: "PhD Research"
+    area: "Nuclear Physics Education & Instrumentation"
+    studyType: "Research Work"
+    startDate: "2016-01-01"
+    endDate: ""
+    summary: >
+      Focused on the development of affordable, open-source data acquisition instruments and experiments for nuclear physics education and research labs.
+    highlights:
+      - "Designed detector electronics and PCB layouts using KiCAD and manually soldered components for instruments."
+      - "Wrote firmware in C for 64MHz PIC processors to handle data acquisition and instrument control via USB."
+      - "Developed Python-based software for data collection, visualization, and analysis, which was open-sourced."
+      - "Authored 3 first-author publications and gave 4 conference presentations."
+  - institution: "Indian Institute of Science Education and Research (IISER), Mohali"
+    area: "Physics"
+    studyType: "Master of Science"
+    startDate: "2009-07-01"
+    endDate: "2014-05-01"
+    score: "CGPA: 7.5"
+    summary: "Thesis focused on the development of an open-source virtual lab framework called vLabtool for physics education."
+  - institution: "The Mother's International School, New Delhi"
+    area: "Secondary School Examination (X)"
+    studyType: "High School"
+    startDate: ""
+    endDate: "2007"
+    score: "91.4%"
+  - institution: "The Mother's International School, New Delhi"
+    area: "Higher Secondary School Examination (XII)"
+    studyType: "High School"
+    startDate: ""
+    endDate: "2009"
+    score: "87.8%"
+
+awards:
+  - title: "Kishore Vaigyanik Protsahan Yojana (KVPY) Scholarship"
+    date: "2008"
+    awarder: "Government of India"
+    summary: "Awarded a national-level scholarship for excelling in science."
+  - title: "Junior Science Talent Search Examination (JSTSE) Scholarship"
+    date: "2007"
+    awarder: ""
+    summary: "Awarded a scholarship for outstanding performance in the JSTSE."
+  - title: "Inter IISER Sports Meet Gold Medalist"
+    date: "2012, 2014"
+    awarder: "Inter IISER Sports"
+    summary: "Gold medals in Volleyball and Football."
+  - title: "Programming and Robotics Awards"
+    date: ""
+    awarder: "Tech fests"
+    summary: "Won awards in various programming and robotics competitions."
+
+publications:
+  - name: "Indigenously developed gamma spectrometer"
+    publisher: "DAE Symp. on Nucl. Phys."
+    releaseDate: "2018"
+    website: ""
+    summary: ""
+  - name: "Novel coincidence setup using indigenously developed portable USB gamma spectrometer and associated analysis software"
+    publisher: "Nuclear Instruments and Methods in Physics Research Section A"
+    releaseDate: ""
+    website: ""
+    summary: ""
+  - name: "Gated MCA technique for demonstration of coincidence phenomena with a set of indigenously developed gamma spectrometers"
+    publisher: "Recent Issues in Nuclear and Particle Physics (RINP2)"
+    releaseDate: ""
+    website: ""
+    summary: ""
+  - name: "Compact dual-parameter MCA for γ−γ Coincidence Measurements"
+    publisher: "DAE Symp. on Nucl. Phys."
+    releaseDate: "2019"
+    website: ""
+    summary: ""
+  - name: "Background Gamma Radiation Surveying in the Indian Peninsula with a Portable USB Spectrometer"
+    publisher: "DAE Symp. on Nucl. Phys."
+    releaseDate: "2019"
+    website: ""
+    summary: ""
+  - name: "Gamma Spectra of Non-Enriched Thorium Sources using PIN Photodiode and PMT based Detectors"
+    publisher: "Physics Education-IAPT"
+    releaseDate: "Jan-Mar 2020"
+    website: ""
+    summary: ""
+  - name: "Measurement Model of an Alpha Spectrometer for Advanced Undergraduate Laboratories"
+    publisher: "Physics Education-IAPT"
+    releaseDate: "Jan-Mar 2019"
+    website: ""
+    summary: ""
+  - name: "Research Based Development of Innovative and Indigenous Technologies for Nuclear Physics Laboratories"
+    publisher: "CUHP-Inflibnet"
+    releaseDate: ""
+    website: ""
+    summary: ""
+  - name: "Alpha Spectrum of 212-Bi Source Prepared using Electrolysis of Non-Enriched ThNO3 Salt"
+    publisher: "Physics Education-IAPT"
+    releaseDate: "Jan-Mar 2019"
+    website: ""
+    summary: ""
+  - name: "SEELablet : A Technological Platform for Development of Innovative Experiments for Undergraduate Education"
+    publisher: "APT TUNES"
+    releaseDate: ""
+    website: ""
+    summary: ""
+  - name: "KuttyPy for Science: Lightning Talk"
+    publisher: "SCIPY India 2019"
+    releaseDate: "2019"
+    website: ""
+    summary: ""
+
+
+skills:
+  - name: "Web Development"
+    level: "Master"
+    keywords:
+      - "HTML"
+      - "CSS"
+      - "Javascript"
+      - "Python"
+  - name: "Systems Engineering"
+    level: "Master"
+    keywords:
+      - "Electrical"
+      - "Mechanical"
+      - "OpenSCAD"
+      - "IoT"
+      - "Hardware"
+languages:
+  - language: "Python"
+    fluency: "Native speaker"
+  - language: "Javascript"
+    fluency: "Native speaker"
+  - language: "C++"
+    fluency: "full-professional-proficiency"
+  - language: "Assembly"
+    fluency: "professional-working-proficiency"
+  - language: "Spanish"
+    fluency: "limited-working-proficiency"
+interests:
+  - name: "Cyber-Security"
+    keywords:
+      - "Physical Security"
+      - "Close Access Technology"
+  - name: "Internet of Things"
+    keywords:
+      - "Wireless Embeded Technology"
+      - "NFC"
+      - "4G-LTE"
+      - "5G"
+
+# references:
+  - name: "Dr. S.K. Jha"
+    reference: >
+      Jithin is a dedicated and hardworking researcher with a strong background in physics and a keen interest in robotics and embedded systems. He is a quick learner and has a knack for problem-solving. He is a valuable asset to any company.

@@ -1,0 +1,44 @@
+<div class = "ui hidden divider"></div>
+{% if include.title %}
+<h2 class="ui horizontal dividing teal header " name="{{ include.title }}" id="{{ include.title }}">
+  <i class="copy outline icon"></i>
+	{{ include.title }}
+</h2>
+{% endif %}
+
+<table class="ui celled striped table {{{include.color}}">
+  <thead>
+	<tr>
+		<th scope="col" class="left aligned">Title</th>
+		<th scope="col" >Journal</th>
+		<th scope="col" class="right aligned collapsing">Author(s)</th>
+		{% if include.filter %}{% else %}<th scope="col" class="left aligned collapsing">Device</th>{% endif %}
+	</tr>
+  </thead>
+  <tbody>
+	{% for pub in include.publist %}
+	{% if include.filter %}
+		{% if include.filter == pub.device %}
+		<tr>
+		  <td class="left aligned selectable">
+			<a href="{{ pub.link }}"><p><i class="file outline icon"></i> {{ pub.title }}</p></a>
+		  </td>
+		  <td>{{ pub.journal }}</td>
+		  <td class="right aligned collapsing"><p>{{ pub.author }}</p></td>
+		</tr>
+		{% endif %}
+	{% else %}
+		<tr>
+		  <td class="left aligned selectable">
+			<a href="{{ pub.link }}"><p><i class="file outline icon"></i> {{ pub.title }}</p></a>
+		  </td>
+		  <td>{{ pub.journal }}</td>
+		  <td class="right aligned collapsing"><p>{{ pub.author }}</p></td>
+		  <td class="left aligned collapsing">{{ pub.device }}</td>
+		</tr>
+
+	{% endif %}
+
+	{% endfor %}
+  </tbody>
+</table>
