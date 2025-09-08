@@ -1,10 +1,10 @@
 ---
 layout: project
-title: 'CAEN Digitizer data collection and viewing on Ubuntu'
+title: 'CAEN Digitizer data collection on Ubuntu'
 date: 1 Jan 2024
 image: 
   path: /assets/img/blog/caen.png
-caption: DT5743 is what i have, but the instructions will work for a wide range
+caption: I've a DT5743, but this will work for many models
 description: >
   Instructions for the radiation physics kids to follow
 accent_color: '#4fb1ba'
@@ -13,7 +13,7 @@ accent_image:
   overlay:    true
 ---
 
-# CAEN Digitizer data collection and viewing on Ubuntu
+# CAEN Digitizer data collection on Ubuntu
 
 DT5743 is what i have, but the instructions will work for a wide range
 

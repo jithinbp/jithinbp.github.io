@@ -8,11 +8,7 @@ accent_image:
   overlay:    true
 ---
 
-
-
-
 # Hello, Fellow traveller! 🥸
-
 
 > I work with design and development, as well as bulk manufacturing of electronics.
   This website describes many of my hacks/creations. 
@@ -49,19 +45,12 @@ accent_image:
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
 {% assign ordered_projects = site.iiser | sort:"date" | reverse %}
-{% for project in ordered_projects limit:3 %}
-    {% assign featured = page.featured | default:project.featured | default:page.big_project | default:project.big_project %}
-    <div class="column column-1">
-    {% include_cached pro/project-card.html project=project featured=featured %}
-    </div>
-{% endfor %}
-{% for project in ordered_projects offset:3 limit:4 %}
+{% for project in ordered_projects limit:8 %}
     {% assign featured = page.featured | default:project.featured | default:page.big_project | default:project.big_project %}
     <div class="column column-1 customcol">
     {% include_cached pro/project-card.html project=project featured=featured %}
     </div>
 {% endfor %}
-
 </div>
 
 <!-- <p class="read-more mt1"><a class="heading flip-title" href="/iiser/">More from MS Thesis at IISER <sup>[{{ site.iiser | size }}]</sup></a></p> -->
@@ -80,6 +69,18 @@ accent_image:
 
 <!-- <p class="read-more mt1"><a class="heading flip-title" href="/iiseracad/">Click here to check out my other undergrad projects <sup>[{{ site.iiseracad | size }}]</sup></a></p> -->
 
+### Side Projects | <a class="heading flip-title" href="/projects/" style="color:teal"> Posts<sup>[{{ site.projects | size }}]</sup></a>
+---
+
+<div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
+{% assign ordered_projects = site.projects | sort:"date"%}
+{% for project in ordered_projects limit:10 %}
+    {% assign featured = page.featured | default:project.featured | default:page.big_project | default:project.big_project %}
+    <div class="column column-1 custommicrocol">
+    {% include_cached pro/project-card.html project=project featured=featured %}
+    </div>
+{% endfor %}
+</div>
 
 
 ## Hobby Projects | <a class="heading flip-title" href="/hobbies/" style="color:teal"> All<sup>[{{ site.hobby | size }}]</sup></a>
@@ -89,7 +90,7 @@ accent_image:
 {% assign ordered_projects = site.hobby | sort:"date" | reverse %}
 {% for project in ordered_projects limit:3 %}
     {% assign featured = page.featured | default:project.featured | default:page.big_project | default:project.big_project %}
-    <div class="column column-1">
+    <div class="column column-1 customcol">
     {% include_cached pro/project-card.html project=project featured=featured %}
     </div>
 {% endfor %}

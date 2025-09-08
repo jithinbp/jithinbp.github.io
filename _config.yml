@@ -51,18 +51,18 @@ menu:
     url:               /iiseracad/
   - title:             🎓🕊️ Ph.D. Nuclear Physics
     url:               /phd/
-  - title:             Device > vLabtool
-    url:               /vlabtool/
-  - title:             Projects
+  - title:             ⚗️ STEM Projects
     url:               /projects/
   - title:             📚🎧☕  Hobby Projects
     url:               /hobbies/
-  - title:             My Résumé
+  - title:             📑 My Résumé
     url:               /resume/
   - title:             🇬 Summer of Code
     url:               /GSOCREADME/
   - title:             Wedding 🤵🏻💍👰🏻
     url:               /wedding
+  - title:             Device > vLabtool
+    url:               /vlabtool/
 
 # Add links to the footer.
 # Typically you'll want to link to your cookie- or privacy policy (if appliable), etc..
