@@ -1,0 +1,22 @@
+<div class="ui clearing hidden divider"></div>	
+<div class="ui container">
+	<div class="ui relaxed divided items">
+	{% for pub in include.prototypes %}
+	<div class="item link">
+	  <div class="ui medium image raised red segment photocard" href="{{pub.url}}">
+		<img src="/assets/img/300x170.png" class="ui image" loading="lazy" data-src="{{ pub.url }}">
+	  </div>
+	  <div class="content">
+		<h1 class="ui header small" id="{{ pub.date | date: '%B , %Y' }}"><a class="ui dividing header brown"><i class="tasks icon"></i>{{ pub.date | date: '%B , %Y' }}</a></h1>
+		<div class="description">
+		  {{ pub.description }}
+		</div>
+		<div class="extra">
+		  <div>{{ pub.date | date: '%B %d, %Y' }}</div>
+		</div>
+	  </div>
+	</div>
+	<div class="ui clearing hidden divider"></div>	
+	{% endfor %}
+	</div>
+</div>
