@@ -3,7 +3,7 @@ layout: project
 title: 'Wireless Thermal Camera'
 date: 2 May 2025
 image: 
-  path: /assets/img/blog/thermalcam.png
+  path: /assets/img/thumbs/thermalcam.png
 caption: Built with an ESP32-S3, and a MLX90640 32x34 sensor.
 description: >
   A wireless thermal camera which transmits over TCP , and has a local python client for viewing readings.

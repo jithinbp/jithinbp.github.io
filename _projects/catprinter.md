@@ -3,7 +3,7 @@ layout: project
 title: 'Reverse engineering thermal printer'
 date: 1 Feb 2024
 image: 
-  path: /assets/img/blog/catprint.jpg
+  path: /assets/img/thumbs/catprint.jpg
 caption: Reverse engineering thermal printer
 description: >
   So i bought this cute cat thermal printer for 1000 Rs, hoping to reverse engineer it and and run

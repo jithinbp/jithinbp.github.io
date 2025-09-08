@@ -3,7 +3,7 @@ layout: project
 title: 'Web Based Graphical coding'
 date: 20 Jan 2013
 image:  
-  path: /assets/img/hobby/dd1.jpg
+  path: /assets/img/thumbs/dd1.jpg
 links:
   - title: Youtube
     url: https://www.youtube.com/watch?v=

@@ -2,7 +2,7 @@
 layout: project
 title: 'Spatial Light Modulator'
 date: 20 Oct 2012
-image: /assets/img/mastersacad/slm.jpg
+image: /assets/img/thumbs/slm.jpg
 caption: A.K.A. a sacrificed cheapo projector which died in vain
 description: >
     A spatial light modulator is really just a specially designed display.Each pixel can be set to a Opaque/Transparent state, and this allows generation of custom diffraction gratings in software and using them right away without the hassles of lithography.

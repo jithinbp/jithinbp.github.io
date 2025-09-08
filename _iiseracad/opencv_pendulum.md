@@ -2,7 +2,7 @@
 layout: project
 title: 'Pendulum Tracking with OpenCV'
 date: 20 Oct 2012
-image: /assets/img/mastersacad/torsion.png
+image: /assets/img/thumbs/torsion.png
 caption: Track a torsion pendulum with opencv and show online.
 description: >
     A downward pointed webcam served as the input device, and python-opencv based image processing routines enabled extracting the torsion angle from the live video feed. The pendulum itself consisted of a stick suspended from spider silk.

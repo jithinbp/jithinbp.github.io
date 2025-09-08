@@ -2,7 +2,7 @@
 layout: project
 title: '3D Phase Portraits'
 date: 20 Oct 2012
-image: /assets/img/mastersacad/mixture260k.png
+image: /assets/img/thumbs/mixture260k.png
 caption: Jasjeet sir's course on computational methods
 description: >
     As project work for a course on computational methods, I simulated the mixing of ideal gases in a closed chamber. The simulation results include average pressure exerted on the walls, and a histogram of the velocity distribution of the particles.

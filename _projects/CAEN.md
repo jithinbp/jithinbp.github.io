@@ -3,7 +3,7 @@ layout: project
 title: 'CAEN Digitizer data collection on Ubuntu'
 date: 1 Jan 2024
 image: 
-  path: /assets/img/blog/caen.jpeg
+  path: /assets/img/thumbs/caen.jpeg
 caption: I've a DT5743, but this will work for many models
 description: >
   Instructions for the radiation physics kids to follow

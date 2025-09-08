@@ -22,6 +22,19 @@ accent_image:
 * My Rather Incomplete [Resume](/resume.md){:.heading.flip-title}
 {:.related-posts.faded}
 
+## Recent Projects | <a class="heading flip-title" href="/projects/" style="color:teal"> Posts<sup>[{{ site.projects | size }}]</sup></a>
+---
+
+<div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
+{% assign ordered_projects = site.projects | sort:"date"%}
+{% for project in ordered_projects limit:10 %}
+    {% assign featured = page.featured | default:project.featured | default:page.big_project | default:project.big_project %}
+    <div class="column column-1 custommicrocol">
+    {% include_cached pro/project-card.html project=project featured=featured %}
+    </div>
+{% endfor %}
+</div>
+
 
 ## Ph.D Thesis @ CUHP  /  My Startup <a href="https://csparkresearch.in" target="_blank">csparkresearch.in</a> | <a class="heading flip-title" href="/phd/" style="color:teal">All Posts<sup>[{{ site.phd | size }}]</sup></a>
 ---
@@ -69,18 +82,6 @@ accent_image:
 
 <!-- <p class="read-more mt1"><a class="heading flip-title" href="/iiseracad/">Click here to check out my other undergrad projects <sup>[{{ site.iiseracad | size }}]</sup></a></p> -->
 
-### Side Projects | <a class="heading flip-title" href="/projects/" style="color:teal"> Posts<sup>[{{ site.projects | size }}]</sup></a>
----
-
-<div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
-{% assign ordered_projects = site.projects | sort:"date"%}
-{% for project in ordered_projects limit:10 %}
-    {% assign featured = page.featured | default:project.featured | default:page.big_project | default:project.big_project %}
-    <div class="column column-1 custommicrocol">
-    {% include_cached pro/project-card.html project=project featured=featured %}
-    </div>
-{% endfor %}
-</div>
 
 
 ## Hobby Projects | <a class="heading flip-title" href="/hobbies/" style="color:teal"> All<sup>[{{ site.hobby | size }}]</sup></a>

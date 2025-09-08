@@ -2,7 +2,7 @@
 layout: project
 title: 'Virtual Lab Project'
 date: 20 Oct 2012
-image: /assets/img/mastersacad/virtual-lab-iit-kanpur-cover.png
+image: /assets/img/thumbs/virtual-lab-iit-kanpur-cover.png
 caption: Virtual Lab I developed with Python PSP at IIT Kanpur
 description: >
     The general aim of this project was to hook up all lab instruments necessary for a particular experiment onto a server so that select users present at a remote locations can access and set parameters on these instruments and view the results on an interactive web page in real  time(web traffic delays overlooked). The entire software set-up and drivers used here are open source based as opposed to the proprietary LabView platform from National Instruments, so as to allow lay users easy access to designing experiments.

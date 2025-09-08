@@ -3,7 +3,7 @@ layout: project
 title: 'Probes for Cryostats'
 date: 20 Oct 2013
 image:  
-  path: /assets/img/probes/acsusceptometer.jpg
+  path: /assets/img/thumbs/acsusceptometer.jpg
 screenshot: /assets/img/probes/acsusceptometer.jpg
 caption: Planar coils for AC susceptometry
 description: >

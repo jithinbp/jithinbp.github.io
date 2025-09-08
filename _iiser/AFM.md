@@ -3,7 +3,7 @@ layout: project
 title: 'Atomic Force Microscope'
 date: 20 Oct 2013
 image:  
-  path: /assets/img/afm/lithography.jpg
+  path: /assets/img/thumbs/lithography.jpg
 screenshot: /assets/img/afm/lithography.jpg
 caption: An Introduction to the MFP-3D AFM installed at the SpinLab, IISER Mohali.
 description: >

@@ -25,10 +25,10 @@ accent_image:
 * this list will be replaced by the toc
 {:toc .large-only}
 
-![Full-width image](/assets/img/phd/gamma_cover.jpg){:.lead width="800" height="100" loading="lazy"}
+![Full-width image](/assets/img/phd/alpha_cover.jpg){:.lead width="800" height="100" loading="lazy"}
 Full setup
 {:.figcaption}
 
-![Full-width image](/assets/img/phd/gamma_spectrum.png){:.lead width="800" height="100" loading="lazy"}
-Cobalt Spectrum
+![Full-width image](/assets/img/phd/physedu_alpha.jpg){:.lead width="800" height="100" loading="lazy"}
+Cover page feature !
 {:.figcaption}

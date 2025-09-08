@@ -3,7 +3,7 @@ layout: project
 title: 'Next Door Neighbors'
 date: 18 Oct 2013
 image:  
-  path: /assets/img/he3/cover.png
+  path: /assets/img/thumbs/cover.png
 screenshot: /assets/img/he3/cover.jpg
 caption: The folks next door had a dilution refrigerator and work on mesoscopic devices
 description: >

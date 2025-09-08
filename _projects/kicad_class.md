@@ -3,7 +3,7 @@ layout: project
 title: 'Teaching basics of KiCAD'
 date: 1 Jan 2024
 image: 
-  path: /assets/img/kicad/adder.jpeg
+  path: /assets/img/thumbs/adder.jpeg
 caption: Was an instructor for postgrad students
 description: >
   The open elective course included basics of microcontrollers, circuit design, and CAD.

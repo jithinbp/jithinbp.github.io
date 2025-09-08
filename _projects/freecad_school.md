@@ -3,7 +3,7 @@ layout: project
 title: 'Workshop on FreeCAD for eigth graders'
 date: 1 Jan 2024
 image: 
-  path: /assets/img/freecad/kids2.jpeg
+  path: /assets/img/thumbs/kids2.jpeg
 caption: Was part of a team that taught FreeCAD to kids
 description: >
   Eighth graders from a nearby school had fun building computer aided designs from engineering drawings using FreeCAD FOSS tool

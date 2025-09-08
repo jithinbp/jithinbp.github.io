@@ -48,14 +48,14 @@ author:
 menu:
   - title:             📑 My Résumé
     url:               /resume/
+  - title:             ⚗️ STEM Projects
+    url:               /projects/
   - title:             🎓🕊️ Ph.D. Nuclear Physics
     url:               /phd/
   - title:             👨🏻‍🔬Masters Thesis Work
     url:               /iiser/
   - title:             ✎ᝰ.Masters Acad Work
     url:               /iiseracad/
-  - title:             ⚗️ STEM Projects
-    url:               /projects/
   - title:             📚🎧☕  Hobby Projects
     url:               /hobbies/
   - title:             🇬 Summer of Code

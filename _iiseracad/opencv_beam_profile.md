@@ -2,7 +2,7 @@
 layout: project
 title: 'Beam Profile Extraction with OpenCV'
 date: 20 Oct 2012
-image: /assets/img/mastersacad/beam.png
+image: /assets/img/thumbs/beam.png
 caption:  a way to profile diffraction patterns automatically
 description: >
     As part of a lab course on optics, I needed a way to profile diffraction patterns automatically The solution attempted was to capture the pattern with a camera, and use Python-OpenCV to extract the beam profile along an axis.
