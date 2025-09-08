@@ -21,6 +21,10 @@ accent_image:
 Designed and manufactured by one of the students. a functional 8 bit full adder/subtractor.
 {:.figcaption}
 
+![](/assets/img/kicad/projects.png)
+
+![](/assets/img/kicad/projects_back.png)
+
 ### Course poster
 
 ![](/assets/img/kicad/OE_fullpage.jpg)

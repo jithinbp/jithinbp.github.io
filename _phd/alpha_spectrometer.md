@@ -32,3 +32,11 @@ Full setup
 ![Full-width image](/assets/img/phd/physedu_alpha.jpg){:.lead width="800" height="100" loading="lazy"}
 Cover page feature !
 {:.figcaption}
+
+![Full-width image](/assets/img/phd/alphapub.png){:.lead width="800" height="100" loading="lazy"}
+Publications with this device
+{:.figcaption}
+
+![Full-width image](/assets/img/phd/alphares.png){:.lead width="800" height="100" loading="lazy"}
+Some nice results such as brnaching ratio, and half-life measurement.
+{:.figcaption}

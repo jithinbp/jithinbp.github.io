@@ -68,7 +68,7 @@ accent_image:
 
 <!-- <p class="read-more mt1"><a class="heading flip-title" href="/iiser/">More from MS Thesis at IISER <sup>[{{ site.iiser | size }}]</sup></a></p> -->
 
-### Other Projects while @ IISER-M | <a class="heading flip-title" href="/iiseracad/" style="color:teal"> Posts<sup>[{{ site.iiser | size }}]</sup></a>
+### Other Projects while @ IISER-M | <a class="heading flip-title" href="/iiseracad/" style="color:teal"> Posts<sup>[{{ site.iiseracad | size }}]</sup></a>
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
 {% assign ordered_projects = site.iiseracad | sort:"date"%}
