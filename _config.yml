@@ -46,18 +46,18 @@ author:
 
 # Add links to the sidebar.
 menu:
+  - title:             📑 My Résumé
+    url:               /resume/
+  - title:             🎓🕊️ Ph.D. Nuclear Physics
+    url:               /phd/
   - title:             👨🏻‍🔬Masters Thesis Work
     url:               /iiser/
   - title:             ✎ᝰ.Masters Acad Work
     url:               /iiseracad/
-  - title:             🎓🕊️ Ph.D. Nuclear Physics
-    url:               /phd/
   - title:             ⚗️ STEM Projects
     url:               /projects/
   - title:             📚🎧☕  Hobby Projects
     url:               /hobbies/
-  - title:             📑 My Résumé
-    url:               /resume/
   - title:             🇬 Summer of Code
     url:               /GSOCREADME/
   - title:             Wedding 🤵🏻💍👰🏻
@@ -72,7 +72,7 @@ legal:
     url:               /LICENSE/
   - title:             NOTICE
     url:               /NOTICE/
-  - title:             CSpark Research
+  - title:             CSPARK RESEARCH
     url:               https://csparkresearch.in
 
 # This text will appear in a `<small>` tag in the footer of every page.

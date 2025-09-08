@@ -13,6 +13,9 @@ accent_image:
   overlay:    true
 ---
 
+* this list will be replaced by the toc
+{:toc .large-only}
+
 # CAEN Digitizer data collection on Ubuntu
 
 DT5743 is what i have, but the instructions will work for a wide range
