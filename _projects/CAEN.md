@@ -85,10 +85,12 @@ make
 sudo make install
 ```
 
-### Execute Wavedemo. [User Manual : UM8789_WaveDemo_x743_UserManual_rev1.pdf](UM8789_WaveDemo_x743_UserManual_rev1.pdf){:target="blank_"}
+## Execute Wavedemo. 
 ---
 
-![](images/CAEN/wavedemo_histogram.png)
+[User Manual : UM8789_WaveDemo_x743_UserManual_rev1.pdf](UM8789_WaveDemo_x743_UserManual_rev1.pdf){:target="blank_"}
+
+![](/assets/img/CAEN/wavedemo_histogram.png)
 
 ```
 WaveDemo_x743 WaveDemoConfig.ini
@@ -98,7 +100,7 @@ The config file contains all info. I have attached my config file below.
 Notice that I have set all SAVE_DATA options to NO because it fills up a few gigs within minutes, and
 I only have like 2GB of space left
 
-###  "WaveDemoConfig.ini : I am only using CH0 on board 1"
+###  "WaveDemoConfig.ini : Only CH0 on board 1"
 ```java
 # ****************************************************************
 # WaveDemo_x743 Configuration File
@@ -407,7 +409,7 @@ Some useful ones:
 
 I input the waveform from a shaping amplifier. 60Co -> 2x2PMT -> preamp -> shaper -> CAEN5743 , and got this plot.
 
-![](images/CAEN/wavedemo.png)
+![](/assets/img/CAEN/wavedemo.png)
  
 
 ### Graphical interface with PyQt
@@ -417,7 +419,7 @@ So i've spun up a graphical interface for lazy folks. it does not use the librar
 
 
 
-![](images/CAEN/pyqt_wavedemo.png)
+![](/assets/img/CAEN/pyqt_wavedemo.png)
 
 
 ## "Source Code : graph.py"
