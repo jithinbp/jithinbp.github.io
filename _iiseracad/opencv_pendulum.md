@@ -3,7 +3,7 @@ layout: project
 title: 'Pendulum Tracking with OpenCV'
 date: 20 Oct 2012
 image: /assets/img/mastersacad/torsion.png
-caption: developed a rig and associated code to track a torsion pendulum and update values to a webpage in real time.
+caption: Track a torsion pendulum with opencv and show online.
 description: >
     A downward pointed webcam served as the input device, and python-opencv based image processing routines enabled extracting the torsion angle from the live video feed. The pendulum itself consisted of a stick suspended from spider silk.
 accent_color: '#4fb1ba'

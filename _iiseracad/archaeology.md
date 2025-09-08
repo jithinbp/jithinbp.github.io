@@ -3,8 +3,7 @@ layout: project
 title: 'Archaeology Elective'
 date: 20 Oct 2013
 image:  
-  path: /assets/img/mastersacad/rakhigarhi.png
-screenshot: /assets/img/mastersacad/rakhigarhi.png
+  path: /assets/img/mastersacad/rakhigarhi.jpeg
 caption: Made an android app to map various routes
 description: >
     As part of my term paper for an elective course on Archaeology, I coded an android application to map various routes and points of interests of a field trip to a historical site.

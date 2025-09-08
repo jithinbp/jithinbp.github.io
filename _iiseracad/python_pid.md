@@ -3,7 +3,7 @@ layout: project
 title: 'Software PID controller'
 date: 20 Oct 2011
 image: /assets/img/mastersacad/pid-can2.jpg
-caption: Uses a sourcemeter, and a voltmeter to control the temperature of a PCB sealed inside a can and immersed in liquid nitrogen.
+caption: PID controller for a PCB sealed inside a can in LN2.
 description: >
     A diode based temperature sensor is used for measuring, and a voltage regulator was repurposed (misused) as a heating element .  A python script converts the voltage values read from the sensor into temperature via a fitting function based on a look up table provided by the manufacturer. It then decides the the amount of current to send to the heater based on the standard PID equation.
 accent_color: '#4fb1ba'

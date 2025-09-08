@@ -2,9 +2,7 @@
 layout: project
 title: 'Liquid Helium Cryostat'
 date: 21 Nov 2013
-image:  
-  path: /assets/img/cryostat/radiation-baffles-on-the-dynamic-VTI.jpg
-screenshot: /assets/img/cryostat/radiation-baffles-on-the-dynamic-VTI.jpg
+screenshot: /assets/img/cryostat/radiation-baffles-on-the-dynamic-VTI-400x280.jpg
 caption: Installation of a liquid helium cryostat for the Magnetic Force Probe Microscope
 description: >
     The cryostat from American Magnetics was installed into a custom designed vibration isolated, EMI and acoustic shielded chamber. This post describes the preparation of the installation site !<br>

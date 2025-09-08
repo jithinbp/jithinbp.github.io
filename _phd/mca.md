@@ -3,7 +3,7 @@ layout: project
 title: 'Multi Channel Analyzer'
 date: 1 Jan 2019
 image:  
-  path: /assets/img/phd/mca_pic.png
+  path: /assets/img/phd/mca_pic.jpeg
 links:
   - title: Buy @ CSpark Research
     url: https://csparkresearch.in/gmcounter

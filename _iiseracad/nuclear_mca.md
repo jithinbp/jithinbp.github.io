@@ -5,7 +5,7 @@ date: 1 July 2011
 image:  
   path: /assets/img/mastersacad/mca_countrate.jpg
 screenshot: /assets/img/mastersacad/mca_countrate.jpg
-caption: coded an android application to map various routes and points of interests of a field trip to a historical site.
+caption: Made an MCA with an Atmega32 processor.
 description: >
     This was a project I worked on during the summer of 2011 at IUAC, New Delhi, under the guidance of Dr. P Sugathan. Dr. P Sugathan. An ATMEGA32 based MCA was developed at IUAC, and I was entrusted to write firmware for peak detection and segregation, as well as set up an interface and write PC software for displaying the energy spectra. The Python-Tk based GUI I wrote was capable of spectrum analysis, calibration, porting data to XmGrace etc. The device was Calibrated using Co-60 
 accent_color: '#4fb1ba'
