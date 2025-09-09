@@ -1,12 +1,15 @@
 ---
-layout: projects
-title: Development History of ExpEYES-17
-image:  
-  path: /assets/img/pcar/thermal.png
-screenshot: /assets/img/pcar/thermal.png
-caption: My work from 2014 onwards on FOSS hardware
+layout: project
+title: Development History of ExpEYES-17 / SEELab-3
+screenshot: /assets/img/seelab/dev/8.jpg
+caption: My work from 2014 onwards on FOSS hardware ExpEYES17/SEElab3
 description: >
   describes the development of ExpEYES-17, vLabtool, PSLab, Python Powered Scientific instrumentation tool, and SEELab-3. From 2014 onwards. Documented in detail on Hackaday.
+accent_color: '#4fb1ba'
+accent_image:
+  background: 'linear-gradient(to bottom,#40182a 0%,#3d1d3c 30%,#e700ff 50%,#9900e9 70%,#008729 100%)'
+  overlay:    true
+
 ---
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">

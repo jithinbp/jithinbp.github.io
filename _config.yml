@@ -50,11 +50,15 @@ menu:
     url:               /resume/
   - title:             ⚗️ STEM Projects
     url:               /projects/
+  - title:             💪✨Fabrication Flex
+    url:               /build/
+  - title:             💬  Public Speaking
+    url:               /projects/conferences/
   - title:             🎓🕊️ Ph.D. Nuclear Physics
     url:               /phd/
-  - title:             👨🏻‍🔬Masters Thesis Work
+  - title:             👨🏻‍🔬  Masters Thesis Work
     url:               /iiser/
-  - title:             ✎ᝰ.Masters Acad Work
+  - title:             ✎ᝰ.  Masters Acad Work
     url:               /iiseracad/
   - title:             📚🎧☕  Hobby Projects
     url:               /hobbies/
@@ -321,6 +325,10 @@ collections:
 
   phd:
     permalink:         /phd/:path/
+    output:            true
+
+  manufacturing:
+    permalink:         /build/:path/
     output:            true
 
 
