@@ -26,7 +26,7 @@ accent_image:
 ---
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
-{% assign ordered_projects = site.projects | sort:"date"%}
+{% assign ordered_projects = site.projects | sort:"date" | reverse %}
 {% for project in ordered_projects limit:10 %}
     {% assign featured = page.featured | default:project.featured | default:page.big_project | default:project.big_project %}
     <div class="column column-1 custommicrocol">
@@ -34,6 +34,8 @@ accent_image:
     </div>
 {% endfor %}
 </div>
+
+
 
 
 ## Ph.D Thesis @ CUHP  /  My Startup <a href="https://csparkresearch.in" target="_blank">csparkresearch.in</a> | <a class="heading flip-title" href="/phd/" style="color:teal">All Posts<sup>[{{ site.phd | size }}]</sup></a>
