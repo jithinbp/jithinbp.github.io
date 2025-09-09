@@ -12,6 +12,8 @@ accent_image:
 
 ---
 
+The circuits layouts were prepared by my father Dr Ajith Kumar, and I worked on the remaining bits which include soldering boards, firmware development, software work such as python libraries, graphical interfaces etc. For enclosure designs, I frequented various shops in Paharganj, New Delhi which dealt in laser cut signboards, and had nice tools.
+
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
 {% assign prototypes = site.data.expeyes-dev %}
 
