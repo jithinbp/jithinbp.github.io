@@ -12,7 +12,11 @@ accent_image:
 
 ---
 
-The circuits layouts were prepared by my father Dr Ajith Kumar, and I worked on the remaining bits which include soldering boards, firmware development, software work such as python libraries, graphical interfaces etc. For enclosure designs, I frequented various shops in Paharganj, New Delhi which dealt in laser cut signboards, and had nice tools.
+The circuits layouts were prepared by my father Dr Ajith Kumar, and I worked on the remaining bits which include soldering boards, firmware development, software work such as python libraries, graphical interfaces etc. For enclosure designs, I frequented various shops in Paharganj, New Delhi which dealt in [laser cut](/build/laser_cutting/) signboards, and had nice tools.
+
+Designed all graphics with Inkscape, and M.K. Packaging Ltd printed the cardboard packaging for ExpEYES-17. The devices were either [screen printed, or UV flatbed printed](/build/screen_printing/)
+
+For [Pick and Place Assembly](/build/pick_and_place/) , Beam Infotech's facility was rented.  [Injection Moulding](build/injection_moulding/) was handled by [Tushar Sood's Paragon Products](https://www.paragongeysers.com/) Ltd at Okhla, New Delhi which deals in Geysers, and has a range of high end moulding machines.
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
 {% assign prototypes = site.data.expeyes-dev %}
