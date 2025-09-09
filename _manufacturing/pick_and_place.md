@@ -9,7 +9,9 @@ description: >
 
 ---
 
-### Manufacturing video
+## Pick and Place assembly
+
+###Manufacturing video
 
 During the batch manufacturing of [KuttyPy Plus](https://csparkresearch.in/kuttypyplus) , I filmed all the important bits. Check out the [video](https://www.youtube.com/embed/9xXyL25D2jo?si=7kIOSDi9OaepTCWc){:target="_blank"}.
 

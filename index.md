@@ -28,7 +28,7 @@ accent_image:
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
 {% assign ordered_projects = site.manufacturing | sort:"date" | reverse %}
-{% for project in ordered_projects limit:10 %}
+{% for project in ordered_projects limit:5 %}
     {% assign featured = page.featured | default:project.featured | default:page.big_project | default:project.big_project %}
     <div class="column column-1 custommicrocol">
     {% include_cached pro/project-card.html project=project featured=featured %}
