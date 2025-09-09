@@ -9,7 +9,7 @@ image:
   path: /assets/img/phd/coincidence.jpg
 caption: Summary of my Ph.D. dissertation
 description: >
-    A gamma-gamma coincidence setup developed as part of my Ph.D. work. The spectrum shows coincidence of positron annihilation events from a 11-Na source placed between two detectors.
+    A gamma-gamma coincidence setup developed as part of my Ph.D. work. The spectrum shows coincidence of positron annihilation events from a <sup>22</sup>Na source placed between two detectors.
 accent_image:
   background: 'url(/assets/img/bg2.jpg)'
 
