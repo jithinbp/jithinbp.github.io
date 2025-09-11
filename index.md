@@ -6,20 +6,14 @@ hide_description: true
 
 # Hello, Fellow traveller! 🥸
 
-> I work with design and development, as well as bulk manufacturing of electronics.
-  This website describes many of my hacks/creations. 
-  * All my startup related work is at [CSpark Research](https://csparkresearch.in)
-  * Ph.D in Nuclear Physics instrumentation - development of radiation detection equipment. 
-  * Founded CSpark Research for developing affordable data acquisition instruments for schools and colleges.
-  * Master's in Physics from IISER-M with thesis work on Point Contact Spectroscopy and Scanning Tunnelling microscopy.
+> 
+* My startup : [CSpark Research](https://csparkresearch.in) for developing affordable data acquisition instruments for schools and colleges.
+* Ph.D in Nuclear Physics instrumentation - development of radiation detection equipment. 
+* Master's in Physics from IISER-M with thesis work on Point Contact Spectroscopy and Scanning Tunnelling microscopy.
 
+I work with design and development, as well as bulk manufacturing of electronics.  This website describes many of my hacks/creations.   My Rather Incomplete [Resume](/resume.md){:.heading.flip-title}
 
-
-* My Rather Incomplete [Resume](/resume.md){:.heading.flip-title}
-{:.related-posts.faded}
-
-
-## Manufacturing Experience | <a class="heading flip-title" href="/build/" style="color:teal"> Posts<sup>[{{ site.manufacturing | size }}]</sup></a>
+## Manufacturing Memoirs | <a class="heading flip-title" href="/build/" style="color:teal"> Posts<sup>[{{ site.manufacturing | size }}]</sup></a>
 ---
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
