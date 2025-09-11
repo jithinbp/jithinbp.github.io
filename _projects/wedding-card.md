@@ -10,8 +10,6 @@ links:
     url: https://www.youtube.com/watch?v=
   - title: Instructions
     url: https://www.hackster.io/jithinbp/ch32v003-blinky-wedding-card-fc8f60
-  - title: webpage
-    url: jithinbp.github.io/pages/wedding.html
   - title: Github
     url: https://github.com/jithinbp/ch32v003-card
   - title: Webpage
