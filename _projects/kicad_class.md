@@ -1,7 +1,7 @@
 ---
 layout: project
 title: 'Teaching basics of KiCAD'
-date: 1 Jan 2024
+date: 1 Jan 2025
 image: 
   path: /assets/img/thumbs/adder.jpeg
 caption: Was an instructor for postgrad students

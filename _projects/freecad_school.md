@@ -1,7 +1,7 @@
 ---
 layout: project
 title: 'Workshop on FreeCAD for eigth graders'
-date: 1 Jan 2024
+date: 15 Aug 2024
 image: 
   path: /assets/img/thumbs/kids2.jpeg
 caption: Was part of a team that taught FreeCAD to kids
