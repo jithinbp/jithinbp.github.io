@@ -1,6 +1,7 @@
 ---
 layout: project
 title: Injection Moulding
+date: 1 Jan 2017
 image:  
   path: /assets/img/seelab/dev/mould.jpg
 caption: Injection moulds that I have gotten built for various devices

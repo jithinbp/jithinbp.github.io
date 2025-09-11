@@ -1,6 +1,7 @@
 ---
 layout: projects
 title: Preparing Gamma ray detectors
+date: 1 Feb 2019
 image:  
   path: /assets/img/seminar/seminar_cropped-1-38_page-0031_clipped.jpg
 caption: DIY gamma ray detectors with CsI and PIN diodes.

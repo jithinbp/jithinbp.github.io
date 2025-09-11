@@ -3,6 +3,7 @@ layout: project
 title: Development History of ExpEYES-17 / SEELab-3
 screenshot: /assets/img/seelab/dev/8.jpg
 caption: My work from 2014 onwards on FOSS hardware ExpEYES17/SEElab3
+date: 31 Jan 2021
 description: >
   describes the development of ExpEYES-17, vLabtool, PSLab, Python Powered Scientific instrumentation tool, and SEELab-3. From 2014 onwards. Documented in detail on Hackaday.
 accent_color: '#4fb1ba'

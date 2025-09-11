@@ -72,10 +72,10 @@ menu:
 # Add links to the footer.
 # Typically you'll want to link to your cookie- or privacy policy (if appliable), etc..
 legal:
-  - title:             LICENSE
-    url:               /LICENSE/
-  - title:             NOTICE
-    url:               /NOTICE/
+  - title:             Hackster
+    url:               https://www.hackster.io/jithinbp/
+  - title:             Hackaday
+    url:               https://hackaday.io/jithinbp
   - title:             CSPARK RESEARCH
     url:               https://csparkresearch.in
 

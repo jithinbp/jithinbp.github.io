@@ -94,6 +94,23 @@
 .icon-instagram:before {
   content: "\ea92";
 }
+.icon-hackaday {
+  background-image: url("/assets/img/hackaday.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 50px; /* Adjust as needed */
+  height: 50px; /* Adjust as needed */
+  display: inline-block;
+}
+.icon-hackster::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256,0C114.6,0,0,114.6,0,256s114.6,256,256,256s256-114.6,256-256S397.4,0,256,0z M256,366.1c-14.2,0-28.5-2.6-42.7-7.9l-22.3-40.8l-15.3,16.1c-18.5,14.2-33.1,30.9-44.7,49.1l-25.2,43.5c-14.2-18.5-30.9-33.1-49.1-44.7L62.7,298.1c17.6,10.4,32.9,23.7,46.1,39.7L122.8,256l-16.1-46.1c-17.6-10.4-32.9-23.7-46.1-39.7L62.7,213.9c14.2-18.5,30.9-33.1,49.1-44.7L138.8,128l-42.5-3.3c14.6-7.9,28.2-17.5,40.8-28.5L168.3,85.4c11,12.6,20.6,26.2,28.5,40.8l3.3,42.5c14.6,7.9,28.2,17.5,40.8,28.5L256,128l46.1,16.1c10.4,17.6,23.7,32.9,39.7,46.1L366.1,94c18.5-14.2,33.1-30.9,49.1-44.7L450,62.7c-17.6,10.4-32.9,23.7-46.1,39.7L388.9,122.8c18.5,14.2,33.1,30.9,49.1,44.7L446.7,213.9c14.2,18.5,30.9,33.1,49.1,44.7l-42.5,3.3c7.9,14.6,17.5,28.2,28.5,40.8L493.6,331.7c-12.6,11-26.2,20.6-40.8,28.5l-3.3-42.5z'/%3E%3C/svg%3E");
+  background-color: #007bff; /* A shade of blue */
+}
 .icon-whatsapp:before {
   content: "\ea93";
 }

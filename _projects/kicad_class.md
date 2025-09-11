@@ -28,3 +28,8 @@ Designed and manufactured by one of the students. a functional 8 bit full adder/
 ### Course poster
 
 ![](/assets/img/kicad/OE_fullpage.jpg)
+
+
+### Additional
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZHitRRMmgEk?si=BzYk71CtsMzck9qJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

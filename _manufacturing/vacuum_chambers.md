@@ -1,6 +1,7 @@
 ---
 layout: project
 title: Preparing Vacuum Chambers
+date: 1 Jan 2018
 image:  
   path: /assets/img/seminar/seminar_cropped-1-38_page-0013_clipped.jpg
 caption: Vacuum Chamber design for alpha spectroscopy

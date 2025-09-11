@@ -2,10 +2,6 @@
 layout: project
 title: 'Alpha Spectrometer'
 date: 1 Jun 2019
-thumb: /assets/img/phd/shaded_spin.gif
-tl: 75%
-tw: 25%
-
 image:  
   path: /assets/img/phd/alpha_banner.jpg
 links:

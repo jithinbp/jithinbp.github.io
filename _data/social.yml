@@ -6,6 +6,14 @@ email:
 amazon:
   name: Amazon
   icon: icon-amazon
+hackaday:
+  name: hackaday
+  prepend: "https://hackaday.com/"
+  icon: icon-hackaday
+hackster:
+  name: hackster
+  prepend: "https://hackster.io/"
+  icon: icon-hackster
 google:
   name: Google
   icon: icon-google

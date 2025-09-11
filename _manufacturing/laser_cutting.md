@@ -1,6 +1,7 @@
 ---
 layout: project
 title: Laser Cutting Enclosures
+date: 1 Feb 2016
 image:  
   path: /assets/img/vlabtool/lasercut/transparent_scaled.jpg
 caption: Laser Cutting skills
@@ -10,7 +11,10 @@ description: >
 
 ## Laser Cutting Enclosures
 
+![](/assets/img/vlabtool/lasercut/collage.jpeg)
+
 ### Red acrylic enclosure
+
 
 ![](/assets/img/vlabtool/lasercut/cutting.jpg)
 

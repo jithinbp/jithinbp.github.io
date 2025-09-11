@@ -3,7 +3,7 @@ layout: project
 title: 'Reverse engineering thermal printer'
 date: 1 Feb 2024
 image: 
-  path: /assets/img/thumbs/catprint.jpg
+  path: /assets/img/blog/catprinter.webp
 caption: Reverse engineering thermal printer
 description: >
   So i bought this cute cat thermal printer for 1000 Rs, hoping to reverse engineer it and and run
@@ -16,7 +16,7 @@ accent_image:
 
 ## Reverse engineering thermal printer
 
-So i bought this cute cat thermal printer for 1000 Rs, hoping to reverse engineer it and and run
+![](/assets/img/thumbs/catprint.jpg) So i bought this cute cat thermal printer for 1000 Rs, hoping to reverse engineer it and and run
 it from a python script over bluetooth.
 
 while waiting for it to deliver, I found several other reverse engineering efforts, and it seemed
