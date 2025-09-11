@@ -14,6 +14,8 @@ links:
     url: jithinbp.github.io/pages/wedding.html
   - title: Github
     url: https://github.com/jithinbp/ch32v003-card
+  - title: Webpage
+    url: /wedding
 caption: My Wedding card based on a cheap risc-v CH32V003 IC
 description: >
     Low cost wedding invites with a cheap RISC-V microcontroller that has LED POV display, RGB, IR receiver, Li-Ion and charger via USB-C !<br>
