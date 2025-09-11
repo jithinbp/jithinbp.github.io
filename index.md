@@ -13,7 +13,7 @@ hide_description: true
 
 I work with design and development, as well as bulk manufacturing of electronics.  This website describes many of my hacks/creations.   My Rather Incomplete [Resume](/resume.md){:.heading.flip-title}
 
-## Manufacturing Memoirs | <a class="heading flip-title" href="/build/" style="color:teal"> Posts<sup>[{{ site.manufacturing | size }}]</sup></a>
+## Manufacturing Memoirs | <a class="heading flip-title" href="/build/" style="color:teal"><sup>[{{ site.manufacturing | size }}]</sup></a>
 ---
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
@@ -26,8 +26,12 @@ I work with design and development, as well as bulk manufacturing of electronics
 {% endfor %}
 </div>
 
+{% assign psize = site.manufacturing.size %}
+{% if psize > 5 %}
+<p class="read-more mt1"><a class="heading flip-title" href="/manufacturing/">{{ site.manufacturing.size | minus:5 }} more posts</a></p>
+{% endif %}
 
-## Recent Projects | <a class="heading flip-title" href="/projects/" style="color:teal"> Posts<sup>[{{ site.projects | size }}]</sup></a>
+## Recent Projects | <a class="heading flip-title" href="/projects/" style="color:teal"><sup>[{{ site.projects | size }}]</sup></a>
 ---
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
@@ -39,11 +43,15 @@ I work with design and development, as well as bulk manufacturing of electronics
     </div>
 {% endfor %}
 </div>
+{% assign psize = site.projects.size %}
+{% if psize > 10 %}
+<p class="read-more mt1"><a class="heading flip-title" href="/projects/">{{ site.projects.size | minus:10 }} more projects</a></p>
+{% endif %}
 
 
 
 
-## Ph.D Thesis @ CUHP  /  My Startup <a href="https://csparkresearch.in" target="_blank">csparkresearch.in</a> | <a class="heading flip-title" href="/phd/" style="color:teal">All Posts<sup>[{{ site.phd | size }}]</sup></a>
+## Ph.D Thesis @ CUHP  /  My Startup <a href="https://csparkresearch.in" target="_blank">csparkresearch.in</a> | <a class="heading flip-title" href="/phd/" style="color:teal"><sup>[{{ site.phd | size }}]</sup></a>
 ---
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
@@ -55,12 +63,16 @@ I work with design and development, as well as bulk manufacturing of electronics
     </div>
 {% endfor %}
 </div>
+{% assign psize = site.phd.size %}
+{% if psize > 6 %}
+<p class="read-more mt1"><a class="heading flip-title" href="/phd/">{{ site.phd.size | minus:6 }} more posts</a></p>
+{% endif %}
 
 <!---<p class="read-more mt1"><a class="heading flip-title" href="/iiser/">More from my Ph.D. work <sup>[{{ site.phd | size }}]</sup></a></p> -->
 
 
 
-## Master's Thesis @ IISER-M | <a class="heading flip-title" href="/iiser/" style="color:teal">  Posts<sup>[{{ site.iiser | size }}]</sup></a>
+## Master's Thesis @ IISER-M | <a class="heading flip-title" href="/iiser/" style="color:teal"><sup>[{{ site.iiser | size }}]</sup></a>
 ---
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
@@ -72,6 +84,12 @@ I work with design and development, as well as bulk manufacturing of electronics
     </div>
 {% endfor %}
 </div>
+
+{% assign psize = site.iiser.size %}
+{% if psize > 8 %}
+<p class="read-more mt1"><a class="heading flip-title" href="/iiser/">{{ site.iiser.size | minus:8 }} more projects</a></p>
+{% endif %}
+
 
 <!-- <p class="read-more mt1"><a class="heading flip-title" href="/iiser/">More from MS Thesis at IISER <sup>[{{ site.iiser | size }}]</sup></a></p> -->
 
@@ -86,6 +104,11 @@ I work with design and development, as well as bulk manufacturing of electronics
     </div>
 {% endfor %}
 </div>
+
+{% assign psize = site.iiseracad.size %}
+{% if psize > 10 %}
+<p class="read-more mt1"><a class="heading flip-title" href="/iiseracad/">{{ site.iiseracad.size | minus:10 }} more random things</a></p>
+{% endif %}
 
 <!-- <p class="read-more mt1"><a class="heading flip-title" href="/iiseracad/">Click here to check out my other undergrad projects <sup>[{{ site.iiseracad | size }}]</sup></a></p> -->
 
@@ -104,6 +127,11 @@ I work with design and development, as well as bulk manufacturing of electronics
 {% endfor %}
 
 </div>
+
+{% assign psize = site.hobby.size %}
+{% if psize > 3 %}
+<p class="read-more mt1"><a class="heading flip-title" href="/hobbies/">{{ site.hobby.size | minus:10 }} more posts</a></p>
+{% endif %}
 
 <!--<p class="read-more mt1"><a class="heading flip-title" href="/hobbies/">More random things<sup>[{{ site.hobby | size }}]</sup></a></p> -->
 
