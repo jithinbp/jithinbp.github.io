@@ -2,7 +2,7 @@
 layout: project
 title: 'Gamma-Gamma Coincidence'
 date: 1 Dec 2018
-thumb: /assets/img/phd/coincidence.gif
+thumb: /assets/img/phd/coincidence.webp
 tl: 49%
 tw: 38%
 
