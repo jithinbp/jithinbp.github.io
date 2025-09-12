@@ -15,4 +15,5 @@ accent_image:
 
 ## Superconducting levitation
 
-
+Liquid nitrogen is always fun at parties. Master chef demoing the levitating track
+![](/assets/img/blog/ln2.jpeg)

@@ -60,3 +60,9 @@ The photograph doesn’t really show the details well, but you could try it out 
 ![](/assets/img/hobby/cropped-birthday-card-normal.jpg)
 
 ![](/assets/img/hobby/cropped-birthday-card-nightmode-1.jpg)
+
+## Tried painting once or twice
+
+Painty Kat tutorials. 2 days.
+
+![](/assets/img/hobby/oil.jpeg)
