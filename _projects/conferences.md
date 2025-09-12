@@ -1,7 +1,7 @@
 ---
 layout: project
 title: 'Public Speaking'
-date: 1 Jan 2025
+date: 23 July 2024
 image: 
   path: /assets/img/blog/fossmeet.jpg
 caption: Summary of various conferences I have spoken at

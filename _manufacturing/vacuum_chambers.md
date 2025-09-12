@@ -3,14 +3,14 @@ layout: project
 title: Preparing Vacuum Chambers
 date: 1 Jan 2018
 image:  
-  path: /assets/img/seminar/seminar_cropped-1-38_page-0013_clipped.jpg
+  path: /assets/img/blog/machining.webp
 caption: Vacuum Chamber design for alpha spectroscopy
 description: >
   CAD render of the vacuum chamber with electronics inside.
 
 ---
 
-
+![](/assets/img/seminar/seminar_cropped-1-38_page-0013_clipped.jpg){:.lead}
 
 ![](/assets/img/seminar/seminar_cropped-1-38_page-0014.jpg){:.lead}
 

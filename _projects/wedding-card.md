@@ -4,7 +4,7 @@ title: 'Wedding Card'
 date: 20 Oct 2024
 image:  
   path: /assets/img/card/card.webp
-screenshot: /assets/img/card/card.webp
+screenshot: /assets/img/blog/card.webp
 links:
   - title: Youtube
     url: https://www.youtube.com/watch?v=

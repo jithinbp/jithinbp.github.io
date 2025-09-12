@@ -1,7 +1,7 @@
 ---
 layout: project
 title: 'CV, Electrodes, and Electrochemistry'
-date: 23 July 2024
+date: 1 Jan 2025
 image: 
   path: /assets/img/blog/CVIDE.jpg
 caption: Built some IDEs, and C-V for SEELab3

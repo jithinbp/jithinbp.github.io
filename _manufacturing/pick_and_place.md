@@ -34,3 +34,9 @@ Seen above is the robot which assembles everything on solder paste pattern, and 
 ### Testing and Calibration
 
 ![](/assets/img/blog/seelab_test.jpeg){:.lead}
+
+### Other pick and place machines
+
+The factory also had a cool machine for placing through hole resistors.
+
+![](/assets/img/blog/pnpthrough.webp){:.lead}

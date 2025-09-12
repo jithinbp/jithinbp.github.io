@@ -1,9 +1,9 @@
 ---
 layout: project
 title: 'Blocks to Bots with KuttyPy Plus'
-date: 1 Jan 2024
+date: 1 Jan 2025
 image: 
-  path: /assets/img/kuttypy/kpy_cover.jpg
+  path: /assets/img/blog/robotarm.webp
 caption: Series of workshops on embedded systems
 description: >
   The kuttpy development board can be used with linux/windows/android, It is an alternative to Arduino for bare metal work. Allows live manipulation of registers of the microcontroller to study how it works.
@@ -20,6 +20,7 @@ links:
 * this list will be replaced by the toc
 {:toc .large-only}
 
+![](/assets/img/kuttypy/kpy_cover.jpg){:.lead}
 
 ## <a href="https://cie.uoc.ac.in/en/latest/projects/b2b/blockstobots/" target="_blank">Blocks to Bots programme</a>
 
