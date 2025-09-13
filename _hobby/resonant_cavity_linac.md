@@ -19,3 +19,6 @@ accent_image:
 I have nothing to do with this. just clicked some photos. The chamber is water cooled to prevent temperature drift which can change the resonant frequency beyond acceptable limits causing RF signal reflection, and tripping the power supply.
 
 ![](/assets/img/hobby/cavity2.jpeg)
+
+![](/assets/img/blog/linac1.jpeg)
+![](/assets/img/blog/linac2.jpeg)

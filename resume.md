@@ -44,11 +44,11 @@ menu: true
 
 | Year | Education |
 | :--- | :--- |
-| 2007 | Secondary school examination (X), CBSE, The Mother’s International school, New Delhi, Aggregate – 91.4%. |
-| 2009 | Higher secondary school examination (XII), CBSE, The Mother’s International school, New Delhi, Aggregate – 87.8% |
-| 2014 | Masters in Physics from Indian Institute of Science Education and Research, Mohali, CGPA at the end of 10 Semesters – 7.5. |
-| 2021 | Ph.D. In nuclear physics instrumentation from CUHP |
 | 2023-2025 | Nava Kerala Chief minister's post doctoral fellowship |
+| 2017-2021 | Ph.D. In nuclear physics instrumentation from CUHP |
+| 2014 | Masters in Physics from Indian Institute of Science Education and Research, Mohali, CGPA at the end of 10 Semesters – 7.5. |
+| 2009 | Higher secondary school examination (XII), CBSE, The Mother’s International school, New Delhi, Aggregate – 87.8% |
+| 2007 | Secondary school examination (X), CBSE, The Mother’s International school, New Delhi, Aggregate – 91.4%. |
 
 ---
 
@@ -56,29 +56,40 @@ menu: true
 
 | Year | Awards |
 | :--- | :--- |
-| 2007 | Awarded Junior Science Talent Search Examination (JSTSE) Scholarship by Dte of Edu., Govt. of New Delhi. |
-| 2008 | Awarded Kishore Vaigyanik Protsahan Yojana (KVPY) Scholarship by Dept. of Sc. and Tech., Govt. of India. |
-| 2007-2009 | Won several awards for Programming and Robotics events at Tech fests in Delhi-NCR. |
-| 2012, 14 | Volleyball and Football gold medallist at Inter IISER sports meets held at IISER Kolkata and Pune. |
-| 2016 | Google Summer of Code (GSOC) |
 | 2023 | Chief Minister's Nava Kerala Post Doctoral Fellowship |
+| 2016 | Google Summer of Code (GSOC) |
+| 2007-2009 | Won several awards for Programming and Robotics events at Tech fests in Delhi-NCR. |
+| 2008 | Awarded Kishore Vaigyanik Protsahan Yojana (KVPY) Scholarship by Dept. of Sc. and Tech., Govt. of India. |
+| 2007 | Awarded Junior Science Talent Search Examination (JSTSE) Scholarship by Dte of Edu., Govt. of New Delhi. |
 
 # Publications
 
 {% include maketable.html publist=site.data.mypubs  color="green" %}
 
-# Conferences and Camps
+# [Conferences and Camps](/projects/conferences/)
 
 | Year | Conferences and Camps |
 | :--- | :--- |
-| July-2008 | Attended Vijyoshi Camp in association with KVPY at IISc Bangalore. |
-| Oct-2009 | Vijyoshi camp by JNCASR in association with KVPY at JNU, New Delhi. |
-| Dec-2011 | Scipy.in for Scientific Computing, IIT Bombay. Sponsored by Enthought, FOSSEE, and MHRD. |
+| 2024 | Fossmeet, NIT Calicut. KuttyPy : A no Cost transformation of the ubiquitous Arduino into an affordable data acquisition system for STEM|
+| 2024 | Pycon. Pycon India 2024  |
+| 2021 | Pycon.  Pycon India 2021 : ExpEYES , Python Powered Measurement Device|
+| 2020 | Scipy. Speaker. Python based portable instrument for Science Experiments|
+| 2019 | Scipy . Speaker and Workshop organiser . Learning Microcontrollers with KuttyPy|
+| 2019 | Background Gamma Radiation Surveying in the IndianPeninsula with a Portable USB Spectrometer,” in Proceedings of the DAE Symp. on Nucl. Phys. 64 (2019), 2019|
+| 2019 | Jithin B.P., “Simulation of N-Well Kronig- Penney Potential using Matrix Approach.,” in NACISP-2018, IAPT, 2018|
+| 2019 | RINP. Gated MCA technique for demonstration of coincidence phenomena with a set of indigenously developed gamma spectrometers,” in Recent Issues in Nuclear and Particle Physics, Viswa Bharati, 2019|
+| 2019 | Scipy. Jithin B.P., “Learning Microcontrollers with Python,” in Scipy India, 2019|
+| 2019 | DAE. Compact dual-parameter MCA for γâĹŠγ Coinci- dence Measurements,” in Proceedings of the DAE Symp. on Nucl. Phys. 64 (2019) 920, 2019. |
+| 2018 | Speaker. Educode.be, Bruxelles, Belgium |
+| aug-2017 | Speaker. Rencontrole Mondiales du Logiciels Libre, St Etienne, France |
 | Dec-2014 | Speaker. Scipy.in for Scientific Computing, IIT Bombay. Sponsored by Enthought, FOSSEE, and MHRD. |
+| Dec-2011 | Scipy.in for Scientific Computing, IIT Bombay. Sponsored by Enthought, FOSSEE, and MHRD. |
+| Oct-2009 | Vijyoshi camp by JNCASR in association with KVPY at JNU, New Delhi. |
+| July-2008 | Attended Vijyoshi Camp in association with KVPY at IISc Bangalore. |
 
 ---
 
-# Computer Skills ([Github](https://www.github.com/jithinbp))
+# Computer Skills ([Github](https://www.github.com/jithinbp)) . As of 2013
 
 ## Python
 

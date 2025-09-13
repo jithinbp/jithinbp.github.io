@@ -8,8 +8,9 @@ author1:
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
   about:             |
-    Master's in Physics from IISER-M with thesis work on Point Contact Spectroscopy and Scanning Tunnelling microscopy. Founded CSpark Research for developing affordable data acquisition instruments for schools and colleges. Ph.D in Nuclear Physics instrumentation - development of radiation detection equipment. I work with design and development, as well as bulk manufacturing of electronics.
-    This website describes many of my hacks/creations. All my startup related work is at [CSpark Research](https://csparkresearch.in)
+    Founder at [CSpark Research](https://csparkresearch.in), for developing affordable data acquisition instruments for schools and colleges. Post Doc, Biosensing. Ph.D , Nuclear Physics instrumentation - development of radiation detection equipment. 
+    I work with design and development, as well as bulk manufacturing of electronics.
+    Master's in Physics from IISER-M with thesis work on Point Contact Spectroscopy and Scanning Tunnelling microscopy.
 
   # This photo will be used in the about section
   picture:

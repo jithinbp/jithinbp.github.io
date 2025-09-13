@@ -16,6 +16,9 @@ accent_image:
 * this list will be replaced by the toc
 {:toc .large-only}
 
+Trials with my 22W Falcon laser engraver.
+At first I tried etching the copper directly, and then I sprayed the copper with acrylic paint, used the laser to ablate it in the etch pattern, and then used standard etching with HCl and H2O2.
+
 ![](/assets/img/hobby/pcb2.jpeg)
 
 

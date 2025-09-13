@@ -24,10 +24,10 @@ title:                 Jithin BP
 
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
-description:           >
-  Master's in Physics from IISER-M with thesis work on PCAR and STM. Founded CSpark Research for developing affordable data acquisition instruments for schools and colleges.
-  Ph.D in Nuclear Physics instrumentation - development of radiation detection equipment. I work with design and development, as well as bulk manufacturing of electronics.
-  This website describes many of my hacks/creations. All my startup related work is at [CSpark Research](https://csparkresearch.in)
+description: >
+    Founder at [CSpark Research](https://csparkresearch.in), developing affordable data acquisition instruments for scientific research. CMNPF Post Doc, Biosensing. Ph.D , Nuclear Physics instrumentation - development of radiation detection equipment. 
+    I work with design and development, as well as bulk manufacturing of electronics.
+    Master's in Physics from IISER-M with thesis work on Point Contact Spectroscopy and Scanning Tunnelling microscopy.
 # A shorter description for the sidebar.
 tagline:               >
   Maker @ CSpark Research

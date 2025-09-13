@@ -27,10 +27,12 @@ accent_image:
 
 The SEELab 3 is a revolutionary, all-in-one test and measurement tool that is making hands-on science and engineering accessible to everyone. Developed as a successor to the popular ExpEYES17, this versatile device is widely used in educational settings, from high schools to universities, and is also a favorite among hobbyists and electronics enthusiasts.
 
+The device is the latest is a long line of prototypes I built, which are [documented here](/_manufacturing/seelab-dev.md){:target="_blank}
 
 ![Full-width image](/assets/img/phd/expeyes.jpg){:.lead width="800" height="100" loading="lazy"}
 {:.figcaption}
 
+more than 3000 units in circulation , and 5000+ downloads on the play store.
 
 ---
 
@@ -39,6 +41,12 @@ The SEELab 3 is a revolutionary, all-in-one test and measurement tool that is ma
 In the world of science and engineering education, hands-on experience is everything. Yet, the high cost of traditional lab equipment has long been a barrier for many students, schools, and hobbyists. Enter the SEELab 3, a compact, all-in-one tool that is fundamentally changing this dynamic. Priced at under $100 USD, this incredible device is more than just a piece of electronics—it's a portable laboratory that fits in your hand, packing the power of a full-scale lab into one accessible package.
 
 ---
+
+### Links
+
+#### College resources
+[SHRI SHIVAJI SCIENCE COLLEGE, AMRAVATI](https://shivajiscamt.org/reports/report.php?id=167)
+
 
 ### The All-in-One Philosophy: A Symphony of Instruments
 
