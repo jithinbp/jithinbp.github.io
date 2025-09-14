@@ -1,0 +1,39 @@
+folder: "assets/img/shd"
+thumbs: true  # set to false if you don't have thumbnails
+images:
+  - name: "shd1.jpeg"
+    description: "Praveen Patil instructing the volunteers for Science Hack Day, a fun 3 day event where professionals and makers build and learn "
+  - name: "shd2.jpeg"
+    description: "Stargazing workshops"
+  - name: "shd3.jpeg"
+    description: "Beware the horse. It bites."
+  - name: "shd4.jpeg"
+    description: "Dekho mera phone."
+  - name: "shd5.jpeg"
+    description: "Kuttypy workshop with arduino nano"
+  - name: "shd6.jpeg"
+    description: "more nano"
+  - name: "saptak.jpeg"
+    description: "Volunteer and permanent staff as website maintainer"
+    link: https://sciencehackday.in/
+  - name: "shd7.jpeg"
+    description: "Persistence of Vision"
+  - name: "shd8.jpeg"
+    description: "Master Praveen"
+  - name: "shd9.jpeg"
+    description: "Group photo SHD 2024"
+  - name: "shd10.jpeg"
+    description: "Me and Praveen's coupled oscillator project made possible by the machining skills of our industrialist sponsors. Anish from KnK Karts explaining the system."
+  - name: "shd11.jpeg"
+    description: "Sayan's  `medieval torture device` a.k.a `FerroTime: Electromagnetic Timepiece` for projects contest"
+    link: https://yudocaa.in/
+    link2: https://sciencehackdayindia.github.io/2023/projects/
+  - name: "shd12.jpeg"
+    description: "Laser Show"
+  - name: "shd13.jpeg"
+    description: "Arun Ganesh conducted a photography workshop with photosensitive ink."
+    link: https://x.com/planemad
+  - name: "shd14.jpeg"
+    description: "some kid who was happy to be there"
+
+

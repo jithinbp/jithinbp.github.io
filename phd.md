@@ -2,7 +2,7 @@
 layout: project
 title: Ph.D. Work
 date: 1 Dec 2020
-thumb: /assets/img/phd/coincidence.gif
+thumb: /assets/img/phd/coincidence.webp
 tl: 49%
 tw: 38%
 image:  

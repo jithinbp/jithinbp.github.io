@@ -1,0 +1,23 @@
+folder: "assets/img/blog"
+thumbs: false  # set to false if you don't have thumbnails
+images:
+  - name: "hydroponics1.jpeg"
+    description: "Pods in PVC pipe that i drilled"
+  - name: "hydroponics2.jpeg"
+    description: "Solar powered channels"
+  - name: "hydroponics3.jpeg"
+    description: "Conventional flowering plants"
+  - name: "hydroponics4.jpeg"
+    description: "Nice big sweet potato "
+  - name: "hydroponics5.jpeg"
+    description: "Tried using a coir mat as a foundation. failed. roots adhere too well"
+  - name: "hydroponics6.jpeg"
+    description: "Lots of bees came on their own"
+  - name: "hydroponics7.jpeg"
+    description: "My setup"
+  - name: "hydroponics8.jpeg"
+    description: "Me and my setup"
+  - name: "hydroponics9.jpeg"
+    description: "Used a 2 inch circular drill"
+
+

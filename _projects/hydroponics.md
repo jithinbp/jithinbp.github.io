@@ -15,12 +15,5 @@ accent_image:
 
 Covid lockdown had me doing random side quests
 
-![](/assets/img/blog/hydroponics2.jpeg)
 
-![](/assets/img/blog/hydroponics3.jpeg)
-![](/assets/img/blog/hydroponics4.jpeg)
-![](/assets/img/blog/hydroponics5.jpeg)
-![](/assets/img/blog/hydroponics6.jpeg)
-![](/assets/img/blog/hydroponics7.jpeg)
-![](/assets/img/blog/hydroponics8.jpeg)
-![](/assets/img/blog/hydroponics9.jpeg)
+{% include imagegallery.html gallery="plants_gallery" columns="4" %}

@@ -20,5 +20,7 @@ I have nothing to do with this. just clicked some photos. The chamber is water c
 
 ![](/assets/img/hobby/cavity2.jpeg)
 
+![](/assets/img/blog/linac3.jpeg)
+
 ![](/assets/img/blog/linac1.jpeg)
 ![](/assets/img/blog/linac2.jpeg)
