@@ -68,3 +68,12 @@ The Cryostat was purchased from American magnetics, and features a 3-axis vector
 ![Full-width image](/assets/img/stm/cryo.jpeg){:.lead width="400" height="100" loading="lazy"}
 
 In order to ensure uninterrupted Liquid Helium supply , a helium plant with two 160 liter portable liquefiers was set up in an adjacent building.  Helium transfer needs to carried out every 3-4 days, and is usually managed by the undergrads.  I need to write a page dedicated to this cryostat, its vibration isolation pit, and RF shielding soon.
+
+
+### Later developments
+
+After I left, a low temperature MFM probe was also installed. got some photos during a later visit.
+
+![](/assets/img/blog/spm1.jpeg)
+![](/assets/img/blog/spm2.jpeg)
+![](/assets/img/blog/spm3.jpeg)

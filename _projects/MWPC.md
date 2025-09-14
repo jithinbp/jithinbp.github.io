@@ -21,3 +21,10 @@ I soldered 20 micron thick wires meant for cellphone LCD display repair. They're
 
 ![](/assets/img/blog/MWPCB.png)
 
+
+### MWPC by Dr Saneesh
+
+Saneesh from IUAC built this MWPC with delay line ICs from Rhombus instead of the L-C ladder I built. It is much more sophisticated, and has been tested in the beam line.
+
+![](/assets/img/blog/saneesh1.jpeg)
+![](/assets/img/blog/saneesh2.jpeg)

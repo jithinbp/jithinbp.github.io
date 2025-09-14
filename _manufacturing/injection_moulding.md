@@ -17,3 +17,8 @@ The surfaces of the mould are then either diamond polished for a glossy finish, 
 ![](/assets/img/seminar/seminar_cropped-1-38_page-0025.jpg){:.lead}
 
 ![](/assets/img/seminar/seminar_cropped-1-38_page-0026.jpg){:.lead}
+
+![](/assets/img/blog/mould1.jpeg){:.lead}
+![](/assets/img/blog/mould2.jpeg){:.lead}
+![](/assets/img/blog/mould3.jpeg){:.lead}
+![](/assets/img/blog/mould4.jpeg){:.lead}
