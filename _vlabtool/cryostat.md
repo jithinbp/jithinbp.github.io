@@ -11,7 +11,7 @@ links:
   - title: Instructions
     url: https://www.hackster.io/jithinbp/ch32v003-blinky-wedding-card-fc8f60
   - title: webpage
-    url: jithinbp.github.io/pages/wedding.html
+    url: jithinbp.in/pages/wedding.html
   - title: Github
     url: https://github.com/jithinbp/ch32v003-card
 caption: My Wedding card based on a cheap risc-v CH32V003 IC

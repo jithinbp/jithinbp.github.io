@@ -10,7 +10,7 @@ links:
   - title: Instructions
     url: https://www.hackster.io/jithinbp/ch32v003-blinky-wedding-card-fc8f60
   - title: webpage
-    url: jithinbp.github.io/pages/wedding.html
+    url: jithinbp.in/pages/wedding.html
   - title: Github
     url: https://github.com/jithinbp/ch32v003-card
 caption: A cost effective, multi-pronged data acquisition tool to turn your computer into a workbench for science and electronics experiments . Equipped with a Python Library and several Apps.
