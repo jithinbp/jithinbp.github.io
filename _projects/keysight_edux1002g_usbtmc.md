@@ -16,6 +16,14 @@ accent_image:
 
 useful to directly pull data onto a PC.
 
+Rules for ubuntu. on windows feel free to struggle with drivers or Zadig
+
+```bash
+#/etc/rules.d/99-keysight.rules
+#sudo service udev restart
+SUBSYSTEM=="usb", ATTRS{idVendor}=="2a8d", ATTRS{idProduct}=="179b", MODE="0666", GROUP="plugdev"
+```
+
 
 ```python
 import usbtmc

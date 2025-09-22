@@ -18,9 +18,13 @@ accent_image:
 
 ## Public Speaking
 
-### [FossUnited 2025](https://fossunited.org/c/indiafoss/2025/cfp/3a8mrlaug1)
+### [IndiaFOSS 2025,  FossUnited @ Nimhans, Bangalore](https://fossunited.org/c/indiafoss/2025/cfp/3a8mrlaug1)
 
 KuttyPy : A no Cost transformation of the ubiquitous Arduino into an affordable data acquisition system for STEM
+
+### [FossMeet 2025, NIT Calicut](https://www.fossmeet.net/speakers)
+
+KuttyPy, a tool for embedded systems programming
 
 ### [Pycon India 2024](https://in.pycon.org/2024/speakers/jithin/)
 

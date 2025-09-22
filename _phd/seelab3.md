@@ -27,7 +27,7 @@ accent_image:
 
 The SEELab 3 is a revolutionary, all-in-one test and measurement tool that is making hands-on science and engineering accessible to everyone. Developed as a successor to the popular ExpEYES17, this versatile device is widely used in educational settings, from high schools to universities, and is also a favorite among hobbyists and electronics enthusiasts.
 
-The device is the latest is a long line of prototypes I built, which are [documented here](/_manufacturing/seelab-dev.md){:target="_blank}
+The device is the latest is a long line of prototypes I built, which are [documented here](/build/seelab-dev/){:target="_blank}
 
 ![Full-width image](/assets/img/phd/expeyes.jpg){:.lead width="800" height="100" loading="lazy"}
 {:.figcaption}

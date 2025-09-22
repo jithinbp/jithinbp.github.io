@@ -28,7 +28,7 @@ I work with design and development, as well as bulk manufacturing of electronics
 
 {% assign psize = site.manufacturing.size %}
 {% if psize > 5 %}
-<p class="read-more mt1"><a class="heading flip-title" href="/manufacturing/">{{ site.manufacturing.size | minus:5 }} more posts</a></p>
+<p class="read-more mt1"><a class="heading flip-title" href="/build/">{{ site.manufacturing.size | minus:5 }} more posts</a></p>
 {% endif %}
 
 ## Recent Projects | <a class="heading flip-title" href="/projects/" style="color:teal"><sup>[{{ site.projects | size }}]</sup></a>
