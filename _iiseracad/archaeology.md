@@ -21,7 +21,7 @@ accent_image:
 
 The full text of the report which also includes discussion of several mass market technologies and apps such as Minecraft and their possible applications in Archaeology: [Download](/assets/pdf/archaeology_report_jithin.pdf)
 
-![Full-width image](/assets/img/mastersacad/rakhigarhi_map.png){:.lead width="800" height="100" loading="lazy"}
+![Full-width image](/assets/img/mastersacad/rakhigarhi_map.jpeg){:.lead width="800" height="100" loading="lazy"}
 I went around marking stuff on my app which automatically geotagged everything. This was then overlaid on Google Maps. 
 {:.figcaption}
 

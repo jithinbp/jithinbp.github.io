@@ -32,3 +32,6 @@ growth of e-coli at 25C . all phases can be seen
 Repurposed a benchtop CNC as a cell plate reader using Python and GCode
 
 ![](/assets/img/blog/autocell.webp){:.lead}
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">For every elegant solution, there exists a trashy amateur solution 😌<br>CNC mill controlled via gcode to visit each cell and measure luminosity with a TSL2591. The mirror and LED is a bad hack till I get a backlight. <br>Placed in a black box while measuring over 2 days. <a href="https://t.co/VENd6xGLIa">https://t.co/VENd6xGLIa</a> <a href="https://t.co/2s2DrKR6vJ">pic.twitter.com/2s2DrKR6vJ</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1927988604758020422?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 

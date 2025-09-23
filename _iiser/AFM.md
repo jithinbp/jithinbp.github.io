@@ -22,7 +22,7 @@ A pictorial walkthrough of the installation of the He-4 based Cryostat at the Sp
 
 ## Construction of the AFM room with Acoustic and Vibration Isolation setup
 
-![Full-width image](/assets/img/afm/installation.png){:.lead width="800" height="100" loading="lazy"}
+![Full-width image](/assets/img/afm/installation.jpeg){:.lead width="800" height="100" loading="lazy"}
 
 The AFM sits on a solid block of RCC for vibration dampening. In addition, it has its own vibration dampening table, as well as an acoustic isolation chamber. The entire room is acoustically isolated with multiple layers of glass wool and neoprene.
 {:.figcaption}
@@ -32,7 +32,7 @@ The AFM sits on a solid block of RCC for vibration dampening. In addition, it ha
 Very cosy and quiet imaging room
 {:.figcaption}
 
-![Full-width image](/assets/img/afm/install2.png){:.lead width="800" height="100" loading="lazy"}
+![Full-width image](/assets/img/afm/install2.jpeg){:.lead width="800" height="100" loading="lazy"}
 
 Close up shots of the liquid cooler, the AFM, and the tip with a liny cantilever which does the actual scanning part.
 {:.figcaption}

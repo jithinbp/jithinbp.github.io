@@ -17,3 +17,6 @@ accent_image:
 
 Liquid nitrogen is always fun at parties. Master chef demoing the levitating track
 ![](/assets/img/blog/ln2.jpeg)
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">It floats!<br>Need to make a vessel to keep it cool for much longer<br>YBCO , superconductivity <a href="https://t.co/8mVWlJms5x">pic.twitter.com/8mVWlJms5x</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1869328933663260900?ref_src=twsrc%5Etfw">December 18, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 

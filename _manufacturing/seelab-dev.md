@@ -19,6 +19,7 @@ Designed all graphics with Inkscape, and M.K. Packaging Ltd printed the cardboar
 
 For [Pick and Place Assembly](/build/pick_and_place/) , Beam Infotech's facility was rented.  [Injection Moulding](build/injection_moulding/) was handled by [Tushar Sood's Paragon Products](https://www.paragongeysers.com/) Ltd at Okhla, New Delhi which deals in Geysers, and has a range of high end moulding machines.
 
+
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
 {% assign prototypes = site.data.expeyes-dev %}
 
@@ -44,3 +45,4 @@ For [Pick and Place Assembly](/build/pick_and_place/) , Beam Infotech's facility
 {% endfor %}
 </div>
 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">long ago ! First big order. <br>Packed a whole batch with mom and dad . <a href="https://t.co/AyVp7MI0Ey">pic.twitter.com/AyVp7MI0Ey</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1909426520331899104?ref_src=twsrc%5Etfw">April 8, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 

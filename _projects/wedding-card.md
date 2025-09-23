@@ -26,6 +26,7 @@ accent_image:
 * this list will be replaced by the toc
 {:toc .large-only}
 
+
 I needed a super affordable BoM to make an electronic wedding invite. Thanks to a couple of open source projects, and CNLohrs work on the Library, the CH32V003 became a good option.
 
 Schematics originally based on [Christmas LED ball](https://www.hackster.io/fabiosouza/christmas-ornament-based-on-ch32v003-riscv-mcu-2793db){:target="_blank"} .
@@ -67,3 +68,5 @@ Full schematics and firmware is available on my github page.
 
 * Fábio Souza for the CH32v003 layout for the LED christmas ball which served as a starting point for this work.
 * [CNLohr] (https://github.com/cnlohr/) for the many examples on ch32v003fun from where I lifted sections for H/W interrupts (for IR), deep sleep mode and wakeup, and PWM. The datasheet was also of much help. :)
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">My <a href="https://twitter.com/hashtag/CH32V003?src=hash&amp;ref_src=twsrc%5Etfw">#CH32V003</a> dev board is up and running!<br>✅ Lots of blinkies 🚨 <br>✅ WS2812b-2020<br>✅ IR TX/RX<br>✅ Li-ion charger , type C 🔋 <br>✅ Deep sleep, interrupts, and POV display ✨ <a href="https://twitter.com/hackadayio?ref_src=twsrc%5Etfw">@hackadayio</a> <a href="https://twitter.com/cnlohr?ref_src=twsrc%5Etfw">@cnlohr</a> <a href="https://twitter.com/FabioSouza_io?ref_src=twsrc%5Etfw">@FabioSouza_io</a> <a href="https://twitter.com/aggarwal_pallav?ref_src=twsrc%5Etfw">@aggarwal_pallav</a> <a href="https://twitter.com/m_akshai?ref_src=twsrc%5Etfw">@m_akshai</a> <a href="https://twitter.com/MakeAugusta?ref_src=twsrc%5Etfw">@MakeAugusta</a> <a href="https://t.co/4kMVrwAMC4">pic.twitter.com/4kMVrwAMC4</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1800898778003890442?ref_src=twsrc%5Etfw">June 12, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 

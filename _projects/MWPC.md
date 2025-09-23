@@ -28,3 +28,6 @@ Saneesh from IUAC built this MWPC with delay line ICs from Rhombus instead of th
 
 ![](/assets/img/blog/saneesh1.jpeg)
 ![](/assets/img/blog/saneesh2.jpeg)
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Back plane done. <br>Now I need to make a small enclosure with a mylar window to contain low pressure argon gas, and a larger vacuum chamber to test it <a href="https://t.co/z5knBArHye">https://t.co/z5knBArHye</a> <a href="https://t.co/6F1ABgR5J5">pic.twitter.com/6F1ABgR5J5</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1933113097503621305?ref_src=twsrc%5Etfw">June 12, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 

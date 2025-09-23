@@ -40,7 +40,7 @@ menu: true
   </div>
 
 
-# Education
+## Education
 
 | Year | Education |
 | :--- | :--- |
@@ -52,7 +52,7 @@ menu: true
 
 ---
 
-# Awards
+## Awards
 
 | Year | Awards |
 | :--- | :--- |
@@ -62,38 +62,21 @@ menu: true
 | 2008 | Awarded Kishore Vaigyanik Protsahan Yojana (KVPY) Scholarship by Dept. of Sc. and Tech., Govt. of India. |
 | 2007 | Awarded Junior Science Talent Search Examination (JSTSE) Scholarship by Dte of Edu., Govt. of New Delhi. |
 
-# Publications
+## [Conferences](/projects/conferences/)
 
-{% include maketable.html publist=site.data.mypubs  color="green" %}
-
-# [Conferences and Camps](/projects/conferences/)
-
-| Year | Conferences and Camps |
-| :--- | :--- |
-| 2025 | IUPAP - International Conference on Physics Education - 2025, IIT Ropar. [Hands-on Physics with Affordable Open-Source Measurement Tools](https://icpe-2025.in/workshop/): From Theory to Experiment with SEELAB3 `invited workshop host`, `upcoming`|
-| 2025 | IndiaFOSS, FossUnited, Bangalore. KuttyPy : A no Cost transformation of the ubiquitous Arduino into an affordable data acquisition system for STEM `invited speaker`|
-| 2025 | Fossmeet, NIT Calicut. : KuttyPy : An alternative to Arduino `invited speaker`|
-| 2024 | Pycon. Pycon India 2024  `invited speaker`|
-| 2021 | Pycon.  Pycon India 2021 : ExpEYES , Python Powered Measurement Device `invited speaker`|
-| 2020 | Scipy. Speaker. Python based portable instrument for Science Experiments `invited speaker`|
-| 2019 | Scipy . Speaker and Workshop organiser . Learning Microcontrollers with KuttyPy `invited speaker`|
-| 2019 | Background Gamma Radiation Surveying in the IndianPeninsula with a Portable USB Spectrometer,” in Proceedings of the DAE Symp. on Nucl. Phys. 64 (2019), 2019|
-| 2019 | Jithin B.P., “Simulation of N-Well Kronig- Penney Potential using Matrix Approach.,” in NACISP-2018, IAPT, 2018|
-| 2019 | RINP. Gated MCA technique for demonstration of coincidence phenomena with a set of indigenously developed gamma spectrometers,” in Recent Issues in Nuclear and Particle Physics, Viswa Bharati, 2019|
-| 2019 | Scipy. Jithin B.P., “Learning Microcontrollers with Python,” in Scipy India, 2019|
-| 2019 | DAE. Compact dual-parameter MCA for γâĹŠγ Coinci- dence Measurements,” in Proceedings of the DAE Symp. on Nucl. Phys. 64 (2019) 920, 2019. |
-| 2018 | Speaker. Educode.be, Bruxelles, Belgium `invited speaker`|
-| aug-2017 | Speaker. Rencontrole Mondiales du Logiciels Libre, St Etienne, France `invited speaker`|
-| Dec-2014 | Speaker. Scipy.in for Scientific Computing, IIT Bombay. Sponsored by Enthought, FOSSEE, and MHRD. |
-| Dec-2011 | Scipy.in for Scientific Computing, IIT Bombay. Sponsored by Enthought, FOSSEE, and MHRD. |
-| Oct-2009 | Vijyoshi camp by JNCASR in association with KVPY at JNU, New Delhi. |
-| July-2008 | Attended Vijyoshi Camp in association with KVPY at IISc Bangalore. |
+{% include reusables/conferences.md %}
 
 ---
 
-# Computer Skills ([Github](https://www.github.com/jithinbp)) . As of 2013
+## Publications
 
-## Python
+{% include maketable.html publist=site.data.mypubs  color="green" %}
+
+---
+
+## Computer Skills ([Github](https://www.github.com/jithinbp)) . As of 2013
+
+### Python
 
 * Developed several open source applications for data acquisition and analysis.
     * Point Contact Andreev Reflection Spectroscopy, AC Susceptometry, Virtual Lab, PID control, Cryostat Magnet Control …
@@ -104,17 +87,17 @@ menu: true
 * Well versed in interfacing scientific equipment with protocols such as GPIB, PCI-e, USB and TCP/UDP.
 * Software development for the vLabtool. Includes real time data acquisition, analysis, and visualization.
 
-## C
+### C
 * Pointers, linked lists, structures, dynamic memory allocation and file handling.
 * Applications developed range from an MS-DOS based CAD application and indie games, to fluid mechanics and ODE solvers.
 
-## Embedded C
+### Embedded C
 
 * Familiar with 16 and 8-bit MCUs from Microchip. Used them in conjunction with analog circuitry to develop low cost test and measurement equipment.
 * Worked with developing firmware for a Multi Channel Analyzer based on an ATMEGA32 chipset.
 * Getting acquainted with the ESP8266 low cost Wi-Fi chipset.
 
-## Interfacing Scientific Equipment
+### Interfacing Scientific Equipment
 
 * Working experience with a host of high end tools from KEITHLEY, Lakeshore, AMI, RHK, and SRS.
 * Developed dedicated standalone applications for transport and spectroscopic measurements as part of my Master’s Thesis work.
@@ -122,41 +105,41 @@ menu: true
 * Driven towards using open-source tools wherever possible, instead of restrictive and proprietary environments such as LabVIEW.
 * Experience includes TCP/UDP, GPIB, USBTMC, RS-232, EUSART, SPI, I2C and IR.
 
-## C++
+### C++
 
 * Classes, pointers, stacks, queues and dynamic memory allocation.
 
-## Java
+### Java
 
 * [Go to My Google Play Store Showcase](https://play.google.com/store/apps/developer?id=Jithin+BP&amp;hl=en)
 * [Running ExpEYES](https://play.google.com/store/apps/details?id=com.expeyesexperiments) on Android devices with USB OTG.
 * An Android based [web server for ExpEYES](https://play.google.com/store/apps/details?id=com.expeyesserver).
 * [A Data Logger](https://play.google.com/store/apps/details?id=com.scpi) for Instruments that use SCPI commands and have Ethernet Connectivity.
 
-## Linux
+### Linux
 
 * Ubuntu is my go-to OS for just about all my software and coding needs.
 * Familiar with a variety of distros including Fedora, SUSE, Mint, and Slackware.
 * Kernel compilation for A13 based tablets, Raspberry Pi, and custom Real Time Schedulers.
 * Cloud setup with NFS sharing and NIS authentication.
 
-## Web Development
+### Web Development
 
 * Apache, PHP, PHP-gd, DRUPAL CMS, Mod-python, Python-PSP, CherryPy, JavaScript, Jquery and AJAX.
 * Applications developed include a Drag and Drop programming interface, Webapps for scientific equipment, and embedded HTML in Qt Apps.
 * Designed this website, so I have a fair amount of WordPress familiarity.
 
-## Database Management
+### Database Management
 
 * Sqlite3
 * MySQL
 
-## Office Tools
+### Office Tools
 
 * LibreOffice / Open Office
 * LATEX
 
-## Miscellaneous
+### Miscellaneous
 
 * PERL
 * REGEX
@@ -164,51 +147,55 @@ menu: true
 
 ---
 
-# Summer Projects
+## Summer Projects (Pre-2014)
 
-## 2007: 3D modelling software based on Ms-dos graphics.
+### 2013 - July: Remote Access for the Particle Accelerator framework, IUAC
 
-* Authored an interactive C program to create 3D drawings using basic shapes. Employs dynamic memory allocation, structures, and basic trigonometry to rotate the models.
+* Implemented a CherryPy based web server which hosts a dynamic, Jquery and AJAX based website to allow control and monitoring of various parts of the particle accelerators via the control system.
 
-## 2007: Sci-ELF robot - Atmega32 based line follower
 
-* Atmega32 based line follower developed for the science fair at The Mother’s International School.
-
-## 2009: Senior Secondary School Exam - Project Work
-
-* Authored C++ based football video game with 8-bit VGA graphics. Standard Human Vs. Computer mode where the PC is capable of making decisions to coordinate its players.
-
-## 2009 Summer: Electrodeposition and characterization of FeAu thin films. IIT Delhi, Dr. Ratnamala Chatterjee
-
-* Thin film deposition of Iron-Gold alloy films by using electro-deposition and subsequent Characterisation using X-ray diffraction and atomic force microscopy.
-
-## Summer 2010: Virtual Lab Project. IIT Kanpur, Dr. Anjan Gupta
-
-* Worked on developing a fully open source framework for controlling instruments remotely. Successfully hosted a resistivity measurement setup on the Intranet. A real time plot server for web browsers was developed. An oscilloscope interface was also made as part of this project.
-
-## 2011 summer: Scanning Tunneling Microscopy. IUAC, New Delhi. Quazar Tech, New Delhi
-
-* Learnt about the design and construction of the instrument from its developers, and obtained atomic resolution scans of HOPG. Visited the manufacturing facility.
-
-## 2011 summer: Developing an MCA for Alpha particle detectors. IUAC, New Delhi
-
-* Developed firmware for an Atmega32 based MCA. Coded features include segregation based on peak energy, reading and writing from CMOS memory, and USB communication. Developed a Python-Tk based GUI. Calibration was carried out using Co-60.
-
-## 2012 - summer: Instrumentation and radiation detection. IISER Mohali, IUAC
-
-* Characterized crystal oscillators using a network analyser at The Ultra low temperature lab, IISER Mohali.
-* Developed electronics for driving a Geiger Muller tube and a Photomultiplier tube.
-* Extracted Thorium from Thorium nitrate for educational experiments.
-
-## 2013 - May, June: Techniques in Condensed Matter Physics. Dr. Goutam Sheet, IISER Mohali
+### 2013 - May, June: Techniques in Condensed Matter Physics. Dr. Goutam Sheet, IISER Mohali
 
 * Pulsed laser deposition of YBCO and SrRuo3 thin films. Sputter deposition of copper on insect wings.
 * Developed data acquisition software for superconductivity transition measurements using Lock-in amplifiers.
 * Compiled RTOS linux kernel for running PID loops for stabilizing tunnelling currents in STMs. Set up COMEDI drivers.
 
-## 2013 - July: Remote Access for the Particle Accelerator framework, IUAC
 
-* Implemented a CherryPy based web server which hosts a dynamic, Jquery and AJAX based website to allow control and monitoring of various parts of the particle accelerators via the control system.
+### 2012 - summer: Instrumentation and radiation detection. IISER Mohali, IUAC
+
+* Characterized crystal oscillators using a network analyser at The Ultra low temperature lab, IISER Mohali.
+* Developed electronics for driving a Geiger Muller tube and a Photomultiplier tube.
+* Extracted Thorium from Thorium nitrate for educational experiments.
+
+### 2011 summer: Developing an MCA for Alpha particle detectors. IUAC, New Delhi
+
+* Developed firmware for an Atmega32 based MCA. Coded features include segregation based on peak energy, reading and writing from CMOS memory, and USB communication. Developed a Python-Tk based GUI. Calibration was carried out using Co-60.
+
+### 2011 summer: Scanning Tunneling Microscopy. IUAC, New Delhi. Quazar Tech, New Delhi
+
+* Learnt about the design and construction of the instrument from its developers, and obtained atomic resolution scans of HOPG. Visited the manufacturing facility.
+
+### Summer 2010: Virtual Lab Project. IIT Kanpur, Dr. Anjan Gupta
+
+* Worked on developing a fully open source framework for controlling instruments remotely. Successfully hosted a resistivity measurement setup on the Intranet. A real time plot server for web browsers was developed. An oscilloscope interface was also made as part of this project.
+
+### 2009: Senior Secondary School Exam - Project Work
+
+* Authored C++ based football video game with 8-bit VGA graphics. Standard Human Vs. Computer mode where the PC is capable of making decisions to coordinate its players.
+
+### 2009 Summer: Electrodeposition and characterization of FeAu thin films. IIT Delhi, Dr. Ratnamala Chatterjee
+
+* Thin film deposition of Iron-Gold alloy films by using electro-deposition and subsequent Characterisation using X-ray diffraction and atomic force microscopy.
+
+
+### 2007: 3D modelling software based on Ms-dos graphics.
+
+* Authored an interactive C program to create 3D drawings using basic shapes. Employs dynamic memory allocation, structures, and basic trigonometry to rotate the models.
+
+### 2007: Sci-ELF robot - Atmega32 based line follower
+
+* Atmega32 based line follower developed for the science fair at The Mother’s International School.
+
 
 ---
 
@@ -229,7 +216,7 @@ menu: true
 
 ---
 
-### Hobby Projects, and Open Source Contributions
+## Hobby Projects, and Open Source Contributions
 
 * A Versatile Labtool
     * A cost effective, multi-pronged data acquisition tool aimed at schools and colleges. It was in the running for the Hackaday Prize 2015, and won a few [prizes](http://hackaday.com/2015/07/07/50-winners-using-microchip-parts/) [too](http://hackaday.com/2015/07/06/50-winners-using-texas-instruments-parts/).
@@ -254,7 +241,7 @@ menu: true
 
 ---
 
-### Other Skills and Interests
+## Other Skills and Interests
 
 | | Other Skills and Interests |
 | :--- | :--- |

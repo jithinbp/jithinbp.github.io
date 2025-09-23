@@ -26,7 +26,7 @@ The cryostat was lowered into the pit with a pulley. Also shown is the safely va
 or the nitrogen boil off outlets get clogged. After precooling with LN2, the Liquid Helium Dewar is used to fill the cryostat
 {:.figcaption}
 
-![Full-width image](/assets/img/cryostat/install2.png){:.lead width="800" height="100" loading="lazy"}
+![Full-width image](/assets/img/cryostat/install2.jpeg){:.lead width="800" height="100" loading="lazy"}
 
 Letting off excess pressure from the LN2 dewar before transfer. Followed by transferring liquid helium by
 er Tom. The safety locks inside the cryostat to prevent shipping damage are also seen.

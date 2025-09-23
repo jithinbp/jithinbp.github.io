@@ -40,3 +40,8 @@ Seen above is the robot which assembles everything on solder paste pattern, and 
 The factory also had a cool machine for placing through hole resistors.
 
 ![](/assets/img/blog/pnpthrough.webp){:.lead}
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sounds of manufacturing 🎶 <a href="https://t.co/h3sEogoqaG">pic.twitter.com/h3sEogoqaG</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1907094757689766383?ref_src=twsrc%5Etfw">April 1, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/throwback?src=hash&amp;ref_src=twsrc%5Etfw">#throwback</a><br>Sorting through around 2% of the boards that didn&#39;t pass QC. most involved manually soldered parts :p <a href="https://t.co/zE4sx5Cud4">pic.twitter.com/zE4sx5Cud4</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1891834792942985363?ref_src=twsrc%5Etfw">February 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
