@@ -13,7 +13,9 @@ accent_image:
   overlay:    true
 ---
 
-## Ente Keralam , Malappuram 
+## Various expositions
+
+### Ente Keralam , Malappuram 
 
 Presented the Blocks to Bots program with [KuttyPy](/projects/kuttypyplus/)
 
@@ -29,3 +31,4 @@ Presented the Blocks to Bots program with [KuttyPy](/projects/kuttypyplus/)
 ![](/assets/img/hobby/indiafoss_collage.jpeg)
 
 ![](/assets/img/hobby/indiafoss.jpeg)
+

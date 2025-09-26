@@ -20,9 +20,18 @@ accent_image:
 
 {% include reusables/conferences.md %}
 
+### Pycon India, Bangalore
+
 ![](/assets/img/blog/pycon.jpeg)
+
+### IndiaFOSS, NIMHANS Convention Centre
+
+![](/assets/img/hobby/indiafoss_collage.jpeg)
+
+![](/assets/img/hobby/indiafoss.jpeg)
 
 
 <iframe width="800" height="600" src="https://www.youtube.com/embed/gBqLaiVBhnc?si=CtTP3xmHA-8FX95U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Goodie bags getting packed at the speed of sound <a href="https://twitter.com/pyconindia?ref_src=twsrc%5Etfw">@pyconindia</a> !🔥🔥<a href="https://twitter.com/hashtag/pyconindia?src=hash&amp;ref_src=twsrc%5Etfw">#pyconindia</a> <a href="https://twitter.com/hashtag/pyconindia2024?src=hash&amp;ref_src=twsrc%5Etfw">#pyconindia2024</a> <a href="https://t.co/ZS1ZXNxE7p">pic.twitter.com/ZS1ZXNxE7p</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1837145890848473315?ref_src=twsrc%5Etfw">September 20, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
