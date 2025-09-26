@@ -15,7 +15,7 @@ accent_image:
 
 ## Ente Keralam , Malappuram 
 
-Presented the Blocks to Bots program with [KuttyPy](/projects/kuttypyplus.md)
+Presented the Blocks to Bots program with [KuttyPy](/projects/kuttypyplus/)
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Physics gets no love at public expos, so I had to stitch together an &quot;AI robot&quot; . Universally loved, except for that one kid who flipped it off at the end for no reason at all 😂 <a href="https://t.co/zsGMfk6OYN">https://t.co/zsGMfk6OYN</a> <a href="https://t.co/8Shiqbd9yE">pic.twitter.com/8Shiqbd9yE</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1921788217461706970?ref_src=twsrc%5Etfw">May 12, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 

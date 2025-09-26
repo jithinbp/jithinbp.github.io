@@ -20,7 +20,7 @@ A pictorial walkthrough of the installation of the He-4 based Cryostat at the Sp
 
 ## Installation of the cryostat
 
-![Full-width image](/assets/img/cryostat/install1.png){:.lead width="800" height="100" loading="lazy"}
+![Full-width image](/assets/img/cryostat/install1.jpeg){:.lead width="800" height="100" loading="lazy"}
 
 The cryostat was lowered into the pit with a pulley. Also shown is the safely valve at the bottom in case a magnet quenches
 or the nitrogen boil off outlets get clogged. After precooling with LN2, the Liquid Helium Dewar is used to fill the cryostat

@@ -1,6 +1,6 @@
 ---
 layout: project
-title: 'High Voltage Sine Waves'
+title: 'HV Sine Waves'
 date: 1 July 2025
 image: 
   path: /assets/img/blog/sinewave2.jpeg

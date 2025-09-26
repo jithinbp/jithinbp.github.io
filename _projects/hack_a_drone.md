@@ -7,7 +7,7 @@ tl: 70%
 tw: 30%
 image: 
   path: /assets/img/projects/drone.webp
-caption: Decompile Apk. Control wifi drones with Python!
+caption: Wifi drones with Python!
 description: >
   decompiled apk for the RC-UFO app to figure out the communication protocol. got the drone flying with python UDP
 accent_color: '#4fb1ba'

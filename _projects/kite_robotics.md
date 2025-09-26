@@ -1,7 +1,7 @@
 ---
 layout: project
 title: 'KITE Kerala Robotics Kit'
-date: 18 Sep 2025
+date: Jan 2025
 image: 
   path: /assets/img/projects/keralarobots.jpg
 caption: KITE SSK Robotics Kit with KuttyPy

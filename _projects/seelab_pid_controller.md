@@ -1,6 +1,6 @@
 ---
 layout: project
-title: 'PID Controller with SEELab3'
+title: 'SEELab3: PID Controller'
 date: 18 Sep 2025
 image: 
   path: /assets/img/projects/pidcover.jpeg
