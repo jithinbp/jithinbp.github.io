@@ -36,7 +36,7 @@ I work with design and development, as well as bulk manufacturing of electronics
 
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
 {% assign ordered_projects = site.projects | sort:"date" | reverse %}
-{% for project in ordered_projects limit:10 %}
+{% for project in ordered_projects limit:15 %}
     {% assign featured = page.featured | default:project.featured | default:page.big_project | default:project.big_project %}
     <div class="column column-1 custommicrocol">
     {% include_cached pro/project-card.html project=project featured=featured %}
@@ -44,8 +44,8 @@ I work with design and development, as well as bulk manufacturing of electronics
 {% endfor %}
 </div>
 {% assign psize = site.projects.size %}
-{% if psize > 10 %}
-<p class="read-more mt1"><a class="heading flip-title" href="/projects/">{{ site.projects.size | minus:10 }} more projects</a></p>
+{% if psize > 15 %}
+<p class="read-more mt1"><a class="heading flip-title" href="/projects/">{{ site.projects.size | minus:15 }} more projects</a></p>
 {% endif %}
 
 
