@@ -1,10 +1,10 @@
 ---
 layout: project
 title: 'FPGA SLG47910'
-date: 13 Oct 2025
+date: 12 Oct 2025
 image: 
   path: /assets/img/blog/shrike.jpeg
-caption: Fiddling with the Shrike Lite from Vicharak
+caption: Early preview of the Shrike Lite from Vicharak
 
 twitter:
   image: /assets/img/blog/shrike.jpeg
@@ -20,7 +20,7 @@ accent_image:
 
 ![](/assets/img/blog/shrike_blink_fpga.webp)
 
-I'm on Ubuntu 22
+I'm on Ubuntu 22. Board [docs are here]()
 
 * got micropython-mpremote, thonny installed via Synaptic
 * cd test
