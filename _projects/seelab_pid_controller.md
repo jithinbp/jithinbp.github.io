@@ -30,6 +30,22 @@ Since the BMP280 has a leat count of 0.01 , the algorithm managed a ridiculous s
 ![](/assets/img/projects/pid.jpeg)
 
 
+## Udev rules
+
+```
+# Keysight Power Supply (0x0699:0x0392)
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0699", ATTRS{idProduct}=="0392", MODE="0666", GROUP="usbtmc", TAG+="usbtmc"
+
+# newer supply from Keysight Technologies, Inc. E36155A
+# USB ID: 2a8d:5902
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="2a8d", ATTRS{idProduct}=="5902", MODE="0666", GROUP="usbtmc", TAG+="usbtmc"
+
+```
+
+```
+sudo udevadm control --reload-rules
+```
+
 ### The Code
 
 
@@ -74,7 +90,7 @@ class Expt(QtWidgets.QMainWindow):
         self.pid = None
         self.p = eyes17.eyes.open()
         self.bmp = SENSORS.BMP280.connect(self.p.I2C)
-        self.scpi = usbtmc.Instrument(0x0699, 0x0392)
+        self.scpi = usbtmc.Instrument(0x0699, 0x0392) # (0x2a8d, 0x5902) for E36155A, (0x0699, 0x0392) for PWS4305 linear
         
         # Get the instrument identification string
         idn_string = self.scpi.ask('*IDN?')
@@ -279,3 +295,24 @@ if __name__ == '__main__':
 
 
 ![](/assets/img/projects/closeup.jpeg)
+
+
+## Testing new power supply E36155A
+
+### ipython3
+
+
+<pre><font color="#26A269"><b>jithin@jithin-Victus</b></font>:<font color="#12488B"><b>/etc/udev/rules.d</b></font>$ ipython3
+Python 3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0]
+Type &apos;copyright&apos;, &apos;credits&apos; or &apos;license&apos; for more information
+IPython 8.20.0 -- An enhanced Interactive Python. Type &apos;?&apos; for help.
+
+<font color="#26A269">In [</font><font color="#33DA7A"><b>1</b></font><font color="#26A269">]: </font><font color="#008700"><b>import</b></font> <font color="#12488B"><b>usbtmc</b></font>
+
+<font color="#26A269">In [</font><font color="#33DA7A"><b>2</b></font><font color="#26A269">]: </font>scpi = usbtmc.Instrument(<font color="#26A269">0x2a8d</font>, <font color="#26A269">0x5902</font>)
+
+<font color="#26A269">In [</font><font color="#33DA7A"><b>3</b></font><font color="#26A269">]: </font>scpi.ask(<font color="#A2734C">&apos;*IDN?&apos;</font>)
+<font color="#C01C28">Out[</font><font color="#F66151"><b>3</b></font><font color="#C01C28">]: </font>&apos;Keysight Technologies,E36155A,MY63001609,1.1.15-1.0.1-1.21&apos;
+
+<font color="#26A269">In [</font><font color="#33DA7A"><b>4</b></font><font color="#26A269">]: </font>
+</pre>
