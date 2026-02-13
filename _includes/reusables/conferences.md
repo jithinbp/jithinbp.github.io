@@ -1,6 +1,12 @@
 | Year | Public Speaking |
 | :--- | :--- |
-| 2025 | IUPAP - International Conference on Physics Education - 2025, IIT Ropar. [Hands-on Physics with Affordable Open-Source Measurement Tools](https://icpe-2025.in/workshop/): From Theory to Experiment with SEELAB3 `invited workshop host`, `upcoming`|
+| Feb-2026 | CIPEx, Jammu University. [One-Week FDP on Computer-Interfaced Physics Experiments (CIPEx 2026) and MMTTC](https://sites.google.com/jammuuniversity.ac.in/fdpjuphysics2026/speakers#h.c1si0ojic9dz) `invited speaker`|
+| Feb-2026 | Sullore-2026 : Sulamussalam Science College. [Panel Discussion, Campus Innovation Ecosystem](https://www.instagram.com/p/DUfqmohE-BN/) `Panelist`|
+| Dec-2025 | KSUM X IEDC TALKS. Design, Development, and bulk manufacturing of electronic devices. `Invited Speaker` . IEDC Summit|
+| Dec-2025 | `Workshop Host` Science Experiments with SEELab, and Drone training and teardown . [Science Hack Day , Belgaum](https://sciencehackday.in/about/)|
+| Dec-2025 | IUPAP - International Conference on Physics Education - 2025, IIT Ropar. [Hands-on Physics with Affordable Open-Source Measurement Tools](https://icpe-2025.in/workshop/): From Theory to Experiment with SEELAB3 `invited workshop host`|
+| Dec-2025 | 2 Day training program on computer interfaced science experiments and FEM with FreeCAD  - Sir P T Sarvajanik Science College, Surat. `invited workshop host`|
+| Dec-2025 | Training program on computer interfaced science experiments  - Govt First Grade College, Malleswaram. `invited workshop host`|
 | 2025 | [IndiaFOSS 2025,  FossUnited @ Nimhans, Bangalore](https://fossunited.org/c/indiafoss/2025/cfp/3a8mrlaug1). KuttyPy : A no Cost transformation of the ubiquitous Arduino into an affordable data acquisition system for STEM `invited speaker`|
 | 2025 | [FossMeet 2025, NIT Calicut](https://www.fossmeet.net/speakers) : KuttyPy : An alternative to Arduino `invited speaker`|
 | 2024 | [Pycon India 2024](https://in.pycon.org/2024/speakers/jithin/)  `invited speaker`|
@@ -17,6 +23,4 @@
 | Dec-2014 | [Speaker](https://scipy.in/2014/static/uploads/jithinbp/attachment/abs.pdf). Scipy.in for Scientific Computing, IIT Bombay. Sponsored by Enthought, FOSSEE, and MHRD. |
 | Dec-2011 | Scipy.in for Scientific Computing, IIT Bombay. Sponsored by Enthought, FOSSEE, and MHRD. |
 | Oct-2009 | Vijyoshi camp by JNCASR in association with KVPY at JNU, New Delhi. |
-| July-2008 | Attended Vijyoshi Camp in association with KVPY at IISc Bangalore. |
-
 
