@@ -11,15 +11,15 @@ hide_description: true
 .image-card-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: baseline;
   gap: 15px;
   margin: 20px 0;
 }
 
 .image-card {
   flex: 1;
-  min-width: 150px;
-  max-width: 200px;
+  min-width: 80px;
+  max-width: 120px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px;
@@ -43,65 +43,83 @@ hide_description: true
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   aspect-ratio: 1.43;
 }
 
 .image-card-caption {
-  padding: 10px;
+  padding: 2px;
   font-size: 0.9rem;
   color: var(--gray-text, #333);
   margin: 0;
 }
 
+@media (max-width: 1200px) {
+  .image-card {
+    min-width: calc(25% - 8px);
+    max-width: calc(25% - 8px);
+  }
+}
+
+
 @media (max-width: 768px) {
   .image-card {
-    min-width: calc(50% - 8px);
-    max-width: calc(50% - 8px);
+    min-width: calc(25% - 8px);
+    max-width: calc(25% - 8px);
   }
 }
 
 @media (max-width: 480px) {
   .image-card {
-    min-width: calc(50% - 8px);
-    max-width: calc(50% - 8px);
+    min-width: calc(25% - 8px);
+    max-width: calc(25% - 8px);
   }
 }
 </style>
 
 <div class="image-card-row">
   <div class="image-card">
-    <a href="#">
-      <img src="/assets/img/cover.jpg" alt="Card 1">
-      <p class="image-card-caption">Card 1 Caption</p>
+    <a href="https://csparkresearch.in" target="_blank" class="no-mark">
+      <img src="/assets/img/cspark.png" alt="Card 1">
+      <p class="image-card-caption">My Startup</p>
     </a>
   </div>
   <div class="image-card">
-    <a href="#">
-      <img src="/assets/img/cover.jpg" alt="Card 2">
-      <p class="image-card-caption">Card 2 Caption</p>
+    <a href="#masters-thesis--iiser-m--8">
+      <img src="/assets/img/pcar/thermal.png" alt="Card 2">
+      <p class="image-card-caption">BS-MS @ IISER-M</p>
     </a>
   </div>
   <div class="image-card">
-    <a href="#">
-      <img src="/assets/img/cover.jpg" alt="Card 3">
-      <p class="image-card-caption">Card 3 Caption</p>
+    <a href="/phd/">
+      <img src="/assets/img/phd/coincidence.webp" alt="Card 3">
+      <p class="image-card-caption">PhD @ CUHP</p>
     </a>
   </div>
   <div class="image-card">
-    <a href="#">
-      <img src="/assets/img/cover.jpg" alt="Card 4">
-      <p class="image-card-caption">Card 4 Caption</p>
+    <a href="/build/">
+      <img src="/assets/img/blog/cvphoto.jpg" alt="Card 4">
+      <p class="image-card-caption">CMNPDF @ UoC</p>
+    </a>
+  </div>
+  <div class="image-card">
+    <a href="/build/">
+      <img src="/assets/img/blog/man.webp" alt="Card 5">
+      <p class="image-card-caption">Manufacturing</p>
+    </a>
+  </div>
+  <div class="image-card">
+    <a href="#recent-projects--29">
+      <img src="/assets/img/blog/st.webp" alt="Card 6">
+      <p class="image-card-caption">Projects</p>
     </a>
   </div>
 </div>
 
-> 
-* My startup : [CSpark Research](https://csparkresearch.in) for developing affordable data acquisition instruments for schools and colleges.
-* Ph.D in Nuclear Physics instrumentation - development of radiation detection equipment. 
-* Master's in Physics from IISER-M with thesis work on Point Contact Spectroscopy and Scanning Tunnelling microscopy.
 
-I work with design and development, as well as bulk manufacturing of electronics.  This website describes many of my hacks/creations.   My Rather Incomplete [Resume](/resume.md){:.heading.flip-title}
+I work with design and development, as well as bulk manufacturing of electronics. Founded [CSpark Research](https://csparkresearch.in) for developing affordable data acquisition instruments for schools and colleges.
+BS-MS from IISER Mohali with thesis work on Point Contact Spectroscopy and Scanning Tunnelling microscopy, Nuclear Physics instrumentation Ph.D. from CUHP, Post Doc UoC. A Rather Incomplete [Resume](/resume.md){:.heading.flip-title}
+
 
 ## Manufacturing Memoirs | <a class="heading flip-title" href="/build/" style="color:teal"><sup>[{{ site.manufacturing | size }}]</sup></a>
 ---
