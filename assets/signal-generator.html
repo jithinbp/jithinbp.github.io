@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signal Generator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #0a0e1a;
+        color: #e0e0e0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      header {
+        background: #141824;
+        padding: 12px 20px;
+        border-bottom: 1px solid #2a2f3a;
+      }
+      h1 {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .main {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding: 16px;
+        overflow-y: auto;
+      }
+      .channel-panel {
+        background: #141824;
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .channel-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #4a9eff;
+        text-align: center;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #2a2f3a;
+      }
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      label {
+        font-size: 13px;
+        font-weight: 500;
+        color: #a0a0a0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .value {
+        font-family: monospace;
+        font-size: 12px;
+        color: #4a9eff;
+      }
+      input[type="range"] {
+        width: 100%;
+        height: 6px;
+        background: #1a1e2e;
+        border-radius: 3px;
+        outline: none;
+        -webkit-appearance: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: #4a9eff;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        background: #4a9eff;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+      }
+      select {
+        background: #1a1e2e;
+        border: 1px solid #2a2f3a;
+        border-radius: 6px;
+        padding: 8px 12px;
+        color: #e0e0e0;
+        font-size: 14px;
+        cursor: pointer;
+        outline: none;
+      }
+      select:focus {
+        border-color: #4a9eff;
+      }
+      .mono-controls {
+        background: #141824;
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        grid-column: 1 / -1;
+      }
+      .mono-toggle {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .mono-toggle input[type="checkbox"] {
+        width: 40px;
+        height: 20px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: #2a2f3a;
+        border-radius: 10px;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        transition: background 0.3s;
+      }
+      .mono-toggle input[type="checkbox"]:checked {
+        background: #4a9eff;
+      }
+      .mono-toggle input[type="checkbox"]::before {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: white;
+        top: 2px;
+        left: 2px;
+        transition: transform 0.3s;
+      }
+      .mono-toggle input[type="checkbox"]:checked::before {
+        transform: translateX(20px);
+      }
+      .mono-toggle label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #e0e0e0;
+        cursor: pointer;
+      }
+      .phase-control {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .status {
+        padding: 12px;
+        background: #1a1e2e;
+        border-radius: 6px;
+        font-size: 12px;
+        font-family: monospace;
+        color: #a0a0a0;
+        text-align: center;
+      }
+      button {
+        background: #4a9eff;
+        border: none;
+        border-radius: 6px;
+        padding: 12px 20px;
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button:hover:not(:disabled) {
+        background: #3a8eef;
+      }
+      button:disabled {
+        background: #2a2f3a;
+        color: #666;
+        cursor: not-allowed;
+      }
+      button.secondary {
+        background: #2a2f3a;
+      }
+      button.secondary:hover:not(:disabled) {
+        background: #3a3f4a;
+      }
+      .warning {
+        background: #ff6b6b;
+        color: white;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        display: none;
+        grid-column: 1 / -1;
+      }
+      .warning.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Signal Generator</h1>
+    </header>
+    <div class="main">
+      <!-- Left Channel -->
+      <div class="channel-panel">
+        <div class="channel-title">Left Channel</div>
+        <div class="control-group">
+          <label>
+            <span>Waveform</span>
+          </label>
+          <select id="waveformL">
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>
+            <span>Frequency (Hz)</span>
+            <span class="value" id="freqValueL">1000</span>
+          </label>
+          <input type="range" id="freqL" min="20" max="10000" value="1000" step="1" />
+        </div>
+        <div class="control-group">
+          <label>
+            <span>Volume</span>
+            <span class="value" id="volValueL">0.5</span>
+          </label>
+          <input type="range" id="volL" min="0" max="1" value="0.5" step="0.01" />
+        </div>
+      </div>
+
+      <!-- Right Channel -->
+      <div class="channel-panel">
+        <div class="channel-title">Right Channel</div>
+        <div class="control-group">
+          <label>
+            <span>Waveform</span>
+          </label>
+          <select id="waveformR">
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>
+            <span>Frequency (Hz)</span>
+            <span class="value" id="freqValueR">1000</span>
+          </label>
+          <input type="range" id="freqR" min="20" max="10000" value="1000" step="1" />
+        </div>
+        <div class="control-group">
+          <label>
+            <span>Volume</span>
+            <span class="value" id="volValueR">0.5</span>
+          </label>
+          <input type="range" id="volR" min="0" max="1" value="0.5" step="0.01" />
+        </div>
+      </div>
+
+      <!-- Mono Controls -->
+      <div class="mono-controls">
+        <div class="mono-toggle">
+          <input type="checkbox" id="monoMode" />
+          <label for="monoMode">Mono Mode (Merge L+R)</label>
+        </div>
+        <div class="phase-control" id="phaseControl">
+          <label>
+            <span>Phase Shift (degrees)</span>
+            <span class="value" id="phaseValue">0</span>
+          </label>
+          <input type="range" id="phaseShift" min="-180" max="180" value="0" step="1" />
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <button id="startBtn">Start</button>
+          <button id="stopBtn" class="secondary" disabled>Stop</button>
+        </div>
+        <div class="status" id="status">Stopped</div>
+      </div>
+      <div class="warning" id="warnBox"></div>
+    </div>
+
+    <script>
+      // DOM elements
+      const waveformL = document.getElementById("waveformL");
+      const waveformR = document.getElementById("waveformR");
+      const freqL = document.getElementById("freqL");
+      const freqR = document.getElementById("freqR");
+      const volL = document.getElementById("volL");
+      const volR = document.getElementById("volR");
+      const phaseShift = document.getElementById("phaseShift");
+      const monoMode = document.getElementById("monoMode");
+      const phaseControl = document.getElementById("phaseControl");
+      const startBtn = document.getElementById("startBtn");
+      const stopBtn = document.getElementById("stopBtn");
+      const statusEl = document.getElementById("status");
+      const warnBox = document.getElementById("warnBox");
+
+      // Value displays
+      const freqValueL = document.getElementById("freqValueL");
+      const freqValueR = document.getElementById("freqValueR");
+      const volValueL = document.getElementById("volValueL");
+      const volValueR = document.getElementById("volValueR");
+      const phaseValue = document.getElementById("phaseValue");
+
+      // Audio context and nodes
+      let audioCtx = null;
+      let oscillatorL = null;
+      let oscillatorR = null;
+      let gainL = null;
+      let gainR = null;
+      let delayR = null; // Delay node for phase shift
+      let merger = null; // ChannelMerger(2) used for BOTH stereo and mono routing
+      let monoSum = null; // Gain node used to sum L+R when mono mode enabled
+      let destination = null;
+
+      // Update value displays
+      freqL.addEventListener("input", () => {
+        freqValueL.textContent = freqL.value;
+        if (oscillatorL) updateOscillator(oscillatorL, freqL.value, waveformL.value);
+      });
+      freqR.addEventListener("input", () => {
+        freqValueR.textContent = freqR.value;
+        if (oscillatorR) updateOscillator(oscillatorR, freqR.value, waveformR.value);
+      });
+      volL.addEventListener("input", () => {
+        volValueL.textContent = parseFloat(volL.value).toFixed(2);
+        if (gainL) gainL.gain.value = parseFloat(volL.value);
+      });
+      volR.addEventListener("input", () => {
+        volValueR.textContent = parseFloat(volR.value).toFixed(2);
+        if (gainR) gainR.gain.value = parseFloat(volR.value);
+      });
+      phaseShift.addEventListener("input", () => {
+        phaseValue.textContent = phaseShift.value;
+        if (oscillatorR) updatePhase();
+      });
+      waveformL.addEventListener("change", () => {
+        if (oscillatorL) updateOscillator(oscillatorL, freqL.value, waveformL.value);
+      });
+      waveformR.addEventListener("change", () => {
+        if (oscillatorR) updateOscillator(oscillatorR, freqR.value, waveformR.value);
+      });
+
+      // Mono mode toggle
+      monoMode.addEventListener("change", () => {
+        if (monoMode.checked) {
+          phaseControl.style.display = "none";
+          if (oscillatorL && oscillatorR && audioCtx) {
+            connectGraph();
+          }
+        } else {
+          phaseControl.style.display = "flex";
+          if (oscillatorL && oscillatorR && audioCtx) {
+            connectGraph();
+          }
+        }
+      });
+
+      function updateOscillator(osc, freq, waveform) {
+        osc.frequency.value = parseFloat(freq);
+        osc.type = waveform;
+      }
+
+      function updatePhase() {
+        if (!oscillatorR || monoMode.checked || !audioCtx) return;
+        
+        const phaseDeg = parseFloat(phaseShift.value);
+        const phaseRad = (phaseDeg * Math.PI) / 180;
+        const freq = parseFloat(freqR.value);
+        
+        // Calculate delay time: phase shift = 2 * PI * frequency * delay
+        // So delay = phase / (2 * PI * frequency)
+        // For negative phase, we need to handle it differently
+        let delayTime = 0;
+        if (Math.abs(phaseDeg) > 0.1) {
+          // Normalize phase to 0-360 range for delay calculation
+          const normalizedPhase = ((phaseDeg % 360) + 360) % 360;
+          delayTime = (normalizedPhase * Math.PI / 180) / (2 * Math.PI * freq);
+          // Clamp to reasonable delay range (0-10ms)
+          delayTime = Math.max(0, Math.min(0.01, delayTime));
+        }
+        
+        // Only update delay node; routing is handled by connectGraph().
+        if (!delayR) delayR = audioCtx.createDelay(0.01);
+        delayR.delayTime.value = delayTime;
+      }
+
+      function disconnectGraph() {
+        try { oscillatorL && oscillatorL.disconnect(); } catch {}
+        try { oscillatorR && oscillatorR.disconnect(); } catch {}
+        try { delayR && delayR.disconnect(); } catch {}
+        try { gainL && gainL.disconnect(); } catch {}
+        try { gainR && gainR.disconnect(); } catch {}
+        try { monoSum && monoSum.disconnect(); } catch {}
+        try { merger && merger.disconnect(); } catch {}
+      }
+
+      function connectGraph() {
+        if (!audioCtx || !oscillatorL || !oscillatorR || !gainL || !gainR || !merger || !destination) return;
+        disconnectGraph();
+
+        // Always end at merger -> destination (avoids invalid destination channel indexing)
+        merger.connect(destination);
+
+        // Left oscillator -> gain
+        oscillatorL.connect(gainL);
+
+        if (monoMode.checked) {
+          // Mono: sum L+R, send to both channels
+          if (!monoSum) monoSum = audioCtx.createGain();
+          monoSum.gain.value = 1.0;
+
+          oscillatorR.connect(gainR);
+          gainL.connect(monoSum);
+          gainR.connect(monoSum);
+
+          monoSum.connect(merger, 0, 0);
+          monoSum.connect(merger, 0, 1);
+        } else {
+          // Stereo: Right channel uses optional delay for phase shift
+          if (!delayR) delayR = audioCtx.createDelay(0.01);
+          updatePhase(); // updates delayR.delayTime
+
+          oscillatorR.connect(delayR);
+          delayR.connect(gainR);
+
+          gainL.connect(merger, 0, 0);
+          gainR.connect(merger, 0, 1);
+        }
+      }
+
+      // Start audio
+      startBtn.addEventListener("click", async () => {
+        try {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          destination = audioCtx.destination;
+
+          // Create oscillators
+          oscillatorL = audioCtx.createOscillator();
+          oscillatorR = audioCtx.createOscillator();
+
+          // Create gain nodes
+          gainL = audioCtx.createGain();
+          gainR = audioCtx.createGain();
+
+          // Create merger for mono mode
+          merger = audioCtx.createChannelMerger(2);
+          monoSum = audioCtx.createGain();
+          monoSum.gain.value = 1.0;
+
+          // Set initial values
+          updateOscillator(oscillatorL, freqL.value, waveformL.value);
+          updateOscillator(oscillatorR, freqR.value, waveformR.value);
+          gainL.gain.value = parseFloat(volL.value);
+          gainR.gain.value = parseFloat(volR.value);
+
+          // Connect graph based on mode (always uses ChannelMerger -> destination)
+          connectGraph();
+
+          oscillatorL.start();
+          oscillatorR.start();
+
+          startBtn.disabled = true;
+          stopBtn.disabled = false;
+          statusEl.textContent = monoMode.checked ? "Playing (Mono)" : "Playing (Stereo)";
+        } catch (err) {
+          showWarn(`Failed to start audio: ${err.message}`);
+        }
+      });
+
+      // Stop audio
+      stopBtn.addEventListener("click", () => {
+        if (oscillatorL) {
+          oscillatorL.stop();
+          oscillatorL.disconnect();
+          oscillatorL = null;
+        }
+        if (oscillatorR) {
+          oscillatorR.stop();
+          oscillatorR.disconnect();
+          oscillatorR = null;
+        }
+        if (gainL) {
+          gainL.disconnect();
+          gainL = null;
+        }
+        if (gainR) {
+          gainR.disconnect();
+          gainR = null;
+        }
+        if (delayR) {
+          delayR.disconnect();
+          delayR = null;
+        }
+        if (monoSum) {
+          monoSum.disconnect();
+          monoSum = null;
+        }
+        if (merger) {
+          merger.disconnect();
+          merger = null;
+        }
+        if (audioCtx) {
+          audioCtx.close();
+          audioCtx = null;
+        }
+
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        statusEl.textContent = "Stopped";
+      });
+
+      function showWarn(msg) {
+        if (!msg) {
+          warnBox.textContent = "";
+          warnBox.classList.remove("show");
+          return;
+        }
+        warnBox.textContent = msg;
+        warnBox.classList.add("show");
+        setTimeout(() => showWarn(""), 5000);
+      }
+
+    </script>
+  </body>
+</html>

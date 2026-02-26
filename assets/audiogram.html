@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Audio Monitor (Waveform • FFT • Spectrogram)</title>
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --panel: #101826;
+        --panel2: #0f1724;
+        --text: #e6eefc;
+        --muted: #9db1d1;
+        --accent: #61dafb;
+        --border: rgba(255, 255, 255, 0.12);
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+        background: radial-gradient(1200px 800px at 20% 10%, #14233b 0%, var(--bg) 55%, #070a0f 100%);
+        color: var(--text);
+      }
+      .wrap {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 18px 16px 24px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      header h1 {
+        font-size: 18px;
+        margin: 0;
+        letter-spacing: 0.2px;
+      }
+      header .hint {
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.35;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: 14px;
+        flex: 1;
+        min-height: 0; /* allow children to size/scroll within */
+      }
+      @media (max-width: 980px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+      .panel {
+        background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%), var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        min-height: 0;
+      }
+      .panel .title {
+        padding: 12px 12px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.02);
+      }
+      .panel .title strong {
+        font-size: 13px;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        color: #d9e7ff;
+      }
+      .panel .content { padding: 12px; overflow: auto; }
+      button {
+        appearance: none;
+        border: 1px solid rgba(255,255,255,0.16);
+        background: linear-gradient(180deg, rgba(97,218,251,0.22), rgba(97,218,251,0.08));
+        color: var(--text);
+        padding: 9px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+      button.secondary {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.14);
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+      .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      .row + .row { margin-top: 10px; }
+      .kv {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(0,0,0,0.18);
+      }
+      .kv label { color: var(--muted); font-size: 12px; }
+      .kv output { color: #dff3ff; font-variant-numeric: tabular-nums; font-size: 12px; }
+      input[type="range"] { width: 180px; }
+      select, input[type="number"] {
+        background: rgba(0,0,0,0.25);
+        border: 1px solid rgba(255,255,255,0.14);
+        color: var(--text);
+        border-radius: 10px;
+        padding: 7px 9px;
+        outline: none;
+      }
+      .stats {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+        margin-top: 10px;
+      }
+      .canvasWrap { padding: 12px; }
+      canvas {
+        display: block;
+        width: 100%;
+        /* Important: fix CSS height for canvases that we continuously resize via JS.
+           Without this, changing the canvas *attribute* height can change layout and cause a growth loop. */
+        background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.60) 100%), var(--panel2);
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 12px;
+      }
+      #waveform, #waveformZoom { height: 200px; }
+       #fft { height: 300px; }
+      #spectrogram { height: 30%; min-height: 360px; max-height: 600px; }
+      .waveSplit {
+        display: grid;
+        grid-template-columns: 7fr 3fr; /* 70:30 */
+        gap: 10px;
+      }
+      .vizGrid {
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        gap: 12px;
+        padding: 12px;
+        height: 100%;
+        min-height: 0;
+      }
+      .vizTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 12px;
+        margin: 0 2px 6px;
+      }
+      .badge {
+        color: rgba(230, 238, 252, 0.95);
+        background: rgba(97, 218, 251, 0.12);
+        border: 1px solid rgba(97, 218, 251, 0.22);
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+      }
+      .footerNote {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .warn {
+        color: #ffd0d0;
+        background: rgba(255, 80, 80, 0.10);
+        border: 1px solid rgba(255, 120, 120, 0.18);
+        padding: 10px 12px;
+        border-radius: 12px;
+        display: none;
+        margin-top: 10px;
+      }
+      .warn.show { display: block; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>Audio Monitor</h1>
+        <div class="hint">
+          Uses your microphone via the Web Audio API. Click <b>Start</b>, then allow mic access.
+        </div>
+      </header>
+
+      <div class="grid">
+        <section class="panel" aria-label="Controls">
+          <div class="title">
+            <strong>Controls</strong>
+            <span class="badge" id="statusBadge">idle</span>
+            <span class="badge" id="sampleRateBadge">— Hz</span>
+          </div>
+          <div class="content">
+            <div class="row">
+              <button id="startBtn">Start</button>
+              <button class="secondary" id="stopBtn" disabled>Stop</button>
+              <button class="secondary" id="clearBtn">Clear Spectrogram</button>
+            </div>
+
+            <div class="row" style="margin-top: 12px">
+              <div class="kv" style="flex:1">
+                <label for="fftSize">FFT Size</label>
+                <div style="display:flex; gap:10px; align-items:center">
+                  <select id="fftSize">
+                    <option>512</option>
+                    <option>1024</option>
+                    <option>2048</option>
+                    <option selected>4096</option>
+                    <option>8192</option>
+                    <option>16384</option>
+                  </select>
+                </div>
+              </div>
+              <div class="kv" style="flex:1">
+                <label for="smoothing">Smoothing</label>
+                <div style="display:flex; gap:10px; align-items:center">
+                  <input id="smoothing" type="range" min="0" max="0.95" step="0.01" value="0.80" />
+                  <output id="smoothingOut">0.80</output>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="kv" style="flex:1">
+                <label for="minDb">Min dB (spectrogram)</label>
+                <div style="display:flex; gap:10px; align-items:center">
+                  <input id="minDb" type="range" min="-120" max="-30" step="1" value="-110" />
+                  <output id="minDbOut">-110</output>
+                </div>
+              </div>
+              <div class="kv" style="flex:1">
+                <label for="maxDb">Max dB (spectrogram)</label>
+                <div style="display:flex; gap:10px; align-items:center">
+                  <input id="maxDb" type="range" min="-60" max="0" step="1" value="-20" />
+                  <output id="maxDbOut">-20</output>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="kv" style="flex:1">
+                <label for="specSpeed">Spectrogram speed</label>
+                <div style="display:flex; gap:10px; align-items:center">
+                  <input id="specSpeed" type="range" min="1" max="8" step="1" value="2" />
+                  <output id="specSpeedOut">2 px/frame</output>
+                </div>
+              </div>
+              <div class="kv" style="flex:1">
+                <label for="freqScale">Freq scale</label>
+                <div style="display:flex; gap:10px; align-items:center">
+                  <select id="freqScale">
+                    <option value="linear" selected>Linear</option>
+                    <option value="log">Log</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="kv" style="flex:1">
+                <label for="hpHz">High-pass (Hz)</label>
+                <div style="display:flex; gap:10px; align-items:center">
+                  <input id="hpHz" type="number" min="0" max="2000" step="1" value="20" style="width: 110px" />
+                  <span style="color:var(--muted); font-size:12px">optional</span>
+                </div>
+              </div>
+              <div class="kv" style="flex:1">
+                <label for="lpHz">Low-pass (Hz)</label>
+                <div style="display:flex; gap:10px; align-items:center">
+                  <input id="lpHz" type="number" min="100" max="24000" step="1" value="0" style="width: 110px" />
+                  <span style="color:var(--muted); font-size:12px">0 = off</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="warn" id="warnBox"></div>
+            <div class="stats" id="stats"></div>
+          </div>
+        </section>
+
+        <section class="panel" aria-label="Visualizations">
+          <div class="vizGrid">
+            <div>
+              <div class="vizTitle">
+                <span>Waveform (time-domain)</span>
+                <span id="waveMeta" class="badge">—</span>
+              </div>
+              <div class="waveSplit">
+                <canvas id="waveform"></canvas>
+                <canvas id="waveformZoom"></canvas>
+              </div>
+            </div>
+            <div>
+              <div class="vizTitle">
+                <span>FFT magnitude</span>
+                <div style="display:flex; gap:8px; align-items:center">
+                  <span id="fftHover" class="badge" style="display:none">—</span>
+                  <span id="fftMeta" class="badge">—</span>
+                </div>
+              </div>
+              <canvas id="fft"></canvas>
+            </div>
+            <div>
+              <div class="vizTitle">
+                <span>Spectrogram (scrolling)</span>
+                <span id="specMeta" class="badge">—</span>
+              </div>
+              <canvas id="spectrogram"></canvas>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      // --- DOM
+      const startBtn = document.getElementById("startBtn");
+      const stopBtn = document.getElementById("stopBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const statusBadge = document.getElementById("statusBadge");
+      const sampleRateBadge = document.getElementById("sampleRateBadge");
+      const statsEl = document.getElementById("stats");
+      const warnBox = document.getElementById("warnBox");
+
+      const fftSizeSel = document.getElementById("fftSize");
+      const smoothing = document.getElementById("smoothing");
+      const smoothingOut = document.getElementById("smoothingOut");
+      const minDb = document.getElementById("minDb");
+      const minDbOut = document.getElementById("minDbOut");
+      const maxDb = document.getElementById("maxDb");
+      const maxDbOut = document.getElementById("maxDbOut");
+      const specSpeed = document.getElementById("specSpeed");
+      const specSpeedOut = document.getElementById("specSpeedOut");
+      const freqScaleSel = document.getElementById("freqScale");
+      const hpHz = document.getElementById("hpHz");
+      const lpHz = document.getElementById("lpHz");
+
+      const waveMeta = document.getElementById("waveMeta");
+      const fftMeta = document.getElementById("fftMeta");
+      const fftHover = document.getElementById("fftHover");
+      const specMeta = document.getElementById("specMeta");
+
+      const waveCanvas = document.getElementById("waveform");
+      const waveZoomCanvas = document.getElementById("waveformZoom");
+      const fftCanvas = document.getElementById("fft");
+      const specCanvas = document.getElementById("spectrogram");
+
+      const waveCtx = waveCanvas.getContext("2d", { alpha: false });
+      const waveZoomCtx = waveZoomCanvas.getContext("2d", { alpha: false });
+      const fftCtx = fftCanvas.getContext("2d", { alpha: false });
+      const specCtx = specCanvas.getContext("2d", { alpha: false, willReadFrequently: true });
+
+      // --- Audio state
+      let audioCtx = null;
+      let analyser = null;
+      let mediaStream = null;
+      let sourceNode = null;
+      let rafId = null;
+
+      // Optional filters (kept simple)
+      let hpNode = null;
+      let lpNode = null;
+
+      // Buffers
+      let timeData = null; // Uint8Array
+      let freqData = null; // Uint8Array
+      let freqFloat = null; // Float32Array (dB)
+      let freqFloatSmoothed = null; // Float32Array (dB), EMA-smoothed for stable visuals/peaks
+
+      // FFT hover-range peak label (±500 Hz around cursor)
+      let fftHoverActive = false;
+      let fftHoverCenterBin = 0;
+
+      // Spectrogram
+      let specImageData = null;
+      let lastFrameMs = performance.now();
+      let fpsEma = 0;
+      // FFT x-axis range (Hz)
+      let fftXMinHz = 0;
+      let fftXMaxHz = 8000;
+      // Shared frequency limit for both FFT and spectrogram (Hz)
+      let freqMaxHz = 10000;
+      // Waveform Y-axis zoom (1.0 = default, higher = more zoom)
+      let waveYZoom = 1.0;
+
+      function getFftBinRange() {
+        const n = analyser.frequencyBinCount;
+        const binHz = audioCtx.sampleRate / analyser.fftSize;
+        const nyquist = audioCtx.sampleRate / 2;
+        const xMin = Math.max(0, Math.min(nyquist - binHz, fftXMinHz));
+        const xMax = Math.max(xMin + binHz, Math.min(nyquist, fftXMaxHz));
+        const startBin = Math.max(0, Math.min(n - 2, Math.floor(xMin / binHz)));
+        const endBin = Math.max(startBin + 1, Math.min(n - 1, Math.floor(xMax / binHz)));
+        return { n, binHz, nyquist, xMin, xMax, startBin, endBin };
+      }
+
+      function setStatus(text) {
+        statusBadge.textContent = text;
+      }
+      function showWarn(msg) {
+        if (!msg) {
+          warnBox.textContent = "";
+          warnBox.classList.remove("show");
+          return;
+        }
+        warnBox.textContent = msg;
+        warnBox.classList.add("show");
+      }
+
+      function clamp01(x) { return Math.max(0, Math.min(1, x)); }
+
+      // "Turbo" colormap inspired by Google's turbo, via polynomial approximation.
+      // Returns [r,g,b] in 0..255 for t in 0..1.
+      function turboColor(t) {
+        t = clamp01(t);
+        const r = 34.61 + t * (1172.33 + t * (-10793.56 + t * (33300.12 + t * (-38394.49 + t * 14825.05))));
+        const g = 23.31 + t * (557.33 + t * (1225.33 + t * (-3574.96 + t * (5333.84 + t * (-2733.45)))));
+        const b = 27.2 + t * (3211.1 + t * (-15327.97 + t * (27814.0 + t * (-22569.18 + t * 6838.66))));
+        return [
+          Math.max(0, Math.min(255, r)) | 0,
+          Math.max(0, Math.min(255, g)) | 0,
+          Math.max(0, Math.min(255, b)) | 0,
+        ];
+      }
+
+      // Resize canvases to match CSS pixel size * devicePixelRatio
+      function resizeCanvasToDisplaySize(canvas) {
+        const dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+        const rect = canvas.getBoundingClientRect();
+        const w = Math.max(1, Math.floor(rect.width * dpr));
+        const h = Math.max(1, Math.floor(rect.height * dpr));
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+          return true;
+        }
+        return false;
+      }
+
+      function clearSpectrogram() {
+        resizeCanvasToDisplaySize(specCanvas);
+        specCtx.fillStyle = "#061018";
+        specCtx.fillRect(0, 0, specCanvas.width, specCanvas.height);
+        specImageData = specCtx.getImageData(0, 0, specCanvas.width, specCanvas.height);
+      }
+
+      // Map x (0..W-1) to an FFT bin inside a given window [startBin..endBin].
+      // This is used by BOTH FFT plotting and spectrogram rendering, so they correlate visually.
+      function xToBinInWindow(x, W, startBin, endBin, scale) {
+        const t = W <= 1 ? 0 : x / (W - 1); // 0..1
+        const span = Math.max(1, endBin - startBin);
+        if (scale === "linear") {
+          return startBin + Math.round(t * span);
+        }
+        // Log-like easing (0..1) that still starts at 0 Hz (startBin) exactly.
+        // u = (exp(k*t)-1)/(exp(k)-1)
+        const k = 5.0;
+        const u = (Math.exp(k * t) - 1) / (Math.exp(k) - 1);
+        return startBin + Math.round(u * span);
+      }
+
+      // Inverse: map bin to x position in window
+      function binToXInWindow(bin, startBin, endBin, W, scale) {
+        const span = Math.max(1, endBin - startBin);
+        const binOffset = bin - startBin;
+        const u = binOffset / span; // 0..1
+        
+        if (scale === "linear") {
+          return u * (W - 1);
+        }
+        // Inverse of log mapping: solve u = (exp(k*t)-1)/(exp(k)-1) for t
+        const k = 5.0;
+        const denom = Math.exp(k) - 1;
+        const t = Math.log(1 + u * denom) / k;
+        return t * (W - 1);
+      }
+
+      function drawWaveform() {
+        const W = waveCanvas.width;
+        const H = waveCanvas.height;
+        waveCtx.fillStyle = "#07121c";
+        waveCtx.fillRect(0, 0, W, H);
+
+        // Grid
+        waveCtx.strokeStyle = "rgba(255,255,255,0.06)";
+        waveCtx.lineWidth = 1;
+        for (let i = 1; i < 6; i++) {
+          const y = (H * i) / 6;
+          waveCtx.beginPath();
+          waveCtx.moveTo(0, y);
+          waveCtx.lineTo(W, y);
+          waveCtx.stroke();
+        }
+
+        // Wave with trigger (similar to zoomed view)
+        const n = timeData.length;
+        
+        // Trigger: compute average, find rising edge closest to average in first N/10
+        let sumMain = 0;
+        for (let i = 0; i < n; i++) sumMain += timeData[i];
+        const avgMain = sumMain / Math.max(1, n);
+
+        const searchNMain = Math.max(1, Math.floor(n / 10));
+        let bestIdxMain = 0;
+        let bestDistMain = Infinity;
+        let foundRisingMain = false;
+        // Rising-edge constraint: only consider upward-moving points
+        for (let i = 0; i < searchNMain && (i + 1) < n; i++) {
+          const v0 = timeData[i];
+          const v1 = timeData[i + 1];
+          if (v1 <= v0) continue;
+          const d = Math.abs(v0 - avgMain);
+          if (d < bestDistMain) {
+            bestDistMain = d;
+            bestIdxMain = i;
+            foundRisingMain = true;
+          }
+        }
+        if (!foundRisingMain) {
+          bestDistMain = Infinity;
+          for (let i = 0; i < searchNMain && i < n; i++) {
+            const d = Math.abs(timeData[i] - avgMain);
+            if (d < bestDistMain) {
+              bestDistMain = d;
+              bestIdxMain = i;
+            }
+          }
+        }
+
+        const triggerStart = bestIdxMain;
+        const yScale = 0.45 * waveYZoom;
+
+        waveCtx.strokeStyle = "rgba(97, 218, 251, 0.95)";
+        waveCtx.lineWidth = Math.max(1, Math.floor(W / 900));
+        waveCtx.beginPath();
+
+        // Plot from trigger point to end, then wrap to beginning if needed
+        const plotLen = n;
+        for (let i = 0; i < plotLen; i++) {
+          const idx = (triggerStart + i) % n;
+          const v = (timeData[idx] - 128) / 128; // -1..1
+          const x = (i / (plotLen - 1)) * W;
+          const y = (0.5 - v * yScale) * H;
+          if (i === 0) waveCtx.moveTo(x, y);
+          else waveCtx.lineTo(x, y);
+        }
+        waveCtx.stroke();
+
+        // Midline
+        waveCtx.strokeStyle = "rgba(255,255,255,0.12)";
+        waveCtx.beginPath();
+        waveCtx.moveTo(0, H / 2);
+        waveCtx.lineTo(W, H / 2);
+        waveCtx.stroke();
+
+        // Zoomed segment (right 5% of data) in the secondary canvas
+        const Wz = waveZoomCanvas.width;
+        const Hz = waveZoomCanvas.height;
+        waveZoomCtx.fillStyle = "#07121c";
+        waveZoomCtx.fillRect(0, 0, Wz, Hz);
+
+        // Grid
+        waveZoomCtx.strokeStyle = "rgba(255,255,255,0.06)";
+        waveZoomCtx.lineWidth = 1;
+        for (let i = 1; i < 6; i++) {
+          const y = (Hz * i) / 6;
+          waveZoomCtx.beginPath();
+          waveZoomCtx.moveTo(0, y);
+          waveZoomCtx.lineTo(Wz, y);
+          waveZoomCtx.stroke();
+        }
+
+        const nAll = timeData.length;
+        const segN = Math.max(8, Math.floor(nAll * 0.05)); // 5% segment
+        const windowStart = Math.max(0, nAll - segN);
+        const windowEnd = nAll;
+
+        // Trigger (fast): compute average of the N-point window, then start from the datapoint
+        // closest to the average, searching only up to N/10 points.
+        // This stabilizes the zoomed waveform without expensive scanning.
+        let sum = 0;
+        for (let i = windowStart; i < windowEnd; i++) sum += timeData[i];
+        const avg = sum / Math.max(1, (windowEnd - windowStart)); // 0..255
+
+        const searchN = Math.max(1, Math.floor(segN / 10));
+        let bestIdx = 0;
+        let bestDist = Infinity;
+        let foundRising = false;
+        // Rising-edge constraint: only consider upward-moving points (v[i+1] > v[i]).
+        // If none found in the search window, fall back to the closest-to-average point.
+        for (let i = 0; i < searchN && (windowStart + i + 1) < windowEnd; i++) {
+          const v0 = timeData[windowStart + i];
+          const v1 = timeData[windowStart + i + 1];
+          if (v1 <= v0) continue;
+          const d = Math.abs(v0 - avg);
+          if (d < bestDist) {
+            bestDist = d;
+            bestIdx = i;
+            foundRising = true;
+          }
+        }
+        if (!foundRising) {
+          bestDist = Infinity;
+          for (let i = 0; i < searchN && (windowStart + i) < windowEnd; i++) {
+            const d = Math.abs(timeData[windowStart + i] - avg);
+            if (d < bestDist) {
+              bestDist = d;
+              bestIdx = i;
+            }
+          }
+        }
+
+        const start = windowStart + bestIdx;
+        const end = Math.min(nAll, start + segN);
+        const yScaleZ = 0.45 * waveYZoom;
+
+        waveZoomCtx.strokeStyle = "rgba(97, 218, 251, 0.95)";
+        waveZoomCtx.lineWidth = Math.max(1, Math.floor(Wz / 900));
+        waveZoomCtx.beginPath();
+
+        const segLen = Math.max(2, end - start);
+        for (let i = 0; i < segLen; i++) {
+          const v = (timeData[start + i] - 128) / 128;
+          const x = (i / (segLen - 1)) * Wz;
+          const y = (0.5 - v * yScaleZ) * Hz;
+          if (i === 0) waveZoomCtx.moveTo(x, y);
+          else waveZoomCtx.lineTo(x, y);
+        }
+        waveZoomCtx.stroke();
+
+        // Midline
+        waveZoomCtx.strokeStyle = "rgba(255,255,255,0.12)";
+        waveZoomCtx.beginPath();
+        waveZoomCtx.moveTo(0, Hz / 2);
+        waveZoomCtx.lineTo(Wz, Hz / 2);
+        waveZoomCtx.stroke();
+      }
+
+      function drawFFT() {
+        const W = fftCanvas.width;
+        const H = fftCanvas.height;
+        fftCtx.fillStyle = "#07121c";
+        fftCtx.fillRect(0, 0, W, H);
+
+        // Grid
+        fftCtx.strokeStyle = "rgba(255,255,255,0.06)";
+        fftCtx.lineWidth = 1;
+        for (let i = 1; i < 6; i++) {
+          const y = (H * i) / 6;
+          fftCtx.beginPath();
+          fftCtx.moveTo(0, y);
+          fftCtx.lineTo(W, y);
+          fftCtx.stroke();
+        }
+
+        // Line (respect x-axis limit)
+        const { startBin, endBin } = getFftBinRange();
+        const scale = freqScaleSel.value;
+
+        // Vertical grid (approx labels at 5 intervals)
+        fftCtx.strokeStyle = "rgba(255,255,255,0.05)";
+        fftCtx.lineWidth = 1;
+        for (let i = 1; i < 6; i++) {
+          const x = (W * i) / 6;
+          fftCtx.beginPath();
+          fftCtx.moveTo(x, 0);
+          fftCtx.lineTo(x, H);
+          fftCtx.stroke();
+        }
+
+        fftCtx.strokeStyle = "rgba(255, 255, 255, 0.10)";
+        fftCtx.lineWidth = 1;
+        fftCtx.beginPath();
+
+        // Convert to 0..1 using the same dB window as the spectrogram controls (correlated look)
+        const min = parseInt(minDb.value, 10);
+        const max = parseInt(maxDb.value, 10);
+        for (let x = 0; x < W; x++) {
+          const bin = xToBinInWindow(x, W, startBin, endBin, scale);
+          const db = (freqFloatSmoothed && Number.isFinite(freqFloatSmoothed[bin])) ? freqFloatSmoothed[bin] : freqFloat[bin];
+          const tt = clamp01((db - min) / (max - min));
+          const y = (1 - tt) * H;
+          if (x === 0) fftCtx.moveTo(x, y);
+          else fftCtx.lineTo(x, y);
+        }
+        fftCtx.stroke();
+
+        // Fill under curve softly
+        fftCtx.lineTo(W, H);
+        fftCtx.lineTo(0, H);
+        fftCtx.closePath();
+        fftCtx.fillStyle = "rgba(97, 218, 251, 0.10)";
+        fftCtx.fill();
+
+        // If hovering, find max peak within ±500Hz of cursor frequency, and label it in-graph
+        if (fftHoverActive && audioCtx && analyser) {
+          const { startBin, endBin, binHz } = getFftBinRange();
+          const dataArray = (freqFloatSmoothed && freqFloatSmoothed.length === freqFloat.length) ? freqFloatSmoothed : freqFloat;
+          const halfWindowBins = Math.max(1, Math.round(500 / binHz));
+          const center = Math.max(startBin, Math.min(endBin, fftHoverCenterBin));
+          const lo = Math.max(startBin, center - halfWindowBins);
+          const hi = Math.min(endBin, center + halfWindowBins);
+
+          let bestBin = -1;
+          let bestDb = -Infinity;
+          for (let b = lo; b <= hi; b++) {
+            const v = Number.isFinite(dataArray[b]) ? dataArray[b] : -Infinity;
+            if (v > bestDb) {
+              bestDb = v;
+              bestBin = b;
+            }
+          }
+
+          if (bestBin >= 0) {
+            const minDbVal = parseInt(minDb.value, 10);
+            const maxDbVal = parseInt(maxDb.value, 10);
+            const t = clamp01((bestDb - minDbVal) / (maxDbVal - minDbVal));
+            const x = binToXInWindow(bestBin, startBin, endBin, W, freqScaleSel.value);
+            const y = (1 - t) * H;
+            const freqHz = bestBin * binHz;
+
+            // Marker
+            fftCtx.fillStyle = "rgba(97, 218, 251, 0.95)";
+            fftCtx.beginPath();
+            fftCtx.arc(x, y, 4, 0, Math.PI * 2);
+            fftCtx.fill();
+
+            // Label inside the graph (clamped to stay within bounds)
+            const label = `${Math.round(freqHz)} Hz`;
+            fftCtx.font = "26px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace";
+            fftCtx.textAlign = "left";
+            fftCtx.textBaseline = "middle";
+            const pad = 6;
+            const tw = fftCtx.measureText(label).width;
+            const th = 18;
+            let lx = x + 10;
+            let ly = y;
+            if (lx + tw + pad * 2 > W) lx = x - (tw + pad * 2) - 10;
+            lx = Math.max(4, Math.min(W - (tw + pad * 2) - 4, lx));
+            ly = Math.max(th / 2 + 4, Math.min(H - th / 2 - 4, ly));
+
+            fftCtx.fillStyle = "rgba(7, 18, 28, 0.85)";
+            fftCtx.fillRect(lx, ly - th / 2, tw + pad * 2, th);
+            fftCtx.strokeStyle = "rgba(97, 218, 251, 0.35)";
+            fftCtx.strokeRect(lx, ly - th / 2, tw + pad * 2, th);
+            fftCtx.fillStyle = "rgba(97, 218, 251, 0.95)";
+            fftCtx.fillText(label, lx + pad, ly);
+          }
+        }
+      }
+
+      function drawSpectrogram() {
+        const W = specCanvas.width;
+        const H = specCanvas.height;
+        const speed = parseInt(specSpeed.value, 10);
+        const scale = freqScaleSel.value;
+
+        if (!specImageData || specImageData.width !== W || specImageData.height !== H) {
+          specImageData = specCtx.getImageData(0, 0, W, H);
+        }
+        const data = specImageData.data;
+
+        // Waterfall: shift DOWN by "speed" pixels (rows), draw newest spectrum at TOP.
+        if (speed > 0 && H > speed) {
+          const rowStride = W * 4;
+          // Move rows down: dest row y gets src row (y - speed)
+          for (let y = H - 1; y >= speed; y--) {
+            const destStart = y * rowStride;
+            const srcStart = (y - speed) * rowStride;
+            data.copyWithin(destStart, srcStart, srcStart + rowStride);
+          }
+        }
+
+        const minS = parseInt(minDb.value, 10);
+        const maxS = parseInt(maxDb.value, 10);
+        const range = Math.max(1, maxS - minS);
+
+        // Use the exact same bin window + x mapping as the FFT plot so a single row correlates 1:1.
+        const { startBin, endBin } = getFftBinRange();
+        const rowsToWrite = Math.max(1, Math.min(speed, H));
+        for (let y = 0; y < rowsToWrite; y++) {
+          for (let x = 0; x < W; x++) {
+            const bin = xToBinInWindow(x, W, startBin, endBin, scale);
+            const db = (freqFloatSmoothed && Number.isFinite(freqFloatSmoothed[bin])) ? freqFloatSmoothed[bin] : freqFloat[bin]; // dBFS
+            const t = clamp01((db - minS) / range);
+            const [r, g, b] = turboColor(t);
+            const idx = (y * W + x) * 4;
+            data[idx + 0] = r;
+            data[idx + 1] = g;
+            data[idx + 2] = b;
+            data[idx + 3] = 255;
+          }
+        }
+
+        specCtx.putImageData(specImageData, 0, 0);
+      }
+
+      function updateMeta() {
+        if (!audioCtx || !analyser) {
+          sampleRateBadge.textContent = "— Hz";
+          waveMeta.textContent = "—";
+          fftMeta.textContent = "—";
+          specMeta.textContent = "—";
+          return;
+        }
+        sampleRateBadge.textContent = `${audioCtx.sampleRate} Hz`;
+        waveMeta.textContent = `${timeData.length} samples`;
+        const nyquist = audioCtx.sampleRate / 2;
+        const xMin = Math.max(0, Math.min(nyquist, fftXMinHz));
+        const xMax = Math.max(xMin, Math.min(nyquist, fftXMaxHz));
+        fftMeta.textContent = `${analyser.frequencyBinCount} bins • ${Math.round(xMin)}–${Math.round(xMax)} Hz`;
+        specMeta.textContent = `${specCanvas.width}×${specCanvas.height}`;
+      }
+
+      function tick() {
+        rafId = requestAnimationFrame(tick);
+
+        const now = performance.now();
+        const dt = Math.max(1, now - lastFrameMs);
+        lastFrameMs = now;
+        const fps = 1000 / dt;
+        fpsEma = fpsEma ? (fpsEma * 0.9 + fps * 0.1) : fps;
+
+        resizeCanvasToDisplaySize(waveCanvas);
+        resizeCanvasToDisplaySize(waveZoomCanvas);
+        resizeCanvasToDisplaySize(fftCanvas);
+        const specResized = resizeCanvasToDisplaySize(specCanvas);
+        if (specResized) clearSpectrogram();
+
+        analyser.getByteTimeDomainData(timeData);
+        analyser.getByteFrequencyData(freqData);
+        analyser.getFloatFrequencyData(freqFloat);
+        // Smooth FFT dB values for stable appearance & peak labeling
+        if (freqFloatSmoothed && freqFloatSmoothed.length === freqFloat.length) {
+          const a = 0.18; // smoothing factor (higher = more responsive, lower = smoother)
+          for (let i = 0; i < freqFloat.length; i++) {
+            const v = freqFloat[i];
+            const s = freqFloatSmoothed[i];
+            freqFloatSmoothed[i] = Number.isFinite(s) ? (s * (1 - a) + v * a) : v;
+          }
+        }
+
+        drawWaveform();
+        drawFFT();
+        drawSpectrogram();
+        updateMeta();
+
+        // Basic stats: peak + rms
+        let peak = 0;
+        let sumSq = 0;
+        for (let i = 0; i < timeData.length; i++) {
+          const v = (timeData[i] - 128) / 128;
+          const av = Math.abs(v);
+          if (av > peak) peak = av;
+          sumSq += v * v;
+        }
+        const rms = Math.sqrt(sumSq / timeData.length);
+        statsEl.textContent = `FPS ~ ${fpsEma.toFixed(0)} • RMS ${rms.toFixed(3)} • Peak ${peak.toFixed(3)} • analyser: minDb ${analyser.minDecibels} maxDb ${analyser.maxDecibels}`;
+      }
+
+      function teardown() {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = null;
+
+        if (mediaStream) {
+          for (const t of mediaStream.getTracks()) t.stop();
+          mediaStream = null;
+        }
+        try { sourceNode && sourceNode.disconnect(); } catch {}
+        try { hpNode && hpNode.disconnect(); } catch {}
+        try { lpNode && lpNode.disconnect(); } catch {}
+        try { analyser && analyser.disconnect(); } catch {}
+        sourceNode = null;
+        hpNode = null;
+        lpNode = null;
+        analyser = null;
+
+        if (audioCtx) {
+          const ctx = audioCtx;
+          audioCtx = null;
+          ctx.close().catch(() => {});
+        }
+
+        timeData = null;
+        freqData = null;
+        freqFloat = null;
+        freqFloatSmoothed = null;
+        setStatus("idle");
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        showWarn("");
+        updateMeta();
+      }
+
+      function applyAnalyserSettings() {
+        if (!analyser) return;
+        analyser.fftSize = parseInt(fftSizeSel.value, 10);
+        analyser.smoothingTimeConstant = parseFloat(smoothing.value);
+        // For FFT curve drawing (not spectrogram range):
+        analyser.minDecibels = -110;
+        analyser.maxDecibels = -10;
+
+        timeData = new Uint8Array(analyser.fftSize);
+        freqData = new Uint8Array(analyser.frequencyBinCount);
+        freqFloat = new Float32Array(analyser.frequencyBinCount);
+        freqFloatSmoothed = new Float32Array(analyser.frequencyBinCount);
+        freqFloatSmoothed.fill(NaN);
+        updateMeta();
+      }
+
+      function applyFilterSettings() {
+        if (!audioCtx) return;
+        if (!hpNode || !lpNode) return;
+        const hp = Math.max(0, parseFloat(hpHz.value || "0"));
+        const lpRaw = parseFloat(lpHz.value || "0");
+        const lp = lpRaw > 0 ? Math.max(40, lpRaw) : 0;
+        hpNode.frequency.value = hp;
+        if (lp > 0) {
+          lpNode.frequency.value = Math.min(lp, audioCtx.sampleRate / 2 - 50);
+          lpNode.type = "lowpass";
+        } else {
+          // effectively bypass LP by setting to Nyquist
+          lpNode.frequency.value = Math.max(1000, audioCtx.sampleRate / 2 - 50);
+          lpNode.type = "lowpass";
+        }
+      }
+
+      async function start() {
+        showWarn("");
+        setStatus("starting…");
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+
+        try {
+          // iOS Safari requires gesture; this is called by click, so OK.
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          sampleRateBadge.textContent = `${audioCtx.sampleRate} Hz`;
+
+          mediaStream = await navigator.mediaDevices.getUserMedia({
+            audio: {
+              echoCancellation: false,
+              noiseSuppression: false,
+              autoGainControl: false,
+            },
+            video: false,
+          });
+
+          sourceNode = audioCtx.createMediaStreamSource(mediaStream);
+          hpNode = audioCtx.createBiquadFilter();
+          hpNode.type = "highpass";
+          hpNode.frequency.value = Math.max(0, parseFloat(hpHz.value || "0"));
+          hpNode.Q.value = 0.707;
+
+          lpNode = audioCtx.createBiquadFilter();
+          lpNode.type = "lowpass";
+          lpNode.Q.value = 0.707;
+          analyser = audioCtx.createAnalyser();
+
+          // Connect chain: source -> hp -> lp -> analyser (no audio output)
+          sourceNode.connect(hpNode);
+          hpNode.connect(lpNode);
+          lpNode.connect(analyser);
+
+          applyAnalyserSettings();
+          applyFilterSettings();
+          // Initialize FFT x-axis to match spectrogram (10kHz limit)
+          const nyquist = audioCtx.sampleRate / 2;
+          fftXMinHz = 0;
+          fftXMaxHz = Math.min(10000, nyquist);
+          freqMaxHz = Math.min(10000, nyquist); // Shared limit for both plots
+          waveYZoom = 1.0; // Reset waveform Y zoom
+
+          clearSpectrogram();
+          lastFrameMs = performance.now();
+          fpsEma = 0;
+          setStatus("running");
+          tick();
+        } catch (err) {
+          console.error(err);
+          teardown();
+          const msg =
+            err && err.name === "NotAllowedError"
+              ? "Microphone permission denied. Please allow mic access and try again."
+              : err && err.name === "NotFoundError"
+                ? "No microphone device found."
+                : `Failed to start audio: ${String(err && err.message ? err.message : err)}`;
+          showWarn(msg);
+        }
+      }
+
+      // --- Events
+      startBtn.addEventListener("click", start);
+      stopBtn.addEventListener("click", teardown);
+      clearBtn.addEventListener("click", clearSpectrogram);
+
+      // FFT x-axis scrolling: mouse wheel zooms xmax (Shift+wheel adjusts xmin)
+      fftCanvas.addEventListener(
+        "wheel",
+        (e) => {
+          if (!audioCtx || !analyser) return;
+          e.preventDefault();
+          const nyquist = audioCtx.sampleRate / 2;
+          const step = e.ctrlKey ? 0.02 : 0.08; // ctrl = finer
+          const dir = Math.sign(e.deltaY || 0);
+          // dir > 0 typically means "scroll down" => zoom out (increase xmax)
+          const factor = dir > 0 ? (1 + step) : (1 - step);
+          const minSpan = Math.max(40, audioCtx.sampleRate / analyser.fftSize);
+
+          if (e.shiftKey) {
+            // Adjust xmin while keeping xmax fixed (simple pan)
+            const span = Math.max(minSpan, fftXMaxHz - fftXMinHz);
+            const delta = span * (dir > 0 ? 0.05 : -0.05);
+            fftXMinHz = Math.max(0, Math.min(fftXMinHz + delta, nyquist - minSpan));
+            fftXMaxHz = Math.max(fftXMinHz + minSpan, Math.min(fftXMinHz + span, nyquist));
+            freqMaxHz = fftXMaxHz; // Keep spectrogram in sync
+          } else {
+            // Adjust xmax (zoom/scroll limit)
+            fftXMaxHz = Math.max(fftXMinHz + minSpan, Math.min(nyquist, fftXMaxHz * factor));
+            freqMaxHz = fftXMaxHz; // Keep spectrogram in sync
+          }
+          updateMeta();
+        },
+        { passive: false },
+      );
+
+      // FFT hover: show frequency at cursor x-position
+      function updateFftHover(clientX) {
+        if (!audioCtx || !analyser) return;
+        const rect = fftCanvas.getBoundingClientRect();
+        const xCss = clientX - rect.left;
+        const x = Math.max(0, Math.min(fftCanvas.width - 1, (xCss / rect.width) * fftCanvas.width));
+        const { startBin, endBin, binHz } = getFftBinRange();
+        const bin = xToBinInWindow(x, fftCanvas.width, startBin, endBin, freqScaleSel.value);
+        const freq = bin * binHz;
+        fftHover.textContent = `${Math.round(freq)} Hz`;
+        fftHoverCenterBin = bin;
+      }
+
+      fftCanvas.addEventListener("mousemove", (e) => {
+        if (!audioCtx || !analyser) return;
+        fftHoverActive = true;
+        fftHover.style.display = "inline-flex";
+        updateFftHover(e.clientX);
+      });
+      fftCanvas.addEventListener("mouseenter", () => {
+        if (!audioCtx || !analyser) return;
+        fftHoverActive = true;
+        fftHover.style.display = "inline-flex";
+      });
+      fftCanvas.addEventListener("mouseleave", () => {
+        fftHoverActive = false;
+        fftHover.style.display = "none";
+      });
+
+      // Waveform Y-axis scrolling: mouse wheel adjusts Y zoom
+      waveCanvas.addEventListener(
+        "wheel",
+        (e) => {
+          if (!audioCtx) return;
+          e.preventDefault();
+          const step = e.ctrlKey ? 0.05 : 0.15; // ctrl = finer
+          const dir = Math.sign(e.deltaY || 0);
+          // dir > 0 (scroll down) => zoom out (decrease zoom), dir < 0 => zoom in (increase zoom)
+          const factor = dir > 0 ? (1 - step) : (1 + step);
+          waveYZoom = Math.max(0.1, Math.min(10.0, waveYZoom * factor));
+        },
+        { passive: false },
+      );
+
+      smoothing.addEventListener("input", () => {
+        smoothingOut.textContent = Number(smoothing.value).toFixed(2);
+        if (analyser) analyser.smoothingTimeConstant = parseFloat(smoothing.value);
+      });
+      minDb.addEventListener("input", () => (minDbOut.textContent = String(minDb.value)));
+      maxDb.addEventListener("input", () => (maxDbOut.textContent = String(maxDb.value)));
+      specSpeed.addEventListener("input", () => (specSpeedOut.textContent = `${specSpeed.value} px/frame`));
+
+      fftSizeSel.addEventListener("change", () => {
+        if (!analyser) return;
+        applyAnalyserSettings();
+        clearSpectrogram();
+      });
+
+      freqScaleSel.addEventListener("change", () => {
+        // Just affects mapping; no other change required.
+      });
+
+      hpHz.addEventListener("change", applyFilterSettings);
+      lpHz.addEventListener("change", applyFilterSettings);
+
+      window.addEventListener("resize", () => {
+        // Next frame will resize; if spec size changes, we clear it.
+      });
+
+      // Init UI outputs
+      smoothingOut.textContent = Number(smoothing.value).toFixed(2);
+      minDbOut.textContent = String(minDb.value);
+      maxDbOut.textContent = String(maxDb.value);
+      specSpeedOut.textContent = `${specSpeed.value} px/frame`;
+
+      // Initial paint
+      [waveCanvas, waveZoomCanvas, fftCanvas, specCanvas].forEach(resizeCanvasToDisplaySize);
+      clearSpectrogram();
+      updateMeta();
+
+      // Auto-start acquisition on page load (permission may still require user gesture in some browsers)
+      /*
+      window.addEventListener("load", () => {
+        if (statusBadge.textContent === "idle") start();
+      });
+      */
+    </script>
+  </body>
+</html>

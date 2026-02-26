@@ -57,6 +57,10 @@ main:not(.layout-resume) {
       width: 20% !important; 
       font-size: 1rem; 
     }
+    .thumbcol { 
+      width: 20% !important; 
+      font-size: 1rem; 
+    }
 
   }
 
@@ -146,4 +150,90 @@ main:not(.layout-resume) {
       font-size: 1rem;
     }
   }
+
+/*jithin */
+
+
+  .mini-project-card {
+    @extend .color-transition;
+    width: 100%;
+    color: var(--gray-text);
+    background-color: var(--gray-bg);
+    padding-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: .125rem .125rem 1rem rgba(0, 0, 0, 0.2);
+    contain: content;
+    border-radius: $border-radius;
+
+    page-break-inside: avoid;
+
+    transition: transform 100ms ease;
+    will-change: transform;
+    &:hover {
+      transform: translateY(-0.25rem);
+      transition: transform 150ms ease;
+    }
+
+    > a.flip-project {
+      display: block;
+
+      .mini-project-card-img {
+        margin-bottom: 0;
+        img { 
+          display: block; 
+          border-top-left-radius: $border-radius;
+          border-top-right-radius: $border-radius;
+        }
+      }
+    }
+
+    a {
+      position: relative;
+      z-index: 1;
+
+      &.fill-card {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0; 
+        bottom: 0;
+        z-index: 0;
+      }
+    }
+
+    > .mini-project-card-title, > .mini-project-card-text {
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    > .mini-project-card-title {
+      display: block;
+      font-size: 0.8rem;
+      margin-top: .6rem;
+      margin-bottom: .15rem;
+      color: inherit;
+    }
+
+    > .mini-project-card-text {
+      margin: .2rem 0;
+    }
+  }
+
+  .column-1 > .mini-project-card {
+    > .mini-project-card-title {
+      font-size: 1rem;
+    }
+
+    > .mini-project-card-text {
+      font-size: 0.8rem;
+    }
+  }
+
+
+
+
+
+
+
 }

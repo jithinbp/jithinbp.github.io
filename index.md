@@ -2,9 +2,99 @@
 layout: welcome
 image: /assets/img/cover.jpg
 hide_description: true
+
 ---
 
 # Hello, Fellow traveller! 🥸
+
+<style>
+.image-card-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.image-card {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--gray-bg, #f5f5f5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.image-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.image-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 1.43;
+}
+
+.image-card-caption {
+  padding: 10px;
+  font-size: 0.9rem;
+  color: var(--gray-text, #333);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .image-card {
+    min-width: calc(50% - 8px);
+    max-width: calc(50% - 8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .image-card {
+    min-width: calc(50% - 8px);
+    max-width: calc(50% - 8px);
+  }
+}
+</style>
+
+<div class="image-card-row">
+  <div class="image-card">
+    <a href="#">
+      <img src="/assets/img/cover.jpg" alt="Card 1">
+      <p class="image-card-caption">Card 1 Caption</p>
+    </a>
+  </div>
+  <div class="image-card">
+    <a href="#">
+      <img src="/assets/img/cover.jpg" alt="Card 2">
+      <p class="image-card-caption">Card 2 Caption</p>
+    </a>
+  </div>
+  <div class="image-card">
+    <a href="#">
+      <img src="/assets/img/cover.jpg" alt="Card 3">
+      <p class="image-card-caption">Card 3 Caption</p>
+    </a>
+  </div>
+  <div class="image-card">
+    <a href="#">
+      <img src="/assets/img/cover.jpg" alt="Card 4">
+      <p class="image-card-caption">Card 4 Caption</p>
+    </a>
+  </div>
+</div>
 
 > 
 * My startup : [CSpark Research](https://csparkresearch.in) for developing affordable data acquisition instruments for schools and colleges.
