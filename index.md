@@ -19,7 +19,7 @@ hide_description: true
 .image-card {
   flex: 1;
   min-width: 80px;
-  max-width: 120px;
+  max-width: 200px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px;
@@ -56,23 +56,23 @@ hide_description: true
 
 @media (max-width: 1200px) {
   .image-card {
-    min-width: calc(25% - 8px);
-    max-width: calc(25% - 8px);
+    min-width: calc(33% - 8px);
+    max-width: calc(33% - 8px);
   }
 }
 
 
 @media (max-width: 768px) {
   .image-card {
-    min-width: calc(25% - 8px);
-    max-width: calc(25% - 8px);
+    min-width: calc(33% - 8px);
+    max-width: calc(33% - 8px);
   }
 }
 
 @media (max-width: 480px) {
   .image-card {
-    min-width: calc(25% - 8px);
-    max-width: calc(25% - 8px);
+    min-width: calc(50% - 8px);
+    max-width: calc(50% - 8px);
   }
 }
 </style>
