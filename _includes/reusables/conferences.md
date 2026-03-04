@@ -2,11 +2,10 @@
 | :--- | :--- |
 | Feb-2026 | IISER Pune - Meet the Scientists [National Science Day Lecture](https://www.iiserpune.ac.in/storage/media-library/8c7c1ab9-5853-4664-ae8d-5414c63c95e7.pdf) `invited speaker`|
 | Feb-2026 | Pimpri Chinchwad Science Park `invited speaker`|
-| Feb-2026 | Delhi Technological University(DTU), Department of Electronics & Communication Engineering. Demonstration of SEELab-3
-`speaker`|
+| Feb-2026 | Delhi Technological University(DTU), Department of Electronics & Communication Engineering. Demonstration of SEELab-3`speaker`|
 | Feb-2026 | CIPEx, Jammu University. [One-Week FDP on Computer-Interfaced Physics Experiments (CIPEx 2026) and MMTTC](https://sites.google.com/jammuuniversity.ac.in/fdpjuphysics2026/speakers#h.c1si0ojic9dz) `invited speaker`|
 | Feb-2026 | Sullore-2026 : Sulamussalam Science College. [Panel Discussion, Campus Innovation Ecosystem](https://www.instagram.com/p/DUfqmohE-BN/) `Panelist`|
-| Dec-2025 | KSUM X IEDC TALKS. Design, Development, and bulk manufacturing of electronic devices. `Invited Speaker` . IEDC Summit|
+| Dec-2025 | KSUM X IEDC TALKS , MMTTC Kannur University (UGC-HRDC). Design, Development, and bulk manufacturing of electronic devices. `Invited Speaker` . Online Short Term Course in Innovation and Start-ups from 28.10.2025 to 03.11.2025|
 | Dec-2025 | `Workshop Host` Science Experiments with SEELab, and Drone training and teardown . [Science Hack Day , Belgaum](https://sciencehackday.in/about/)|
 | Dec-2025 | IUPAP - International Conference on Physics Education - 2025, IIT Ropar. [Hands-on Physics with Affordable Open-Source Measurement Tools](https://icpe-2025.in/workshop/): From Theory to Experiment with SEELAB3 `invited workshop host`|
 | Dec-2025 | 2 Day training program on computer interfaced science experiments and FEM with FreeCAD  - Sir P T Sarvajanik Science College, Surat. `invited workshop host`|
@@ -14,6 +13,7 @@
 | 2025 | [IndiaFOSS 2025,  FossUnited @ Nimhans, Bangalore](https://fossunited.org/c/indiafoss/2025/cfp/3a8mrlaug1). KuttyPy : A no Cost transformation of the ubiquitous Arduino into an affordable data acquisition system for STEM `invited speaker`|
 | 2025 | [FossMeet 2025, NIT Calicut](https://www.fossmeet.net/speakers) : KuttyPy : An alternative to Arduino `invited speaker`|
 | 2024 | [Pycon India 2024](https://in.pycon.org/2024/speakers/jithin/)  `invited speaker`|
+| 8th-12th July 2024 | ECE department, Netaji Subhas University of Technology . Short-term course on CMOS/FPGA implementation of analog and digital systems `invited speaker for hands-on lecture`|
 | 2021 | [ Pycon India 2021 : ExpEYES , Python Powered Measurement Device ](https://pyvideo.org/pycon-india-2021/expeyes-a-python-powered-measurement-device-for-hands-on-science-education.html) `invited speaker`|
 | 2020 | Scipy. Speaker. Python based portable instrument for Science Experiments `invited speaker`|
 | 2019 | Scipy . Speaker and Workshop organiser . Learning Microcontrollers with KuttyPy `invited speaker`|

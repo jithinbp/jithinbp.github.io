@@ -21,7 +21,13 @@ accent_image:
 {% include reusables/conferences.md %}
 {% include reusables/conferences_less.md %}
 
+
+![](/assets/img/blog/IISERP.jpeg)
+![](/assets/img/blog/JMU.jpeg)
+
 ### ICPE 2025 - IUPAP , IIT Ropar
+
+![](/assets/img/blog/ICPEmemento.jpeg)
 
 ![](/assets/img/blog/icpe.jpeg)
 
