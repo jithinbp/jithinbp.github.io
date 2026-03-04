@@ -80,11 +80,11 @@ body:not(.no-large-headings) {
     h1, .h1 {
       @media screen and (min-width: $break-point-dynamic) {
         width: calc(100% + 50vw - 32rem);
-        font-size: 3rem;
-        line-height: 1.2;
+        font-size: 2.2rem;
+        line-height: 1;
       }
       @media screen and (min-width: $break-point-font-large) {
-        font-size: 4rem;
+        font-size: 3rem;
         line-height: 1.1;
       }
     }
@@ -92,7 +92,7 @@ body:not(.no-large-headings) {
 }
 
 h1, h2, h3, .h1, .h2, .h3 {
-  margin: 4rem 0 1rem;
+  margin: 3rem 0 1rem;
 }
 
 h4, h5, h6, .h4, .h5, .h6 {
