@@ -1,5 +1,9 @@
 | Year | Public Speaking |
 | :--- | :--- |
+| Feb-2026 | IISER Pune - Meet the Scientists [National Science Day Lecture](https://www.iiserpune.ac.in/storage/media-library/8c7c1ab9-5853-4664-ae8d-5414c63c95e7.pdf) `invited speaker`|
+| Feb-2026 | Pimpri Chinchwad Science Park `invited speaker`|
+| Feb-2026 | Delhi Technological University(DTU), Department of Electronics & Communication Engineering. Demonstration of SEELab-3
+`speaker`|
 | Feb-2026 | CIPEx, Jammu University. [One-Week FDP on Computer-Interfaced Physics Experiments (CIPEx 2026) and MMTTC](https://sites.google.com/jammuuniversity.ac.in/fdpjuphysics2026/speakers#h.c1si0ojic9dz) `invited speaker`|
 | Feb-2026 | Sullore-2026 : Sulamussalam Science College. [Panel Discussion, Campus Innovation Ecosystem](https://www.instagram.com/p/DUfqmohE-BN/) `Panelist`|
 | Dec-2025 | KSUM X IEDC TALKS. Design, Development, and bulk manufacturing of electronic devices. `Invited Speaker` . IEDC Summit|
