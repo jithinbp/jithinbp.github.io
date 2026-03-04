@@ -3,14 +3,13 @@
 
 # Uncomment and set the URL of your site (with protocol, e.g. `https://`)
 # NOTE: You don't need to provide this property when hosting on GitHub Pages or Netlify.
-url:                   https://jithinbp.github.io
+url:                   https://jithinbp.in
 
 # Uncomment and set the "base URL" of your site.
 # When your site is in a subdirectory, set to `/<name of directory>`,
 # with a leading `/` but no trailing `/`. Use the empty string '' otherwise.
 # NOTE: You don't need to provide this property when hosting on GitHub Pages or Netlify.
-# baseurl:               '/hydejack-starter-kit'
-
+baseurl:               ''
 
 # General settings
 # ---------------------------------------------------------------------------------------
@@ -25,7 +24,7 @@ title:                 Jithin BP
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description: >
-    Founder at [CSpark Research](https://csparkresearch.in), developing affordable data acquisition instruments for scientific research. CMNPF Post Doc, Biosensing. Ph.D , Nuclear Physics instrumentation - development of radiation detection equipment. 
+    Founder at [CSpark Research](https://csparkresearch.in), developing affordable data acquisition instruments for scientific research. CMNPF Post Doc. Ph.D , Nuclear Physics instrumentation - development of radiation detection equipment.BS-MS IISER-M 
     I work with design and development, as well as bulk manufacturing of electronics.
     Master's in Physics from IISER-M with thesis work on Point Contact Spectroscopy and Scanning Tunnelling microscopy.
 # A shorter description for the sidebar.
@@ -33,7 +32,7 @@ tagline:               >
   Maker @ CSpark Research
 
 # A list of keywords for your blog
-keywords:              [hacker, developer, engineer, hardware, new delhi, calicut]
+keywords:              [hacker, developer, engineer, hardware, new delhi, calicut, iiser, cuhp,  uoc]
 
 logo:                  /assets/img/jb0.jpg
 
