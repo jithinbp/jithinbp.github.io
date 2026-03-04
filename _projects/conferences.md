@@ -19,7 +19,6 @@ accent_image:
 ## Public Speaking
 
 {% include reusables/conferences.md %}
-{% include reusables/conferences_less.md %}
 
 
 ![](/assets/img/blog/IISERP.jpeg)
@@ -51,6 +50,9 @@ accent_image:
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Goodie bags getting packed at the speed of sound <a href="https://twitter.com/pyconindia?ref_src=twsrc%5Etfw">@pyconindia</a> !🔥🔥<a href="https://twitter.com/hashtag/pyconindia?src=hash&amp;ref_src=twsrc%5Etfw">#pyconindia</a> <a href="https://twitter.com/hashtag/pyconindia2024?src=hash&amp;ref_src=twsrc%5Etfw">#pyconindia2024</a> <a href="https://t.co/ZS1ZXNxE7p">pic.twitter.com/ZS1ZXNxE7p</a></p>&mdash; Jithin B.P., Ph.D. (@jithinbp_) <a href="https://twitter.com/jithinbp_/status/1837145890848473315?ref_src=twsrc%5Etfw">September 20, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
 ### Other workshops
+
+{% include reusables/conferences_less.md %}
+
 
 
 + 2 day session on computer interfaced science experiments at P T Science College, Surat

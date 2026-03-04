@@ -47,14 +47,14 @@ author:
 menu:
   - title:             📑 My Résumé
     url:               /resume/
-  - title:             ⚗️ STEM Projects
-    url:               /projects/
-  - title:             💪✨Fabrication Flex
-    url:               /build/
   - title:             💬  Public Speaking
     url:               /projects/conferences/
   - title:             🎓🕊️ Ph.D. Nuclear Physics
     url:               /phd/
+  - title:             Manufacturing Experience
+    url:               /build/
+  - title:             ⚗️ STEM Projects
+    url:               /projects/
   - title:             👨🏻‍🔬  Masters Thesis Work
     url:               /iiser/
   - title:             ✎ᝰ.  Masters Acad Work
@@ -65,8 +65,6 @@ menu:
     url:               /GSOCREADME/
   - title:             Wedding 🤵🏻💍👰🏻
     url:               /wedding
-  - title:             Hackaday
-    url:               https://hackaday.io/jithinbp
 
 # Add links to the footer.
 # Typically you'll want to link to your cookie- or privacy policy (if appliable), etc..
