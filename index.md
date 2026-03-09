@@ -80,14 +80,26 @@ hide_description: true
 <div class="image-card-row">
   <div class="image-card">
     <a href="https://csparkresearch.in" target="_blank" class="no-mark">
-      <img src="/assets/img/cspark.png" alt="Card 1">
+      <img src="/assets/img/csthumb.webp" alt="Card 1">
       <p class="image-card-caption">My Startup</p>
+    </a>
+  </div>
+  <div class="image-card">
+    <a href="https://play.google.com/store/apps/dev?id=6397725586288813242" target="_blank" class="no-mark">
+      <img src="/assets/img/playstorethumb.webp" alt="Card 1">
+      <p class="image-card-caption">Play Store</p>
+    </a>
+  </div>
+  <div class="image-card">
+    <a href="/build/">
+      <img src="/assets/img/blog/man.webp" alt="Card 5">
+      <p class="image-card-caption">Manufacturing</p>
     </a>
   </div>
   <div class="image-card">
     <a href="#masters-thesis--iiser-m--8">
       <img src="/assets/img/pcar/thermal.png" alt="Card 2">
-      <p class="image-card-caption">BS-MS @ IISER-M</p>
+      <p class="image-card-caption">IISER-M</p>
     </a>
   </div>
   <div class="image-card">
@@ -99,13 +111,7 @@ hide_description: true
   <div class="image-card">
     <a href="/build/">
       <img src="/assets/img/blog/cvphoto.jpg" alt="Card 4">
-      <p class="image-card-caption">CMNPDF @ UoC</p>
-    </a>
-  </div>
-  <div class="image-card">
-    <a href="/build/">
-      <img src="/assets/img/blog/man.webp" alt="Card 5">
-      <p class="image-card-caption">Manufacturing</p>
+      <p class="image-card-caption">CMNPDF</p>
     </a>
   </div>
   <div class="image-card">
