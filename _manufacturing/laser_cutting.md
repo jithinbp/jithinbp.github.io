@@ -9,8 +9,6 @@ description: >
   Transparent acrylic cut and bent with a CO2 laser to serve as an enclosure for a prototype called the Python Powered Scientific Instrumentation Tool.
 ---
 
-## Laser Cutting Enclosures
-
 ![](/assets/img/vlabtool/lasercut/collage.jpeg)
 
 ### Red acrylic enclosure

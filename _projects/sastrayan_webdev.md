@@ -13,8 +13,6 @@ accent_image:
 
 ---
 
-## Sastrayan 2026 Website Dev
-
 
 The open house event sastrayan involved 30+ departments and offices of the university. consolidating everything on a common
 platform was required in order to present an event map to the public and also estimating funds utilisation in real time.

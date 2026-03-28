@@ -1,6 +1,6 @@
 ---
 layout: project
-title: 'Teaching basics of KiCAD'
+title: 'Introduction to KiCAD for MSc students'
 date: 1 Jan 2025
 image: 
   path: /assets/img/thumbs/adder.jpeg
@@ -13,7 +13,6 @@ accent_image:
   overlay:    true
 ---
 
-## Introduction to KiCAD for MSc students
 
 ### Student project
 

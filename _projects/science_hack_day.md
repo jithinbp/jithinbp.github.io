@@ -13,8 +13,6 @@ accent_image:
   overlay:    true
 ---
 
-## What is Science Hack Day?
-
 ### [Science Hack Day Website](https://sciencehackday.in/)
 
 December 26 - 28, 2025  . [Register Now!!]((https://sciencehackday.in/)) for SHD, Belgaum, India !

@@ -1,12 +1,10 @@
 ---
 layout: welcome
+title: "Hello, Fellow traveller! 🥸"
 image: /assets/img/cover.jpg
 hide_description: true
 
 ---
-
-# Hello, Fellow traveller! 🥸
-
 <style>
 .image-card-row {
   display: flex;

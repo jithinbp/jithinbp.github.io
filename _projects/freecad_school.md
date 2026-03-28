@@ -13,8 +13,6 @@ accent_image:
   overlay:    true
 ---
 
-## FreeCAD workshop for schools
-
 By the end of the day they had mastered the basics, and could read an engineering drawing and make a freecad file from it.
 
 ![](/assets/img/freecad/collage.jpeg)

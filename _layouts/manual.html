@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | SEELab</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --seelab-blue: #004a99;
+      --paper-white: #ffffff;
+      --bg-soft: #f8f9fa;
+      --text-dark: #1a1a1a;
+      --border-light: #dee2e6;
+    }
+
+    body { 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Crimson Pro', serif; 
+      background: var(--bg-soft); 
+      color: var(--text-dark);
+      font-size: 1.15rem;
+    }
+
+    .manual-wrapper { 
+      max-width: 850px; 
+      margin: 20px auto; 
+      background: var(--paper-white); 
+      padding: 30px 30px; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-top: 6px solid var(--seelab-blue);
+      position: relative;
+    }
+
+    /* Top Utility Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #888;
+      margin-bottom: 30px;
+      letter-spacing: 1.5px;
+    }
+
+    /* Header & Title */
+    .header-title { 
+      text-align: center; 
+      font-family: 'Inter', sans-serif;
+      font-size: 2.2rem; 
+      font-weight: 700;
+      color: var(--seelab-blue);
+      margin: 0 0 10px 0;
+      line-height: 1.2;
+    }
+
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--seelab-blue), transparent);
+      margin-bottom: 30px;
+    }
+    
+    .info-row { 
+      display: flex; 
+      justify-content: space-between; 
+      margin: 20px 0; 
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
+      font-size: 0.85rem;
+    }
+
+    /* Content Styling */
+    .main-content h3 { 
+      margin-top: 2.2em; 
+      color: var(--seelab-blue);
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      border-left: 4px solid var(--seelab-blue);
+      padding-left: 12px;
+    }
+
+    /* LaTeX / Math Spacing */
+    .mjx-chtml { margin: 1em 0 !important; }
+
+    img { 
+      max-width: 100%; 
+      height: auto; 
+      display: block; 
+      margin: 30px auto; 
+      border-radius: 4px;
+      border: 1px solid var(--border-light);
+    }
+
+    .image-caption {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: -20px;
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    /* Tables for Observations */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border: 1px solid var(--border-light);
+      padding: 12px;
+      text-align: center;
+    }
+    th { background-color: var(--bg-soft); font-weight: 700; }
+
+
+    /* PRINT SPECIFIC FIXES */
+    @page {
+      size: A4;
+      margin: 15mm; /* Standard margin for A4 printers */
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .manual-wrapper { 
+        border: none; 
+        padding: 0; 
+        max-width: 100%; 
+        width: 100%;
+
+      }
+      .no-print, .no-print * {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        opacity: 0 !important;
+      }
+      
+      .viva-section {
+        page-break-before: always !important;
+        break-before: page !important;
+        display: block;
+        width: 100%;
+      }
+
+      /* Target the <p> tag that Jekyll wraps around your images */
+      p img, 
+      p:has(img) {
+        display: block !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+      }
+
+      /* Ensure the image itself fills the available width but doesn't exceed page height */
+      img {
+        max-width: 100% !important;
+        max-height: 80vh !important; /* Leaves room for the caption/header */
+        height: auto !important;
+        object-fit: contain !important;
+      }
+      /* Prevent the entire block from being cut in half across pages */
+      .nosplit {
+          display: block;
+          page-break-inside: avoid;
+          break-inside: avoid;
+          width: 100%;
+          margin-bottom: 1em;
+        }
+
+        /* Force side-by-side even if the printer tries to stack them */
+        .nosplit .image-row {
+          display: flex !important;
+          flex-direction: row !important;
+          flex-wrap: nowrap !important;
+        }
+
+        /* Lock the column widths so they don't shrink to 0 or expand to 100% */
+        .nosplit .image-column {
+          /*flex: 0 0 48% !important;*/
+          max-width: 78% !important;
+        }
+      /* Prevent headers from being 'orphaned' at the bottom of a page */
+      h1, h2, h3, h4 {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      /* Ensure table rows don't split */
+      tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      /* Force table borders to show */
+      table {
+          border-collapse: collapse !important;
+          width: 100% !important;
+          margin-bottom: 1em !important;
+        }
+
+        table, th, td {
+          border: 1.5pt solid #000 !important; /* Uses 'pt' for better print scaling */
+          padding: 8px !important;
+        }
+
+        /* Ensure header background isn't stripped */
+        th {
+          background-color: #f2f2f2 !important;
+          -webkit-print-color-adjust: exact; /* Forces background colors in Chrome/Safari */
+          print-color-adjust: exact;
+        }
+
+        /* Prevent tables from breaking across pages awkwardly */
+        tr {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+        }
+    }
+
+  /* The Backdrop (dimmed background) */
+  .exp-modal::backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Main Dialog Container */
+    .exp-modal {
+      width: 95%;
+      max-width: 800px;
+      max-height: 85vh;
+      border: none;
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      font-family: 'Inter', sans-serif;
+      overflow: hidden; /* Keeps header sticky if you add it */
+      animation: slideUp 0.3s ease-out;
+    }
+
+    /* Scrollable Area */
+    .exp-modal-content {
+      padding: 20px;
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    }
+
+    /* Responsive Mobile View (< 600px) */
+    @media (max-width: 600px) {
+      #exp-dialog {
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        max-width: 90vw !important;
+        border-radius: 0;
+        margin: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 20px;
+      }
+
+      .nav-links > a , .nav-links > button {
+        padding: 3px !important;
+      }
+
+
+      .exp-modal {
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        max-width: 100vw;
+        border-radius: 0;
+        margin: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 20px;
+      }
+      
+      .exp-modal-content {
+        max-height: calc(100vh - 70px); /* Subtract header height */
+        padding: 15px;
+      }
+
+      /* Make list items larger for thumbs on mobile */
+      .exp-modal li a {
+        padding: 15px 10px !important;
+      }
+    }
+
+    /* Animation for a smooth entrance */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Custom Scrollbar for the list */
+    .exp-modal-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .exp-modal-content::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="no-print" style="max-width: 800px; margin: 5px auto; display: flex; justify-content: space-between; align-items: center; padding: 10px; border-top: 1px solid #eee;">
+    
+    <div class="nav-links" style="font-family: sans-serif; display: flex; gap: 5px;">
+      {% if page.previous.url %}
+        <a href="{{ page.previous.url | relative_url }}" style="padding: 8px 12px; background: #f8f9fa; color: #333; text-decoration: none; border: 1px solid #ccc; border-radius: 4px;">&laquo; Prev</a>
+      {% endif %}
+    
+      <img src="/assets/icons/logo.png" alt="SEELab Logo" style="width: 40px; height: 40px; cursor: pointer;margin: 3px" onclick="window.location.href='https://csparkresearch.in/seelab3'"/>
+      
+      <button onclick="document.getElementById('exp-dialog').showModal()" style="padding: 8px 12px; background: #6c757d; color: white; border: 1px solid #6c757d; border-radius: 4px; cursor: pointer; font-weight: bold;">
+        Experiments Menu
+      </button>
+    
+      {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}" style="padding: 8px 12px; background: #f8f9fa; color: #333; text-decoration: none; border: 1px solid #ccc; border-radius: 4px;">Next &raquo;</a>
+      {% endif %}
+    </div>
+
+    <button onclick="window.print()" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-family: sans-serif;">
+      Print to A4 PDF
+    </button>
+
+  </div>
+
+
+  <div class="manual-wrapper">
+    <div class="top-bar">
+      <div>{% if page.section %}{{ page.section }}{% else %}Technical Manual{% endif %}</div>
+      <div>SEELab User Manual &copy; {{ "now" | date: "%b/%Y" }}</div>
+    </div>
+
+    <h1 class="header-title">{{ page.title }}</h1>
+    <div class="divider"></div>
+
+    <div class="info-row">
+      <span>Name: ______________________</span>      
+      <span>Exp No: __________, Date: _______</span>
+    </div>
+
+    {% if page.image.path %}
+      <img src="{{ page.image.path | relative_url }}">
+      <div class="image-caption">{{ page.caption }}</div>
+    {% endif %}
+
+    <div class="main-content">
+      {{ content }}
+    </div>
+    
+    <div style="margin-top: 60px; border-top: 1px dashed #ccc; padding-top: 20px; font-family: 'Inter'; font-size: 0.8rem; text-align: right;">
+      Verified By: __________________________
+    </div>
+  </div>
+
+
+  <dialog id="exp-dialog" style="width: 90%; max-width: 600px; border: none; border-radius: 8px; padding: 0; box-shadow: 0 0 20px rgba(0,0,0,0.2); font-family: 'Inter', sans-serif;">
+    <div style="padding: 20px; background: var(--seelab-blue); color: white; display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="margin: 0; font-size: 1.2rem;">Experiment Directory</h2>
+      <button onclick="this.closest('dialog').close()" style="background: transparent; border: 1px solid white; color: white; border-radius: 4px; cursor: pointer; padding: 2px 8px;">&times; Close</button>
+    </div>
+    
+
+    <div style="padding: 20px; max-height: 70vh; overflow-y: auto;">
+      {% comment %} 
+        Iterate through the custom order defined in _config.yml 
+      {% endcomment %}
+      
+      {% for section_name in site.manual_sections %}
+        {% assign section_items = site.seelabmanual | where: "section", section_name | sort: "date" %}
+        
+        {% if section_items.size > 0 %}
+          <h3 style="color: var(--seelab-blue); font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid var(--seelab-blue); padding-bottom: 5px; margin-top: 25px; display: flex; justify-content: space-between;">
+            {{ section_name }}
+            <span style="font-size: 0.7rem; opacity: 0.6;">{{ section_items.size }} Units</span>
+          </h3>
+          
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            {% for item in section_items %}
+              <li style="border-bottom: 1px solid #f0f0f0;">
+                <a href="{{ item.url | relative_url }}" style="text-decoration: none; color: #333; display: flex; align-items: center; padding: 10px 5px; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f8f9fa'; this.style.paddingLeft='10px'" onmouseout="this.style.background='transparent'; this.style.paddingLeft='5px'">
+                  <div style="flex-grow: 1;">
+                    <div style="font-weight: 600; font-size: 1rem;">{{ item.title }}</div>
+                    <div style="font-size: 0.75rem; color: #888;">{{ item.date | date: "%B %d, %Y" }}</div>
+                  </div>
+                  <span style="color: var(--seelab-blue); font-size: 1.2rem; font-weight: bold; opacity: 0.3;">&rsaquo;</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endfor %}
+
+
+      {% assign unsectioned = site.seelabmanual | where_exp: "item", "item.section == nil" %}
+      {% if unsectioned.size > 0 %}
+        <h3 style="color: #666; font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 25px;">Miscellaneous</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          {% for item in unsectioned %}
+            <li style="margin: 8px 0;"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+    </div>
+
+
+  </dialog>
+
+
+</body>
+</html>

@@ -32,9 +32,22 @@ The device is the latest is a long line of prototypes I built, which are [docume
 ![Full-width image](/assets/img/phd/expeyes.jpg){:.lead width="800" height="100" loading="lazy"}
 {:.figcaption}
 
-more than 3000 units in circulation , and 5000+ downloads on the play store.
+more than 3000 units in circulation , and 10000+ downloads on the play store.
 
 ---
+
+<div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
+{% assign manuals = site.seelabmanual | sort:"date" | reverse %}
+{% for manual in manuals %}
+    {% assign featured = page.featured | default:manual.featured | default:page.big_project | default:manual.big_project %}
+    <div class="column column-1 custommicrocol">
+    {% include_cached pro/project-card.html project=manual featured=featured %}
+    </div>
+{% endfor %}
+</div>
+
+
+
 
 ### A Complete Lab in Your Pocket: Why the SEELab 3 is a Game-Changer for Science Education
 

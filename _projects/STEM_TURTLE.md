@@ -13,8 +13,6 @@ accent_image:
   overlay:    true
 ---
 
-## STEM Turtle
-
 ![](/assets/img/blog/stemturtle.png)
 
 ![](/assets/img/blog/stemturtle2.png)
