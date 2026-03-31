@@ -80,11 +80,21 @@ Since the ripple frequency is $2f$, the capacitor discharges for only half the p
 5. Note the ripple frequency on A3 — it should be **$2 \times 1000 = 2000\text{ Hz}$**.
 6. **Add the filter capacitor** ($1\text{ }\mu F$ in parallel with $R_L$). Observe A3 again — compare the ripple amplitude and average DC level with the unfiltered output and with the filtered half-wave result from the previous experiment.
 
-<img src="/assets/img/seelab/electronics/images/fullwave-screen-phone.jpg" style="width: 50%; display: block; margin: 0 auto;">
-
-<img src="/assets/img/seelab/electronics/images/fullwave-screen-pc.png" style="width: 70%; display: block; margin: 0 auto;">
+<div class="nosplit">
+  <div class="image-row" style="display: flex; flex-wrap: nowrap; gap: 20px; margin: 20px 0; justify-content: center; width: 100%;">
+    <div class="image-column" style="flex: 0 0 28%; text-align: center; box-sizing: border-box;">
+      <img src="/assets/img/seelab/electronics/images/fullwave-screen-phone.jpg" alt="Distance Plot" style="width: 100%; height: auto; border: 1px solid #eee;">
+      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Fullwave (No Filter Capacitor)</p>
+    </div>    
+    <div class="image-column" style="flex: 0 0 68%; text-align: center; box-sizing: border-box;">
+      <img src="/assets/img/seelab/electronics/images/fullwave-screen-pc.png" alt="Falling Data" style="width: 100%; height: auto; border: 1px solid #eee;">
+      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Full Wave (Desktop App)</p>
+    </div>
+  </div>
+</div>
 
 <img src="/assets/img/seelab/electronics/images/fullwave-filter-screen.png" style="width: 70%; display: block; margin: 0 auto;">
+<p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Full Wave (Filter Capacitor Added)</p>
 
 ---
 
@@ -161,13 +171,6 @@ Since the ripple frequency is $2f$, the capacitor discharges for only half the p
 </details>
 
 <details>
-<summary><b>Q3. The output peak of the full-wave rectifier is $V_{peak} - V_f$, with only one diode drop. Why not two?</b></summary>
-<p>
-<b>Ans:</b> At any given moment, only one diode is conducting — either D1 (during the WG positive half) or D2 (during the $\overline{\text{WG}}$ positive half). The current path at any instant is: source → one diode → $R_L$ → GND. Only one diode is in the active current path at a time, so only one $V_f \approx 0.6\text{ V}$ drop appears. This is unlike a bridge rectifier, where two diodes conduct simultaneously, causing a $2V_f$ drop.
-</p>
-</details>
-
-<details>
 <summary><b>Q4. For the same filter capacitor, why does a full-wave rectifier produce less ripple than a half-wave rectifier?</b></summary>
 <p>
 <b>Ans:</b> The ripple voltage is approximately $V_{ripple} \approx V_{peak}/(f_{ripple} \cdot R_L C)$. Since $f_{ripple} = 2f$ for full-wave versus $f$ for half-wave, the full-wave ripple is half that of the half-wave rectifier for the same $R_L$, $C$, and input frequency. Equivalently, a full-wave rectifier needs a capacitor half the size to achieve the same ripple level.
@@ -177,7 +180,7 @@ Since the ripple frequency is $2f$, the capacitor discharges for only half the p
 <details>
 <summary><b>Q5. How does this two-diode full-wave circuit differ from a bridge rectifier, and what are the trade-offs?</b></summary>
 <p>
-<b>Ans:</b> This circuit uses two diodes and requires a centre-tapped (or anti-phase) source, so only one diode drop ($V_f$) appears in the output path. A bridge rectifier uses four diodes but works from a single-ended AC source (no centre tap required) — however, two diodes conduct simultaneously, giving a $2V_f \approx 1.2\text{ V}$ drop. For low-voltage supplies this double drop is a significant efficiency penalty; for mains-derived supplies ($\approx 230\text{ V}$) the 1.2 V drop is negligible, which is why the bridge is more common in practice.
+<b>Ans:</b> This circuit uses two diodes and requires a centre-tapped (or anti-phase) source, so only one diode drop ($V_f$) appears in the output path. A bridge rectifier uses four diodes but works from a single-ended AC source (no centre tap required) — however, two diodes conduct simultaneously, giving a $2V_f \approx 1.2\text{ V}$ drop
 </p>
 </details>
 

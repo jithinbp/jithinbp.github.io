@@ -131,16 +131,7 @@ Applying a negative voltage to PV1 with the reversed diode clips the negative ha
 
 ---
 
-### 8. Precautions
-
-1. **PV1 polarity:** SEELab3's PV1 may not support negative voltages on all firmware versions. Check the specification before attempting Part B; if unavailable, Part B can be demonstrated with PV1 = 0 V and diode reversed (clips at $-V_f$).
-2. **Resistor is essential:** The series resistor $R$ limits the current through the diode when it clamps. Never omit it — a direct WG-to-diode connection with no $R$ will draw excessive current from the WG output stage.
-3. **Input amplitude:** Keep $V_{in,\text{peak}} \leq 3\text{ V}$ to stay within the safe input range of A1 and A2.
-4. **Diode orientation check:** Before powering on, confirm the diode orientation with a multimeter in diode-test mode — it is easy to inadvertently reverse the diode when switching between Part A and Part B.
-
----
-
-### 9. Troubleshooting
+### 8. Troubleshooting
 
 | Symptom | Possible Cause | Corrective Action |
 | :--- | :--- | :--- |
@@ -153,7 +144,7 @@ Applying a negative voltage to PV1 with the reversed diode clips the negative ha
 
 <div class="viva-section nosplit">
 
-<h3>10. Viva-Voce Questions</h3>
+<h3>9. Viva-Voce Questions</h3>
 
 <details>
 <summary><b>Q1. What is a clipper circuit and how does it differ from a rectifier?</b></summary>
@@ -180,13 +171,6 @@ Applying a negative voltage to PV1 with the reversed diode clips the negative ha
 <summary><b>Q4. How would you design a circuit that clips both the positive and negative peaks simultaneously (a double clipper)?</b></summary>
 <p>
 <b>Ans:</b> Place two diodes in anti-parallel (back-to-back, opposite orientations) between the output node and ground — or between the output node and two separate DC bias sources ($+V_{clip,1}$ and $-V_{clip,2}$). D1 (anode to output, cathode to $+V_{clip,1}$) clamps the positive peak, and D2 (cathode to output, anode to $-V_{clip,2}$) clamps the negative peak. This is also called a limiter and is used in audio circuits and protection stages to prevent signals from exceeding a safe voltage window.
-</p>
-</details>
-
-<details>
-<summary><b>Q5. A clipper and a Zener diode voltage regulator both limit voltage. What is the key difference?</b></summary>
-<p>
-<b>Ans:</b> A clipper uses a forward-biased PN junction — its clamp voltage is $V_{PV1} + V_f$, which is set by an external bias and is adjustable. A Zener regulator uses the reverse breakdown (Zener) voltage of a specially doped diode, which is a fixed property of the device (e.g., 3.3 V, 5.1 V, 12 V). The Zener conducts heavily in reverse once $V_Z$ is exceeded, clamping the voltage without needing an external bias supply. Clippers are used for waveform shaping; Zener regulators are used for voltage stabilisation.
 </p>
 </details>
 

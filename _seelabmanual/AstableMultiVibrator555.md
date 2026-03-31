@@ -195,22 +195,16 @@ Because the capacitor charges through $R_1 + R_2$ but discharges through $R_2$ o
 </p>
 </details>
 
-<details>
-<summary><b>Q3. Why is the duty cycle always greater than 50% in the standard astable circuit?</b></summary>
-<p>
-<b>Ans:</b> The capacitor charges through $R_1 + R_2$ but discharges through $R_2$ alone. Since $R_1 > 0$, the charge path resistance is always larger than the discharge path resistance, making $t_{HIGH} > t_{LOW}$. Therefore $D = t_{HIGH}/T > 0.5$ always. To achieve exactly 50%, $R_1$ must be removed from the charge path — done in practice by placing a steering diode in parallel with $R_2$, so the capacitor charges only through $R_1$ and discharges only through $R_2$, giving $t_{HIGH} = t_{LOW}$ when $R_1 = R_2$.
-</p>
-</details>
 
 <details>
-<summary><b>Q4. How would you change the frequency without changing the duty cycle?</b></summary>
+<summary><b>Q3. How would you change the frequency without changing the duty cycle?</b></summary>
 <p>
 <b>Ans:</b> The duty cycle $D = (R_1 + R_2)/(R_1 + 2R_2)$ depends only on the ratio of resistances. Changing $C$ scales both $t_{HIGH}$ and $t_{LOW}$ by the same factor, so $T$ changes (frequency changes) while the ratio $t_{HIGH}/T$ stays constant — the duty cycle is unaffected. Therefore: to change frequency while preserving duty cycle, change only $C$.
 </p>
 </details>
 
 <details>
-<summary><b>Q5. What is the purpose of the $0.01\text{ }\mu F$ capacitor on pin 5?</b></summary>
+<summary><b>Q4. What is the purpose of the $0.01\text{ }\mu F$ capacitor on pin 5?</b></summary>
 <p>
 <b>Ans:</b> Pin 5 is the control voltage pin — it connects directly to the $\frac{2}{3}V_{CC}$ tap of the internal voltage divider. Any noise or ripple on the supply that reaches pin 5 shifts the upper threshold, causing the output frequency to jitter. The $0.01\text{ }\mu F$ capacitor to GND forms a low-pass filter that bypasses high-frequency noise on pin 5 to ground, stabilising the threshold and keeping the output frequency clean. In applications where pin 5 is deliberately driven by an external voltage, this capacitor is omitted and the external voltage modulates the frequency (voltage-controlled oscillator mode).
 </p>

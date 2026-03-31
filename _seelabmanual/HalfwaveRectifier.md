@@ -30,6 +30,7 @@ To study the rectifying action of a PN junction diode by constructing a **half-w
 
 ### 3. Theory & Principle
 
+
 #### 3.1 The PN Junction as a Rectifier
 
 A PN junction diode conducts current freely when **forward biased** (anode positive with respect to cathode) and blocks current when **reverse biased**. When an AC sinusoidal voltage is applied to a series circuit of a diode and a load resistor $R_L$:
@@ -82,6 +83,20 @@ where $f$ is the AC frequency. A larger $RC$ product means slower discharge and 
 
 ---
 
+
+<div class="nosplit">
+  <div class="image-row" style="display: flex; flex-wrap: nowrap; gap: 20px; margin: 20px 0; justify-content: center; width: 100%;">
+    <div class="image-column" style="flex: 0 0 28%; text-align: center; box-sizing: border-box;">
+      <img src="/assets/img/seelab/electronics/images/halfwave-screen-phone.jpg" alt="Distance Plot" style="width: 100%; height: auto; border: 1px solid #eee;">
+      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Halfwave (No Filter Capacitor. Notice voltage drop)</p>
+    </div>    
+    <div class="image-column" style="flex: 0 0 68%; text-align: center; box-sizing: border-box;">
+      <img src="/assets/img/seelab/electronics/images/halfwave-with-filter-screen.png" alt="Falling Data" style="width: 100%; height: auto; border: 1px solid #eee;">
+      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Half Wave With Filter</p>
+    </div>
+  </div>
+</div>
+
 ### 4. Circuit Diagram / Setup
 
 **Part A — Basic half-wave rectifier (no filter capacitor):**
@@ -130,20 +145,6 @@ where $f$ is the AC frequency. A larger $RC$ product means slower discharge and 
 13. Note the **ripple amplitude** and the **average DC level**.
 
 
-<div class="nosplit">
-  <div class="image-row" style="display: flex; flex-wrap: nowrap; gap: 20px; margin: 20px 0; justify-content: center; width: 100%;">
-    <div class="image-column" style="flex: 0 0 28%; text-align: center; box-sizing: border-box;">
-      <img src="/assets/img/seelab/electronics/images/halfwave-screen-phone.jpg" alt="Distance Plot" style="width: 100%; height: auto; border: 1px solid #eee;">
-      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Halfwave (No Filter Capacitor. Notice voltage drop)</p>
-    </div>    
-    <div class="image-column" style="flex: 0 0 68%; text-align: center; box-sizing: border-box;">
-      <img src="/assets/img/seelab/electronics/images/halfwave-with-filter-screen.png" alt="Falling Data" style="width: 100%; height: auto; border: 1px solid #eee;">
-      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Half Wave With Filter</p>
-    </div>
-  </div>
-</div>
-
-<img src="/assets/img/seelab/electronics/images/halfwave-setup-eyes17.jpg" style="width: 70%; display: block; margin: 0 auto;">
 
 
 ---

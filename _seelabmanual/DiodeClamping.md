@@ -158,35 +158,28 @@ Reversing the diode flips the action — the diode now clamps the **positive** p
 <h3>10. Viva-Voce Questions</h3>
 
 <details>
-<summary><b>Q1. What is the fundamental difference between a clipper and a clamper?</b></summary>
-<p>
-<b>Ans:</b> A clipper removes part of the waveform — it reduces the peak-to-peak amplitude by cutting away anything above or below a threshold. A clamper shifts the entire waveform up or down by adding a DC offset — the waveform shape and peak-to-peak amplitude are completely preserved. You can verify this instantly from the oscilloscope: if $V_{p\text{-}p}$ at the output equals $V_{p\text{-}p}$ at the input, it is a clamper; if it is smaller, it is a clipper.
-</p>
-</details>
-
-<details>
-<summary><b>Q2. What role does the capacitor play in the clamping circuit?</b></summary>
+<summary><b>Q1. What role does the capacitor play in the clamping circuit?</b></summary>
 <p>
 <b>Ans:</b> The capacitor serves as a DC-blocking and charge-storage element. On the first clamping half-cycle, the diode conducts and the capacitor charges to the difference between the input peak and the clamping voltage. This stored charge acts as a battery — it adds a fixed DC voltage in series with the AC signal on every subsequent cycle, effectively shifting the entire waveform. The capacitor must retain its charge between cycles (i.e., the discharge time constant $\tau = R_{load}C$ must be much larger than the signal period) for steady clamping to be maintained.
 </p>
 </details>
 
 <details>
-<summary><b>Q3. Why is the clamped level $V_{PV1} - V_f$ rather than $V_{PV1}$?</b></summary>
+<summary><b>Q2. Why is the clamped level $V_{PV1} - V_f$ rather than $V_{PV1}$?</b></summary>
 <p>
 <b>Ans:</b> The diode conducts when its anode (output node) is more positive than its cathode (PV1) by $V_f \approx 0.6\text{ V}$. It stops conducting — and therefore clamps — when the output node reaches exactly $V_{PV1} - V_f$ during the negative peak, not $V_{PV1}$. The $V_f$ drop across the forward-biased diode subtracts from the bias, so the final clamped level is always one diode drop below (for this orientation) the applied bias voltage.
 </p>
 </details>
 
 <details>
-<summary><b>Q4. The positive peak of the clamped output is much higher than the original input peak. Is this a problem?</b></summary>
+<summary><b>Q3. The positive peak of the clamped output is much higher than the original input peak. Is this a problem?</b></summary>
 <p>
-<b>Ans:</b> Not a circuit problem — it is the expected behaviour. If the negative peak is lifted by $\Delta V$ (the DC shift), the positive peak is also lifted by the same $\Delta V$, since the entire waveform shifts rigidly. For a $3\text{ V}$ peak input clamped at $+0.4\text{ V}$, the positive peak reaches $0.4 + 6 = 6.4\text{ V}$ — well above the original $+3\text{ V}$. Practically, this means the downstream circuit (and the A2 input channel) must be able to handle this elevated positive swing without clipping or damage.
+<b>Ans:</b> Not a circuit problem — it is the expected behaviour. If the negative peak is lifted by $\Delta V$ (the DC shift), the positive peak is also lifted by the same $\Delta V$, since the entire waveform shifts rigidly. Practically, this means the downstream circuit (and the A2 input channel) must be able to handle this elevated positive swing without clipping or damage.
 </p>
 </details>
 
 <details>
-<summary><b>Q5. Where is clamping used in real electronic systems?</b></summary>
+<summary><b>Q4. Where is clamping used in real electronic systems?</b></summary>
 <p>
 <b>Ans:</b> Clampers appear in several practical applications: (1) <b>Television sync restoration</b> — the sync tip of a composite video signal is clamped to a reference level at the start of each line to remove noise-induced DC wander. (2) <b>Voltage multiplier circuits</b> — cascaded clampers and peak detectors (Cockcroft-Walton ladder) progressively stack DC offsets to multiply a low AC voltage to a high DC voltage without a transformer. (3) <b>Coupling with level shifting</b> — when an AC signal from one stage needs to be shifted to a specific DC operating point before entering the next stage.
 </p>
