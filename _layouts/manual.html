@@ -4,6 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }} | SEELab</title>
+  {% assign social_title = page.title | append: " | SEELab" %}
+  {% assign social_description_base = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace %}
+  {% assign social_description = page.section | default: "SEELab" | append: " - " | append: social_description_base | truncate: 160 %}
+  {% assign social_image = page.image_math | default: page.image.path | default: site.logo %}
+  {% assign social_image_url = social_image | relative_url | absolute_url %}
+
+  <meta name="description" content="{{ social_description }}">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ social_title }}">
+  <meta property="og:description" content="{{ social_description }}">
+  <meta property="og:image" content="{{ social_image_url }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ social_title }}">
+  <meta name="twitter:description" content="{{ social_description }}">
+  <meta name="twitter:image" content="{{ social_image_url }}">
   
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
