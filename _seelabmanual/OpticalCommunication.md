@@ -8,7 +8,7 @@ caption: Demonstrating the basic principle of wireless optical data transfer
 section: School Level Physics
 ---
 
-## Experiment: Basic Principle of Optical Communication
+## Basic Principle of Optical Communication
 
 ### 1. Aim
 

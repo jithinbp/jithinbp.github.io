@@ -8,7 +8,7 @@ caption: Converting electrical signals to sound and back again
 section: School Level Physics
 ---
 
-## Experiment: Transduction of Sound Waves
+## Transduction of Sound Waves
 
 ### 1. Aim
 

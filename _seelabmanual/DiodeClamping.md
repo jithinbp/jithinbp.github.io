@@ -8,7 +8,7 @@ caption: Diode clamping circuit — the capacitor shifts the entire waveform, th
 section: Electronics
 ---
 
-## Experiment: Clamping Circuit Using a PN Junction Diode
+## Clamping Circuit Using a PN Junction Diode
 
 ### 1. Aim
 

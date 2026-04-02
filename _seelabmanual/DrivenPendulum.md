@@ -8,7 +8,7 @@ caption: Observing resonance in a magnetically driven pendulum
 section: School Level Physics
 ---
 
-## Experiment: Driven Pendulum and Resonance
+## Driven Pendulum and Resonance
 
 ### 1. Aim
 

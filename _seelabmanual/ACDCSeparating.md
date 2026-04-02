@@ -8,7 +8,7 @@ caption: Using a capacitor to remove the DC offset from a signal
 section: Electrical Engineering
 ---
 
-## Experiment: Separating AC and DC Components
+## Separating AC and DC Components
 
 ### 1. Aim
 

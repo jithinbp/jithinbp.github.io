@@ -8,7 +8,7 @@ caption: Measuring water resistance using an AC source to avoid polarization
 section: School Level Physics
 ---
 
-## Experiment: Measurement of the Resistance of Water
+## Measurement of the Resistance of Water
 
 ### 1. Aim
 To measure the electrical resistance of a water column and understand why an AC voltage source is required for stable measurements in liquids.

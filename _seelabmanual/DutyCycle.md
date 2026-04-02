@@ -8,7 +8,7 @@ caption: Measuring frequency and duty cycle of a pulse-width modulated signal
 section: Electrical Engineering
 ---
 
-## Experiment: Pulse Width and Duty Cycle Measurement
+## Pulse Width and Duty Cycle Measurement
 
 ### 1. Aim
 

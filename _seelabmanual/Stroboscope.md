@@ -8,7 +8,7 @@ caption: Freezing high-speed motion using a pulsed light source
 section: School Level Physics
 ---
 
-## Experiment: Stroboscopic Effect and Rotational Speed
+## Stroboscopic Effect and Rotational Speed
 
 ### 1. Aim
 

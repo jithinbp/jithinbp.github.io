@@ -8,7 +8,7 @@ caption: Capturing the growth and decay of current in an RL circuit
 section: Electrical Engineering
 ---
 
-## Experiment: Transient Response of an RL Circuit
+## Transient Response of an RL Circuit
 
 ### 1. Aim
 

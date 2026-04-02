@@ -8,7 +8,7 @@ caption: Observing damped oscillations in a series RLC circuit
 section: Electrical Engineering
 ---
 
-## Experiment: Transient Response of an RLC Circuit
+## Transient Response of an RLC Circuit
 
 ### 1. Aim
 

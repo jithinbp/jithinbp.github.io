@@ -8,7 +8,7 @@ caption: Studying the steady-state AC response and series resonance of a series 
 section: Electrical Engineering
 ---
 
-## Experiment: Steady-State Response and Series Resonance of a Series RLC Circuit
+## Steady-State Response and Series Resonance of a Series RLC Circuit
 
 ### 1. Aim
 

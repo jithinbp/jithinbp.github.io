@@ -8,7 +8,7 @@ caption: VL53L0X LIDAR measuring displacement of oscillating mass
 section: Mechanics
 ---
 
-## Experiment: Distance Measurement using LIDAR
+## Distance Measurement using LIDAR
 
 ### 1. Aim
 

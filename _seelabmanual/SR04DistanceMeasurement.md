@@ -8,7 +8,7 @@ caption: SR04 module measuring distance to moving reflector
 section: Mechanics
 ---
 
-## Experiment: Measuring Distance using SR04
+## Measuring Distance using SR04
 
 ### 1. Aim
 

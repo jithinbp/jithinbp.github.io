@@ -8,7 +8,7 @@ caption: Zener V-I characteristic — same indirect current measurement as the P
 section: Electronics
 ---
 
-## Experiment: V-I Characteristics of a Zener Diode
+## V-I Characteristics of a Zener Diode
 
 ### 1. Aim
 

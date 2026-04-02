@@ -8,7 +8,7 @@ caption: V-I characteristic measurement — PV1 sweeps voltage, A1 measures diod
 section: Electronics
 ---
 
-## Experiment: V-I Characteristics of a PN Junction Diode
+## V-I Characteristics of a PN Junction Diode
 
 ### 1. Aim
 

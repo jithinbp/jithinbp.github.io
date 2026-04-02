@@ -8,7 +8,7 @@ caption: Capturing the 50Hz electromagnetic field from domestic wiring
 section: School Level Physics
 ---
 
-## Experiment: Capturing AC Pickup from Domestic Wiring
+## Capturing AC Pickup from Domestic Wiring
 
 ### 1. Aim
 

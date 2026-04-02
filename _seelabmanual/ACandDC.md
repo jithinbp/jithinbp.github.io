@@ -8,7 +8,7 @@ caption: Comparing steady DC and alternating AC waveforms
 section: School Level Physics
 ---
 
-## Experiment: Distinction Between AC and DC
+## Distinction Between AC and DC
 
 ### 1. Aim
 

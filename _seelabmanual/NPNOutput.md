@@ -8,7 +8,7 @@ caption: NPN transistor in common-emitter configuration — collector characteri
 section: Electronics
 ---
 
-## Experiment: Output Characteristics of an NPN Transistor (Common-Emitter)
+## Output Characteristics of an NPN Transistor (Common-Emitter)
 
 ### 1. Aim
 

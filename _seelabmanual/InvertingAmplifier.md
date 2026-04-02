@@ -8,7 +8,7 @@ caption: OP07 inverting amplifier with Ri = 1 kOhm and Rf = 10 kOhm
 section: Electronics
 ---
 
-## Experiment: Inverting Amplifier using Op-Amp
+## Inverting Amplifier using Op-Amp
 
 ### 1. Aim
 

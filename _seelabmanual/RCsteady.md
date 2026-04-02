@@ -8,7 +8,7 @@ caption: Studying the steady-state AC response of a series RC circuit
 section: Electrical Engineering
 ---
 
-## Experiment: Steady-State Response of a Series RC Circuit
+## Steady-State Response of a Series RC Circuit
 
 ### 1. Aim
 

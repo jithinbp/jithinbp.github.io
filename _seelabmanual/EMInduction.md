@@ -8,7 +8,7 @@ caption: Capturing the induced EMF from a falling magnet
 section: School Level Physics
 ---
 
-## Experiment: Faraday's Law of Electromagnetic Induction
+## Faraday's Law of Electromagnetic Induction
 
 ### 1. Aim
 

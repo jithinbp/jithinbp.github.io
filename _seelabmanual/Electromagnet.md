@@ -8,7 +8,7 @@ caption: Studying the magnetic field produced by a current-carrying coil
 section: School Level Physics
 ---
 
-## Experiment: Study of an Electromagnet
+## Study of an Electromagnet
 
 ### 1. Aim
 

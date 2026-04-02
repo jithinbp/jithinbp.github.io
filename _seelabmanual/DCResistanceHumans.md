@@ -8,7 +8,7 @@ caption: Measure DC Resistance of the Body
 section: Getting Started
 ---
 
-## Experiment: Measurement of DC Resistance of the Human Body
+## Measurement of DC Resistance of the Human Body
 
 ### 1. Aim
 

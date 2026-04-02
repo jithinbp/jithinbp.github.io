@@ -8,7 +8,7 @@ caption: Analyzing phase and amplitude in a resistive AC circuit
 section: School Level Physics
 ---
 
-## Experiment: Phase and Amplitude in AC Resistive Circuits
+## Phase and Amplitude in AC Resistive Circuits
 
 ### 1. Aim
 

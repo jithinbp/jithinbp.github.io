@@ -8,7 +8,7 @@ caption: Phase comparison between WG reference and microphone signal
 section: Acoustics
 ---
 
-## Experiment: Velocity of Sound in Air
+## Velocity of Sound in Air
 
 ### 1. Aim
 

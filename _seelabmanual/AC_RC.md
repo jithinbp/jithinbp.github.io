@@ -8,7 +8,7 @@ caption: Observing the phase shift between voltage and current in an RC circuit
 section: School Level Physics
 ---
 
-## Experiment: Phase Relationship in AC Capacitive Circuits
+## Phase Relationship in AC Capacitive Circuits
 
 ### 1. Aim
 

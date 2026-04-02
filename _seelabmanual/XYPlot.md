@@ -8,7 +8,7 @@ caption: Visualizing the relationship between two signals using XY mode
 section: Electrical Engineering
 ---
 
-## Experiment: XY Plots and Lissajous Figures
+## XY Plots and Lissajous Figures
 
 ### 1. Aim
 

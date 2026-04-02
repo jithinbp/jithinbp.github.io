@@ -8,7 +8,7 @@ caption: 555 astable multivibrator — output monitored on A1, capacitor voltage
 section: Electronics
 ---
 
-## Experiment: Astable Multivibrator Using IC 555
+## Astable Multivibrator Using IC 555
 
 ### 1. Aim
 

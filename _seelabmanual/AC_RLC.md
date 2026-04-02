@@ -8,7 +8,7 @@ caption: Analyzing resonance and phase in a Series RLC Circuit
 section: School Level Physics
 ---
 
-## Experiment: Phase and Resonance in Series RLC Circuits
+## Phase and Resonance in Series RLC Circuits
 
 ### 1. Aim
 

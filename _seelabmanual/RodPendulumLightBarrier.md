@@ -8,7 +8,7 @@ caption: Rod pendulum crossing LED-phototransistor light barrier
 section: Mechanics
 ---
 
-## Experiment: Pendulum Period using Light Barrier
+## Pendulum Period using Light Barrier
 
 ### 1. Aim
 

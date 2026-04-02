@@ -8,7 +8,7 @@ caption: Generating alternating current using a rotating magnet and coil
 section: School Level Physics
 ---
 
-## Experiment: Principles of an AC Generator
+## Principles of an AC Generator
 
 ### 1. Aim
 

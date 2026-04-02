@@ -8,7 +8,7 @@ caption: Measuring distance and studying free fall using ultrasound
 section: School Level Physics
 ---
 
-## Experiment: Distance Measurement and Free Fall using Ultrasound
+## Distance Measurement and Free Fall using Ultrasound
 
 ### 1. Aim
 

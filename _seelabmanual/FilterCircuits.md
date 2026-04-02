@@ -8,7 +8,7 @@ caption: Measuring the gain and phase response of an active band-pass filter
 section: Electrical Engineering
 ---
 
-## Experiment: Study of Active Filter Circuits
+## Study of Active Filter Circuits
 
 ### 1. Aim
 

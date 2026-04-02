@@ -8,7 +8,7 @@ caption: Full-wave rectifier using WG and $\overline{\text{WG}}$ as the two anti
 section: Electronics
 ---
 
-## Experiment: Full-Wave Rectifier Using Two PN Junction Diodes
+## Full-Wave Rectifier Using Two PN Junction Diodes
 
 ### 1. Aim
 

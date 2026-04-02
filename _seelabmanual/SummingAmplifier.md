@@ -8,7 +8,7 @@ caption: OP07 summing amplifier with R1 = R2 = Rf = 1 kOhm
 section: Electronics
 ---
 
-## Experiment: Summing Amplifier using Op-Amp
+## Summing Amplifier using Op-Amp
 
 ### 1. Aim
 

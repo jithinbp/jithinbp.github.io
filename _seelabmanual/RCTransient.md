@@ -8,7 +8,7 @@ caption: Capturing the charging and discharging curves of an RC circuit
 section: Electrical Engineering
 ---
 
-## Experiment: Transient Response of an RC Circuit
+## Transient Response of an RC Circuit
 
 ### 1. Aim
 

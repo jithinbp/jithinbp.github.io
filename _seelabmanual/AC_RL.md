@@ -8,7 +8,7 @@ caption: Observing the phase shift between voltage and current in an RL circuit
 section: School Level Physics
 ---
 
-## Experiment: Phase Relationship in AC Inductive Circuits
+## Phase Relationship in AC Inductive Circuits
 
 ### 1. Aim
 

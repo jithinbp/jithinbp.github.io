@@ -8,7 +8,7 @@ caption: Single-stage NPN common-emitter amplifier using AC coupling at the base
 section: Electronics
 ---
 
-## Experiment: Single Transistor Amplifier
+## Single Transistor Amplifier
 
 ### 1. Aim
 

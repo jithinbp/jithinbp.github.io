@@ -8,7 +8,7 @@ caption: Measuring the output impedance of the PV1 programmable voltage source
 section: Electrical Engineering
 ---
 
-## Experiment: Output Impedance of a Voltage Source
+## Output Impedance of a Voltage Source
 
 ### 1. Aim
 

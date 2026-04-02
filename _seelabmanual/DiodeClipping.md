@@ -8,7 +8,7 @@ caption: Diode clipping circuit with programmable clipping level set by PV1
 section: Electronics
 ---
 
-## Experiment: Clipping Circuit Using a PN Junction Diode
+## Clipping Circuit Using a PN Junction Diode
 
 ### 1. Aim
 

@@ -8,7 +8,7 @@ caption: Two-buzzer setup for beat formation and envelope observation
 section: Acoustics
 ---
 
-## Experiment: Interference of Sound (Beats)
+## Interference of Sound (Beats)
 
 ### 1. Aim
 

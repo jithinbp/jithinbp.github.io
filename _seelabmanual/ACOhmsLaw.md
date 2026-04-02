@@ -8,7 +8,7 @@ caption: Verifying Ohm's Law with a sinusoidal source using two series resistors
 section: Electrical Engineering
 ---
 
-## Experiment: Verification of Ohm's Law Using an AC Source
+## Verification of Ohm's Law Using an AC Source
 
 ### 1. Aim
 

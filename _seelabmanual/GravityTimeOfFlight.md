@@ -8,7 +8,7 @@ caption: Steel ball release using electromagnet and contact sensor
 section: Mechanics
 ---
 
-## Experiment: Determination of g by Time of Flight
+## Determination of g by Time of Flight
 
 ### 1. Aim
 

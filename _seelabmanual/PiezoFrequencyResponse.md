@@ -8,7 +8,7 @@ caption: Piezo buzzer frequency sweep and microphone response measurement
 section: Acoustics
 ---
 
-## Experiment: Frequency Response of Piezo Buzzer
+## Frequency Response of Piezo Buzzer
 
 ### 1. Aim
 

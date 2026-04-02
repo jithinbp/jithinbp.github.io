@@ -8,7 +8,7 @@ caption: Measuring voltages on A1, A2, and A3 inputs
 section: Getting Started
 ---
 
-## Experiment: Measurement of DC Voltages on A1, A2, and A3
+## Measurement of DC Voltages on A1, A2, and A3
 
 ### 1. Aim
 

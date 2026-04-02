@@ -8,7 +8,7 @@ caption: Studying the steady-state AC response of a series L-R circuit
 section: Electrical Engineering
 ---
 
-## Experiment: Steady-State Response of a Series RL Circuit
+## Steady-State Response of a Series RL Circuit
 
 ### 1. Aim
 

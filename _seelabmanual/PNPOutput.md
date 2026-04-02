@@ -8,7 +8,7 @@ caption: PNP transistor in common-emitter configuration — same setup as NPN wi
 section: Electronics
 ---
 
-## Experiment: Output Characteristics of a PNP Transistor
+## Output Characteristics of a PNP Transistor
 
 ### 1. Aim
 

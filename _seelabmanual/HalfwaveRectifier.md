@@ -8,7 +8,7 @@ caption: Half-wave rectifier circuit with optional filter capacitor
 section: Electronics
 ---
 
-## Experiment: Half-Wave Rectifier Using a PN Junction Diode
+## Half-Wave Rectifier Using a PN Junction Diode
 
 ### 1. Aim
 

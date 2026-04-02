@@ -8,7 +8,7 @@ caption: Demonstrating the principle of mutual induction between two coils
 section: School Level Physics
 ---
 
-## Experiment: Mutual Induction and Transformer Action
+## Mutual Induction and Transformer Action
 
 ### 1. Aim
 
