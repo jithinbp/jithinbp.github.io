@@ -36,9 +36,12 @@ more than 3000 units in circulation , and 10000+ downloads on the play store.
 
 ---
 
+### [Traditional Lab Manuals](/seelabmanuals)
+
+---
 <div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
 {% assign manuals = site.seelabmanual | sort:"date" | reverse %}
-{% for manual in manuals %}
+{% for manual in manuals limit: 5%}
     {% assign featured = page.featured | default:manual.featured | default:page.big_project | default:manual.big_project %}
     <div class="column column-1 custommicrocol">
     {% include_cached pro/project-card.html project=manual featured=featured %}
@@ -46,6 +49,7 @@ more than 3000 units in circulation , and 10000+ downloads on the play store.
 {% endfor %}
 </div>
 
+<p class="read-more mt1"><a class="heading flip-title" href="/seelabmanuals/">And many more...</a></p>
 
 
 
