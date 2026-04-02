@@ -1,9 +1,12 @@
 ---
 layout: cleancover
 title: "SEELab 3.0 : Lab Manuals"
+description: Printable docs for Experiments with SEELab 3.0
 date: 28 March 2026
 image:
   path: /assets/img/phd/seelab-cover.jpg
+thumb:
+  path: /assets/img/thumbs/seelab-cover.jpg
 caption: Traditional lab manuals for SEElab 3.0
 ---
 

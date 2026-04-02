@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }}</title>
-  {% assign social_title = page.title | append: " | SEELab" %}
+  {% assign social_title = page.title %}
   {% assign social_description_base = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace %}
-  {% assign social_description = page.section | default: "SEELab" | append: " - " | append: social_description_base | truncate: 160 %}
-  {% assign social_image = page.image_math | default: page.image.path | default: site.logo %}
+  {% assign social_description = social_description_base | truncate: 160 %}
+  {% assign social_image = page.thumb.path | default: page.image.path | default: site.logo %}
   {% assign social_image_url = social_image | relative_url | absolute_url %}
 
   <meta name="description" content="{{ social_description }}">
