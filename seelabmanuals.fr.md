@@ -2,13 +2,13 @@
 layout: cleancover
 title: "SEELab 3.0 : Lab Manuals"
 description: Printable docs for Experiments with SEELab 3.0
-lang: en
+lang: fr
 date: 28 March 2026
+permalink: /fr/seelabmanuals/
 image:
   path: /assets/img/phd/seelab-cover.jpg
 caption: Traditional lab manuals for SEElab 3.0
 ---
-
 <div style="padding: 20px;">  
   {% assign toc_lang = page.lang | default: "en" %}
   {% assign available_langs = "" %}

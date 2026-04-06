@@ -61,6 +61,21 @@ A steep slope means low $r_o$ (less ideal current source); a flat curve means hi
 
 ---
 
+<div class="nosplit">
+  <div class="image-row" style="display: flex; flex-wrap: nowrap; gap: 20px; margin: 20px 0; justify-content: center; width: 100%;">
+    <div class="image-column" style="flex: 0 0 28%; text-align: center; box-sizing: border-box;">
+      <img src="/assets/img/seelab/electronics/images/NPN-screen-phone.jpg" alt="NPN Output — Mobile App" style="width: 100%; height: auto; border: 1px solid #eee;">
+      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Mobile App</p>
+    </div>
+    <div class="image-column" style="flex: 0 0 68%; text-align: center; box-sizing: border-box;">
+      <img src="/assets/img/seelab/electronics/images/npn-screenshot.jpg" alt="NPN Output — Desktop App" style="width: 100%; height: auto; border: 1px solid #eee;">
+      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Python Output</p>
+    </div>
+  </div>
+</div>
+
+---
+
 ### 4. Circuit Diagram / Setup
 
 1. Connect **PV2** → $R_B$ ($100\text{ k}\Omega$) → **Base** of 2N2222. Connect **A2** at the Base.
@@ -95,20 +110,9 @@ The following Python programs automate the sweep and analysis. Download them fro
 * [**npn-ce-ibic.py**](https://expeyes.in/experiments/electronics/code/npn-ce-ibic.py) — plots the transfer characteristic ($I_B$ vs $I_C$).
 * [**npn-ce-ibic-lsfit.py**](https://expeyes.in/experiments/electronics/code/npn-ce-ibic-lsfit.py) — fits the $I_B$ vs $I_C$ data by least squares to extract $h_{FE}$.
 
-<div class="nosplit">
-  <div class="image-row" style="display: flex; flex-wrap: nowrap; gap: 20px; margin: 20px 0; justify-content: center; width: 100%;">
-    <div class="image-column" style="flex: 0 0 28%; text-align: center; box-sizing: border-box;">
-      <img src="/assets/img/seelab/electronics/images/NPN-screen-phone.jpg" alt="NPN Output — Mobile App" style="width: 100%; height: auto; border: 1px solid #eee;">
-      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Mobile App</p>
-    </div>
-    <div class="image-column" style="flex: 0 0 68%; text-align: center; box-sizing: border-box;">
-      <img src="/assets/img/seelab/electronics/images/npn-ce-output.png" alt="NPN Output — Python Plot" style="width: 100%; height: auto; border: 1px solid #eee;">
-      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Python Output</p>
-    </div>
-  </div>
-</div>
+<img src="/assets/img/seelab/electronics/images/npn-ce-output.png" alt="NPN Output — Python Plot" style="width: 70%; height: auto; border: 1px solid #eee;">
 
----
+
 
 ### 6. Observation Table
 

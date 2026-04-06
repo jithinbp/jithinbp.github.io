@@ -180,6 +180,13 @@
         padding: 0 !important;
         opacity: 0 !important;
       }
+      #manual-lang-switcher {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        opacity: 0 !important;
+      }
       
       .viva-section {
         page-break-before: always !important;
@@ -387,6 +394,13 @@
     </div>
 
     <h1 class="header-title">{{ page.title }}</h1>
+    
+    {% capture manual_lang_links %}{% include seelab/language-switcher.html doc=page show_default=true show_current=true %}{% endcapture %}
+    {% if manual_lang_links != "" %}
+      <div id="manual-lang-switcher" class="no-print" style="text-align: center; margin-top: -2px; margin-bottom: 10px; font-family: 'Inter', sans-serif; font-size: 0.78rem; letter-spacing: 0.4px;">
+        {{ manual_lang_links }}
+      </div>
+    {% endif %}
     <div class="divider"></div>
 
     <div class="info-row">
@@ -471,6 +485,16 @@
 
   </dialog>
 
+{% if site.google_analytics %}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R0B00R9LZR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', '{{site.google_analytics}}');
+</script>
+{% endif %}
+  
 </body>
 </html>

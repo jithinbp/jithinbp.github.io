@@ -1,0 +1,62 @@
+{% assign default_lang = site.default_lang | default: "en" %}
+{% assign doc = include.doc %}
+{% assign show_default = include.show_default %}
+{% if show_default == nil %}{% assign show_default = true %}{% endif %}
+{% assign show_current = include.show_current %}
+{% if show_current == nil %}{% assign show_current = true %}{% endif %}
+
+{% assign current_lang = doc.lang | default: default_lang %}
+{% assign current_file = doc.path | split:'/' | last %}
+{% assign current_stem = current_file | replace: '.md', '' %}
+{% assign current_suffix = '.' | append: current_lang %}
+{% assign current_base = current_stem %}
+{% if current_lang != default_lang %}
+  {% assign current_base = current_stem | replace: current_suffix, '' %}
+{% endif %}
+{% assign group_translation_key = doc.translation_key %}
+{% assign group_base_key = current_base %}
+
+{% assign all_docs = site.seelabmanual | sort: "lang" %}
+{% assign first_item = true %}
+{% capture links %}
+  {% for cand in all_docs %}
+    {% assign cand_lang = cand.lang | default: default_lang %}
+    {% assign cand_file = cand.path | split:'/' | last %}
+    {% assign cand_stem = cand_file | replace: '.md', '' %}
+    {% assign cand_suffix = '.' | append: cand_lang %}
+    {% assign cand_base = cand_stem %}
+    {% if cand_lang != default_lang %}
+      {% assign cand_base = cand_stem | replace: cand_suffix, '' %}
+    {% endif %}
+    {% assign is_match = false %}
+    {% if group_translation_key and cand.translation_key == group_translation_key %}
+      {% assign is_match = true %}
+    {% endif %}
+    {% if cand_base == group_base_key %}
+      {% assign is_match = true %}
+    {% endif %}
+
+    {% if is_match %}
+      {% assign include_doc = true %}
+      {% if show_default != true and cand_lang == default_lang %}
+        {% assign include_doc = false %}
+      {% endif %}
+      {% if show_current != true and cand_lang == current_lang %}
+        {% assign include_doc = false %}
+      {% endif %}
+
+      {% if include_doc %}
+        {% unless first_item %} | {% endunless %}
+        {% if cand_lang == current_lang and show_current == true %}
+          <strong>{{ cand_lang | upcase }}</strong>
+        {% else %}
+          <a href="{{ cand.url | relative_url }}">{{ cand_lang | upcase }}</a>
+        {% endif %}
+        {% assign first_item = false %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+{{ links | strip }}
+

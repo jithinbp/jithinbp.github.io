@@ -1,0 +1,216 @@
+---
+layout: manual
+title: "Caractéristiques de sortie d'un transistor NPN"
+date: 28 March 2026
+lang: fr
+translation_key: npn-output-characteristics
+permalink: /fr/seelabmanual/npn-output/
+image:
+  path: /assets/img/seelab/electronics/images/transistorCE-setup-seelab3.jpg
+caption: Transistor NPN en configuration émetteur commun
+section: Electronics
+---
+
+## Caractéristiques de sortie d'un transistor NPN (Émetteur commun)
+
+### 1. Objectif
+
+Tracer les **caractéristiques de sortie** ($I_C$ en fonction de $V_{CE}$ pour un $I_B$ fixé) et les **caractéristiques de transfert** ($I_C$ en fonction de $I_B$) d’un transistor NPN en configuration émetteur commun, et déterminer le **gain en courant** $h_{FE}$ ainsi que l’**impédance de sortie** à partir des courbes.
+
+---
+
+### 2. Appareillage / Composants nécessaires
+
+* Unité SEELab3 (PV1 et PV2 nécessaires)
+* Transistor NPN : **2N2222** ($h_{FE} \approx 200$)
+* Résistance de collecteur $R_C = 1\text{ k}\Omega$
+* Résistance de base $R_B = 100\text{ k}\Omega$
+* Fils de connexion
+* PC avec Python 3 (librairies : `expeyes`, `numpy`, `scipy`, `matplotlib`)
+
+---
+
+### 3. Théorie & principe
+
+<img src="/assets/img/seelab/electronics/images/npn-ce-schematic.svg" style="width: 55%; display: block; margin: 20px auto; border: none;">
+
+En configuration **émetteur commun (EC / CE)**, l’émetteur est la borne commune aux circuits d’entrée (base) et de sortie (collecteur). Le transistor présente trois régions de fonctionnement :
+
+* **Coupure (cut-off)** : $V_{BE} < 0.6\text{ V}$ — jonctions polarisées en inverse ; $I_C \approx 0$.
+* **Active** : $V_{BE} \approx 0.7\text{ V}$, $V_{CE} > V_{CE,sat}$ — base-émetteur en direct, base-collecteur en inverse. Le courant collecteur est contrôlé par le courant de base : $I_C = h_{FE}\cdot I_B$.
+* **Saturation** : $V_{CE} < V_{CE,sat} \approx 0.2\text{ V}$ — les deux jonctions en direct ; $I_C$ n’est plus contrôlé par $I_B$.
+
+Le **gain en courant DC** :
+
+$$h_{FE} = \frac{I_C}{I_B} \bigg|_{\text{région active}}$$
+
+Pour un 2N2222, $h_{FE} \approx 200$, ce qui signifie qu’un courant de base de $10\text{ }\mu\text{A}$ peut conduire à un courant collecteur d’environ $2\text{ mA}$.
+
+#### Mesure indirecte des courants
+
+$I_B$ et $I_C$ sont déterminés sans ampèremètre, via les chutes de tension sur les résistances :
+
+$$I_B = \frac{V_{PV2} - V_{A2}}{R_B} \qquad I_C = \frac{V_{PV1} - V_{A1}}{R_C}$$
+
+où A2 mesure la tension de base et A1 la tension au collecteur.
+
+#### Impédance de sortie
+
+En région active, les courbes $I_C$–$V_{CE}$ sont presque horizontales. La légère pente permet d’estimer l’**impédance de sortie** :
+
+$$r_o = \frac{\Delta V_{CE}}{\Delta I_C}\bigg|_{I_B = \text{const}}$$
+
+---
+
+<div class="nosplit">
+  <div class="image-row" style="display: flex; flex-wrap: nowrap; gap: 20px; margin: 20px 0; justify-content: center; width: 100%;">
+    <div class="image-column" style="flex: 0 0 28%; text-align: center; box-sizing: border-box;">
+      <img src="/assets/img/seelab/electronics/images/NPN-screen-phone.jpg" alt="NPN Output — Mobile App" style="width: 100%; height: auto; border: 1px solid #eee;">
+      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Application mobile</p>
+    </div>
+    <div class="image-column" style="flex: 0 0 68%; text-align: center; box-sizing: border-box;">
+      <img src="/assets/img/seelab/electronics/images/npn-screenshot.jpg" alt="NPN Output — Desktop App" style="width: 100%; height: auto; border: 1px solid #eee;">
+      <p class="caption" style="font-size: 0.9rem; font-style: italic; color: #555; margin-top: 8px;">Sortie Python</p>
+    </div>
+  </div>
+</div>
+
+---
+
+### 4. Schéma / montage
+
+1. Relier **PV2** → $R_B$ ($100\text{ k}\Omega$) → **Base** du 2N2222. Relier **A2** à la base.
+2. Relier **PV1** → $R_C$ ($1\text{ k}\Omega$) → **Collecteur**. Relier **A1** au collecteur.
+3. Relier l’**émetteur** à **GND**.
+
+---
+
+### 5. Procédure
+
+#### Partie A — Caractéristiques de sortie (application)
+
+1. Ouvrir l’application SEELab3 et choisir **« NPN Output Characteristics »**.
+2. Fixer **PV2** à une valeur (ex. $1.5\text{ V}$) pour établir un courant de base $I_B \approx (1.5 - 0.7)/100\text{k} = 8\text{ }\mu\text{A}$.
+3. Le logiciel balaie **PV1** de $0$ à $3.3\text{ V}$ et calcule $I_C = (V_{PV1} - V_{A1})/R_C$.
+4. Tracer $I_C$ vs $V_{CE}$, repérer **saturation** ($V_{CE} < 0.3\text{ V}$) et **région active**.
+5. Répéter pour au moins **trois valeurs de PV2**.
+
+#### Partie B — Caractéristiques de transfert et $h_{FE}$
+
+6. Fixer $V_{PV1}$ à une valeur gardant le transistor en région active (ex. $2\text{ V}$).
+7. Balayer **PV2**, relever $I_B$ et $I_C$.
+8. Tracer $I_C$ vs $I_B$ — la pente donne $h_{FE}$.
+
+#### Partie C — Automatisation Python
+
+* [**npn-ce-output.py**](https://expeyes.in/experiments/electronics/code/npn-ce-output.py)
+* [**Sample data (npn-ce-output.csv)**](https://expeyes.in/experiments/electronics/code/npn-ce-output.csv)
+* [**npn-ce-output-analyse.py**](https://expeyes.in/experiments/electronics/code/npn-ce-output-analyse.py)
+* [**npn-ce-ibic.py**](https://expeyes.in/experiments/electronics/code/npn-ce-ibic.py)
+* [**npn-ce-ibic-lsfit.py**](https://expeyes.in/experiments/electronics/code/npn-ce-ibic-lsfit.py)
+
+<img src="/assets/img/seelab/electronics/images/npn-ce-output.png" alt="NPN Output — Python Plot" style="width: 70%; height: auto; border: 1px solid #eee;">
+
+### 6. Tableau d’observations
+
+**Transistor :** ________ &emsp;|&emsp; $R_C$ : ________ $\Omega$ &emsp;|&emsp; $R_B$ : ________ $\Omega$
+
+#### 6a. Caractéristiques de sortie — $I_C$ vs $V_{CE}$
+
+| $I_B$ ($\mu$A) | $I_C$ à $V_{CE}=0.2$ V | $I_C$ à $0.5$ V | $I_C$ à $1.0$ V | $I_C$ à $1.5$ V | $I_C$ à $2.0$ V | $I_C$ à $2.5$ V |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| ~7  | | | | | | |
+| ~9  | | | | | | |
+| ~11 | | | | | | |
+| ~13 | | | | | | |
+
+#### 6b. Caractéristiques de transfert et $h_{FE}$
+
+| $I_B$ ($\mu$A) | $I_C$ (mA) | $h_{FE} = I_C / I_B$ |
+| :---: | :---: | :---: |
+| | | |
+| | | |
+| | | |
+| | | |
+| **$h_{FE}$ moyen** | | |
+
+#### 6c. Impédance de sortie (région active, à partir de la pente)
+
+| $I_B$ ($\mu$A) | Pente $\Delta I_C / \Delta V_{CE}$ (mA/V) | $r_o = 1/\text{pente}$ (k$\Omega$) |
+| :---: | :---: | :---: |
+| | | |
+| | | |
+| | | |
+
+---
+
+### 7. Résultats et discussion
+
+* Les courbes montrent une région de saturation ($V_{CE} < \approx 0.3\text{ V}$) et une région active ($V_{CE} > 0.5\text{ V}$).
+* Le gain mesuré est $h_{FE} =$ ________, à comparer à $\approx 200$ pour le 2N2222.
+* L’impédance de sortie en région active est $r_o \approx$ ________ k$\Omega$.
+* L’augmentation de $I_B$ décale les plateaux de $I_C$, confirmant $I_C \propto I_B$ en région active.
+
+---
+
+### 8. Précautions
+
+1. **Ne jamais laisser la base flottante** : toujours garder $R_B$ entre PV2 et la base.
+2. **Limite PV1 = 3.3 V** : le balayage collecteur est limité à $V_{CE,max} \approx 3.3\text{ V}$.
+3. **Dissipation** : à $I_C = 2\text{ mA}$ et $V_{CE} = 3\text{ V}$, $P = 6\text{ mW}$ (sans danger pour le 2N2222). Éviter de dépasser $\sim 3\text{ mA}$ dans ce montage.
+4. **Brochage** : vérifier E, B, C selon le boîtier (TO-18 vs TO-92).
+
+---
+
+### 9. Dépannage
+
+| Symptôme | Cause possible | Action corrective |
+| :--- | :--- | :--- |
+| **$I_C$ nul pour tout $V_{CE}$** | base non connectée / PV2 trop faible | vérifier PV2 et la connexion de $R_B$ |
+| **Saturation immédiate, courbes non séparées** | collecteur et émetteur inversés | vérifier le brochage et corriger |
+| **Toutes les courbes se confondent** | A2 pas sur la base | connecter A2 au nœud base |
+| **$h_{FE}$ trop faible** | transistor incorrect/défectueux | remplacer le 2N2222 |
+
+---
+
+<div class="viva-section nosplit">
+
+<h3>10. Questions de viva</h3>
+
+<details>
+<summary><b>Q1. Pourquoi la configuration émetteur commun est-elle la plus utilisée ?</b></summary>
+<p>
+<b>Réponse :</b> Elle fournit à la fois un gain en courant et un gain en tension, donc un gain de puissance élevé. La configuration base commune n’a pas de gain en courant, et le suiveur émetteur n’a pas de gain en tension.
+</p>
+</details>
+
+<details>
+<summary><b>Q2. Que se passe-t-il quand $V_{CE}$ devient inférieur à $V_{CE,sat}$ ?</b></summary>
+<p>
+<b>Réponse :</b> La jonction base-collecteur devient aussi polarisée en direct : le transistor sature, et $I_C$ n’est plus contrôlé par $I_B$ mais par le circuit externe.
+</p>
+</details>
+
+<details>
+<summary><b>Q3. Pourquoi les courbes $I_C$–$V_{CE}$ ont-elles une légère pente en région active ?</b></summary>
+<p>
+<b>Réponse :</b> À cause de l’**effet Early** (modulation de la largeur de base) : quand $V_{CE}$ augmente, la base effective se réduit et $I_C$ augmente légèrement.
+</p>
+</details>
+
+<details>
+<summary><b>Q4. Comment mesure-t-on $I_B$ et $I_C$ sans ampèremètre ?</b></summary>
+<p>
+<b>Réponse :</b> En mesurant les tensions aux bornes des résistances connues et en appliquant la loi d’Ohm : $I_B = (V_{PV2}-V_{A2})/R_B$ et $I_C = (V_{PV1}-V_{A1})/R_C$.
+</p>
+</details>
+
+<details>
+<summary><b>Q5. Pourquoi $h_{FE}$ varie-t-il avec $I_C$ ?</b></summary>
+<p>
+<b>Réponse :</b> Le gain n’est pas constant : il est maximal à un courant modéré et diminue à très faible et très fort courant. En conception d’amplificateurs, on choisit un point de polarisation stable et on utilise du feedback.
+</p>
+</details>
+
+</div>
+
