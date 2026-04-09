@@ -350,7 +350,6 @@ include:
 plugins:
   - jekyll-default-layout
   - jekyll-feed
-  - jekyll-optional-front-matter
   - jekyll-paginate
   - jekyll-readme-index
   - jekyll-redirect-from
@@ -360,6 +359,7 @@ plugins:
   - jekyll-include-cache
   - jekyll-last-modified-at
 
+#  - jekyll-optional-front-matter
 
 # SEO Tag
 # ---------------------------------------------------------------------------------------
@@ -396,7 +396,7 @@ social:
 # Plugin Configs
 # ---------------------------------------------------------------------------------------
 optional_front_matter:
-  remove_originals:    true
+  remove_originals:    false
 
 readme_index:
   remove_originals:    true

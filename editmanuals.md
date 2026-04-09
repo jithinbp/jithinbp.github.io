@@ -1,8 +1,9 @@
 ---
-layout: cleancover
+layout: editmanual
 title: "Edit Manuals"
 description: Edit and preview SEELab manual markdown files
 permalink: /editmanuals/
+search: exclude
 ---
 
 <style>
@@ -183,7 +184,7 @@ permalink: /editmanuals/
     flex: 1;
     min-height: 68vh;
     overflow: auto;
-    padding: 14px;
+    padding: 1px;
     box-sizing: border-box;
     background: #fff;
   }
@@ -258,14 +259,16 @@ permalink: /editmanuals/
   const manualDocs = [
     {% assign manuals = site.seelabmanual | sort: "path" %}
     {% for doc in manuals %}
+      {% assign file_name = doc.path | split: "/" | last %}
+      {% assign source_path = "/assets/md/" | append: file_name %}
       {
         path: {{ doc.path | jsonify }},
+        fileName: {{ file_name | jsonify }},
+        sourceUrl: {{ source_path | relative_url | jsonify }},
         title: {{ doc.title | default: doc.path | jsonify }},
-        lang: {{ doc.lang | default: "en" | jsonify }},
-        section: {{ doc.section | default: "" | jsonify }},
+        section: {{ doc.section | default: "Technical Manual" | jsonify }},
         imagePath: {{ doc.image.path | default: "" | jsonify }},
-        caption: {{ doc.caption | default: "" | jsonify }},
-        content: {{ doc.content | jsonify }}
+        caption: {{ doc.caption | default: "" | jsonify }}
       }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ];
@@ -317,8 +320,57 @@ permalink: /editmanuals/
     return out;
   }
 
+  function stripFrontMatter(md) {
+    // If markdown starts with YAML front matter, remove it for preview rendering.
+    if (!md.startsWith("---")) return md;
+    const parts = md.split("\n");
+    let endIdx = -1;
+    for (let i = 1; i < parts.length; i++) {
+      if (parts[i].trim() === "---") {
+        endIdx = i;
+        break;
+      }
+    }
+    if (endIdx === -1) return md;
+    return parts.slice(endIdx + 1).join("\n").trimStart();
+  }
+
+  function parseFrontMatter(md) {
+    if (!md.startsWith("---")) return {};
+    const lines = md.split("\n");
+    let endIdx = -1;
+    for (let i = 1; i < lines.length; i++) {
+      if (lines[i].trim() === "---") {
+        endIdx = i;
+        break;
+      }
+    }
+    if (endIdx === -1) return {};
+
+    const data = {};
+    let parentKey = "";
+    for (const raw of lines.slice(1, endIdx)) {
+      const line = raw.replace(/\t/g, "  ");
+      if (!line.trim() || line.trim().startsWith("#")) continue;
+
+      const nested = line.match(/^ {2}([A-Za-z0-9_-]+):\s*(.*)$/);
+      if (nested && parentKey) {
+        const key = `${parentKey}.${nested[1]}`;
+        data[key] = nested[2].trim().replace(/^["']|["']$/g, "");
+        continue;
+      }
+
+      const top = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+      if (top) {
+        parentKey = top[1];
+        data[parentKey] = top[2].trim().replace(/^["']|["']$/g, "");
+      }
+    }
+    return data;
+  }
+
   function renderPreview(docMeta) {
-    const md = mdEditor.value || "";
+    const md = stripFrontMatter(mdEditor.value || "");
     const extracted = extractMath(md);
     const renderedHtml = marked.parse(extracted.md, { breaks: true });
     const rendered = restoreMath(renderedHtml, extracted.store);
@@ -354,25 +406,41 @@ permalink: /editmanuals/
     }
   }
 
-  function loadDocByIndex(index) {
+  async function loadDocByIndex(index) {
     const doc = manualDocs[index];
     if (!doc) return;
-    mdEditor.value = doc.content || "";
+    const sourceUrl = doc.sourceUrl || `{{ "/assets/md/" | relative_url }}${doc.fileName}`;
+    try {
+      const res = await fetch(sourceUrl, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const raw = await res.text();
+      mdEditor.value = raw;
+      const fm = parseFrontMatter(raw);
+      doc.title = fm.title || doc.fileName || "Manual";
+      doc.section = fm.section || "Technical Manual";
+      doc.imagePath = fm["image.path"] || "";
+      doc.caption = fm.caption || "";
+    } catch (_) {
+      mdEditor.value = `Unable to load: ${sourceUrl}`;
+      doc.title = doc.fileName || "Manual";
+      doc.section = "Technical Manual";
+      doc.imagePath = "";
+      doc.caption = "";
+    }
     renderPreview(doc);
   }
 
   function initSelect() {
     manualDocs.forEach((doc, index) => {
       const opt = document.createElement("option");
-      const langTag = (doc.lang || "en").toUpperCase();
       opt.value = String(index);
-      opt.textContent = `[${langTag}] ${doc.path}`;
+      opt.textContent = doc.fileName || doc.path;
       fileSelect.appendChild(opt);
     });
   }
 
-  fileSelect.addEventListener("change", () => {
-    loadDocByIndex(Number(fileSelect.value));
+  fileSelect.addEventListener("change", async () => {
+    await loadDocByIndex(Number(fileSelect.value));
   });
 
   mdEditor.addEventListener("input", () => {

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }}</title>
+  {% assign social_title = page.title %}
+  {% assign social_description_base = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace %}
+  {% assign social_description = social_description_base | truncate: 160 %}
+  {% assign social_image = page.thumb.path | default: page.image.path | default: site.logo %}
+  {% assign social_image_url = social_image | relative_url | absolute_url %}
+
+  <meta name="description" content="{{ social_description }}">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ social_title }}">
+  <meta property="og:description" content="{{ social_description }}">
+  <meta property="og:image" content="{{ social_image_url }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ social_title }}">
+  <meta name="twitter:description" content="{{ social_description }}">
+  <meta name="twitter:image" content="{{ social_image_url }}">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --seelab-blue: #004a99;
+      --paper-white: #ffffff;
+      --bg-soft: #f8f9fa;
+      --text-dark: #1a1a1a;
+      --border-light: #dee2e6;
+    }
+
+    body { 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Crimson Pro', serif; 
+      background: var(--bg-soft); 
+      color: var(--text-dark);
+      font-size: 1.15rem;
+    }
+
+    .manual-wrapper { 
+      max-width: 850px; 
+      margin: 20px auto; 
+      background: var(--paper-white); 
+      padding: 30px 30px; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-top: 6px solid var(--seelab-blue);
+      position: relative;
+    }
+
+    /* Top Utility Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #888;
+      margin-bottom: 30px;
+      letter-spacing: 1.5px;
+    }
+
+    /* Header & Title */
+    .header-title { 
+      text-align: center; 
+      font-family: 'Inter', sans-serif;
+      font-size: 2.2rem; 
+      font-weight: 700;
+      color: var(--seelab-blue);
+      margin: 0 0 10px 0;
+      line-height: 1.2;
+    }
+
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--seelab-blue), transparent);
+      margin-bottom: 30px;
+    }
+    
+    .info-row { 
+      display: flex; 
+      justify-content: space-between; 
+      margin: 20px 0; 
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
+      font-size: 0.85rem;
+    }
+
+    /* Content Styling */
+    .main-content h3 { 
+      margin-top: 2.2em; 
+      color: var(--seelab-blue);
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      border-left: 4px solid var(--seelab-blue);
+      padding-left: 12px;
+    }
+
+    /* LaTeX / Math Spacing */
+    .mjx-chtml { margin: 1em 0 !important; }
+
+    img { 
+      max-width: 100%; 
+      height: auto; 
+      display: block; 
+      margin: 30px auto; 
+      border-radius: 4px;
+      border: 1px solid var(--border-light);
+    }
+
+    .image-caption {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: -20px;
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    /* Tables for Observations */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border: 1px solid var(--border-light);
+      padding: 12px;
+      text-align: center;
+    }
+    th { background-color: var(--bg-soft); font-weight: 700; }
+
+
+    /* PRINT SPECIFIC FIXES */
+    @page {
+      size: A4;
+      margin: 15mm; /* Standard margin for A4 printers */
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .manual-wrapper { 
+        border: none; 
+        padding: 0; 
+        max-width: 100%; 
+        width: 100%;
+
+      }
+      .no-print, .no-print * {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        opacity: 0 !important;
+      }
+      
+      .viva-section {
+        page-break-before: always !important;
+        break-before: page !important;
+        display: block;
+        width: 100%;
+      }
+
+      /* Target the <p> tag that Jekyll wraps around your images */
+      p img, 
+      p:has(img) {
+        display: block !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+      }
+
+      /* Ensure the image itself fills the available width but doesn't exceed page height */
+      img {
+        max-width: 100% !important;
+        max-height: 80vh !important; /* Leaves room for the caption/header */
+        height: auto !important;
+        object-fit: contain !important;
+      }
+      /* Prevent the entire block from being cut in half across pages */
+      .nosplit {
+          display: block;
+          page-break-inside: avoid;
+          break-inside: avoid;
+          width: 100%;
+          margin-bottom: 1em;
+        }
+
+        /* Force side-by-side even if the printer tries to stack them */
+        .nosplit .image-row {
+          display: flex !important;
+          flex-direction: row !important;
+          flex-wrap: nowrap !important;
+        }
+
+        /* Lock the column widths so they don't shrink to 0 or expand to 100% */
+        .nosplit .image-column {
+          /*flex: 0 0 48% !important;*/
+          max-width: 78% !important;
+        }
+      /* Prevent headers from being 'orphaned' at the bottom of a page */
+      h1, h2, h3, h4 {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      /* Ensure table rows don't split */
+      tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      /* Force table borders to show */
+      table {
+          border-collapse: collapse !important;
+          width: 100% !important;
+          margin-bottom: 1em !important;
+        }
+
+        table, th, td {
+          border: 1.5pt solid #000 !important; /* Uses 'pt' for better print scaling */
+          padding: 8px !important;
+        }
+
+        /* Ensure header background isn't stripped */
+        th {
+          background-color: #f2f2f2 !important;
+          -webkit-print-color-adjust: exact; /* Forces background colors in Chrome/Safari */
+          print-color-adjust: exact;
+        }
+
+        /* Prevent tables from breaking across pages awkwardly */
+        tr {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+        }
+    }
+
+  /* The Backdrop (dimmed background) */
+  .exp-modal::backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+    }
+
+
+    /* Responsive Mobile View (< 600px) */
+    @media (max-width: 600px) {
+
+      .nav-links > a , .nav-links > button {
+        padding: 3px !important;
+      }
+
+
+    }
+
+    /* Animation for a smooth entrance */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+</head>
+<body>
+
+
+
+  <div>
+    <div class="main-content">
+      {{ content }}
+    </div>
+    
+
+    <div class="no-print" style="max-width: 800px; margin: 5px auto; display: flex; justify-content: space-between; align-items: center; padding: 10px; border-top: 1px solid #eee;">
+    
+      <div class="nav-links" style="font-family: sans-serif; display: flex; gap: 5px;">
+        <img src="/assets/icons/logo.png" alt="SEELab Logo" style="width: 40px; height: 40px; cursor: pointer;margin: 3px" onclick="window.location.href='https://csparkresearch.in/seelab3'"/>      
+      </div>
+  
+      <button onclick="window.print()" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-family: sans-serif;">
+        Print to A4 PDF
+      </button>
+  
+    </div>
+  
+  </div>
+
+
+
+{% if site.google_analytics %}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R0B00R9LZR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{site.google_analytics}}');
+</script>
+{% endif %}
+  
+
+</body>
+</html>
