@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Strip YAML front matter from markdown files in this directory.
+When front matter is removed, the file is written as ``.txt`` and the ``.md`` is deleted.
 
 Usage:
   python3 remove_front_matter.py --dry-run
@@ -34,7 +35,9 @@ def strip_front_matter(text: str) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Remove YAML front matter from .md files in static/md.")
+    parser = argparse.ArgumentParser(
+        description="Remove YAML front matter from .md files in this folder; write body as .txt (same stem) for /editmanuals."
+    )
     parser.add_argument("--apply", action="store_true", help="Write changes to files.")
     parser.add_argument("--dry-run", action="store_true", help="Show what would change.")
     args = parser.parse_args()
@@ -51,14 +54,18 @@ def main() -> int:
         stripped = strip_front_matter(original)
         if stripped != original:
             changed += 1
-            print(f"{'Would update' if args.dry_run else 'Updated'}: {path.name}")
-            if args.apply:
-                path.write_text(stripped, encoding="utf-8")
+            out_path = path.with_suffix(".txt")
+            if args.dry_run:
+                print(f"Would strip front matter, write {out_path.name}, remove {path.name}")
+            else:
+                out_path.write_text(stripped, encoding="utf-8")
+                path.unlink()
+                print(f"Wrote {out_path.name}, removed {path.name}")
 
     if changed == 0:
         print("No files needed changes.")
     else:
-        print(f"Done. {changed} file(s) {'would be' if args.dry_run else 'were'} updated.")
+        print(f"Done. {changed} file(s) {'would be' if args.dry_run else 'were'} converted to .txt.")
 
     return 0
 

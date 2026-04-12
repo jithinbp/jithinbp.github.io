@@ -169,7 +169,6 @@ This agrees with the marked value of $560\text{ }\Omega$ within experimental tol
 1. **Input Impedance Effect:** The $1\text{ M}\Omega$ input impedance of channels A1 and A2 is in parallel with the circuit elements they monitor. For the resistor values used here ($R_1 = 1\text{ k}\Omega$, $R_2 = 560\text{ }\Omega$), this loading effect is negligible (less than $0.1\%$). For very high circuit resistances (e.g., $> 100\text{ k}\Omega$), this error becomes significant and must be corrected.
 2. **Clean Region Selection:** When the software analyses the selected region of the graph to extract peak voltage and phase, select a portion with at least 2–3 complete, undistorted sinusoidal cycles. Avoid the transient start-up region.
 3. **Resistor Tolerance:** Standard resistors have $\pm 5\%$ tolerance (gold band) or $\pm 1\%$ (brown band). A discrepancy of a few percent between the calculated and marked value is expected and acceptable.
-4. **Stable Amplitude:** Ensure the WG amplitude is set such that the peak voltage does not saturate the input channels. Keep $V_{A1,\text{peak}} < 3.3\text{ V}$ for safe operation.
 
 ---
 

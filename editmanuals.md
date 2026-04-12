@@ -1,7 +1,7 @@
 ---
 layout: editmanual
 title: "Edit Manuals"
-description: Edit and preview SEELab manual markdown files
+description: Edit and preview SEELab manual body text
 permalink: /editmanuals/
 search: exclude
 ---
@@ -226,13 +226,13 @@ search: exclude
 
 <div class="editor-page-wrap">
   <div class="editor-toolbar">
-    <label for="manual-file-select">Manual Markdown File</label>
+    <label for="manual-file-select">Manual body file</label>
     <select id="manual-file-select"></select>
   </div>
 
   <div class="editor-grid">
     <section class="editor-pane">
-      <div class="editor-pane-title">Markdown (.md)</div>
+      <div class="editor-pane-title">Markdown</div>
       <textarea id="manual-md-editor" spellcheck="false"></textarea>
     </section>
 
@@ -259,11 +259,12 @@ search: exclude
   const manualDocs = [
     {% assign manuals = site.seelabmanual | sort: "path" %}
     {% for doc in manuals %}
-      {% assign file_name = doc.path | split: "/" | last %}
-      {% assign source_path = "/assets/md/" | append: file_name %}
+      {% assign coll_file = doc.path | split: "/" | last %}
+      {% assign body_file = coll_file | replace: ".md", ".txt" %}
+      {% assign source_path = "/assets/md/" | append: body_file %}
       {
         path: {{ doc.path | jsonify }},
-        fileName: {{ file_name | jsonify }},
+        fileName: {{ body_file | jsonify }},
         sourceUrl: {{ source_path | relative_url | jsonify }},
         title: {{ doc.title | default: doc.path | jsonify }},
         section: {{ doc.section | default: "Technical Manual" | jsonify }},
@@ -416,14 +417,15 @@ search: exclude
       const raw = await res.text();
       mdEditor.value = raw;
       const fm = parseFrontMatter(raw);
-      doc.title = fm.title || doc.fileName || "Manual";
-      doc.section = fm.section || "Technical Manual";
-      doc.imagePath = fm["image.path"] || "";
-      doc.caption = fm.caption || "";
+      // Body .txt files usually have no YAML; keep titles from the collection entry.
+      doc.title = fm.title || doc.title || doc.fileName || "Manual";
+      doc.section = fm.section || doc.section || "Technical Manual";
+      doc.imagePath = fm["image.path"] || doc.imagePath || "";
+      doc.caption = fm.caption || doc.caption || "";
     } catch (_) {
       mdEditor.value = `Unable to load: ${sourceUrl}`;
-      doc.title = doc.fileName || "Manual";
-      doc.section = "Technical Manual";
+      doc.title = doc.title || doc.fileName || "Manual";
+      doc.section = doc.section || "Technical Manual";
       doc.imagePath = "";
       doc.caption = "";
     }

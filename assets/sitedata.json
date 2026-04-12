@@ -1,21 +1,31 @@
 ---
 sitemap: false
 ---
+{% comment %} Hydejack search: omit lab manuals (/manual/, /manuals/) and seelabmanuals* directory pages (where_exp cannot use "contains ... == false" in Liquid 4). {% endcomment %}
 {% unless site.hydejack.no_search or jekyll.environment == 'development' %}
 {% assign pages = site.html_pages | where_exp:"page","page.sitemap != false" %}
 {% assign docs = site.documents | where_exp:"doc","doc.sitemap != false" %}
 {
   "pages": [
-    {% for page in pages %}{
+    {% assign page_sep = "" %}
+    {% for page in pages %}
+    {% unless page.url contains '/manual/' or page.url contains '/manuals/' or page.url contains 'seelabmanuals' %}
+    {{ page_sep }}{
       {% if page.image       %}"image": {{       page.image       | jsonify }},{% endif %}
       {% if page.title       %}"title": {{       page.title       | jsonify }},{% endif %}
       {% if page.description %}"description": {{ page.description | markdownify | strip_html | jsonify }},{% endif %}
       {% if page.content     %}"content": {{     page.content     | markdownify | strip_html | jsonify }},{% endif %}
       "url": {{                                  page.url         | jsonify }}
-    }{% unless forloop.last %},{% endunless %}{% endfor %}
+    }
+    {% assign page_sep = "," %}
+    {% endunless %}
+    {% endfor %}
   ], 
   "documents": [
-    {% for doc in docs %}{
+    {% assign doc_sep = "" %}
+    {% for doc in docs %}
+    {% unless doc.url contains '/manual/' or doc.url contains '/manuals/' or doc.url contains 'seelabmanuals' %}
+    {{ doc_sep }}{
       {% if doc.image       %}"image": {{       doc.image       | jsonify }},{% endif %}
       {% if doc.title       %}"title": {{       doc.title       | jsonify }},{% endif %}
       {% if doc.date        %}"date": {{        doc.date        | jsonify }},{% endif %}
@@ -26,7 +36,10 @@ sitemap: false
       {% if doc.keywords    %}"keywords": {{    doc.keywords    | jsonify }},{% endif %}
       "collection": {{                          doc.collection  | jsonify }},
       "url": {{                                 doc.url         | jsonify }}
-    }{% unless forloop.last %},{% endunless %}{% endfor %}
+    }
+    {% assign doc_sep = "," %}
+    {% endunless %}
+    {% endfor %}
   ]
 }
 {% else %}{}{% endunless %}

@@ -1,5 +1,5 @@
 | Year | Public Speaking |
-| :--- | :--- |
+| Apr-2026 | FOSSMEET 2026 - NIT Calicut [FOSS tools for Product design and manufacturing](https://fossmeet.org/speakers) `invited speaker`|
 | Feb-2026 | IISER Pune - Meet the Scientists [National Science Day Lecture](https://www.iiserpune.ac.in/storage/media-library/8c7c1ab9-5853-4664-ae8d-5414c63c95e7.pdf) `invited speaker`|
 | Feb-2026 | Pimpri Chinchwad Science Park `invited speaker`|
 | Feb-2026 | Delhi Technological University(DTU), Department of Electronics & Communication Engineering. Demonstration of SEELab-3`speaker`|

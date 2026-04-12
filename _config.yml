@@ -82,6 +82,15 @@ csparkurl:              https://csparkresearch.in
 # Format of the permalinks
 permalink:             /blog/:categories/:year-:month-:day-:title/
 
+# Syntax highlighting: Rouge (Jekyll / GitHub Pages). Pygments is not supported on GitHub Pages.
+highlighter: rouge
+
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+
 # Pagination configuration (used by the `blog` layout)
 paginate:              10
 paginate_path:         /blog/:num/
@@ -211,6 +220,7 @@ hydejack:
   # Set to true to disable the built-in search functionality.
   # Note that search is disabled during local use to save on build time.
   # Run Jekyll with the `JEKYLL_ENV` environment variable set to `production` to enable.
+  # Search index is `assets/sitedata.json`: lab manuals under /manual/, paths containing /manuals/, and seelabmanuals* hubs are excluded from that index (see top of that file).
   no_search:           false
 
   # Set to `true` if you do not want parts of the css inlined in <head/>
@@ -466,3 +476,4 @@ manual_sections:
   - "Acoustics"
   - "Thermal Physics"
   - "Add On Sensors"
+  - "Interfacing"

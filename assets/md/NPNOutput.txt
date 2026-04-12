@@ -80,7 +80,7 @@ A steep slope means low $r_o$ (less ideal current source); a flat curve means hi
 
 1. Open the SEELab3 app and select the **"NPN Output Characteristics"** experiment.
 2. Set **PV2** to a fixed value (e.g., $1.5\text{ V}$) to establish a base current $I_B \approx (1.5 - 0.7)/100\text{k} = 8\text{ }\mu\text{A}$.
-3. The software sweeps **PV1** from $0$ to $3.3\text{ V}$ in steps, recording $V_{A1}$ (collector voltage) at each step and computing $I_C = (V_{PV1} - V_{A1})/R_C$.
+3. The software sweeps **PV1** from $0$ to $5\text{ V}$ in steps, recording $V_{A1}$ (collector voltage) at each step and computing $I_C = (V_{PV1} - V_{A1})/R_C$.
 4. The $I_C$ vs $V_{CE}$ curve is plotted. Identify the **saturation region** (steep rise, $V_{CE} < 0.3\text{ V}$) and the **active region** (flat plateau).
 5. Repeat for at least **three different PV2 values** to generate a family of curves.
 
@@ -151,7 +151,7 @@ For each $I_B$ row, record $I_C$ (mA) at the listed $V_{CE}$ values.
 ### 8. Precautions
 
 1. **Never leave the base floating:** A floating base picks up stray voltages and drives the transistor into an unpredictable state. Always connect $R_B$ from PV2 to the base, even when PV2 = 0 V.
-2. **PV1 limit is 3.3 V:** The collector sweep is limited to $V_{CE,max} \approx 3.3\text{ V}$. This is sufficient to clearly observe both the saturation knee and the active plateau for the base currents used.
+2. **PV1 limit is 5 V:** The collector sweep is limited to $V_{CE,max} \approx 3.3\text{ V}$. This is sufficient to clearly observe both the saturation knee and the active plateau for the base currents used.
 3. **Power dissipation:** At $I_C = 2\text{ mA}$ and $V_{CE} = 3\text{ V}$, the transistor dissipates $P = 6\text{ mW}$ — well within the 2N2222's $625\text{ mW}$ limit. Do not use base currents that push $I_C$ beyond $3\text{ mA}$ with this setup.
 4. **Transistor pinout:** The 2N2222 in TO-18 metal can and TO-92 plastic package have different pin orders. Verify the pinout (E, B, C) from the datasheet before inserting.
 

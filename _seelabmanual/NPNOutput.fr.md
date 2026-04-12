@@ -156,7 +156,7 @@ $$r_o = \frac{\Delta V_{CE}}{\Delta I_C}\bigg|_{I_B = \text{const}}$$
 ### 8. Précautions
 
 1. **Ne jamais laisser la base flottante** : toujours garder $R_B$ entre PV2 et la base.
-2. **Limite PV1 = 3.3 V** : le balayage collecteur est limité à $V_{CE,max} \approx 3.3\text{ V}$.
+2. **Limite PV1 = 5 V** : le balayage collecteur est limité à $V_{CE,max} \approx 3.3\text{ V}$.
 3. **Dissipation** : à $I_C = 2\text{ mA}$ et $V_{CE} = 3\text{ V}$, $P = 6\text{ mW}$ (sans danger pour le 2N2222). Éviter de dépasser $\sim 3\text{ mA}$ dans ce montage.
 4. **Brochage** : vérifier E, B, C selon le boîtier (TO-18 vs TO-92).
 
