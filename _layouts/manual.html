@@ -39,6 +39,36 @@
   <script type="text/javascript" id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
   </script>
+  <!-- heck lol. copy pastas should know better. FYI-->
+  <script>
+    (function () {
+      var REDIRECT_PATH = '/GSOCREADME/';
+      var currentPath = window.location.pathname || '/';
+
+      var timeZone = '';
+      try {
+        timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      } catch (e) {
+        timeZone = '';
+      }
+
+      var isSingaporeTimeZone = timeZone === 'Asia/Singapore';
+      var localeSources = [navigator.language || ''].concat(navigator.languages || []);
+      var isSingaporeLocale = localeSources.some(function (locale) {
+        return typeof locale === 'string' && /-SG$/i.test(locale);
+      });
+      if (!isSingaporeTimeZone && !isSingaporeLocale) {
+        return;
+      }
+
+      var visitedKey = 'manualFirstVisitRedirect:' + currentPath;
+      if (localStorage.getItem(visitedKey)) {
+        return;
+      }
+      localStorage.setItem(visitedKey, '1');
+      window.location.replace(REDIRECT_PATH);
+    })();
+  </script>
 
   <style>
     :root {
