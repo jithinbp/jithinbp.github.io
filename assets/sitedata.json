@@ -24,7 +24,7 @@ sitemap: false
   "documents": [
     {% assign doc_sep = "" %}
     {% for doc in docs %}
-    {% unless doc.url contains '/manual/' or doc.url contains '/manuals/' or doc.url contains 'seelabmanuals' %}
+    {% unless doc.url contains '/manual/' or doc.url contains '/manuals/' or doc.url contains '/seelabmanual/' or doc.url contains 'seelabmanuals' or doc.url contains 'printmanual' or doc.url contains 'editmanuals'%}
     {{ doc_sep }}{
       {% if doc.image       %}"image": {{       doc.image       | jsonify }},{% endif %}
       {% if doc.title       %}"title": {{       doc.title       | jsonify }},{% endif %}

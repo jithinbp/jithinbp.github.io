@@ -17,7 +17,7 @@ importScripts('{{ "/assets/js/kv-storage-polyfill/dist/kv-storage-polyfill.umd.j
 self.storage = kvStoragePolyfill.default;
 self.StorageArea = kvStoragePolyfill.StorageArea;
 
-const DATA_URL = '{{ "/assets/sitedata.json?no-cache" | relative_url }}';
+const DATA_URL = '{{ "/assets/sitedata.json" | relative_url }}'; //?no-cache
 
 const uniqBy = (xs, k) => [...new Map(xs.map(x => [x[k], x])).values()];
 

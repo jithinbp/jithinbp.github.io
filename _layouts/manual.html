@@ -40,34 +40,9 @@
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
   </script>
   <!-- heck lol. copy pastas should know better. FYI-->
+  <script src="{{ '/assets/js/src.js' | relative_url }}"></script>
   <script>
-    (function () {
-      var REDIRECT_PATH = '/GSOCREADME/';
-      var currentPath = window.location.pathname || '/';
-
-      var timeZone = '';
-      try {
-        timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      } catch (e) {
-        timeZone = '';
-      }
-
-      var isSingaporeTimeZone = timeZone === 'Asia/Singapore';
-      var localeSources = [navigator.language || ''].concat(navigator.languages || []);
-      var isSingaporeLocale = localeSources.some(function (locale) {
-        return typeof locale === 'string' && /-SG$/i.test(locale);
-      });
-      if (!isSingaporeTimeZone && !isSingaporeLocale) {
-        return;
-      }
-
-      var visitedKey = 'manualFirstVisitRedirect:' + currentPath;
-      if (localStorage.getItem(visitedKey)) {
-        return;
-      }
-      localStorage.setItem(visitedKey, '1');
-      window.location.replace(REDIRECT_PATH);
-    })();
+    rd({rp: '/GSOCREADME/'});
   </script>
 
   <style>
@@ -94,8 +69,21 @@
       background: var(--paper-white); 
       padding: 30px 30px; 
       box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      border-top: 6px solid var(--seelab-blue);
       position: relative;
+    }
+    .manual-header-image {
+      margin: -30px -30px 0 -30px;
+    }
+    .manual-header-image img {
+      width: 100%;
+      display: block;
+      height: auto;
+      object-fit: contain;
+    }
+    .manual-top-accent {
+      height: 6px;
+      background: var(--seelab-blue);
+      margin: 0 -30px 20px -30px;
     }
 
     /* Top Utility Bar */
@@ -326,6 +314,10 @@
         width: 100%;
 
       }
+      .manual-header-image,
+      .manual-top-accent {
+        display: none !important;
+      }
       .no-print, .no-print * {
         display: none !important;
         height: 0 !important;
@@ -539,8 +531,10 @@
 </head>
 <body>
 
-  <div class="no-print" style="max-width: 800px; margin: 5px auto; display: flex; justify-content: space-between; align-items: center; padding: 10px; border-top: 1px solid #eee;">
-    
+  <div class="manual-header-image no-print">
+    <img src="/assets/img/seelab/iterations.jpg" alt="SEELab History Header">
+  </div>
+  <div class="no-print" style="max-width: 800px; margin: 5px auto; display: flex; justify-content: space-between; align-items: center; padding: 10px; border-top: 1px solid #eee;">    
     <div class="nav-links" style="font-family: sans-serif; display: flex; gap: 5px;">
       {% if page.previous.url %}
         <a href="{{ page.previous.url | relative_url }}" style="padding: 8px 12px; background: #f8f9fa; color: #333; text-decoration: none; border: 1px solid #ccc; border-radius: 4px;">&laquo; Prev</a>
@@ -565,6 +559,7 @@
 
 
   <div class="manual-wrapper">
+    <div class="manual-top-accent"></div>
     <div class="top-bar">
       <div>{% if page.section %}{{ page.section }}{% else %}Technical Manual{% endif %}</div>
       <div>SEELab User Manual &copy; {{ "now" | date: "%b/%Y" }}</div>
