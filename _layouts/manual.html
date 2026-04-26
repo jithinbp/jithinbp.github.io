@@ -74,11 +74,30 @@
     .manual-header-image {
       margin: -30px 0px -30px 0px;
     }
+    .manual-header-link {
+      position: relative;
+      display: block;
+      text-decoration: none;
+    }
     .manual-header-image img {
       width: 100%;
       display: block;
       height: auto;
       object-fit: contain;
+    }
+    .manual-header-overlay {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      background: rgba(0, 74, 153, 0.78);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.4px;
+      padding: 2px 3px;
+      border-radius: 4px;
+      text-transform: uppercase;
     }
     .manual-top-accent {
       height: 6px;
@@ -531,9 +550,12 @@
 </head>
 <body>
 
-  <div class="manual-header-image no-print">
-    <img src="/assets/img/seelab/iterations.jpg" alt="SEELab History Header">
-  </div>
+    <div class="manual-header-image no-print">
+      <a href="/build/seelab-dev/" target="_blank" rel="noopener noreferrer" class="manual-header-link">
+        <img src="/assets/img/seelab/iterations.jpg" alt="SEELab History Header">
+        <span class="manual-header-overlay">SEELab Development History</span>
+      </a>
+    </div>
   <div class="no-print" style="max-width: 800px; margin: 5px auto; display: flex; justify-content: space-between; align-items: center; padding: 10px; border-top: 1px solid #eee;">    
     <div class="nav-links" style="font-family: sans-serif; display: flex; gap: 5px;">
       {% if page.previous.url %}
