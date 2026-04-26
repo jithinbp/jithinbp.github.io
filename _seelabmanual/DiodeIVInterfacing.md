@@ -66,7 +66,7 @@ plt.show()
 
 ---
 
-### 4. A more thorough example — live tracing, auto-scaling, Matplotlib widgets etc.
+### 4. A more thorough example including live tracing, auto-scaling, Matplotlib widgets etc.
 
 ```python
 import time
