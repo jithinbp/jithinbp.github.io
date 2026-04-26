@@ -28,7 +28,7 @@ For [Pick and Place Assembly](/build/pick_and_place/) , Beam Infotech's facility
 
       <article
         class="project-card">
-        <a class="no-hover no-print-link flip-project" tabindex="-1">
+        <a class="no-hover no-print-link flip-project" tabindex="-1" {% if prototype.link %}href="{{ prototype.link }}" target="_blank" {% endif %}>
           <div class="project-card-img aspect-ratio sixteen-nine flip-project-img {% unless screenshot %}fallback-img{% endunless %}">
             {% include_cached components/hy-img.html img=prototype.url alt=prototype.date sizes=sizes width=864 height=486 %}
           </div>

@@ -13,6 +13,7 @@
 - date: April 2015
   url: /assets/img/seelab/dev/5_02-apr-2015.jpg
   description: Hardware and software working as expected but packaging issues remained. Decided to go for 2mm round sockets and Berg strips for Input/Output connectors. Added an inductance meter also. Prototype made with acrylic cabinet. Added Ad9833 waveform generators. 
+  link: https://hackaday.io/project/5971-python-powered-scientific-instrumentation-tool
 - date: April 2015
   url: /assets/img/seelab/dev/6_19-apr-2015.jpg
   description: One more round of prototyping to correct some errors. 
@@ -28,6 +29,7 @@
 - date:  21-June 2015
   url:  /assets/img/seelab/dev/a_21-jun-2015.jpg
   description: Decided to make a very low cost version [no high precision references, PGA etc], attempted gain control using op-amps and uC pins. , but it failed because of reverse voltage protection on uC pins via internal schottky diodes. 28-bit DDS sine wave generator with 0.004Hz resolution up to 2MHz was included. External amplitude control . 
+  link: https://hackaday.com/2016/07/27/hackaday-prize-entry-a-suite-of-lab-instruments/
 - date:  25 July 2015
   url: /assets/img/seelab/dev/b_25-jul-2015.jpg
   description: 
@@ -49,9 +51,11 @@
 - date: January 2016
   url: /assets/img/seelab/dev/10_01-jun-2015.jpg
   description: Made a laser cut enclosure for the vLabtool and got it screen printed. Four of these were distributed to developers of PSLab Akarshan, Praveen, Padmal and called Version 1. Featured on <a href="https://hackaday.com/2016/07/27/hackaday-prize-entry-a-suite-of-lab-instruments/" target="_blank">Hackaday</a>
+  link: /GSOCREADME/
 - date: February 2016
   url: /assets/img/seelab/dev/pendulum.jpg
   description: Over 50 Experiments were developed with SEELablet and <a href="https://hackaday.io/project/12552-seelablet-instrument-cluster-for-laboratories" target="_blank">documented on hackaday.io</a>.  
+  link: https://hackaday.io/project/12552-seelablet-instrument-cluster-for-laboratories
 - date: March 2016
   url: http://res.cloudinary.com/cspark/image/upload/c_lpad,h_280,w_500/v1481558046/seelab_proto/seelab-orangepi.jpg
   description: Several issues with making the ABS plastic cabinet were sorted out, and final assembly process was streamlined. four desktop versions were bought by Farook College, Calicut, followed by several other institutions.
@@ -79,9 +83,18 @@
 - date: Dec 2019
   url: /assets/img/thumbs/seelab-cover.jpg
   description: SEELab 3.0 Launched with an initial production run of 3000 units. <a href="https://csparkresearch.in/seelab3" target="_blank">SEELab3 Homepage</a>
+  link: https://csparkresearch.in/seelab3
 - date: Feb 2020
   url: /assets/img/seelab/dev/ISF.jpg
   description: Exhibited at the India Science Fest, IISER Pune. Workshops organised for high school students 
 - date: Feb 2020
   url: /assets/img/seelab/dev/ml.png
   description: Malayalam Translations contributed by Amal M for the user interface. This adds to the existing french translations by Georges Khaznadar. 
+- date: Feb 2022
+  url: /assets/img/seelab/dev/pendulum_timing.webp
+  description: Made several experiments as part of the seelab android app. Released on 3rd July 2022.
+  link: https://play.google.com/store/apps/details?id=com.cspark.research.eyes17
+- date: March 2026
+  url: /assets/img/seelab/dev/diodeiv.jpg
+  description: Publication number crosses 20 across different journals.
+  link: https://csparkresearch.in/publications
