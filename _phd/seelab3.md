@@ -51,6 +51,20 @@ more than 3000 units in circulation , and 10000+ downloads on the play store.
 
 <p class="read-more mt1"><a class="heading flip-title" href="/seelabmanuals/">And many more...</a></p>
 
+### [Blog Posts](/seelabblog)
+
+---
+<div class="columns mt3 {% unless no_third_column %}columns-break{% endunless %}">
+{% assign manuals = site.seelabblog | sort:"date" | reverse %}
+{% for manual in manuals limit: 5%}
+    {% assign featured = page.featured | default:manual.featured | default:page.big_project | default:manual.big_project %}
+    <div class="column column-1 custommicrocol">
+    {% include_cached pro/project-card.html project=manual featured=featured %}
+    </div>
+{% endfor %}
+</div>
+
+<p class="read-more mt1"><a class="heading flip-title" href="/seelabblog/">And many more...</a></p>
 
 
 ### A Complete Lab in Your Pocket: Why the SEELab 3 is a Game-Changer for Science Education

@@ -337,6 +337,10 @@ collections:
     permalink:         /manual/:path/
     output:            true
 
+  seelabblog:
+    permalink:         /manual/:title/
+    output:            true
+
 # File inclusion/exclusion
 # ----------------------------------------------------------------------------------------
 
@@ -479,3 +483,4 @@ manual_sections:
   - "Thermal Physics"
   - "Add On Sensors"
   - "Interfacing"
+  - "advanced"

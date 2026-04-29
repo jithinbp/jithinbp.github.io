@@ -1,6 +1,6 @@
 ---
 layout: manual
-title: "Measuring DC Voltages"
+title: "Measuring Multiple DC Voltages"
 date: 27 March 2026
 image:
   path: /assets/img/seelab/GetStart/images/A1A2A3.jpg
