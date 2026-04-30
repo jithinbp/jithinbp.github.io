@@ -549,17 +549,105 @@
 
 </head>
 <body>
+  <script>
+    (function () {
+      var COUNTER_KEY = 'manualHeaderImageDailyCounter';
+      var today = new Date();
+      var dayToken = [
+        today.getFullYear(),
+        String(today.getMonth() + 1).padStart(2, '0'),
+        String(today.getDate()).padStart(2, '0')
+      ].join('-');
 
-    <div class="manual-header-image no-print">
+      var state = { day: dayToken, count: 0 };
+      try {
+        var raw = localStorage.getItem(COUNTER_KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (parsed && parsed.day === dayToken && Number.isInteger(parsed.count)) {
+            state = parsed;
+          }
+        }
+      } catch (e) {
+        state = { day: dayToken, count: 0 };
+      }
+
+      // Show banner only for first 2 visits each day.
+      var shouldShowBanner = state.count < 2;
+      state.count = state.count + 1;
+      try {
+        localStorage.setItem(COUNTER_KEY, JSON.stringify(state));
+      } catch (e) {
+        // Ignore storage failures; default behavior keeps banner visible.
+      }
+
+      window.__showManualHeaderBanner = shouldShowBanner;
+    })();
+  </script>
+
+  {% assign toc_lang = page.lang | default: "en" %}
+  {% assign ordered_manuals = site.data.manual_book_order.manual_order | default: "" %}
+  {% assign current_key = page.path | split: "/" | last | default: page.name | default: page.slug %}
+  {% assign current_key = current_key | downcase | replace: ".md", "" %}
+  {% assign nav_prev_url = "" %}
+  {% assign nav_next_url = "" %}
+  {% assign found_current = false %}
+  {% assign current_in_order = false %}
+
+  {% for slug in ordered_manuals %}
+    {% assign expected_name = slug | append: ".md" %}
+    {% assign wanted_key = slug | downcase %}
+    {% assign item = site.seelabmanual | where_exp: "doc", "doc.path contains expected_name" | first %}
+    {% if item %}
+      {% assign item_lang = item.lang | default: "en" %}
+      {% if item_lang == toc_lang %}
+        {% if wanted_key == current_key %}
+          {% assign found_current = true %}
+          {% assign current_in_order = true %}
+        {% else %}
+          {% if found_current %}
+            {% if nav_next_url == "" %}
+              {% assign nav_next_url = item.url %}
+            {% endif %}
+          {% else %}
+            {% assign nav_prev_url = item.url %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% unless current_in_order %}
+    {% assign nav_prev_url = page.previous.url | default: "" %}
+    {% assign nav_next_url = page.next.url | default: "" %}
+  {% endunless %}
+
+    <div id="manual-header-image-banner" class="manual-header-image no-print" style="display: none;">
       <a href="/build/seelab-dev/" target="_blank" rel="noopener noreferrer" class="manual-header-link">
-        <img src="/assets/img/seelab/iterations.jpg" alt="SEELab History Header">
+        <img data-src="/assets/img/seelab/iterations.jpg" alt="SEELab History Header">
         <span class="manual-header-overlay">SEELab Development History</span>
       </a>
     </div>
+  <script>
+    (function () {
+      var banner = document.getElementById('manual-header-image-banner');
+      if (!banner) return;
+      if (!window.__showManualHeaderBanner) {
+        banner.remove();
+        return;
+      }
+
+      var img = banner.querySelector('img[data-src]');
+      if (img) {
+        img.setAttribute('src', img.getAttribute('data-src'));
+      }
+      banner.style.display = '';
+    })();
+  </script>
   <div class="no-print" style="max-width: 800px; margin: 5px auto; display: flex; justify-content: space-between; align-items: center; padding: 10px; border-top: 1px solid #eee;">    
     <div class="nav-links" style="font-family: sans-serif; display: flex; gap: 5px;">
-      {% if page.previous.url %}
-        <a href="{{ page.previous.url | relative_url }}" style="padding: 8px 12px; background: #f8f9fa; color: #333; text-decoration: none; border: 1px solid #ccc; border-radius: 4px;">&laquo; Prev</a>
+      {% if nav_prev_url != "" %}
+        <a href="{{ nav_prev_url | relative_url }}" style="padding: 8px 12px; background: #f8f9fa; color: #333; text-decoration: none; border: 1px solid #ccc; border-radius: 4px;">&laquo; Prev</a>
       {% endif %}
     
       <img src="/assets/icons/logo.png" alt="SEELab Logo" style="width: 40px; height: 40px; cursor: pointer;margin: 3px" onclick="window.location.href='https://csparkresearch.in/seelab3'"/>
@@ -568,8 +656,8 @@
         Experiments Menu
       </button>
     
-      {% if page.next.url %}
-        <a href="{{ page.next.url | relative_url }}" style="padding: 8px 12px; background: #f8f9fa; color: #333; text-decoration: none; border: 1px solid #ccc; border-radius: 4px;">Next &raquo;</a>
+      {% if nav_next_url != "" %}
+        <a href="{{ nav_next_url | relative_url }}" style="padding: 8px 12px; background: #f8f9fa; color: #333; text-decoration: none; border: 1px solid #ccc; border-radius: 4px;">Next &raquo;</a>
       {% endif %}
     </div>
 
@@ -629,50 +717,59 @@
   <dialog id="exp-dialog" style="width: 90%; max-width: 600px; border: none; border-radius: 8px; padding: 0; box-shadow: 0 0 20px rgba(0,0,0,0.2); font-family: 'Inter', sans-serif;">
     <div style="padding: 20px; background: var(--seelab-blue); color: white; display: flex; justify-content: space-between; align-items: center;">
       <h2 style="margin: 0; font-size: 1.2rem;"><a href="/seelabmanuals" style="color: #eee;">Experiment Directory</a></h2>
-      <button onclick="this.closest('dialog').close()" style="background: transparent; border: 1px solid white; color: white; border-radius: 4px; cursor: pointer; padding: 2px 8px;">&times; Close</button>
+      <div>
+        <a href="/manual-book/" target="_blank"style="background: white; color: var(--seelab-blue); vertical-align: middle; max-height: 1em; border: 1px solid white; border-radius: 4px; cursor: pointer; padding: 2px 12px 2px 8px; display: inline-flex; align-items: center; font-weight: 600; text-decoration: none;">
+          <img src="/assets/icons/pdf-book.png" alt="PDF Book" width="18" height="18" style="margin-right: 6px; vertical-align: middle;" />  
+          book
+        </a>
+        <button onclick="this.closest('dialog').close()" style="background: transparent; border: 1px solid white; color: white; border-radius: 4px; cursor: pointer; padding: 2px 8px;">&times; Close</button>
+      </div>
     </div>
     
 
     <div style="padding: 20px; max-height: 70vh; overflow-y: auto;">
-      {% comment %} 
-        Iterate through the custom order defined in _config.yml 
-      {% endcomment %}
-      
+      {% assign ordered = site.data.manual_book_order.manual_order | default: "" %}
       {% for section_name in site.manual_sections %}
-        {% assign section_items = site.seelabmanual | where: "section", section_name | sort: "date" %}
-        
-        {% if section_items.size > 0 %}
+        {% assign section_count = 0 %}
+        {% for slug in ordered %}
+          {% assign expected_name = slug | append: ".md" %}
+          {% assign item = site.seelabmanual | where_exp: "doc", "doc.path contains expected_name" | first %}
+          {% if item and item.section == section_name %}
+            {% assign item_lang = item.lang | default: "en" %}
+            {% if item_lang == toc_lang %}
+              {% assign section_count = section_count | plus: 1 %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        {% if section_count > 0 %}
           <h3 style="color: var(--seelab-blue); font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid var(--seelab-blue); padding-bottom: 5px; margin-top: 25px; display: flex; justify-content: space-between;">
             {{ section_name }}
-            <span style="font-size: 0.7rem; opacity: 0.6;">{{ section_items.size }} Units</span>
+            <span style="font-size: 0.7rem; opacity: 0.6;">{{ section_count }} Units</span>
           </h3>
           
           <ul style="list-style: none; padding: 0; margin: 0;">
-            {% for item in section_items %}
-              <li style="border-bottom: 1px solid #f0f0f0;">
-                <a href="{{ item.url | relative_url }}" style="text-decoration: none; color: #333; display: flex; align-items: center; padding: 10px 5px; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f8f9fa'; this.style.paddingLeft='10px'" onmouseout="this.style.background='transparent'; this.style.paddingLeft='5px'">
-                  <div style="flex-grow: 1;">
-                    <div style="font-weight: 600; font-size: 1rem;">{{ item.title }}</div>
-                    <div style="font-size: 0.75rem; color: #888;">{{ item.date | date: "%B %d, %Y" }}</div>
-                  </div>
-                  <span style="color: var(--seelab-blue); font-size: 1.2rem; font-weight: bold; opacity: 0.3;">&rsaquo;</span>
-                </a>
-              </li>
+            {% for slug in ordered %}
+              {% assign expected_name = slug | append: ".md" %}
+              {% assign item = site.seelabmanual | where_exp: "doc", "doc.path contains expected_name" | first %}
+              {% if item and item.section == section_name %}
+                {% assign item_lang = item.lang | default: "en" %}
+                {% if item_lang == toc_lang %}
+                  <li style="border-bottom: 1px solid #f0f0f0;">
+                    <a href="{{ item.url | relative_url }}" style="text-decoration: none; color: #333; display: flex; align-items: center; padding: 10px 5px; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f8f9fa'; this.style.paddingLeft='10px'" onmouseout="this.style.background='transparent'; this.style.paddingLeft='5px'">
+                      <div style="flex-grow: 1;">
+                        <div style="font-weight: 600; font-size: 1rem;">{{ item.title }}</div>
+                        <div style="font-size: 0.75rem; color: #888;">{{ item.date | date: "%B %d, %Y" }}</div>
+                      </div>
+                      <span style="color: var(--seelab-blue); font-size: 1.2rem; font-weight: bold; opacity: 0.3;">&rsaquo;</span>
+                    </a>
+                  </li>
+                {% endif %}
+              {% endif %}
             {% endfor %}
           </ul>
         {% endif %}
       {% endfor %}
-
-
-      {% assign unsectioned = site.seelabmanual | where_exp: "item", "item.section == nil" %}
-      {% if unsectioned.size > 0 %}
-        <h3 style="color: #666; font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 25px;">Miscellaneous</h3>
-        <ul style="list-style: none; padding: 0; margin: 0;">
-          {% for item in unsectioned %}
-            <li style="margin: 8px 0;"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
-          {% endfor %}
-        </ul>
-      {% endif %}
 
     </div>
 

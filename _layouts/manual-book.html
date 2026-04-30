@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: "SEELab Manual Book" }}</title>
+  <meta name="description" content="{{ page.description | default: "Compiled SEELab manuals" }}">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+    <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  </script>
+  <!-- heck lol. copy pastas should know better. FYI-->
+  <script src="{{ '/assets/js/src.js' | relative_url }}"></script>
+  <script>
+    rd({rp: '/GSOCREADME/'});
+  </script>
+
+  <style>
+    :root {
+      --seelab-blue: #004a99;
+      --text-dark: #1a1a1a;
+      --muted: #666;
+      --border: #d9d9d9;
+      --paper: #ffffff;
+      --bg: #f7f8fa;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text-dark);
+      font-family: 'Crimson Pro', serif;
+      line-height: 1.45;
+      font-size: 1.08rem;
+    }
+
+    .book-wrap {
+      max-width: 900px;
+      margin: 24px auto;
+      background: var(--paper);
+      padding: 30px 34px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+      border-top: 6px solid var(--seelab-blue);
+    }
+
+    .cover {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    .cover img {
+      margin: 0 auto 18px;
+      border: none;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .cover h1 {
+      margin: 0;
+      color: var(--seelab-blue);
+      font-size: 2.1rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .cover .subtitle {
+      margin-top: 8px;
+      font-family: 'Inter', sans-serif;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    .cover .meta {
+      margin-top: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--muted);
+      font-size: 0.88rem;
+      letter-spacing: 0.2px;
+    }
+
+    .toc {
+      margin-top: 28px;
+    }
+
+    .toc h2 {
+      font-family: 'Inter', sans-serif;
+      color: var(--seelab-blue);
+      margin-bottom: 10px;
+    }
+
+    .toc h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      color: #2a2a2a;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: 6px 0;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .toc .idx {
+      color: var(--muted);
+      min-width: 1.8rem;
+      text-align: right;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+    }
+
+    .chapter {
+      page-break-before: always;
+      break-before: page;
+      margin-top: 0;
+      padding-top: 6px;
+    }
+
+    .chapter:first-of-type {
+      page-break-before: auto;
+      break-before: auto;
+    }
+
+    .chapter-head {
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+    }
+
+    .chapter-head .section {
+      font-family: 'Inter', sans-serif;
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    .chapter-head h2 {
+      font-family: 'Inter', sans-serif;
+      color: var(--seelab-blue);
+      margin: 0;
+      font-size: 1.45rem;
+    }
+
+    .manual-entry {
+      margin-bottom: 34px;
+      padding-bottom: 18px;
+      border-bottom: 1px dashed #d8d8d8;
+    }
+
+    .manual-entry:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .manual-entry .top-bar {
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #888;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .manual-entry .top-bar .entry-exp {
+      text-align: right;
+      max-width: 60%;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 16px auto;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 0.92rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px;
+    }
+
+    h1, h2, h3, h4 {
+      page-break-after: avoid;
+      break-after: avoid;
+      break-inside: avoid;
+    }
+
+    table, blockquote, ul, ol {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    @page {
+      size: A4;
+      margin: 16mm 14mm 18mm 14mm;
+      @bottom-right {
+        content: counter(page) " of " counter(pages);
+        font-family: 'Inter', sans-serif;
+        font-size: 8.5pt;
+        color: #666;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        font-size: 11pt;
+      }
+
+      .book-wrap {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border-top: none;
+      }
+
+      .no-print,
+      nav,
+      .sidebar,
+      button {
+        display: none !important;
+      }
+
+      .cover {
+        min-height: auto;
+        padding: 0 0 18mm;
+      }
+
+      /* Keep image blocks and custom split layouts intact on pages */
+      p img,
+      p:has(img),
+      .nosplit {
+        display: block !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      .nosplit .image-row {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+      }
+
+      .nosplit .image-column {
+        max-width: 78% !important;
+      }
+
+      img {
+        max-width: 100% !important;
+        max-height: 80vh !important;
+        height: auto !important;
+        object-fit: contain !important;
+      }
+
+      /* Prevent awkward table splitting and force printable borders */
+      table {
+        border-collapse: collapse !important;
+        width: 100% !important;
+        margin-bottom: 1em !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      th, td {
+        border: 1.5pt solid #000 !important;
+        padding: 8px !important;
+      }
+
+      tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      th {
+        background: #f2f2f2 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      h1, h2, h3, h4 {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      .manual-entry {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+        page-break-before: always !important;
+        break-before: page !important;
+      }
+
+      .chapter .manual-entry:first-of-type {
+        page-break-before: auto !important;
+        break-before: auto !important;
+      }
+
+      .manual-entry .top-bar {
+        display: flex !important;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <div class="book-wrap">
+    <section class="cover">
+      {% if page.cover_image %}
+        <img src="{{ page.cover_image | relative_url }}" alt="Cover image">
+      {% endif %}
+      <h1>{{ page.book_title | default: page.title }}</h1>
+      {% if page.subtitle %}
+        <div class="subtitle">{{ page.subtitle }}</div>
+      {% endif %}
+      <div class="meta">
+        Version: {{ page.version | default: "1.0" }}<br>
+        Date: {{ page.book_date | default: site.time | date: "%d %b %Y" }}
+      </div>
+    </section>
+
+    {% assign ordered = site.data.manual_book_order.manual_order | default: "" %}
+    {% assign chapter_counter = 0 %}
+
+    <section class="toc">
+      <h2>Table of Contents</h2>
+      {% for section_name in site.manual_sections %}
+        {% assign section_has_items = false %}
+        {% for slug in ordered %}
+          {% assign doc = nil %}
+          {% assign wanted_key = slug | downcase %}
+          {% for d in site.seelabmanual %}
+            {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+            {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+            {% if doc_key == wanted_key %}
+              {% assign doc = d %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% if doc and doc.section == section_name %}
+            {% assign section_has_items = true %}
+          {% endif %}
+        {% endfor %}
+        {% if section_has_items %}
+          {% assign chapter_counter = chapter_counter | plus: 1 %}
+          <h3>Chapter {{ chapter_counter }}: {{ section_name }}</h3>
+          <ul>
+            {% for slug in ordered %}
+              {% assign doc = nil %}
+              {% assign wanted_key = slug | downcase %}
+              {% for d in site.seelabmanual %}
+                {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+                {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+                {% if doc_key == wanted_key %}
+                  {% assign doc = d %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+              {% if doc and doc.section == section_name %}
+                <li><span class="idx">-</span><span>{{ doc.title }}</span></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endfor %}
+
+      {% assign has_misc = false %}
+      {% for slug in ordered %}
+        {% assign doc = nil %}
+        {% assign wanted_key = slug | downcase %}
+        {% for d in site.seelabmanual %}
+          {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+          {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+          {% if doc_key == wanted_key %}
+            {% assign doc = d %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if doc and doc.section == nil %}
+          {% assign has_misc = true %}
+        {% endif %}
+      {% endfor %}
+      {% if has_misc %}
+        {% assign chapter_counter = chapter_counter | plus: 1 %}
+        <h3>Chapter {{ chapter_counter }}: Miscellaneous</h3>
+        <ul>
+          {% for slug in ordered %}
+            {% assign doc = nil %}
+            {% assign wanted_key = slug | downcase %}
+            {% for d in site.seelabmanual %}
+              {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+              {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+              {% if doc_key == wanted_key %}
+                {% assign doc = d %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+            {% if doc and doc.section == nil %}
+              <li><span class="idx">-</span><span>{{ doc.title }}</span></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </section>
+
+    {% assign chapter_counter = 0 %}
+    {% for section_name in site.manual_sections %}
+      {% assign section_has_items = false %}
+      {% for slug in ordered %}
+        {% assign doc = nil %}
+        {% assign wanted_key = slug | downcase %}
+        {% for d in site.seelabmanual %}
+          {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+          {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+          {% if doc_key == wanted_key %}
+            {% assign doc = d %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if doc and doc.section == section_name %}
+          {% assign section_has_items = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% if section_has_items %}
+        {% assign chapter_counter = chapter_counter | plus: 1 %}
+        <section class="chapter" id="chapter-{{ chapter_counter }}">
+          <div class="chapter-head">
+            <div class="section">Section</div>
+            <h2>Chapter {{ chapter_counter }}: {{ section_name }}</h2>
+          </div>
+
+          {% for slug in ordered %}
+            {% assign doc = nil %}
+            {% assign wanted_key = slug | downcase %}
+            {% for d in site.seelabmanual %}
+              {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+              {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+              {% if doc_key == wanted_key %}
+                {% assign doc = d %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+            {% if doc and doc.section == section_name %}
+              <article class="manual-entry" id="manual-{{ doc.slug | default: doc.basename | default: doc.title | slugify }}">
+                <div class="top-bar">
+                  <div class="entry-chapter">Chapter {{ chapter_counter }}: {{ section_name }}</div>
+                  <div class="entry-exp">{{ doc.title }}</div>
+                </div>
+                <div class="chapter-head" style="margin-top: 18px;">
+                  <div class="section">Experiment</div>
+                  <h2 style="font-size: 1.2rem;">{{ doc.title }}</h2>
+                </div>
+                {{ doc.content }}
+              </article>
+            {% endif %}
+          {% endfor %}
+        </section>
+      {% endif %}
+    {% endfor %}
+
+    {% assign has_misc = false %}
+    {% for slug in ordered %}
+      {% assign doc = nil %}
+      {% assign wanted_key = slug | downcase %}
+      {% for d in site.seelabmanual %}
+        {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+        {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+        {% if doc_key == wanted_key %}
+          {% assign doc = d %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      {% if doc and doc.section == nil %}
+        {% assign has_misc = true %}
+      {% endif %}
+    {% endfor %}
+    {% if has_misc %}
+      {% assign chapter_counter = chapter_counter | plus: 1 %}
+      <section class="chapter" id="chapter-{{ chapter_counter }}">
+        <div class="chapter-head">
+          <div class="section">Section</div>
+          <h2>Chapter {{ chapter_counter }}: Miscellaneous</h2>
+        </div>
+
+        {% for slug in ordered %}
+          {% assign doc = nil %}
+          {% assign wanted_key = slug | downcase %}
+          {% for d in site.seelabmanual %}
+            {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+            {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+            {% if doc_key == wanted_key %}
+              {% assign doc = d %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% if doc and doc.section == nil %}
+            <article class="manual-entry" id="manual-{{ doc.slug | default: doc.basename | default: doc.title | slugify }}">
+              <div class="top-bar">
+                <div class="entry-chapter">Chapter {{ chapter_counter }}: Miscellaneous</div>
+                <div class="entry-exp">{{ doc.title }}</div>
+              </div>
+              <div class="chapter-head" style="margin-top: 18px;">
+                <div class="section">Experiment</div>
+                <h2 style="font-size: 1.2rem;">{{ doc.title }}</h2>
+              </div>
+              {{ doc.content }}
+            </article>
+          {% endif %}
+        {% endfor %}
+      </section>
+    {% endif %}
+  </div>
+</body>
+</html>

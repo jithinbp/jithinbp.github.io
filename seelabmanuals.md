@@ -46,38 +46,102 @@ caption: Traditional lab manuals for SEElab 3.0
     {% endfor %}
   </div>
 
+  {% assign ordered = site.data.manual_book_order.manual_order | default: "" %}
   {% for section_name in site.manual_sections %}
-    {% assign section_items = site.seelabmanual | where: "section", section_name | sort: "date" %}    
-    {% if section_items.size > 0 %}
+    {% assign section_count = 0 %}
+    {% for slug in ordered %}
+      {% assign item = nil %}
+      {% assign wanted_key = slug | downcase %}
+      {% for d in site.seelabmanual %}
+        {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+        {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+        {% if doc_key == wanted_key %}
+          {% assign item = d %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      {% if item and item.section == section_name %}
+        {% assign item_lang = item.lang | default: "en" %}
+        {% if item_lang == toc_lang %}
+          {% assign section_count = section_count | plus: 1 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if section_count > 0 %}
       <h3 style="color: var(--seelab-blue); font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid var(--seelab-blue); padding-bottom: 5px; margin-top: 25px; display: flex; justify-content: space-between;">
         {{ section_name }}
-        <span style="font-size: 0.7rem; opacity: 0.6;">{{ section_items.size }} Units</span>
+        <span style="font-size: 0.7rem; opacity: 0.6;">{{ section_count }} Units</span>
       </h3>      
       <ul style="list-style: none; padding: 0; margin: 0;">
-        {% for item in section_items %}
-          {% assign item_lang = item.lang | default: "en" %}
-          {% if item_lang == toc_lang %}
-            <li style="border-bottom: 1px solid #f0f0f0;">
-              <a href="{{ item.url | relative_url }}" style="text-decoration: none; color: #333; display: flex; align-items: center; padding: 10px 5px 10px 5px; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f8f9fa'; this.style.paddingLeft='10px'" onmouseout="this.style.background='transparent'; this.style.paddingLeft='5px'">
-                <div style="flex-grow: 1; font-weight: 600; font-size: 1rem;">
-                  {{ item.title }}
-                </div>
-                <span style="color: var(--seelab-blue); font-size: 1.2rem; font-weight: bold; opacity: 0.3;">&rsaquo;</span>
-              </a>
-            </li>
+        {% for slug in ordered %}
+          {% assign item = nil %}
+          {% assign wanted_key = slug | downcase %}
+          {% for d in site.seelabmanual %}
+            {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+            {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+            {% if doc_key == wanted_key %}
+              {% assign item = d %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% if item and item.section == section_name %}
+            {% assign item_lang = item.lang | default: "en" %}
+            {% if item_lang == toc_lang %}
+              <li style="border-bottom: 1px solid #f0f0f0;">
+                <a href="{{ item.url | relative_url }}" style="text-decoration: none; color: #333; display: flex; align-items: center; padding: 10px 5px 10px 5px; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f8f9fa'; this.style.paddingLeft='10px'" onmouseout="this.style.background='transparent'; this.style.paddingLeft='5px'">
+                  <div style="flex-grow: 1; font-weight: 600; font-size: 1rem;">
+                    {{ item.title }}
+                  </div>
+                  <span style="color: var(--seelab-blue); font-size: 1.2rem; font-weight: bold; opacity: 0.3;">&rsaquo;</span>
+                </a>
+              </li>
+            {% endif %}
           {% endif %}
         {% endfor %}
       </ul>
     {% endif %}
   {% endfor %}
-  {% assign unsectioned = site.seelabmanual | where_exp: "item", "item.section == nil" %}
-  {% if unsectioned.size > 0 %}
+
+  {% assign unsectioned_count = 0 %}
+  {% for slug in ordered %}
+    {% assign item = nil %}
+    {% assign wanted_key = slug | downcase %}
+    {% for d in site.seelabmanual %}
+      {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+      {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+      {% if doc_key == wanted_key %}
+        {% assign item = d %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    {% if item and item.section == nil %}
+      {% assign item_lang = item.lang | default: "en" %}
+      {% if item_lang == toc_lang %}
+        {% assign unsectioned_count = unsectioned_count | plus: 1 %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if unsectioned_count > 0 %}
     <h3 style="color: #666; font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 25px;">Miscellaneous</h3>
     <ul style="list-style: none; padding: 0; margin: 0;">
-      {% for item in unsectioned %}
-        {% assign item_lang = item.lang | default: "en" %}
-        {% if item_lang == toc_lang %}
-          <li style="margin: 8px 0;"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+      {% for slug in ordered %}
+        {% assign item = nil %}
+        {% assign wanted_key = slug | downcase %}
+        {% for d in site.seelabmanual %}
+          {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
+          {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
+          {% if doc_key == wanted_key %}
+            {% assign item = d %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if item and item.section == nil %}
+          {% assign item_lang = item.lang | default: "en" %}
+          {% if item_lang == toc_lang %}
+            <li style="margin: 8px 0;"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+          {% endif %}
         {% endif %}
       {% endfor %}
     </ul>
