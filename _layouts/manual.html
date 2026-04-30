@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -728,49 +729,46 @@
     
 
     <div style="padding: 20px; max-height: 70vh; overflow-y: auto;">
-      {% assign ordered = site.data.manual_book_order.manual_order | default: "" %}
-      {% for section_name in site.manual_sections %}
-        {% assign section_count = 0 %}
-        {% for slug in ordered %}
-          {% assign expected_name = slug | append: ".md" %}
-          {% assign item = site.seelabmanual | where_exp: "doc", "doc.path contains expected_name" | first %}
-          {% if item and item.section == section_name %}
-            {% assign item_lang = item.lang | default: "en" %}
-            {% if item_lang == toc_lang %}
-              {% assign section_count = section_count | plus: 1 %}
-            {% endif %}
-          {% endif %}
-        {% endfor %}
+      {%- assign ordered = site.data.manual_book_order.manual_order | default: "" -%}
+      {%- for section_name in site.manual_sections -%}
+        {%- assign section_count = 0 -%}
+        {%- for slug in ordered -%}
+          {%- assign expected_name = slug | append: ".md" -%}
+          {%- assign item = site.seelabmanual | where_exp: "doc", "doc.path contains expected_name" | first -%}
+          {%- if item and item.section == section_name -%}
+            {%- assign item_lang = item.lang | default: "en" -%}
+            {%- if item_lang == toc_lang -%}
+              {%- assign section_count = section_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
 
-        {% if section_count > 0 %}
+        {%- if section_count > 0 -%}
           <h3 style="color: var(--seelab-blue); font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid var(--seelab-blue); padding-bottom: 5px; margin-top: 25px; display: flex; justify-content: space-between;">
             {{ section_name }}
             <span style="font-size: 0.7rem; opacity: 0.6;">{{ section_count }} Units</span>
           </h3>
-          
           <ul style="list-style: none; padding: 0; margin: 0;">
-            {% for slug in ordered %}
-              {% assign expected_name = slug | append: ".md" %}
-              {% assign item = site.seelabmanual | where_exp: "doc", "doc.path contains expected_name" | first %}
-              {% if item and item.section == section_name %}
-                {% assign item_lang = item.lang | default: "en" %}
-                {% if item_lang == toc_lang %}
+            {%- for slug in ordered -%}
+              {%- assign expected_name = slug | append: ".md" -%}
+              {%- assign item = site.seelabmanual | where_exp: "doc", "doc.path contains expected_name" | first -%}
+              {%- if item and item.section == section_name -%}
+                {%- assign item_lang = item.lang | default: "en" -%}
+                {%- if item_lang == toc_lang -%}
                   <li style="border-bottom: 1px solid #f0f0f0;">
-                    <a href="{{ item.url | relative_url }}" style="text-decoration: none; color: #333; display: flex; align-items: center; padding: 10px 5px; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f8f9fa'; this.style.paddingLeft='10px'" onmouseout="this.style.background='transparent'; this.style.paddingLeft='5px'">
+                    <a href="{{ item.url | relative_url }}" style="text-decoration: none; color: #333; display: flex; align-items: center; padding: 3px 5px; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f8f9fa'; this.style.paddingLeft='10px'" onmouseout="this.style.background='transparent'; this.style.paddingLeft='5px'">
                       <div style="flex-grow: 1;">
                         <div style="font-weight: 600; font-size: 1rem;">{{ item.title }}</div>
-                        <div style="font-size: 0.75rem; color: #888;">{{ item.date | date: "%B %d, %Y" }}</div>
                       </div>
                       <span style="color: var(--seelab-blue); font-size: 1.2rem; font-weight: bold; opacity: 0.3;">&rsaquo;</span>
                     </a>
                   </li>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
           </ul>
-        {% endif %}
-      {% endfor %}
-
+        {%- endif -%}
+      {%- endfor -%}
     </div>
 
 

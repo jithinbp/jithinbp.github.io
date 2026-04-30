@@ -363,129 +363,129 @@
       </div>
     </section>
 
-    {% assign ordered = site.data.manual_book_order.manual_order | default: "" %}
-    {% assign chapter_counter = 0 %}
+    {%- assign ordered = site.data.manual_book_order.manual_order | default: "" -%}
+    {%- assign chapter_counter = 0 -%}
 
     <section class="toc">
       <h2>Table of Contents</h2>
-      {% for section_name in site.manual_sections %}
-        {% assign section_has_items = false %}
-        {% for slug in ordered %}
-          {% assign doc = nil %}
-          {% assign wanted_key = slug | downcase %}
-          {% for d in site.seelabmanual %}
-            {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
-            {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
-            {% if doc_key == wanted_key %}
-              {% assign doc = d %}
-              {% break %}
-            {% endif %}
-          {% endfor %}
-          {% if doc and doc.section == section_name %}
-            {% assign section_has_items = true %}
-          {% endif %}
-        {% endfor %}
-        {% if section_has_items %}
-          {% assign chapter_counter = chapter_counter | plus: 1 %}
+      {%- for section_name in site.manual_sections -%}
+        {%- assign section_has_items = false -%}
+        {%- for slug in ordered -%}
+          {%- assign doc = nil -%}
+          {%- assign wanted_key = slug | downcase -%}
+          {%- for d in site.seelabmanual -%}
+            {%- assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path -%}
+            {%- assign doc_key = doc_key | downcase | replace: ".md", "" -%}
+            {%- if doc_key == wanted_key -%}
+              {%- assign doc = d -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if doc and doc.section == section_name -%}
+            {%- assign section_has_items = true -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if section_has_items -%}
+          {%- assign chapter_counter = chapter_counter | plus: 1 -%}
           <h3>Chapter {{ chapter_counter }}: {{ section_name }}</h3>
           <ul>
-            {% for slug in ordered %}
-              {% assign doc = nil %}
-              {% assign wanted_key = slug | downcase %}
-              {% for d in site.seelabmanual %}
-                {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
-                {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
-                {% if doc_key == wanted_key %}
-                  {% assign doc = d %}
-                  {% break %}
-                {% endif %}
-              {% endfor %}
-              {% if doc and doc.section == section_name %}
+            {%- for slug in ordered -%}
+              {%- assign doc = nil -%}
+              {%- assign wanted_key = slug | downcase -%}
+              {%- for d in site.seelabmanual -%}
+                {%- assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path -%}
+                {%- assign doc_key = doc_key | downcase | replace: ".md", "" -%}
+                {%- if doc_key == wanted_key -%}
+                  {%- assign doc = d -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if doc and doc.section == section_name -%}
                 <li><span class="idx">-</span><span>{{ doc.title }}</span></li>
-              {% endif %}
-            {% endfor %}
+              {%- endif -%}
+            {%- endfor -%}
           </ul>
-        {% endif %}
-      {% endfor %}
+        {%- endif -%}
+      {%- endfor -%}
 
-      {% assign has_misc = false %}
-      {% for slug in ordered %}
-        {% assign doc = nil %}
-        {% assign wanted_key = slug | downcase %}
-        {% for d in site.seelabmanual %}
-          {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
-          {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
-          {% if doc_key == wanted_key %}
-            {% assign doc = d %}
-            {% break %}
-          {% endif %}
-        {% endfor %}
-        {% if doc and doc.section == nil %}
-          {% assign has_misc = true %}
-        {% endif %}
-      {% endfor %}
-      {% if has_misc %}
-        {% assign chapter_counter = chapter_counter | plus: 1 %}
+      {%- assign has_misc = false -%}
+      {%- for slug in ordered -%}
+        {%- assign doc = nil -%}
+        {%- assign wanted_key = slug | downcase -%}
+        {%- for d in site.seelabmanual -%}
+          {%- assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path -%}
+          {%- assign doc_key = doc_key | downcase | replace: ".md", "" -%}
+          {%- if doc_key == wanted_key -%}
+            {%- assign doc = d -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if doc and doc.section == nil -%}
+          {%- assign has_misc = true -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if has_misc -%}
+        {%- assign chapter_counter = chapter_counter | plus: 1 -%}
         <h3>Chapter {{ chapter_counter }}: Miscellaneous</h3>
         <ul>
-          {% for slug in ordered %}
-            {% assign doc = nil %}
-            {% assign wanted_key = slug | downcase %}
-            {% for d in site.seelabmanual %}
-              {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
-              {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
-              {% if doc_key == wanted_key %}
-                {% assign doc = d %}
-                {% break %}
-              {% endif %}
-            {% endfor %}
-            {% if doc and doc.section == nil %}
+          {%- for slug in ordered -%}
+            {%- assign doc = nil -%}
+            {%- assign wanted_key = slug | downcase -%}
+            {%- for d in site.seelabmanual -%}
+              {%- assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path -%}
+              {%- assign doc_key = doc_key | downcase | replace: ".md", "" -%}
+              {%- if doc_key == wanted_key -%}
+                {%- assign doc = d -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if doc and doc.section == nil -%}
               <li><span class="idx">-</span><span>{{ doc.title }}</span></li>
-            {% endif %}
-          {% endfor %}
+            {%- endif -%}
+          {%- endfor -%}
         </ul>
-      {% endif %}
+      {%- endif -%}
     </section>
 
-    {% assign chapter_counter = 0 %}
-    {% for section_name in site.manual_sections %}
-      {% assign section_has_items = false %}
-      {% for slug in ordered %}
-        {% assign doc = nil %}
-        {% assign wanted_key = slug | downcase %}
-        {% for d in site.seelabmanual %}
-          {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
-          {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
-          {% if doc_key == wanted_key %}
-            {% assign doc = d %}
-            {% break %}
-          {% endif %}
-        {% endfor %}
-        {% if doc and doc.section == section_name %}
-          {% assign section_has_items = true %}
-        {% endif %}
-      {% endfor %}
+    {%- assign chapter_counter = 0 -%}
+    {%- for section_name in site.manual_sections -%}
+      {%- assign section_has_items = false -%}
+      {%- for slug in ordered -%}
+        {%- assign doc = nil -%}
+        {%- assign wanted_key = slug | downcase -%}
+        {%- for d in site.seelabmanual -%}
+          {%- assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path -%}
+          {%- assign doc_key = doc_key | downcase | replace: ".md", "" -%}
+          {%- if doc_key == wanted_key -%}
+            {%- assign doc = d -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if doc and doc.section == section_name -%}
+          {%- assign section_has_items = true -%}
+        {%- endif -%}
+      {%- endfor -%}
 
-      {% if section_has_items %}
-        {% assign chapter_counter = chapter_counter | plus: 1 %}
+      {%- if section_has_items -%}
+        {%- assign chapter_counter = chapter_counter | plus: 1 -%}
         <section class="chapter" id="chapter-{{ chapter_counter }}">
           <div class="chapter-head">
             <div class="section">Section</div>
             <h2>Chapter {{ chapter_counter }}: {{ section_name }}</h2>
           </div>
 
-          {% for slug in ordered %}
-            {% assign doc = nil %}
-            {% assign wanted_key = slug | downcase %}
-            {% for d in site.seelabmanual %}
-              {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
-              {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
-              {% if doc_key == wanted_key %}
-                {% assign doc = d %}
-                {% break %}
-              {% endif %}
-            {% endfor %}
-            {% if doc and doc.section == section_name %}
+          {%- for slug in ordered -%}
+            {%- assign doc = nil -%}
+            {%- assign wanted_key = slug | downcase -%}
+            {%- for d in site.seelabmanual -%}
+              {%- assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path -%}
+              {%- assign doc_key = doc_key | downcase | replace: ".md", "" -%}
+              {%- if doc_key == wanted_key -%}
+                {%- assign doc = d -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if doc and doc.section == section_name -%}
               <article class="manual-entry" id="manual-{{ doc.slug | default: doc.basename | default: doc.title | slugify }}">
                 <div class="top-bar">
                   <div class="entry-chapter">Chapter {{ chapter_counter }}: {{ section_name }}</div>
@@ -497,48 +497,48 @@
                 </div>
                 {{ doc.content }}
               </article>
-            {% endif %}
-          {% endfor %}
+            {%- endif -%}
+          {%- endfor -%}
         </section>
-      {% endif %}
-    {% endfor %}
+      {%- endif -%}
+    {%- endfor -%}
 
-    {% assign has_misc = false %}
-    {% for slug in ordered %}
-      {% assign doc = nil %}
-      {% assign wanted_key = slug | downcase %}
-      {% for d in site.seelabmanual %}
-        {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
-        {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
-        {% if doc_key == wanted_key %}
-          {% assign doc = d %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
-      {% if doc and doc.section == nil %}
-        {% assign has_misc = true %}
-      {% endif %}
-    {% endfor %}
-    {% if has_misc %}
-      {% assign chapter_counter = chapter_counter | plus: 1 %}
+    {%- assign has_misc = false -%}
+    {%- for slug in ordered -%}
+      {%- assign doc = nil -%}
+      {%- assign wanted_key = slug | downcase -%}
+      {%- for d in site.seelabmanual -%}
+        {%- assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path -%}
+        {%- assign doc_key = doc_key | downcase | replace: ".md", "" -%}
+        {%- if doc_key == wanted_key -%}
+          {%- assign doc = d -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if doc and doc.section == nil -%}
+        {%- assign has_misc = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if has_misc -%}
+      {%- assign chapter_counter = chapter_counter | plus: 1 -%}
       <section class="chapter" id="chapter-{{ chapter_counter }}">
         <div class="chapter-head">
           <div class="section">Section</div>
           <h2>Chapter {{ chapter_counter }}: Miscellaneous</h2>
         </div>
 
-        {% for slug in ordered %}
-          {% assign doc = nil %}
-          {% assign wanted_key = slug | downcase %}
-          {% for d in site.seelabmanual %}
-            {% assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path %}
-            {% assign doc_key = doc_key | downcase | replace: ".md", "" %}
-            {% if doc_key == wanted_key %}
-              {% assign doc = d %}
-              {% break %}
-            {% endif %}
-          {% endfor %}
-          {% if doc and doc.section == nil %}
+        {%- for slug in ordered -%}
+          {%- assign doc = nil -%}
+          {%- assign wanted_key = slug | downcase -%}
+          {%- for d in site.seelabmanual -%}
+            {%- assign doc_key = d.slug | default: d.basename | default: d.name | default: d.path -%}
+            {%- assign doc_key = doc_key | downcase | replace: ".md", "" -%}
+            {%- if doc_key == wanted_key -%}
+              {%- assign doc = d -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if doc and doc.section == nil -%}
             <article class="manual-entry" id="manual-{{ doc.slug | default: doc.basename | default: doc.title | slugify }}">
               <div class="top-bar">
                 <div class="entry-chapter">Chapter {{ chapter_counter }}: Miscellaneous</div>
@@ -550,10 +550,22 @@
               </div>
               {{ doc.content }}
             </article>
-          {% endif %}
-        {% endfor %}
+          {%- endif -%}
+        {%- endfor -%}
       </section>
-    {% endif %}
+    {%- endif -%}
   </div>
+
+{% if site.google_analytics %}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R0B00R9LZR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{site.google_analytics}}');
+</script>
+{% endif %}
+
 </body>
 </html>
