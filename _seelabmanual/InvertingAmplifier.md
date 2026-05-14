@@ -135,6 +135,11 @@ $$A_v = \frac{V_{out,pp}}{V_{in,pp}}$$
 | Severe clipping at low input | Supply rails too low or op-amp wiring error | Verify $\pm 6\text{ V}$ rails and feedback path |
 | Noisy/distorted output | Floating ground or loose breadboard contacts | Tighten wiring and ensure common ground |
 
+
+### [Video Resource: https://www.youtube.com/embed/EXFcZkPimdE](https://www.youtube.com/embed/EXFcZkPimdE)
+
+<div class="no-print"><iframe width="560" height="315" src="https://www.youtube.com/embed/EXFcZkPimdE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
 ---
 
 <div class="viva-section nosplit">

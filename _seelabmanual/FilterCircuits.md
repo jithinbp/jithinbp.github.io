@@ -274,6 +274,10 @@ plt.show()
 
 ---
 
+### [Video Resource: https://www.youtube.com/embed/6vXtdxgFGdk](https://www.youtube.com/embed/6vXtdxgFGdk)
+
+<div class="no-print"><iframe width="560" height="315" src="https://www.youtube.com/embed/6vXtdxgFGdk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
 <div class="viva-section nosplit">
 
 <h3>10. Viva-Voce Questions</h3>

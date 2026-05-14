@@ -3,6 +3,7 @@ layout: manual
 title: "Measuring Capacitance using IN1"
 date: 28 April 2026
 section: Getting Started
+video: NMeqCf7tGmQ
 image:
   path: /assets/img/seelab/GetStart/images/measureCAP-setup-eyes17.jpg
 caption: Measuring capacitances using the IN1 Input, and making your own capacitors
@@ -107,8 +108,12 @@ Example: if overlap area is reduced to half, measured capacitance should be appr
 | Symptom | Possible Cause | Corrective Action |
 | :--- | :--- | :--- |
 | Reading too high | Stray/body capacitance | Keep hands away, shorten leads |
-| Reading unstable | Loose connection | Tighten clips |
+| Reading unstable | Loose connection/electrical noise | Tighten clips/remove nearby power cables |
 | No reading | Wrong terminal | Ensure capacitor is between IN1 and GND |
+
+### [Video Resource: https://www.youtube.com/embed/NMeqCf7tGmQ](https://www.youtube.com/embed/NMeqCf7tGmQ)
+
+<div class="no-print"><iframe width="560" height="315" src="https://www.youtube.com/embed/NMeqCf7tGmQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
 <div class="viva-section nosplit">
 

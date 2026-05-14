@@ -59,6 +59,11 @@ Example from setup: $S=27\text{ cm}$ with $t\approx0.2354\text{ s}$ gives $g\app
 
 <img src="/assets/img/seelab/mechanics/images/tof-screen-phone.jpg" style="width: 35%; display: block; margin: 20px auto;">
 
+
+### [Video Resource: https://www.youtube.com/embed/0fIoOm9ugK4](https://www.youtube.com/embed/0fIoOm9ugK4)
+
+<div class="no-print"><iframe width="560" height="315" src="https://www.youtube.com/embed/0fIoOm9ugK4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
 ---
 
 ### 6. Observation Table
