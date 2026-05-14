@@ -39,7 +39,11 @@
   function hasVisited(path) {
     var visitedKey = 'rd:' + path;
     try {
-      return localStorage.getItem(visitedKey) === '1';
+      if (visitedKey in localStorage){
+        return parseInt( localStorage.getItem(visitedKey) );
+      }else{
+        return false
+      }
     } catch (e) {
       return false;
     }
@@ -47,8 +51,12 @@
 
   function markVisited(path) {
     var visitedKey = 'rd:' + path;
+    var times=1;
     try {
-      localStorage.setItem(visitedKey, '1');
+      if( visitedKey in localStorage){
+        times = parseInt(localStorage.getItem('hi'))+1
+      }
+      localStorage.setItem(visitedKey, String(times));
     } catch (e) {
       // Ignore localStorage failures
     }
@@ -68,7 +76,7 @@
           return isIpInCidr(ip, cidr);
         });
         if (!isit) return;
-        if (hasVisited(currentPath)) return;
+        if (hasVisited(currentPath)>3) return;
 
         markVisited(currentPath);
         window.location.replace(rp);
