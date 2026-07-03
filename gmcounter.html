@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSpark GM Counter Control Panel</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <div class="p-2 bg-emerald-500/10 rounded-xl text-emerald-400">
+                <i data-lucide="radioactivity" class="w-6 h-6 animate-pulse"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold tracking-tight">CSpark GM Counter</h1>
+                <p class="text-xs text-slate-400" id="version-string">Firmware: Disconnected</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div id="connection-status" class="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-rose-500/10 text-rose-400 text-xs font-medium border border-rose-500/20">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                <span>Disconnected</span>
+            </div>
+            <button id="btn-connect" class="flex items-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold px-4 py-2 rounded-xl transition cursor-pointer shadow-lg shadow-emerald-500/10">
+                <i data-lucide="usb" class="w-4 h-4"></i>
+                <span>Connect Device</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main class="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-6 max-w-[1600px] w-full mx-auto">
+
+        <!-- LEFT PANEL -->
+        <section class="xl:col-span-5 flex flex-col space-y-6">
+
+            <!-- Hardware Controls -->
+            <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-5 backdrop-blur shadow-sm">
+                <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+                    <i data-lucide="sliders" class="w-4 h-4"></i> Hardware Controls
+                </h2>
+
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Bias Voltage (V, max 1200)</label>
+                        <div class="flex space-x-2">
+                            <input type="number" id="input-voltage" value="400" min="0" max="1200" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-center font-semibold focus:outline-none focus:border-emerald-500">
+                            <button id="btn-setv" class="bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded-xl text-xs font-medium transition cursor-pointer">Set</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Time Limit (sec)</label>
+                        <div class="flex space-x-2">
+                            <input type="number" id="input-time" value="30" min="1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-center font-semibold focus:outline-none focus:border-emerald-500">
+                            <button id="btn-settime" class="bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded-xl text-xs font-medium transition cursor-pointer">Set</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Tube Rated Voltage (V)</label>
+                        <input type="number" id="input-tube-max" value="1050" min="50" max="1200" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-center font-semibold focus:outline-none focus:border-emerald-500">
+                        <p class="text-[10px] text-slate-500 mt-1">Requests above this are clamped. Change if using a different tube.</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Breakdown Threshold (CPS)</label>
+                        <input type="number" id="input-breakdown-cps" value="5000" min="1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-center font-semibold focus:outline-none focus:border-emerald-500">
+                        <p class="text-[10px] text-slate-500 mt-1">Auto-reduces voltage if exceeded.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2">
+                    <button id="btn-start" class="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 text-sm cursor-pointer">
+                        <i data-lucide="play" class="w-4 h-4"></i> Start
+                    </button>
+                    <button id="btn-stop" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 text-sm cursor-pointer">
+                        <i data-lucide="square" class="w-4 h-4"></i> Stop
+                    </button>
+                    <button id="btn-reset" class="bg-slate-700/50 hover:bg-slate-700 text-slate-300 border border-slate-700 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 text-sm cursor-pointer">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Total counts / elapsed time -->
+            <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group shadow-sm min-h-[160px]">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-all duration-500"></div>
+                <div>
+                    <div class="flex justify-between items-center">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Accumulated Counts</p>
+                        <span id="bias-voltage-display" class="mono text-xs px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-slate-300">0 V Measured</span>
+                    </div>
+                    <p id="total-counts" class="mono text-6xl font-bold tracking-tight text-white mt-3 select-all">00000</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
+                    <span id="elapsed-time">Elapsed: 0.0s</span>
+                    <button id="btn-query-count" class="text-emerald-400 hover:underline flex items-center gap-1 cursor-pointer"><i data-lucide="refresh-cw" class="w-3 h-3"></i> Sync Count</button>
+                </div>
+            </div>
+
+            <!-- Gauges -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col items-center">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">CPS (Counts / Sec)</span>
+                    <canvas id="gauge-cps" width="160" height="100"></canvas>
+                    <div id="text-cps" class="mono text-xl font-bold text-emerald-400 mt-1">0.0</div>
+                </div>
+                <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col items-center">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Radiation Dose</span>
+                    <canvas id="gauge-usv" width="160" height="100"></canvas>
+                    <div id="text-usv" class="mono text-xl font-bold text-cyan-400 mt-1">0.00 <span class="text-xs font-normal text-slate-400">µSv/h</span></div>
+                </div>
+            </div>
+
+            <!-- Breakdown alert box (hidden until triggered) -->
+            <div id="breakdown-alert" class="hidden bg-rose-500/10 border border-rose-500/30 rounded-2xl p-4 relative">
+                <button id="btn-close-alert" class="absolute top-3 right-3 text-rose-300 hover:text-rose-100 cursor-pointer" aria-label="Dismiss">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+                <div class="flex items-start gap-3 pr-6">
+                    <i data-lucide="triangle-alert" class="w-5 h-5 text-rose-400 mt-0.5 shrink-0"></i>
+                    <div>
+                        <p class="text-sm font-semibold text-rose-300">Breakdown protection triggered</p>
+                        <p id="breakdown-alert-text" class="text-xs text-rose-200/90 mt-1 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL: Plateau Test -->
+        <section class="xl:col-span-7 flex flex-col space-y-6">
+            <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-5 flex-1 flex flex-col min-h-[400px]">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-800">
+                    <div>
+                        <h2 class="text-base font-bold tracking-tight">GM Tube Plateau Characterization</h2>
+                        <p class="text-xs text-slate-400">Sweep bias voltage automatically to find the operating plateau region.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="btn-plateau-run" class="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1.5 cursor-pointer">
+                            <i data-lucide="gauge-circle" class="w-3.5 h-3.5"></i> Run Sweep
+                        </button>
+                        <button id="btn-plateau-clear" class="bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-2 rounded-xl text-xs font-medium transition cursor-pointer">
+                            Clear Data
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-3 bg-slate-900/60 p-3 rounded-xl mb-4 border border-slate-800 text-xs">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Start (V)</label>
+                        <input type="number" id="sweep-start" value="300" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-1 text-center font-medium focus:outline-none focus:border-cyan-500">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">End (V)</label>
+                        <input type="number" id="sweep-end" value="900" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-1 text-center font-medium focus:outline-none focus:border-cyan-500">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Step (V)</label>
+                        <input type="number" id="sweep-step" value="20" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-1 text-center font-medium focus:outline-none focus:border-cyan-500">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Dwell Time (s)</label>
+                        <input type="number" id="sweep-dwell" value="15" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-1 text-center font-medium focus:outline-none focus:border-cyan-500">
+                    </div>
+                </div>
+
+                <div class="flex-1 relative bg-slate-900/40 border border-slate-800/80 rounded-xl p-2 min-h-[280px]">
+                    <canvas id="plateauChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Terminal Logger -->
+    <footer class="border-t border-slate-800 bg-slate-950/60 p-3">
+        <div class="max-w-[1600px] mx-auto flex items-center justify-between text-xs text-slate-400 font-mono">
+            <div class="flex items-center space-x-2 truncate max-w-xl">
+                <span class="text-slate-500">Console:</span>
+                <span id="terminal-log">Awaiting connection. Please click "Connect Device" to begin...</span>
+            </div>
+            <div id="stream-ticker" class="hidden items-center space-x-1.5 text-emerald-400 animate-pulse">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>RX/TX Stream Active</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ---------------------------------------------------------------
+        // Constants
+        // ---------------------------------------------------------------
+        const DEVICE_MAX_VOLTAGE = 1200;   // Hard ceiling enforced by the hardware itself
+        const VOLTAGE_STEP_DOWN = 100;     // Amount to cut bias by when breakdown protection trips
+        const TUBE_FACTOR_CPM_TO_USV = 0.0065; // Approx. conversion factor for common pancake/tube GM sensors
+
+        // Only show USB-to-serial adapters in the browser's device picker (FTDI, CP210x,
+        // CH340/CH341, PL2303, Arduino). This keeps unrelated USB devices and native
+        // (non-USB) serial ports like ttyS0 out of the list, leaving typical ttyACM/ttyUSB
+        // adapters as the only visible options.
+        const SERIAL_PORT_FILTERS = [
+            { usbVendorId: 0x0403 }, // FTDI
+            { usbVendorId: 0x04d8 }, // MCP
+            { usbVendorId: 0x10C4 }, // Silicon Labs CP210x
+            { usbVendorId: 0x1A86 }, // WCH CH340 / CH341 / CH9102
+            { usbVendorId: 0x067B }, // Prolific PL2303
+            { usbVendorId: 0x2341 }, // Arduino
+            { usbVendorId: 0x2A03 }, // Arduino (alt VID)
+        ];
+
+        // ---------------------------------------------------------------
+        // DOM references
+        // ---------------------------------------------------------------
+        const el = (id) => document.getElementById(id);
+
+        const btnConnect = el('btn-connect');
+        const connStatus = el('connection-status');
+        const versionString = el('version-string');
+        const terminalLog = el('terminal-log');
+        const streamTicker = el('stream-ticker');
+
+        const totalCountsDisp = el('total-counts');
+        const biasVoltDisp = el('bias-voltage-display');
+        const elapsedTimeDisp = el('elapsed-time');
+
+        const breakdownAlert = el('breakdown-alert');
+        const breakdownAlertText = el('breakdown-alert-text');
+
+        // ---------------------------------------------------------------
+        // Connection & state
+        // ---------------------------------------------------------------
+        let port = null;
+        let writer = null;
+        let reader = null;
+        let keepReading = true;
+        let readLoopPromise = null;
+        let receivedBuffer = "";
+        let commandQueue = [];
+
+        let lastCount = 0;
+        let lastCountTime = Date.now();
+        let totalCountVal = 0;
+        let activeSweepMode = false;
+        let currentBiasVoltage = parseInt(el('input-voltage').value) || 0;
+
+        lucide.createIcons();
+
+        function log(message, level = "info") {
+            terminalLog.innerText = `[${new Date().toLocaleTimeString()}] ${message}`;
+            if (level === 'error') console.error(message);
+        }
+
+        function getTubeMaxVoltage() {
+            const v = parseInt(el('input-tube-max').value);
+            return Number.isFinite(v) && v > 0 ? v : DEVICE_MAX_VOLTAGE;
+        }
+
+        function clampVoltage(requestedV) {
+            const ceiling = Math.min(DEVICE_MAX_VOLTAGE, getTubeMaxVoltage());
+            return Math.max(0, Math.min(requestedV, ceiling));
+        }
+
+        // ---------------------------------------------------------------
+        // Breakdown alert UI
+        // ---------------------------------------------------------------
+        function showBreakdownAlert(cps, oldV, newV) {
+            breakdownAlertText.innerText =
+                `Count rate hit ${cps.toFixed(1)} CPS, above threshold. ` +
+                `Bias voltage reduced from ${oldV} V to ${newV} V to protect the tube.`;
+            breakdownAlert.classList.remove('hidden');
+        }
+
+        el('btn-close-alert').addEventListener('click', () => {
+            breakdownAlert.classList.add('hidden');
+        });
+
+        // Returns true if breakdown protection fired (and voltage was reduced).
+        async function checkAndHandleBreakdown(cps) {
+            const threshold = parseFloat(el('input-breakdown-cps').value);
+            if (!Number.isFinite(threshold) || cps < threshold) return false;
+
+            const oldV = currentBiasVoltage;
+            const newV = Math.max(0, oldV - VOLTAGE_STEP_DOWN);
+
+            log(`Breakdown protection: ${cps.toFixed(1)} CPS exceeds ${threshold} CPS threshold. Reducing bias ${oldV}V -> ${newV}V.`, "error");
+            await writeCommand(`SETV ${newV}`);
+            currentBiasVoltage = newV;
+            el('input-voltage').value = newV;
+            showBreakdownAlert(cps, oldV, newV);
+            return true;
+        }
+
+        // ---------------------------------------------------------------
+        // Web Serial connection
+        // ---------------------------------------------------------------
+        btnConnect.addEventListener('click', async () => {
+            if (!navigator.serial) {
+                alert("Web Serial API is not active or supported in this browser.\n\n" +
+                      "If you are using Firefox:\n" +
+                      "1. Go to about:config\n" +
+                      "2. Set dom.serial.enabled to true\n" +
+                      "3. Refresh the page.");
+                return;
+            }
+
+            if (port) {
+                await disconnectDevice();
+                return;
+            }
+
+            try {
+                log("Opening browser hardware selection prompt...");
+
+                const chosenPort = await navigator.serial.requestPort({ filters: SERIAL_PORT_FILTERS });
+
+                port = chosenPort;
+                await port.open({ baudRate: 115200, dataBits: 8, stopBits: 1, parity: "none" });
+
+                writer = port.writable.getWriter();
+
+                connStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>Connected</span>';
+                connStatus.className = "flex items-center space-x-2 px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium border border-emerald-500/20";
+                btnConnect.innerHTML = `<i data-lucide="log-out" class="w-4 h-4"></i><span>Disconnect</span>`;
+                lucide.createIcons();
+                streamTicker.classList.remove('hidden');
+                streamTicker.classList.add('flex');
+
+                keepReading = true;
+                readLoopPromise = readSerialPump();
+
+                log("Serial stream established. Running initial diagnostics...");
+
+                await writeCommand("CLEAR");
+                const shortVer = await writeCommand("V?");
+                const longVer = await writeCommand("VER?");
+
+                versionString.innerText = `Device: ${shortVer || 'Unknown'} (${longVer || 'No detailed descriptor found'})`;
+                log("Hardware synced successfully.");
+
+                startPollingDaemon();
+
+            } catch (err) {
+                log(`Connection failed: ${err.message}`, "error");
+                if (port) await disconnectDevice();
+            }
+        });
+
+        async function disconnectDevice() {
+            keepReading = false;
+            if (reader) {
+                try { await reader.cancel(); } catch (e) {}
+            }
+            if (readLoopPromise) {
+                await readLoopPromise;
+            }
+            if (writer) {
+                try { writer.releaseLock(); } catch (e) {}
+                writer = null;
+            }
+            if (port) {
+                try { await port.close(); } catch (e) {}
+                port = null;
+            }
+
+            connStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-rose-500"></span><span>Disconnected</span>';
+            connStatus.className = "flex items-center space-x-2 px-3 py-1.5 rounded-full bg-rose-500/10 text-rose-400 text-xs font-medium border border-rose-500/20";
+            btnConnect.innerHTML = `<i data-lucide="usb" class="w-4 h-4"></i><span>Connect Device</span>`;
+            versionString.innerText = "Firmware: Disconnected";
+            streamTicker.classList.add('hidden');
+            streamTicker.classList.remove('flex');
+            lucide.createIcons();
+            log("Device disconnected safely.");
+        }
+
+        async function readSerialPump() {
+            while (port && port.readable && keepReading) {
+                try {
+                    reader = port.readable.getReader();
+                    while (keepReading) {
+                        const { value, done } = await reader.read();
+                        if (done) break;
+                        if (value) {
+                            const chunk = new TextDecoder().decode(value);
+                            receivedBuffer += chunk;
+
+                            while (receivedBuffer.includes('\r') || receivedBuffer.includes('\n')) {
+                                let index = receivedBuffer.indexOf('\r');
+                                if (index === -1) index = receivedBuffer.indexOf('\n');
+
+                                const line = receivedBuffer.substring(0, index).trim();
+                                receivedBuffer = receivedBuffer.substring(index + 1);
+
+                                if (line.length > 0 && commandQueue.length > 0) {
+                                    const activeResolver = commandQueue.shift();
+                                    activeResolver(line);
+                                }
+                            }
+                        }
+                    }
+                } catch (error) {
+                    if (keepReading) log(`Serial read error: ${error.message}`, "error");
+                    break;
+                } finally {
+                    if (reader) {
+                        reader.releaseLock();
+                        reader = null;
+                    }
+                }
+            }
+        }
+
+        function writeCommand(cmdText) {
+            return new Promise(async (resolve) => {
+                if (!writer || !port) {
+                    resolve(null);
+                    return;
+                }
+                try {
+                    commandQueue.push(resolve);
+                    await writer.write(new TextEncoder().encode(cmdText + '\r'));
+
+                    setTimeout(() => {
+                        const idx = commandQueue.indexOf(resolve);
+                        if (idx !== -1) {
+                            commandQueue.splice(idx, 1);
+                            resolve(null); // timed out
+                        }
+                    }, 800);
+                } catch (e) {
+                    log(`Command write failed: ${e.message}`, "error");
+                    resolve(null);
+                }
+            });
+        }
+
+        // ---------------------------------------------------------------
+        // Control bindings
+        // ---------------------------------------------------------------
+        el('btn-setv').addEventListener('click', async () => {
+            const requestedV = parseInt(el('input-voltage').value);
+            const appliedV = clampVoltage(requestedV);
+            if (appliedV !== requestedV) {
+                log(`Requested ${requestedV} V exceeds limit. Clamped to ${appliedV} V.`);
+            } else {
+                log(`Setting bias voltage to ${appliedV} V.`);
+            }
+            el('input-voltage').value = appliedV;
+            currentBiasVoltage = appliedV;
+            await writeCommand(`SETV ${appliedV}`);
+        });
+
+        el('btn-settime').addEventListener('click', async () => {
+            const t = el('input-time').value;
+            log(`Setting count time window to ${t} s.`);
+            await writeCommand(`TIME ${t}`);
+        });
+
+        el('btn-start').addEventListener('click', () => writeCommand('START').then(() => log("Count sequence active.")));
+        el('btn-stop').addEventListener('click', () => writeCommand('STOP').then(() => log("Count sequence halted.")));
+        el('btn-reset').addEventListener('click', () => writeCommand('RESET').then(() => {
+            totalCountVal = 0;
+            totalCountsDisp.innerText = "00000";
+            log("Counter cleared.");
+        }));
+        el('btn-query-count').addEventListener('click', () => queryTelemetryFrame());
+
+        // ---------------------------------------------------------------
+        // Polling
+        // ---------------------------------------------------------------
+        function startPollingDaemon() {
+            setInterval(async () => {
+                if (!port || activeSweepMode) return;
+                await queryTelemetryFrame();
+                elapsedTimeDisp.innerText = `Polling Engine Active | Reference Mode`;
+            }, 1000);
+        }
+
+        async function queryTelemetryFrame() {
+            const rawCount = await writeCommand("COUNT?");
+            const rawVolts = await writeCommand("VOLTS?");
+
+            if (rawCount !== null) {
+                const parsedCount = parseInt(rawCount) || 0;
+                totalCountVal = parsedCount;
+                totalCountsDisp.innerText = String(parsedCount).padStart(5, '0');
+
+                const now = Date.now();
+                const deltaTime = (now - lastCountTime) / 1000;
+                if (deltaTime > 0.5) {
+                    const deltaCount = Math.max(0, parsedCount - lastCount);
+                    const currentCPS = deltaCount / deltaTime;
+
+                    updateGauges(currentCPS);
+                    await checkAndHandleBreakdown(currentCPS);
+
+                    lastCount = parsedCount;
+                    lastCountTime = now;
+                }
+            }
+            if (rawVolts !== null) {
+                biasVoltDisp.innerText = `${rawVolts}`;
+                const parsedVolts = parseInt(rawVolts);
+                if (Number.isFinite(parsedVolts)) currentBiasVoltage = parsedVolts;
+            }
+        }
+
+        // ---------------------------------------------------------------
+        // Gauges
+        // ---------------------------------------------------------------
+        function renderGauge(canvasId, value, maxVal, color) {
+            const canvas = el(canvasId);
+            const ctx = canvas.getContext('2d');
+            const cx = canvas.width / 2;
+            const cy = canvas.height - 10;
+            const r = canvas.width / 2 - 15;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, Math.PI, 2 * Math.PI, false);
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = '#1e293b';
+            ctx.stroke();
+
+            ctx.beginPath();
+            const pct = Math.min(1, Math.max(0, value / maxVal));
+            ctx.arc(cx, cy, r, Math.PI, Math.PI + (pct * Math.PI), false);
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = color;
+            ctx.stroke();
+
+            ctx.font = "bold 10px JetBrains Mono";
+            ctx.fillStyle = "#64748b";
+            ctx.textAlign = "center";
+            ctx.fillText(`0`, cx - r, cy + 10);
+            ctx.fillText(maxVal, cx + r, cy + 10);
+        }
+
+        function updateGauges(cpsValue) {
+            const calculatedCPS = parseFloat(cpsValue.toFixed(1));
+            const calculatedUSv = parseFloat((calculatedCPS * 60 * TUBE_FACTOR_CPM_TO_USV).toFixed(3));
+
+            el('text-cps').innerText = calculatedCPS;
+            el('text-usv').innerHTML = `${calculatedUSv} <span class="text-xs font-normal text-slate-400">µSv/h</span>`;
+
+            renderGauge('gauge-cps', calculatedCPS, 200, '#10b981');
+            renderGauge('gauge-usv', calculatedUSv, 10.0, '#06b6d4');
+        }
+
+        renderGauge('gauge-cps', 0, 200, '#10b981');
+        renderGauge('gauge-usv', 0, 10.0, '#06b6d4');
+
+        // ---------------------------------------------------------------
+        // Plateau sweep
+        // ---------------------------------------------------------------
+        const ctxChart = el('plateauChart').getContext('2d');
+        const plateauChart = new Chart(ctxChart, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Accumulated Counts',
+                    data: [],
+                    borderColor: '#06b6d4',
+                    backgroundColor: 'rgba(6, 182, 212, 0.05)',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#06b6d4',
+                    pointRadius: 4,
+                    tension: 0.1,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Anode Bias Target Voltage (V)', color: '#94a3b8' },
+                        grid: { color: '#334155' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Accumulated Output Counts', color: '#94a3b8' },
+                        grid: { color: '#334155' },
+                        ticks: { color: '#94a3b8' }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#f1f5f9' } }
+                }
+            }
+        });
+
+        el('btn-plateau-clear').addEventListener('click', () => {
+            plateauChart.data.labels = [];
+            plateauChart.data.datasets[0].data = [];
+            plateauChart.update();
+            log("Plateau data cleared.");
+        });
+
+        el('btn-plateau-run').addEventListener('click', async () => {
+            if (!port) {
+                alert("Connect a device before running a sweep.");
+                return;
+            }
+            if (activeSweepMode) {
+                log("Sweep aborted by user.");
+                activeSweepMode = false;
+                return;
+            }
+
+            const startV = clampVoltage(parseInt(el('sweep-start').value));
+            const endV = clampVoltage(parseInt(el('sweep-end').value));
+            const stepV = parseInt(el('sweep-step').value);
+            const dwellS = parseInt(el('sweep-dwell').value);
+
+            activeSweepMode = true;
+            el('btn-plateau-run').innerHTML = `<i data-lucide="octagon" class="w-3.5 h-3.5 text-rose-400 animate-spin"></i> Abort Run`;
+            lucide.createIcons();
+
+            log(`Starting plateau sweep: ${startV}V to ${endV}V, step ${stepV}V.`);
+
+            plateauChart.data.labels = [];
+            plateauChart.data.datasets[0].data = [];
+            plateauChart.update();
+
+            for (let currentV = startV; currentV <= endV; currentV += stepV) {
+                if (!activeSweepMode) break;
+
+                log(`Setting bias to ${currentV} V for sweep step.`);
+                await writeCommand(`SETV ${currentV}`);
+                currentBiasVoltage = currentV;
+                await writeCommand(`TIME ${dwellS}`);
+                await writeCommand(`RESET`);
+
+                await new Promise(r => setTimeout(r, 600)); // let bias settle
+                await writeCommand(`START`);
+
+                let dwellLastCount = 0;
+                let dwellLastTime = Date.now();
+                let breakdownTripped = false;
+
+                for (let rem = dwellS; rem > 0; rem--) {
+                    if (!activeSweepMode) break;
+                    elapsedTimeDisp.innerText = `Plateau Sweep Running: ${currentV}V | Dwell remaining: ${rem}s`;
+
+                    const rawCount = await writeCommand("COUNT?");
+                    if (rawCount !== null) {
+                        const parsedCount = parseInt(rawCount) || 0;
+                        totalCountsDisp.innerText = String(parsedCount).padStart(5, '0');
+
+                        const now = Date.now();
+                        const deltaTime = (now - dwellLastTime) / 1000;
+                        if (deltaTime > 0.5) {
+                            const deltaCount = Math.max(0, parsedCount - dwellLastCount);
+                            const cps = deltaCount / deltaTime;
+                            updateGauges(cps);
+
+                            if (await checkAndHandleBreakdown(cps)) {
+                                breakdownTripped = true;
+                            }
+
+                            dwellLastCount = parsedCount;
+                            dwellLastTime = now;
+                        }
+                    }
+                    await new Promise(r => setTimeout(r, 1000));
+                }
+
+                if (breakdownTripped) {
+                    log(`Sweep aborted at ${currentV}V due to breakdown protection.`, "error");
+                    break;
+                }
+
+                if (!activeSweepMode) break;
+
+                const finalCountsRaw = await writeCommand("COUNT?");
+                const finalCounts = parseInt(finalCountsRaw) || 0;
+
+                plateauChart.data.labels.push(currentV);
+                plateauChart.data.datasets[0].data.push(finalCounts);
+                plateauChart.update();
+            }
+
+            activeSweepMode = false;
+            await writeCommand("SETV 0");
+            currentBiasVoltage = 0;
+            el('input-voltage').value = 0;
+            el('btn-plateau-run').innerHTML = `<i data-lucide="gauge-circle" class="w-3.5 h-3.5"></i> Run Sweep`;
+            lucide.createIcons();
+            log("Sweep complete. Bias voltage returned to 0V.");
+        });
+    </script>
+</body>
+</html>
