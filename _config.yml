@@ -69,6 +69,8 @@ menu:
     url:               /GSOCREADME/
   - title:             Wedding 🤵🏻💍👰🏻
     url:               /wedding
+  - title:             🚀KuttyPy Webapp
+    url:               https://jithinbp.in/kuttypy/index.html
 
 # Add links to the footer.
 # Typically you'll want to link to your cookie- or privacy policy (if appliable), etc..
@@ -79,7 +81,7 @@ legal:
     url:               https://hackaday.io/jithinbp
   - title:             CSPARK RESEARCH
     url:               https://csparkresearch.in
-  - title:             GM-counter webapp
+  - title:             GM-counter
     url:               https://jithinbp.in/gmcounter.html
 
 # This text will appear in a `<small>` tag in the footer of every page.
