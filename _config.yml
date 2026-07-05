@@ -359,7 +359,9 @@ exclude:
   - .jekyll-cache
   - .sass-cache
   - '*.toml'
-  - vendor
+  - vendor/bundle
+  - kuttypy/serve.py
+  - kuttypy/__pycache__
   - unusedphotos
   - Gemfile
   - Gemfile.lock
@@ -367,6 +369,7 @@ exclude:
 include:
   - .well-known
   - LICENSE.md
+  - kuttypy/vendor
 
 
 # Plugins
