@@ -9,6 +9,7 @@ import { buildRegisterDatalist, initRegisterTerminal } from './register-terminal
 import { initSensorsPanel } from './sensors-panel.js';
 import { createSensorDriver } from './sensors.js';
 import { openSensorDialog } from './sensor-dialog.js';
+import { isAndroidChrome } from './platform.js';
 
 const POLL_MS = 20;
 
@@ -445,9 +446,15 @@ async function handleDisconnect(reason) {
 btnConnect.addEventListener('click', handleConnect);
 btnDisconnect.addEventListener('click', () => handleDisconnect());
 
-navigator.serial?.addEventListener('disconnect', () => {
-  handleDisconnect('Device unplugged');
-});
+if (isAndroidChrome() && navigator.usb) {
+  navigator.usb.addEventListener('disconnect', () => {
+    handleDisconnect('Device unplugged');
+  });
+} else {
+  navigator.serial?.addEventListener('disconnect', () => {
+    handleDisconnect('Device unplugged');
+  });
+}
 
 buildUI();
 buildRegisterDatalist();

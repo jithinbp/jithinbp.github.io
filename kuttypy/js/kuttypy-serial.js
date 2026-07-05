@@ -3,6 +3,8 @@
  * ATMEGA32 register map from utilities/REGISTERS.py
  */
 
+import { isAndroidChrome } from './platform.js';
+
 export const BAUD = 38400;
 
 export const CMD = {
@@ -161,11 +163,19 @@ export class KuttyPyDevice {
   }
 
   async connect() {
-    if (!('serial' in navigator)) {
-      throw new Error('Web Serial API is not available. Use Chrome or Edge on localhost.');
+    if (!('serial' in navigator) && !('usb' in navigator)) {
+      throw new Error('Web Serial / WebUSB not available. Use Chrome or Edge.');
     }
 
-    this.port = await navigator.serial.requestPort({ filters: USB_FILTERS });
+    if (isAndroidChrome()) {
+      const { requestKuttyPyPort } = await import('./android-serial.js');
+      this.port = await requestKuttyPyPort(USB_FILTERS);
+    } else {
+      if (!('serial' in navigator)) {
+        throw new Error('Web Serial API is not available. Use Chrome or Edge.');
+      }
+      this.port = await navigator.serial.requestPort({ filters: USB_FILTERS });
+    }
     await this.port.open({ baudRate: BAUD });
 
     this.reader = this.port.readable.getReader();
