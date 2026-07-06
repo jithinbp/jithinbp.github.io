@@ -4,7 +4,7 @@
 
 import { createSensorDriver } from './sensors.js';
 import { identifyDetectedSensors, sensorMeta } from './sensor-probe.js';
-import { openSensorDialog } from './sensor-dialog.js';
+import { openSensorDialog } from './sensor-dialog.js?v=20';
 
 export function initSensorsPanel(root, device, {
   setStatus,
@@ -16,17 +16,33 @@ export function initSensorsPanel(root, device, {
   const btnScan = root.querySelector('.btn-i2c-scan');
   const buttonsEl = root.querySelector('.sensor-buttons');
   let openDialog = null;
+  let hasSensorChips = false;
+  let scanning = false;
+
+  function setPanelEmpty(empty) {
+    hasSensorChips = !empty;
+    root.classList.toggle('sensors-panel--empty', empty);
+    root.dataset.scanHint = empty ? 'Tap to scan I2C bus' : '';
+  }
+
+  function showEmptyHint(message = 'Tap to scan I2C bus') {
+    buttonsEl.innerHTML = `<p class="sensor-buttons-empty">${message}</p>`;
+    setPanelEmpty(true);
+  }
 
   function clearButtons() {
     buttonsEl.innerHTML = '';
+    setPanelEmpty(true);
   }
 
   function renderSensorButtons(detected) {
-    clearButtons();
+    buttonsEl.innerHTML = '';
     if (!detected.length) {
-      buttonsEl.innerHTML = '<p class="sensor-buttons-empty">No supported sensors identified</p>';
+      showEmptyHint('No supported sensors identified — tap to rescan');
       return;
     }
+
+    setPanelEmpty(false);
 
     for (const { typeId, address } of detected) {
       const meta = sensorMeta(typeId);
@@ -67,14 +83,16 @@ export function initSensorsPanel(root, device, {
   }
 
   async function scan() {
+    if (scanning) return;
     if (!isConnected()) {
       setStatus('Connect device to scan I2C bus');
       return;
     }
+    scanning = true;
     btnScan.disabled = true;
     btnScan.textContent = 'Scanning…';
-    clearButtons();
     buttonsEl.innerHTML = '<p class="sensor-buttons-empty">Identifying sensors…</p>';
+    setPanelEmpty(true);
     try {
       const detected = await withPollingPaused(async () => {
         const addrs = await device.i2cScan();
@@ -93,32 +111,44 @@ export function initSensorsPanel(root, device, {
         }
       } else {
         btnScan.textContent = 'No devices';
-        clearButtons();
+        showEmptyHint('No I2C devices — tap to rescan');
       }
     } catch (err) {
       btnScan.textContent = 'Scan failed';
-      clearButtons();
+      showEmptyHint('Scan failed — tap to retry');
       setStatus(err.message);
     } finally {
+      scanning = false;
       btnScan.disabled = !isConnected();
     }
   }
 
-  btnScan.addEventListener('click', scan);
+  btnScan.addEventListener('click', (e) => {
+    e.stopPropagation();
+    scan();
+  });
+
+  root.addEventListener('click', () => {
+    if (!hasSensorChips) scan();
+  });
+
+  showEmptyHint('Connect device, then tap to scan');
 
   return {
     setConnected(connected) {
       btnScan.disabled = !connected;
       if (!connected) {
         btnScan.textContent = 'I2C Scan';
-        clearButtons();
+        showEmptyHint('Connect device, then tap to scan');
         openDialog?.close?.();
         openDialog = null;
+      } else if (!hasSensorChips) {
+        showEmptyHint('Tap to scan I2C bus');
       }
     },
     reset() {
       btnScan.textContent = 'I2C Scan';
-      clearButtons();
+      showEmptyHint('Tap to scan I2C bus');
     },
   };
 }

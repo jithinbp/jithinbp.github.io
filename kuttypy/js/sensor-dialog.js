@@ -2,9 +2,10 @@
  * Sensor monitor dialog — gauges on top, live chart below.
  */
 
-import { createAnalogGauge } from './analog-gauge.js';
-import { createSensorLogger, LOGGER_COLORS, DEFAULT_WINDOW_SEC, DEFAULT_SAMPLE_INTERVAL_MS, defaultSampleIntervalMs } from './sensor-logger.js';
-import { SENSOR_TYPES } from './sensors.js';
+import { createAnalogGauge } from './analog-gauge.js?v=20';
+import { createSensorLogger, LOGGER_COLORS, DEFAULT_WINDOW_SEC, DEFAULT_SAMPLE_INTERVAL_MS, defaultSampleIntervalMs } from './sensor-logger.js?v=27';
+import { SENSOR_TYPES } from './sensors.js?v=20';
+import { ASSET_V } from './build.js?v=20';
 
 export function openSensorDialog({
   typeId,
@@ -43,7 +44,6 @@ export function openSensorDialog({
         <div class="sensor-gauges-row" aria-label="Live readings"></div>
         <div class="sensor-logger-panel">
           <div class="sensor-logger-bar">
-            <div class="sensor-trace-toggles" aria-label="Visible traces"></div>
             <div class="sensor-logger-actions">
               <div class="sensor-timing-fields">
                 <label class="sensor-num-field" title="Visible time range on X axis">
@@ -62,6 +62,7 @@ export function openSensorDialog({
               <button type="button" class="sensor-logger-pause">Pause</button>
               <button type="button" class="sensor-logger-clear">Clear</button>
               <button type="button" class="sensor-logger-reset" title="Reset zoom and auto-scale">Reset view</button>
+              <button type="button" class="sensor-logger-download" title="Download trace data as CSV"><i class="fa-solid fa-download"></i> Download CSV</button>
             </div>
           </div>
           <div class="sensor-chart-wrap">
@@ -71,11 +72,18 @@ export function openSensorDialog({
       </div>
       <footer class="sensor-dialog-footer">
         <span class="sensor-status">Initializing…</span>
+        <span class="sensor-ui-version" hidden></span>
       </footer>
     </div>
   `;
 
   document.body.appendChild(overlay);
+
+  const verEl = overlay.querySelector('.sensor-ui-version');
+  if (verEl) {
+    verEl.textContent = `UI ${ASSET_V}`;
+    verEl.hidden = false;
+  }
 
   const gaugesEl = overlay.querySelector('.sensor-gauges-row');
   const configEl = overlay.querySelector('.sensor-config');
@@ -83,9 +91,9 @@ export function openSensorDialog({
   const headerTitle = overlay.querySelector('#sensor-dialog-title');
   const headerAddr = overlay.querySelector('.sensor-dialog-addr');
   const canvas = overlay.querySelector('.sensor-chart');
-  const traceTogglesEl = overlay.querySelector('.sensor-trace-toggles');
   const btnPause = overlay.querySelector('.sensor-logger-pause');
   const btnClear = overlay.querySelector('.sensor-logger-clear');
+  const btnDownload = overlay.querySelector('.sensor-logger-download');
   const btnReset = overlay.querySelector('.sensor-logger-reset');
   const windowInput = overlay.querySelector('.sensor-window-sec');
   const intervalInput = overlay.querySelector('.sensor-interval-ms');
@@ -94,10 +102,11 @@ export function openSensorDialog({
     return new Promise((r) => setTimeout(r, ms));
   }
 
-  const gauges = meta.fields.map((f) => {
-    const g = createAnalogGauge(f.label, f.unit, f.min, f.max);
+  const gauges = meta.fields.map((f, i) => {
+    const color = LOGGER_COLORS[i % LOGGER_COLORS.length];
+    const g = createAnalogGauge(f.label, f.unit, f.min, f.max, { traceColor: color });
     gaugesEl.appendChild(g.el);
-    return { ...f, gauge: g };
+    return { ...f, gauge: g, traceIndex: i };
   });
 
   const configSelects = [];
@@ -208,21 +217,14 @@ export function openSensorDialog({
   function initLogger() {
     logger = createSensorLogger(canvas, meta.fields);
 
-    meta.fields.forEach((f, i) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'sensor-trace-toggle active';
-      btn.innerHTML = `
-        <span class="trace-swatch" style="background:${LOGGER_COLORS[i % LOGGER_COLORS.length]}"></span>
-        <span>${f.label}</span>
-      `;
-      btn.addEventListener('click', () => {
-        const on = !btn.classList.contains('active');
-        btn.classList.toggle('active', on);
-        logger.setVisible(i, on);
-      });
-      traceTogglesEl.appendChild(btn);
-    });
+    for (const { gauge, label, traceIndex } of gauges) {
+      const toggleTrace = () => {
+        const on = !gauge.isTraceActive();
+        gauge.setTraceActive(on);
+        logger.setVisible(traceIndex, on);
+      };
+      gauge.el.addEventListener('click', toggleTrace);
+    }
 
     requestAnimationFrame(() => logger.resize());
   }
@@ -279,6 +281,31 @@ export function openSensorDialog({
     restartPollLoop();
   }
 
+  function downloadTraceCsv() {
+    if (!logger) return;
+    const csv = logger.toCsv(meta.fields);
+    if (!csv) {
+      statusEl.textContent = 'No trace data to download';
+      return;
+    }
+
+    const safeName = meta.name.replace(/[^\w.-]+/g, '_');
+    const addrPart = address != null
+      ? `_0x${address.toString(16).toUpperCase()}`
+      : '';
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const filename = `${safeName}${addrPart}_${stamp}.csv`;
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+    statusEl.textContent = `Downloaded ${logger.getSampleCount()} row(s)`;
+  }
+
   function close() {
     stopPollLoop();
     logger?.destroy();
@@ -294,6 +321,7 @@ export function openSensorDialog({
     startTime = Date.now();
     logger?.clear();
   });
+  btnDownload.addEventListener('click', downloadTraceCsv);
   btnReset.addEventListener('click', () => logger?.resetView());
   bindNumericField(windowInput, applyWindowSec);
   bindNumericField(intervalInput, applyIntervalMs);

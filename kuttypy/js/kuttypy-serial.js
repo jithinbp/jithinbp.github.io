@@ -4,6 +4,8 @@
  */
 
 import { isAndroidChrome } from './platform.js';
+import { resolveRegister } from './registers.js';
+import { ConnectDebug, setLastConnectDebug, showConnectDebugPanel, hideConnectDebugPanel, isConnectUserCancelled } from './connect-debug.js';
 
 export const BAUD = 38400;
 
@@ -17,6 +19,9 @@ export const CMD = {
 };
 
 export const VERSION_ATMEGA32 = 99;
+
+/** Bootloader / device type bytes KuttyPyLib accepts */
+export const VERSION_BYTES = [98, 99, 100, 101];
 
 /** USB filters: CH340 and MCP2200 only */
 export const USB_FILTERS = [
@@ -76,6 +81,24 @@ function delay(ms) {
 /** Force 0–255 unsigned byte (avoids sign/extension issues). */
 function asByte(n) {
   return n & 0xff;
+}
+
+/** Resolve register name (PORTB) or numeric address to protocol byte. */
+function regAddress(reg) {
+  if (typeof reg === 'number' && Number.isFinite(reg)) return asByte(reg);
+  const resolved = resolveRegister(reg);
+  if (resolved) return resolved.addr;
+  const key = String(reg ?? '').trim().toUpperCase();
+  if (key in REGISTERS) return REGISTERS[key];
+  throw new Error(`Unknown register: ${reg}`);
+}
+
+export function regDisplayName(reg) {
+  if (typeof reg === 'number' && Number.isFinite(reg)) {
+    const resolved = Object.entries(REGISTERS).find(([, addr]) => addr === asByte(reg));
+    return resolved?.[0] ?? `0x${asByte(reg).toString(16).toUpperCase()}`;
+  }
+  return resolveRegister(reg)?.name ?? String(reg ?? '').trim().toUpperCase();
 }
 
 /**
@@ -160,6 +183,40 @@ export class KuttyPyDevice {
     this.ioLock = Promise.resolve();
     this.connected = false;
     this.version = 0;
+    this.lastConnectDebug = null;
+  }
+
+  /** Desktop Web Serial — original working handshake (unchanged for Android). */
+  async _connectDesktop(debug) {
+    debug.log('connect: desktop Web Serial');
+    this.port = await navigator.serial.requestPort({ filters: USB_FILTERS });
+    debug.log(`connect: opening port @ ${BAUD} baud`);
+    await this.port.open({ baudRate: BAUD });
+
+    this.reader = this.port.readable.getReader();
+    this.writer = this.port.writable.getWriter();
+
+    let version = -1;
+    for (let attempt = 0; attempt < 3 && version !== VERSION_ATMEGA32; attempt++) {
+      debug.log(`connect: GET_VERSION attempt ${attempt + 1}/3`);
+      version = await this.__getVersionDesktop();
+      debug.log(`connect: attempt ${attempt + 1} returned ${version}`);
+    }
+
+    if (version !== VERSION_ATMEGA32) {
+      const msg = version < 0
+        ? 'No response from device — is KuttyPy connected and not in use by another app?'
+        : `Unexpected firmware version ${version} (expected ${VERSION_ATMEGA32})`;
+      throw new Error(msg);
+    }
+
+    this.rx = new RxBuffer(this.reader);
+    this.rx.start();
+
+    this.version = version;
+    this.connected = true;
+    debug.log(`connect: OK — firmware v${version}`);
+    return version;
   }
 
   async connect() {
@@ -167,43 +224,45 @@ export class KuttyPyDevice {
       throw new Error('Web Serial / WebUSB not available. Use Chrome or Edge.');
     }
 
-    if (isAndroidChrome()) {
-      const { requestKuttyPyPort } = await import('./android-serial.js');
-      this.port = await requestKuttyPyPort(USB_FILTERS);
-    } else {
-      if (!('serial' in navigator)) {
-        throw new Error('Web Serial API is not available. Use Chrome or Edge.');
+    const debug = new ConnectDebug();
+    this.lastConnectDebug = debug;
+    setLastConnectDebug(debug);
+    hideConnectDebugPanel();
+
+    try {
+      debug.log(`connect: start (android=${isAndroidChrome()} serial=${!!navigator.serial} usb=${!!navigator.usb})`);
+
+      if (isAndroidChrome()) {
+        const { connectAndroid } = await import('./android-connect.js');
+        const version = await connectAndroid(this, USB_FILTERS, debug);
+        this.rx = new RxBuffer(this.reader);
+        this.rx.start();
+        this.version = version;
+        this.connected = true;
+        debug.log(`connect: OK — firmware v${version}`);
+      } else {
+        if (!('serial' in navigator)) {
+          throw new Error('Web Serial API is not available. Use Chrome or Edge.');
+        }
+        await this._connectDesktop(debug);
       }
-      this.port = await navigator.serial.requestPort({ filters: USB_FILTERS });
-    }
-    await this.port.open({ baudRate: BAUD });
 
-    this.reader = this.port.readable.getReader();
-    this.writer = this.port.writable.getWriter();
-
-    // Match KuttyPyLib.connectToPort: always pulse then __get_version__
-    let version = -1;
-    for (let attempt = 0; attempt < 3 && version !== VERSION_ATMEGA32; attempt++) {
-      version = await this.__getVersion__();
-    }
-
-    if (version !== VERSION_ATMEGA32) {
+      hideConnectDebugPanel();
+      return this.version;
+    } catch (err) {
+      debug.logErr('connect: exception', err);
+      const cancelled = isConnectUserCancelled(err);
+      if (!cancelled && this.lastConnectDebug) {
+        showConnectDebugPanel(err.message || 'Connection failed', this.lastConnectDebug);
+      }
       await this.disconnect();
-      throw new Error(
-        version < 0
-          ? 'No response from device — is KuttyPy connected and not in use by another app?'
-          : `Unexpected firmware version ${version} (expected ${VERSION_ATMEGA32})`,
-      );
+      if (cancelled) {
+        const e = new Error('Connection cancelled');
+        e.userCancelled = true;
+        throw e;
+      }
+      throw err;
     }
-
-    // Start background RX only after handshake — avoids stale bytes (e.g. 0xCE/206)
-    // from user code or boot noise being mistaken for the version response.
-    this.rx = new RxBuffer(this.reader);
-    this.rx.start();
-
-    this.version = version;
-    this.connected = true;
-    return version;
   }
 
   async disconnect() {
@@ -237,10 +296,9 @@ export class KuttyPyDevice {
   }
 
   /**
-   * Exact mirror of KuttyPyLib.__get_version__:
-   * pulse → drain → sleep up to 250 ms → write 0x01 → read one byte.
+   * Desktop only — mirrors KuttyPyLib.__get_version__.
    */
-  async __getVersion__() {
+  async __getVersionDesktop() {
     await this._bootPulse();
 
     const t0 = performance.now();
@@ -250,7 +308,6 @@ export class KuttyPyDevice {
     const wait = Math.max(0, 250 - elapsed);
     if (wait > 0) await delay(wait);
 
-    // Reset reader so no in-flight reads deliver pre-command garbage (e.g. user-code serial).
     await this._resetReader();
 
     await this._writeByte(CMD.GET_VERSION);
@@ -330,16 +387,18 @@ export class KuttyPyDevice {
   }
 
   async _getRegUnlocked(reg) {
+    const addr = regAddress(reg);
     await this._writeByte(CMD.READB);
-    await this._writeByte(asByte(reg));
+    await this._writeByte(addr);
     const val = await this._getByte();
     if (val === null) throw new Error('No response from device');
     return val;
   }
 
   async _setRegUnlocked(reg, data) {
+    const addr = regAddress(reg);
     await this._writeByte(CMD.WRITEB);
-    await this._writeByte(asByte(reg));
+    await this._writeByte(addr);
     await this._writeByte(asByte(data));
   }
 

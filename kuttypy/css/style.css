@@ -11,6 +11,7 @@
   --led-glow-on: rgba(34, 197, 94, 0.55);
   --led-glow-off: rgba(239, 68, 68, 0.45);
   --output-hover: #fbbf24;
+  --header-height: 72px;
 }
 
 * {
@@ -60,10 +61,245 @@ header h1 span {
   color: var(--led-on);
 }
 
+.connect-debug-panel {
+  margin-top: 0.5rem;
+  border: 1px solid #c44;
+  border-radius: 8px;
+  background: rgba(200, 68, 68, 0.08);
+  max-width: 42rem;
+}
+
+.connect-debug-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid rgba(200, 68, 68, 0.35);
+  font-size: 0.85rem;
+  color: #f88;
+}
+
+.connect-debug-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.connect-debug-close {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.1rem 0.35rem;
+  cursor: pointer;
+}
+
+.connect-debug-close:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.connect-debug-body {
+  margin: 0;
+  padding: 0.5rem 0.65rem;
+  max-height: 12rem;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+}
+
+/* ── App confirm dialog ── */
+
+.app-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.app-confirm-overlay[hidden] {
+  display: none !important;
+}
+
+.app-confirm-dialog {
+  width: min(22rem, 92vw);
+  padding: 1.1rem 1.15rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+.app-confirm-title {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.app-confirm-message {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.app-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.app-confirm-btn {
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.app-confirm-btn--cancel:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.app-confirm-btn--ok {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #38bdf8;
+  color: #7dd3fc;
+}
+
+.app-confirm-btn--ok:hover {
+  background: rgba(56, 189, 248, 0.22);
+}
+
+.app-confirm-btn--ok.app-confirm-btn--danger {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  color: #fca5a5;
+}
+
+.app-confirm-btn--ok.app-confirm-btn--danger:hover {
+  background: rgba(239, 68, 68, 0.22);
+}
+
 .toolbar {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.35rem;
   align-items: center;
+}
+
+/* USB connect / disconnect — transparent, minimal chrome */
+.toolbar .btn-usb {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+}
+
+.toolbar .btn-usb:hover:not(:disabled) {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.toolbar .btn-usb:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.toolbar .btn-usb__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.btn-usb--connect {
+  align-items: center;
+  min-height: 38px;
+}
+
+.btn-usb--connect .btn-usb__left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.btn-usb--connect .btn-usb__icon {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-usb--connect .btn-usb__pulse {
+  position: absolute;
+  inset: 4px 2px 4px 4px;
+  border-radius: 6px;
+  background: var(--led-on);
+  opacity: 0.35;
+  animation: btn-usb-pulse 1.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.btn-usb--connect:disabled .btn-usb__pulse,
+.btn-usb--connect.is-connected .btn-usb__pulse {
+  display: none;
+}
+
+.btn-usb--connect .btn-usb__label {
+  display: block;
+  padding: 0.45rem 0.75rem 0.45rem 0.15rem;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.btn-usb--disconnect {
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+@keyframes btn-usb-pulse {
+  0%, 100% {
+    opacity: 0.18;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+  50% {
+    opacity: 0.55;
+    box-shadow: 0 0 12px 2px rgba(34, 197, 94, 0.45);
+  }
 }
 
 button {
@@ -142,6 +378,8 @@ main {
   line-height: 1.45;
 }
 
+/* removed: descriptive paragraph replaced by Visual Programming button */
+
 /* ── Sensors (I2C) ── */
 
 .sensors-panel {
@@ -156,11 +394,20 @@ main {
   overflow: hidden;
 }
 
+.sensors-panel.sensors-panel--empty {
+  cursor: pointer;
+}
+
+.sensors-panel.sensors-panel--empty .sensor-buttons-empty {
+  cursor: pointer;
+}
+
 .sensors-panel::before {
   content: "";
   position: absolute;
   inset: 0;
   background: url("../images/sensors.png") right top / auto 72px no-repeat;
+  background-size: cover;
   opacity: 0.1;
   pointer-events: none;
 }
@@ -372,22 +619,37 @@ main {
 }
 
 .sensor-gauges-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-  justify-content: center;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 0.65rem;
+  align-items: start;
   flex-shrink: 0;
 }
 
 .sensor-gauges-row .analog-gauge {
-  flex: 0 1 200px;
-  min-width: 160px;
-  max-width: 240px;
+  min-width: 0;
+  max-width: none;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.sensor-gauges-row .analog-gauge.gauge-trace-off {
+  opacity: 0.38;
+}
+
+.sensor-gauges-row .analog-gauge.gauge-trace-off .gauge-face {
+  opacity: 0.55;
 }
 
 .sensor-gauges-row .gauge-face {
-  max-width: 200px;
+  max-width: 100%;
+}
+
+.sensor-gauges-row .analog-gauge:only-child {
+  grid-column: 1 / -1;
+  max-width: min(240px, 100%);
+  justify-self: center;
 }
 
 .sensor-logger-panel {
@@ -402,6 +664,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.5rem;
   flex-shrink: 0;
 }
@@ -411,7 +674,6 @@ main {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.35rem;
-  margin-left: auto;
 }
 
 .sensor-timing-fields {
@@ -458,41 +720,10 @@ main {
 
 .sensor-logger-pause,
 .sensor-logger-clear,
+.sensor-logger-download,
 .sensor-logger-reset {
   padding: 0.3rem 0.6rem;
   font-size: 0.72rem;
-}
-
-.sensor-trace-toggles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.sensor-trace-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.28rem 0.55rem;
-  font-size: 0.72rem;
-  border-radius: 999px;
-  background: rgba(15, 20, 25, 0.6);
-  border: 1px solid var(--border);
-  opacity: 0.45;
-  transition: opacity 0.15s, border-color 0.15s, background 0.15s;
-}
-
-.sensor-trace-toggle.active {
-  opacity: 1;
-  border-color: var(--accent);
-  background: rgba(56, 189, 248, 0.1);
-}
-
-.trace-swatch {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
 }
 
 .sensor-chart-wrap {
@@ -515,10 +746,21 @@ main {
 }
 
 .sensor-dialog-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
   padding: 0.6rem 1.25rem;
   border-top: 1px solid var(--border);
   font-size: 0.75rem;
   color: var(--muted);
+  flex-shrink: 0;
+}
+
+.sensor-ui-version {
+  font-family: ui-monospace, monospace;
+  font-size: 0.65rem;
+  opacity: 0.55;
   flex-shrink: 0;
 }
 
@@ -581,15 +823,14 @@ main {
 
 .gauge-hub {
   fill: #0f172a;
-  stroke: var(--accent);
+  stroke: #38bdf8;
   stroke-width: 1.5;
 }
 
 .gauge-needle {
-  stroke: #f8fafc;
+  stroke: #e2e8f0;
   stroke-width: 2.8;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.6));
   transition: x2 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
               y2 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
 }
@@ -617,9 +858,8 @@ main {
   font-family: ui-monospace, monospace;
   font-size: 1.45rem;
   font-weight: 700;
-  color: var(--accent);
+  color: #38bdf8;
   line-height: 1.2;
-  text-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
 }
 
 .gauge-unit {
@@ -645,6 +885,55 @@ main {
   .ports-grid {
     grid-template-columns: 1fr;
   }
+
+  .port-header {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .port-regs {
+    font-size: 0.62rem;
+    gap: 0.1rem 0.4rem;
+  }
+
+  .pin-list {
+    padding: 0.25rem 0.5rem 0.4rem;
+  }
+
+  .pin-row {
+    padding: 0.12rem 0;
+    gap: 0.3rem;
+  }
+
+  .led {
+    width: 30px;
+    height: 30px;
+  }
+
+  .sensor-dialog {
+    min-height: 0;
+    height: min(92vh, 860px);
+  }
+
+  .sensor-body {
+    padding: 0.5rem 0.65rem 0.65rem;
+    gap: 0.45rem;
+  }
+
+  .sensor-gauges-row {
+    gap: 0.35rem 0.45rem;
+  }
+
+  .sensor-gauges-row .analog-gauge {
+    padding: 0.3rem 0.2rem 0.15rem;
+  }
+
+  .gauge-readout {
+    margin-top: -0.15rem;
+  }
+
+  .gauge-value {
+    font-size: 1rem;
+  }
 }
 
 .port-card {
@@ -655,38 +944,51 @@ main {
 }
 
 .port-header {
-  padding: 0.65rem 0.9rem;
+  padding: 0.5rem 0.75rem;
   background: var(--surface2);
   border-bottom: 1px solid var(--border);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
 }
 
 .port-header h2 {
   margin: 0;
   font-size: 1.05rem;
   color: var(--accent);
+  flex-shrink: 0;
 }
 
 .port-regs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.15rem 0.55rem;
+  flex: 1;
+  min-width: 0;
   font-family: ui-monospace, "Cascadia Code", monospace;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--muted);
-  text-align: right;
-  line-height: 1.35;
+  line-height: 1.2;
+}
+
+.port-reg {
+  white-space: nowrap;
 }
 
 .pin-list {
-  padding: 0.5rem 0.75rem 0.75rem;
+  padding: 0.35rem 0.65rem 0.5rem;
 }
 
 .pin-row {
   display: grid;
   grid-template-columns: 44px 1fr 88px;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0;
+  gap: 0.4rem;
+  padding: 0.2rem 0;
   border-bottom: 1px solid rgba(51, 65, 85, 0.45);
 }
 

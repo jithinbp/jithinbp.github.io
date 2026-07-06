@@ -8,8 +8,11 @@ import { portPanelFromRegister } from './registers.js';
 import { buildRegisterDatalist, initRegisterTerminal } from './register-terminal.js';
 import { initSensorsPanel } from './sensors-panel.js';
 import { createSensorDriver } from './sensors.js';
-import { openSensorDialog } from './sensor-dialog.js';
+import { openSensorDialog } from './sensor-dialog.js?v=20';
 import { isAndroidChrome } from './platform.js';
+import { hideConnectDebugPanel } from './connect-debug.js';
+import { initViewRouter } from './view-router.js';
+import { initVisualView } from './view-visual.js?v=30';
 
 const POLL_MS = 20;
 
@@ -54,9 +57,9 @@ function updatePortHeader(port) {
   const s = portState[port];
   if (!regsEl || !s) return;
   regsEl.innerHTML =
-    `DDR${port}: ${formatBin(s.ddr)}<br>` +
-    `PORT${port}: ${formatBin(s.port)}<br>` +
-    `PIN${port}: ${formatBin(s.pin)}`;
+    `<span class="port-reg">DDR${port}: ${formatBin(s.ddr)}</span>` +
+    `<span class="port-reg">PORT${port}: ${formatBin(s.port)}</span>` +
+    `<span class="port-reg">PIN${port}: ${formatBin(s.pin)}</span>`;
 }
 
 function setTristateUI(els, mode) {
@@ -178,7 +181,11 @@ function buildUI() {
     card.innerHTML = `
       <div class="port-header">
         <h2>Port ${port}</h2>
-        <div class="port-regs">DDR${port}: --------<br>PORT${port}: --------<br>PIN${port}: --------</div>
+        <div class="port-regs">
+          <span class="port-reg">DDR${port}: --------</span>
+          <span class="port-reg">PORT${port}: --------</span>
+          <span class="port-reg">PIN${port}: --------</span>
+        </div>
       </div>
       <div class="pin-list"></div>
     `;
@@ -409,6 +416,7 @@ function setPinControlsEnabled(connected) {
 
 function setControlsConnected(connected) {
   btnConnect.disabled = connected;
+  btnConnect.classList.toggle('is-connected', connected);
   btnDisconnect.disabled = !connected;
   setPinControlsEnabled(connected);
   regTerminal?.setConnected(connected);
@@ -417,10 +425,11 @@ function setControlsConnected(connected) {
 
 async function handleConnect() {
   try {
+    hideConnectDebugPanel();
     setStatus('Connecting…');
     const version = await device.connect();
     setControlsConnected(true);
-    setStatus(`Connected — ATMEGA32 firmware v${version}`, true);
+    setStatus(`Yay! firmware v${version}`, true);
 
     for (const port of PORTS) {
       await refreshPort(port);
@@ -428,6 +437,11 @@ async function handleConnect() {
     startPolling();
     regTerminal?.log('Connected — register terminal ready', 'read');
   } catch (err) {
+    if (err?.userCancelled) {
+      setStatus('Not connected');
+      setControlsConnected(false);
+      return;
+    }
     console.error(err);
     setStatus(err.message || 'Connection failed');
     setControlsConnected(false);
@@ -479,3 +493,15 @@ sensorsPanel = initSensorsPanel(
     startPolling,
   },
 );
+
+initViewRouter({
+  onVisualEnter: () => stopPolling(),
+  onVisualLeave: () => {
+    if (device.connected) startPolling();
+  },
+});
+initVisualView({
+  getDevice: () => device,
+  isConnected: () => device.connected,
+  withPollingPaused,
+});

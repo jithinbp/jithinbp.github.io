@@ -2,6 +2,12 @@
  * Sensor data logger — Chart.js + chartjs-plugin-zoom (Y zoom/pan, X autoscroll).
  */
 
+import {
+  chartPointerInteraction,
+  mobileTooltipLifetimePlugin,
+  mobileTooltipOptions,
+} from './chart-mobile-tooltip.js';
+
 export const LOGGER_COLORS = ['#38bdf8', '#22c55e', '#f97316', '#a78bfa', '#f43f5e', '#eab308'];
 
 export const DEFAULT_WINDOW_SEC = 10;
@@ -10,10 +16,16 @@ export const DEFAULT_SAMPLE_INTERVAL_MS = 20;
 /** Suggested default sample interval (ms) per sensor type. */
 export function defaultSampleIntervalMs(typeId, driver) {
   const table = {
+    MTP10: 200,
     BMP180: 20,
     BMP280: 20,
     BME280: 20,
+    AHT10: 100,
+    TSL2561: 150,
+    TCS34725: 100,
+    MLX90614: 100,
     MPU6050: 50,
+    ADXL345: 50,
     HMC5883L: 100,
     QMC5883L: 100,
     TSL2591: 250,
@@ -21,7 +33,11 @@ export function defaultSampleIntervalMs(typeId, driver) {
     VL53L0X: 100,
     AS5600: 50,
     ADS1115: 20,
+    INA219: 100,
+    MAX30100: 50,
     ATMEGA32_ADC: 20,
+    ML8511: 50,
+    AD8232: 20,
   };
   if (table[typeId] != null) return table[typeId];
   if (driver?.dataRate) return Math.max(DEFAULT_SAMPLE_INTERVAL_MS, Math.ceil(1000 / driver.dataRate));
@@ -37,16 +53,11 @@ function chartTheme() {
     responsive: true,
     maintainAspectRatio: false,
     animation: false,
-    interaction: { mode: 'nearest', axis: 'x', intersect: false },
+    interaction: chartPointerInteraction,
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: 'rgba(15, 20, 25, 0.92)',
-        titleColor: '#e2e8f0',
-        bodyColor: '#94a3b8',
-        borderColor: '#334155',
-        borderWidth: 1,
-        padding: 10,
+        ...mobileTooltipOptions,
         callbacks: {
           title(items) {
             return items.length ? `t = ${Number(items[0].parsed.x).toFixed(2)} s` : '';
@@ -106,6 +117,7 @@ export function createSensorLogger(canvas, fields, { windowSec = DEFAULT_WINDOW_
 
   const chart = new Chart(ctx, {
     type: 'line',
+    plugins: [mobileTooltipLifetimePlugin],
     data: {
       datasets: fields.map((f, i) => ({
         label: f.label,
@@ -251,6 +263,35 @@ export function createSensorLogger(canvas, fields, { windowSec = DEFAULT_WINDOW_
       chart.update('none');
     },
 
+    getSampleCount() {
+      return chart.data.datasets[0]?.data.length ?? 0;
+    },
+
+    /** Multi-column CSV: time_s + one column per trace (all buffered samples). */
+    toCsv(fields) {
+      const datasets = chart.data.datasets;
+      const n = datasets[0]?.data.length ?? 0;
+      if (!n) return null;
+
+      const colNames = fields?.length
+        ? fields.map((f) => (f.unit ? `${f.label} (${f.unit})` : f.label))
+        : datasets.map((ds) => ds.label);
+
+      const headers = ['time_s', ...colNames];
+      const lines = [headers.map(csvCell).join(',')];
+
+      for (let i = 0; i < n; i++) {
+        const t = datasets[0].data[i].x;
+        const row = [
+          csvNum(t),
+          ...datasets.map((ds) => csvNum(ds.data[i]?.y)),
+        ];
+        lines.push(row.join(','));
+      }
+
+      return lines.join('\n');
+    },
+
     destroy() {
       chart.destroy();
     },
@@ -284,4 +325,15 @@ function clampWindow(sec) {
   const n = Number(sec);
   if (!Number.isFinite(n)) return DEFAULT_WINDOW_SEC;
   return Math.max(MIN_WINDOW_SEC, Math.min(MAX_WINDOW_SEC, n));
+}
+
+function csvNum(v) {
+  const n = Number(v);
+  if (!Number.isFinite(n)) return '';
+  return String(n);
+}
+
+function csvCell(v) {
+  const s = String(v);
+  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }

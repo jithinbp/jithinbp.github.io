@@ -34,7 +34,33 @@ function formatValue(v, lo, hi) {
   return Math.round(v).toString();
 }
 
-export function createAnalogGauge(label, unit, min, max) {
+function hexToRgb(hex) {
+  const h = hex.replace('#', '');
+  return [
+    parseInt(h.slice(0, 2), 16),
+    parseInt(h.slice(2, 4), 16),
+    parseInt(h.slice(4, 6), 16),
+  ];
+}
+
+function rgbToHex(r, g, b) {
+  return `#${[r, g, b]
+    .map((x) => Math.max(0, Math.min(255, Math.round(x))).toString(16).padStart(2, '0'))
+    .join('')}`;
+}
+
+function mixHex(hex, target, t) {
+  const [r0, g0, b0] = hexToRgb(hex);
+  const [r1, g1, b1] = hexToRgb(target);
+  return rgbToHex(r0 + (r1 - r0) * t, g0 + (g1 - g0) * t, b0 + (b1 - b0) * t);
+}
+
+function hexAlpha(hex, alpha) {
+  const [r, g, b] = hexToRgb(hex);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+export function createAnalogGauge(label, unit, min, max, { traceColor: initialTraceColor } = {}) {
   const uid = `g${Math.random().toString(36).slice(2, 9)}`;
   const root = document.createElement('div');
   root.className = 'analog-gauge';
@@ -81,11 +107,16 @@ export function createAnalogGauge(label, unit, min, max) {
   const ticksG = root.querySelector('.gauge-ticks');
   const valueArc = root.querySelector('.gauge-value-arc');
   const needle = root.querySelector('.gauge-needle');
+  const hub = root.querySelector('.gauge-hub');
   const labelEl = root.querySelector('.gauge-label');
   const valueEl = root.querySelector('.gauge-value');
   const rangeEl = root.querySelector('.gauge-range');
+  const fillGrad = root.querySelector(`#${uid}-fill`);
+  const fillStops = fillGrad ? fillGrad.querySelectorAll('stop') : [];
   let lo = min;
   let hi = max;
+  let traceColor = null;
+  let traceActive = true;
 
   function buildTicks() {
     ticksG.innerHTML = '';
@@ -158,10 +189,66 @@ export function createAnalogGauge(label, unit, min, max) {
 
   setRange(min, max);
   update(NaN);
+  if (initialTraceColor) {
+    setTraceColor(initialTraceColor);
+    setTraceActive(true);
+  }
 
   function setLabel(text) {
     labelEl.textContent = text;
   }
 
-  return { el: root, update, setRange, setLabel };
+  function applyTraceColor(color) {
+    traceColor = color;
+    root.dataset.traceColor = color;
+    root.style.borderColor = color;
+    root.style.boxShadow = `inset 0 0 18px ${hexAlpha(color, 0.12)}`;
+    valueEl.style.color = color;
+    labelEl.style.color = color;
+
+    if (fillStops.length >= 3) {
+      fillStops[0].setAttribute('stop-color', mixHex(color, '#000000', 0.35));
+      fillStops[1].setAttribute('stop-color', color);
+      fillStops[2].setAttribute('stop-color', mixHex(color, '#ffffff', 0.25));
+    }
+
+    valueArc.setAttribute('stroke', color);
+    needle.setAttribute('stroke', color);
+    hub.setAttribute('stroke', color);
+  }
+
+  function setTraceColor(color) {
+    applyTraceColor(color);
+  }
+
+  function setTraceActive(active) {
+    traceActive = active;
+    root.classList.toggle('gauge-trace-active', active);
+    root.classList.toggle('gauge-trace-off', !active);
+    if (active && traceColor) {
+      applyTraceColor(traceColor);
+    } else if (!active) {
+      root.style.borderColor = 'rgba(51, 65, 85, 0.6)';
+      root.style.boxShadow = 'none';
+      valueEl.style.color = '#64748b';
+      labelEl.style.color = '#64748b';
+      valueArc.setAttribute('stroke', '#475569');
+      needle.setAttribute('stroke', '#64748b');
+      hub.setAttribute('stroke', '#64748b');
+    }
+  }
+
+  function isTraceActive() {
+    return traceActive;
+  }
+
+  return {
+    el: root,
+    update,
+    setRange,
+    setLabel,
+    setTraceColor,
+    setTraceActive,
+    isTraceActive,
+  };
 }
