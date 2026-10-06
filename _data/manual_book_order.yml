@@ -41,6 +41,10 @@ manual_order:
   - FullwaveRectifier
   - HalfwaveRectifier
   - InvertingAmplifier
+  - NonInvertingAmplifier
+  - LogicGates
+  - ClockDivider
+  - MOSFETCharacteristics
   - NPNOutput
   - NPNOutput.fr
   - NPNOutput.hi
